@@ -2,7 +2,7 @@
 
 // Example data (replace with real sensor data from APIs or devices)
 const airQualityData = {
-	aqi: "156",
+	aqi: "105",
 	temperature: "17°C",
 	humidity: "25%",
 	co2: "479 ppm",
@@ -88,17 +88,18 @@ function addAQILabels()
 	canvas.parentNode.appendChild(labelsContainer);
 }
 
-function getLabelForAQI(aqi) {
-    const range = aqiRanges.find(range => aqi <= range.max);
-    return range ? range.label : 'N/A';
-  }
+function getLabelForAQI(aqi)
+{
+	const range = aqiRanges.find(range => aqi <= range.max);
+	return range ? range.label : 'N/A';
+}
 
 // Function to update AQI
 function updateAQI(aqi)
 {
 	drawDot(aqi);
 	document.getElementById('aqi-value').textContent = aqi;
-    document.getElementById('aqi-label').textContent = getLabelForAQI(aqi);
+	document.getElementById('aqi-label').textContent = getLabelForAQI(aqi);
 }
 
 // Function to update the UI with sensor data
@@ -120,12 +121,11 @@ function updateDashboard(data)
 	document.getElementById("date-time").textContent = now.toLocaleString();
 }
 
-// Simulate real-time updates (replace with actual API calls)
-setInterval(() => { updateDashboard(airQualityData); },
-	    3000); // Update every 3 seconds
-
 document.addEventListener("DOMContentLoaded", function() {
 	drawArc();
 	addAQILabels();
 	updateDashboard(airQualityData);
+	// Simulate real-time updates (replace with actual API calls)
+	setInterval(() => { updateDashboard(airQualityData); },
+		    3000); // Update every 3 seconds
 });

@@ -37,10 +37,15 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+    width: 80%; /* Adjust this value as needed */
+    max-width: 150px; /* Adjust based on your arc size */
   }
   
   .aqi-value p {
     margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   
   .aqi-value h1 {
