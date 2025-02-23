@@ -1,60 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Air Quality Dashboard</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <div class="dashboard">
-    <div class="header">
-      <h1>Air Quality Dashboard</h1>
-      <p id="date-time">2025-02-23 18:48</p>
-    </div>
-
-    <div class="main-display">
-      <div class="aqi-display">
-        <p>AQI</p>
-        <h2 id="aqi">75</h2>
-      </div>
-      <div class="temp-humidity">
-        <p id="temperature">17°C</p>
-        <p id="humidity">25% Humidity</p>
-      </div>
-    </div>
-
-    <div class="sensor-data">
-      <div class="sensor-item">
-        <p>CO2</p>
-        <h3 id="co2">479 ppm</h3>
-      </div>
-      <div class="sensor-item">
-        <p>PM2.5</p>
-        <h3 id="pm25">45 µg/m³</h3>
-      </div>
-      <div class="sensor-item">
-        <p>PM10</p>
-        <h3 id="pm10">28 µg/m³</h3>
-      </div>
-      <div class="sensor-item">
-        <p>HCHO</p>
-        <h3 id="hcho">0.040 mg/m³</h3>
-      </div>
-      <div class="sensor-item">
-        <p>TVOC</p>
-        <h3 id="tvoc">0.75 mg/m³</h3>
-      </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-      Data from sensors | Updated every 3 seconds
-    </footer>
-
-  </div>
-
-  <!-- JavaScript -->
-  <script src="script.js"></script>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Air Quality Dashboard</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div class="dashboard">
+            <div class="header">
+                <h1>Air Quality Dashboard</h1>
+                <p id="date-time">2025-02-23 18:48</p>
+            </div>
+            <div class="main-display">
+                <!-- Temperature -->
+                <div class="temp-humidity">
+                    <span>🌡️</span>
+                    <span id="temp-value">17°C</span>
+                </div>
+                <!-- AQI Display -->
+                <div class="aqi-display">
+                    <canvas id="aqi-arc" width="300" height="300"></canvas>
+                    <div class="aqi-value">
+                        <p>AQI</p>
+                        <h2 id="aqi-value">75</h2>
+                    </div>
+                </div>
+                <!-- Humidity -->
+                <div class="temp-humidity">
+                    <span>💧</span>
+                    <span id="humidity-value">25%</span>
+                </div>
+            </div>
+            <div class="sensor-data">
+                <div class="sensor-item">
+                    <p>CO2</p>
+                    <h3 id="co2">479 ppm</h3>
+                </div>
+                <div class="sensor-item">
+                    <p>PM2.5</p>
+                    <h3 id="pm25">45 µg/m³</h3>
+                </div>
+                <div class="sensor-item">
+                    <p>PM10</p>
+                    <h3 id="pm10">28 µg/m³</h3>
+                </div>
+                <div class="sensor-item">
+                    <p>HCHO</p>
+                    <h3 id="hcho">0.040 mg/m³</h3>
+                </div>
+                <div class="sensor-item">
+                    <p>TVOC</p>
+                    <h3 id="tvoc">0.75 mg/m³</h3>
+                </div>
+            </div>
+            <!-- Footer -->
+            <footer class="footer">
+                Data from sensors | Updated every 3 seconds
+            </footer>
+        </div>
+        <!-- JavaScript -->
+        <script src="script.js"></script>
+    </body>
 </html>
