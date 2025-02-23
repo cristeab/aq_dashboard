@@ -21,8 +21,8 @@ const centerX = canvas.width / 2;
 const centerY = canvas.height / 2;
 const radius = 80;
 
-// Define colors based on AQI ranges
-const colors = [
+// Define colors & labels based on AQI ranges
+const aqiRanges = [
 	{ max: 50, color: '#00E400', label: 'Good' },
 	{ max: 100, color: '#FFFF00', label: 'Moderate' },
 	{ max: 150, color: '#FF7E00', label: 'Unhealthy for Sensitive Groups' },
