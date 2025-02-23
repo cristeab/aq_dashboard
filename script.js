@@ -88,11 +88,17 @@ function addAQILabels()
 	canvas.parentNode.appendChild(labelsContainer);
 }
 
+function getLabelForAQI(aqi) {
+    const range = aqiRanges.find(range => aqi <= range.max);
+    return range ? range.label : 'N/A';
+  }
+
 // Function to update AQI
 function updateAQI(aqi)
 {
 	drawDot(aqi);
 	document.getElementById('aqi-value').textContent = aqi;
+    document.getElementById('aqi-label').textContent = getLabelForAQI(aqi);
 }
 
 // Function to update the UI with sensor data
