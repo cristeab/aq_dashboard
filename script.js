@@ -32,7 +32,7 @@ function updateDashboard(data) {
 // Simulate real-time updates (replace with actual API calls)
 setInterval(() => {
     updateDashboard(airQualityData);
-}, 60000); // Update every minute
+}, 3000); // Update every 3 seconds
 
 // Initial load
 updateDashboard(airQualityData);
