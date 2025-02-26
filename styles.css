@@ -74,16 +74,13 @@ body {
   .sensor-data {
     display: flex;
     flex-direction: column;
+    gap: 10px; /* Add gap between rows */
   }
   
   .sensor-row {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
-  }
-
-  .sensor-row:first-child {
-    justify-content: center;
+    gap: 10px; /* Add gap between items */
   }
 
   .sensor-item {
@@ -92,7 +89,6 @@ body {
     padding: 16px;
     border-radius: 8px;
     text-align: center;
-    margin: 0 10px;
     max-width: 100px;
   }
   
