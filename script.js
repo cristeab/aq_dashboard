@@ -5,11 +5,15 @@ const airQualityData = {
 	aqi: "105",
 	temperature: "17°C",
 	humidity: "25%",
-	co2: "479 ppm",
+	pm10: "479 ppm",
 	pm25: "45 µg/m³",
 	pm10: "28 µg/m³",
-	hcho: "0.040 mg/m³",
-	tvoc: "0.75 mg/m³"
+	pm03plus: "10",
+	pm05plus: "3",
+	pm10plus: "2",
+	pm25plus: "3",
+	pm50plus: "0",
+	pm100plus: "0"
 };
 
 // Get the canvas element
