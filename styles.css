@@ -24,7 +24,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 0px;
   }
   
   .aqi-display {
@@ -74,8 +74,8 @@ body {
   .sensor-data {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 16px;
-    margin-top: 16px;
+    gap: 10px;
+    margin-top: 0;
   }
   
   .sensor-item {
