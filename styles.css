@@ -93,7 +93,8 @@ body {
   }
   
   .sensor-item h3 {
-    margin-top: 8px;
+    margin: 0;
+    margin-bottom: 4px; /* Reduce margin between lines */
   }
   
   .footer {
