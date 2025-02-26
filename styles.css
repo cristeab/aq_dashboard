@@ -82,6 +82,10 @@ body {
     margin-bottom: 10px;
   }
 
+  .sensor-row:first-child {
+    justify-content: center;
+  }
+
   .sensor-item {
     flex: 1;
     background-color: #fff;
@@ -89,6 +93,7 @@ body {
     border-radius: 8px;
     text-align: center;
     margin: 0 10px;
+    max-width: 100px;
   }
   
   .sensor-item h3 {
