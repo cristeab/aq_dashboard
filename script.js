@@ -5,9 +5,9 @@ const airQualityData = {
 	aqi: "105",
 	temperature: "17°C",
 	humidity: "25%",
-	pm10: "479 ppm",
+	pm10: "479 µg/m³",
 	pm25: "45 µg/m³",
-	pm10: "28 µg/m³",
+	pm100: "28 µg/m³",
 	pm03plus: "10",
 	pm05plus: "3",
 	pm10plus: "2",
@@ -132,11 +132,16 @@ function updateDashboard(data)
 	document.getElementById("temp-value").textContent = data.temperature;
 	document.getElementById("humidity-value").textContent = data.humidity;
 
-	document.getElementById("co2").textContent = data.co2;
-	document.getElementById("pm25").textContent = data.pm25;
-	document.getElementById("pm10").textContent = data.pm10;
-	document.getElementById("hcho").textContent = data.hcho;
-	document.getElementById("tvoc").textContent = data.tvoc;
+	document.getElementById("pm1.0").textContent = data.pm10;
+	document.getElementById("pm2.5").textContent = data.pm25;
+	document.getElementById("pm10").textContent = data.pm100;
+
+	document.getElementById("pm0.3plus").textContent = data.pm03plus;
+	document.getElementById("pm0.5plus").textContent = data.pm05plus;
+	document.getElementById("pm1.0plus").textContent = data.pm10plus;
+	document.getElementById("pm2.5plus").textContent = data.pm25plus;
+	document.getElementById("pm5.0plus").textContent = data.pm50plus;
+	document.getElementById("pm10plus").textContent = data.pm100plus;
 
 	// Update date-time
 	const now = new Date();
