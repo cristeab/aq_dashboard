@@ -86,12 +86,19 @@ body {
   .sensor-item {
     flex: 1;
     background-color: #fff;
-    padding: 16px;
+    padding: 8px;
     border-radius: 8px;
     text-align: center;
     max-width: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   
+  .sensor-item p {
+    margin: 4px 0; /* Reduce margin to decrease space above and below text */
+  }
+
   .sensor-item h3 {
     margin: 0;
     margin-bottom: 4px; /* Reduce margin between lines */
