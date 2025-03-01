@@ -1,8 +1,12 @@
+#!/usr/bin/env python3
+
 from fastapi import FastAPI, WebSocket
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import HTMLResponse
 from influxdb_client import InfluxDBClient
 import asyncio
 import json
+
 
 app = FastAPI()
 
@@ -11,6 +15,11 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # InfluxDB connection
 client = InfluxDBClient(url="http://localhost:8086", token="your_token", org="your_org")
+
+@app.get("/", response_class=HTMLResponse)
+async def root():
+    with open("static/index.html", "r") as file:
+        return file.read()
 
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
@@ -37,4 +46,4 @@ def process_influxdb_result(result):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000, ssl_keyfile="key.pem", ssl_certfile="cert.pem")
+    uvicorn.run(app, host="0.0.0.0", port=8888, ssl_keyfile="key.pem", ssl_certfile="cert.pem")
