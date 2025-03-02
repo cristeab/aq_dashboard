@@ -28,7 +28,28 @@ async def websocket_endpoint(websocket: WebSocket):
     try:
         while True:
             # Query latest data from InfluxDB
-            data = storage.read_aqi()
+            aqi_data = storage.read_aqi()
+            data = {
+                "timestamp": aqi_data["time"],
+                "aqi": aqi_data["pm25_cf1_aqi"]
+            }
+            for i in range(2):
+                pm_data = storage.read_pm(i)
+                data = data | {
+                    "pm10_" + str(i): pm_data["pm10_cf1"],
+                    "pm25_" + str(i): pm_data["pm25_cf1"],
+                    "pm100_" + str(i): pm_data["pm100_cf1"],
+                    "pm03plus_" + str(i): pm_data["gr03um"],
+                    "pm05plus_" + str(i): pm_data["gr05um"],
+                    "pm10plus_" + str(i): pm_data["gr10um"],
+                    "pm25plus_" + str(i): pm_data["gr25um"],
+                    "pm50plus_" + str(i): pm_data["gr50um"],
+                    "pm100plus_" + str(i): pm_data["gr100um"]
+                }
+            data = data | {
+                            "temperature": 0,
+                            "humidity": 0
+                    }
 
             # Send data to client
             await websocket.send_json(data)
@@ -38,11 +59,6 @@ async def websocket_endpoint(websocket: WebSocket):
     except WebSocketDisconnect:
         print("Client disconnected")
 
-def process_influxdb_result(result):
-    print(result)
-    # Process InfluxDB result and return as JSON-serializable dict
-    # Implement this based on your data structure
-    pass
 
 if __name__ == "__main__":
     import uvicorn

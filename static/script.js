@@ -2,18 +2,18 @@
 
 // Example data (replace with real sensor data from APIs or devices)
 const dummyData = {
-	aqi: "105",
-	temperature: "17°C",
-	humidity: "25%",
-	pm10: "479 µg/m³",
-	pm25: "45 µg/m³",
-	pm100: "28 µg/m³",
-	pm03plus: "10",
-	pm05plus: "3",
-	pm10plus: "2",
-	pm25plus: "3",
+	aqi: "0",
+	pm10: "0 µg/m³",
+	pm25: "0 µg/m³",
+	pm100: "0 µg/m³",
+	pm03plus: "0",
+	pm05plus: "0",
+	pm10plus: "0",
+	pm25plus: "0",
 	pm50plus: "0",
-	pm100plus: "0"
+	pm100plus: "0",
+	temperature: "0°C",
+	humidity: "0%"
 };
 
 // Get the canvas element
@@ -127,25 +127,34 @@ function updateAQI(aqi)
 // Function to update the UI with sensor data
 function updateDashboard(data)
 {
+	// Update date-time
+	document.getElementById("date-time").textContent = data.timestamp;
+
 	// Draw AQI Arc
 	updateAQI(data.aqi);
-	document.getElementById("temp-value").textContent = data.temperature;
-	document.getElementById("humidity-value").textContent = data.humidity;
 
-	document.getElementById("pm1.0").textContent = data.pm10;
-	document.getElementById("pm2.5").textContent = data.pm25;
-	document.getElementById("pm10").textContent = data.pm100;
+	document.getElementById("pm1.0_0").textContent = data.pm10_0 + " µg/m³";
+	document.getElementById("pm1.0_1").textContent = data.pm10_1 + " µg/m³";
+	document.getElementById("pm2.5_0").textContent = data.pm25_0 + " µg/m³";
+	document.getElementById("pm2.5_1").textContent = data.pm25_1 + " µg/m³";
+	document.getElementById("pm10_0").textContent = data.pm100_0 + " µg/m³";
+	document.getElementById("pm10_1").textContent = data.pm100_1 + " µg/m³";
 
-	document.getElementById("pm0.3plus").textContent = data.pm03plus;
-	document.getElementById("pm0.5plus").textContent = data.pm05plus;
-	document.getElementById("pm1.0plus").textContent = data.pm10plus;
-	document.getElementById("pm2.5plus").textContent = data.pm25plus;
-	document.getElementById("pm5.0plus").textContent = data.pm50plus;
-	document.getElementById("pm10plus").textContent = data.pm100plus;
+	document.getElementById("pm0.3plus_0").textContent = data.pm03plus_0;
+	document.getElementById("pm0.3plus_1").textContent = data.pm03plus_1;
+	document.getElementById("pm0.5plus_0").textContent = data.pm05plus_0;
+	document.getElementById("pm0.5plus_1").textContent = data.pm05plus_1;
+	document.getElementById("pm1.0plus_0").textContent = data.pm10plus_0;
+	document.getElementById("pm1.0plus_1").textContent = data.pm10plus_1;
+	document.getElementById("pm2.5plus_0").textContent = data.pm25plus_0;
+	document.getElementById("pm2.5plus_1").textContent = data.pm25plus_1;
+	document.getElementById("pm5.0plus_0").textContent = data.pm50plus_0;
+	document.getElementById("pm5.0plus_1").textContent = data.pm50plus_1;
+	document.getElementById("pm10plus_0").textContent = data.pm100plus_0;
+	document.getElementById("pm10plus_1").textContent = data.pm100plus_1;
 
-	// Update date-time
-	const now = new Date();
-	document.getElementById("date-time").textContent = now.toLocaleString();
+	document.getElementById("temp-value").textContent = data.temperature + "°C";
+	document.getElementById("humidity-value").textContent = data.humidity + "%";
 }
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -161,6 +170,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	const wsUrl = `wss://${ipAddress}:${port}/ws`;
 	const socket = new WebSocket(wsUrl);
 	socket.onmessage = function(event) {
+		console.log(event.data);
 		const data = JSON.parse(event.data);
 		// Update your dashboard with the received data
 		updateDashboard(data);
