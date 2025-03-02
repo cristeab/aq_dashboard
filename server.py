@@ -3,19 +3,11 @@
 from fastapi import FastAPI, WebSocket
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
-from influxdb_client import InfluxDBClient
 import asyncio
 import json
-import os
-import sys
 from plantower.persistent_storage import PersistentStorage
 from fastapi.websockets import WebSocketDisconnect
 
-
-token = os.environ.get("INFLUX_TOKEN")
-if not token:
-    print("Error: INFLUX_TOKEN environment variable is not set.")
-    sys.exit(1)
 
 app = FastAPI()
 
