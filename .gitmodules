@@ -1,0 +1,3 @@
+[submodule "plantower"]
+	path = plantower
+	url = git@github.com:cristeab/plantower.git
