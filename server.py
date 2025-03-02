@@ -30,11 +30,9 @@ async def websocket_endpoint(websocket: WebSocket):
     try:
         while True:
             # Query latest data from InfluxDB
-            query = f'from(bucket:"{aqi_bucket}") |> range(start: -1m) |> last()'
-            result = client.query_api().query(query)
-            
-            # Process and send data
-            data = process_influxdb_result(result)
+            data = storage.read_aqi()
+
+            # Send data to client
             await websocket.send_json(data)
             
             # Wait before sending next update
