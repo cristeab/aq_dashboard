@@ -1,7 +1,7 @@
 // script.js
 
 // Example data (replace with real sensor data from APIs or devices)
-const airQualityData = {
+const dummyData = {
 	aqi: "105",
 	temperature: "17°C",
 	humidity: "25%",
@@ -151,8 +151,17 @@ function updateDashboard(data)
 document.addEventListener("DOMContentLoaded", function() {
 	drawArc();
 	addAQILabels();
-	updateDashboard(airQualityData);
-	// Simulate real-time updates (replace with actual API calls)
-	setInterval(() => { updateDashboard(airQualityData); },
-		    3000); // Update every 3 seconds
+	updateDashboard(dummyData);
+
+	// Extract the IP address from the current URL
+	const ipAddress = window.location.hostname;
+
+	// Connect to the WebSocket server
+	const wsUrl = `wss://${ipAddress}:8000/ws`;
+	const socket = new WebSocket(wsUrl);
+	socket.onmessage = function(event) {
+		const data = JSON.parse(event.data);
+		// Update your dashboard with the received data
+		updateDashboard(data);
+	};
 });

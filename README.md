@@ -11,3 +11,9 @@ Prepare Python virtual environment and activate it:
 Install requirements with
 
     pip install -m requirements.txt
+
+Start the server with:
+
+    ./server.py
+
+Access the server at: https://<server URL>:8888

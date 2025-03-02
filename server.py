@@ -6,7 +6,14 @@ from fastapi.responses import HTMLResponse
 from influxdb_client import InfluxDBClient
 import asyncio
 import json
+import os
+import sys
 
+
+token = os.environ.get("INFLUX_TOKEN")
+if not token:
+    print("Error: INFLUX_TOKEN environment variable is not set.")
+    sys.exit(1)
 
 app = FastAPI()
 
@@ -14,7 +21,11 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # InfluxDB connection
-client = InfluxDBClient(url="http://localhost:8086", token="your_token", org="your_org")
+org = "home"
+url = "http://localhost:8086"
+pm_bucket="pm"
+aqi_bucket="aqi"
+client = InfluxDBClient(url=url, token=token, org=org)
 
 @app.get("/", response_class=HTMLResponse)
 async def root():
@@ -23,11 +34,13 @@ async def root():
 
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
+    print('Waiting for connections...')
     await websocket.accept()
+    print('Connected')
     try:
         while True:
             # Query latest data from InfluxDB
-            query = 'from(bucket:"your_bucket") |> range(start: -1m) |> last()'
+            query = f'from(bucket:"{aqi_bucket}") |> range(start: -1m) |> last()'
             result = client.query_api().query(query)
             
             # Process and send data
@@ -35,11 +48,12 @@ async def websocket_endpoint(websocket: WebSocket):
             await websocket.send_json(data)
             
             # Wait before sending next update
-            await asyncio.sleep(5)
+            await asyncio.sleep(3)
     except WebSocketDisconnect:
         print("Client disconnected")
 
 def process_influxdb_result(result):
+    print(result)
     # Process InfluxDB result and return as JSON-serializable dict
     # Implement this based on your data structure
     pass
