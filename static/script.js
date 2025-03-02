@@ -155,9 +155,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	// Extract the IP address from the current URL
 	const ipAddress = window.location.hostname;
+	const port = window.location.port;
 
 	// Connect to the WebSocket server
-	const wsUrl = `wss://${ipAddress}:8000/ws`;
+	const wsUrl = `wss://${ipAddress}:${port}/ws`;
 	const socket = new WebSocket(wsUrl);
 	socket.onmessage = function(event) {
 		const data = JSON.parse(event.data);

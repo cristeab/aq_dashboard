@@ -24,9 +24,7 @@ async def root():
 
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
-    print('Waiting for connections...')
     await websocket.accept()
-    print('Connected')
     try:
         while True:
             # Query latest data from InfluxDB
