@@ -8,6 +8,8 @@ import asyncio
 import json
 import os
 import sys
+from plantower.persistent_storage import PersistentStorage
+from fastapi.websockets import WebSocketDisconnect
 
 
 token = os.environ.get("INFLUX_TOKEN")
@@ -21,11 +23,7 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # InfluxDB connection
-org = "home"
-url = "http://localhost:8086"
-pm_bucket="pm"
-aqi_bucket="aqi"
-client = InfluxDBClient(url=url, token=token, org=org)
+storage = PersistentStorage()
 
 @app.get("/", response_class=HTMLResponse)
 async def root():
