@@ -55,34 +55,20 @@ function drawArc()
 	});
 }
 
-function drawDot(aqi)
-{
+function drawTickMark(aqi) {
     const angle = Math.PI * (0.75 + (1.5 * aqi) / 500);
-    const dotX = centerX + radius * Math.cos(angle);
-    const dotY = centerY + radius * Math.sin(angle);
-  
-    // Add shadow
-    ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
-    ctx.shadowBlur = 4;
-    ctx.shadowOffsetX = 2;
-    ctx.shadowOffsetY = 2;
-  
-    // Draw larger white dot
+    const innerTickX = centerX + (radius - 10) * Math.cos(angle);
+    const innerTickY = centerY + (radius - 10) * Math.sin(angle);
+    const outerTickX = centerX + (radius + 10) * Math.cos(angle);
+    const outerTickY = centerY + (radius + 10) * Math.sin(angle);
+
+    // Draw tick mark
     ctx.beginPath();
-    ctx.arc(dotX, dotY, 8, 0, Math.PI * 2);
-    ctx.fillStyle = "#fff";
-    ctx.fill();
-  
-    // Add contrasting outline
+    ctx.moveTo(innerTickX, innerTickY);
+    ctx.lineTo(outerTickX, outerTickY);
     ctx.lineWidth = 2;
     ctx.strokeStyle = "#000";
     ctx.stroke();
-  
-    // Reset shadow
-    ctx.shadowColor = 'transparent';
-    ctx.shadowBlur = 0;
-    ctx.shadowOffsetX = 0;
-    ctx.shadowOffsetY = 0;
 }
 
 function addAQILabels()
@@ -119,7 +105,8 @@ function getLabelForAQI(aqi)
 // Function to update AQI
 function updateAQI(aqi)
 {
-	drawDot(aqi);
+	drawArc(); // Redraw the arc to clear the previous tick mark
+	drawTickMark(aqi);
 	document.getElementById('aqi-value').textContent = aqi;
 	document.getElementById('aqi-label').textContent = getLabelForAQI(aqi);
 }
