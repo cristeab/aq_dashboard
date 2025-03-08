@@ -29,6 +29,10 @@ async def websocket_endpoint(websocket: WebSocket):
         while True:
             # Query latest data from InfluxDB
             aqi_data = storage.read_aqi()
+            if "time" not in aqi_data:
+                continue
+            if "pm25_cf1_aqi" not in aqi_data:
+                continue
             data = {
                 "timestamp": aqi_data["time"],
                 "aqi": aqi_data["pm25_cf1_aqi"]
