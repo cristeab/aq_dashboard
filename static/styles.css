@@ -4,6 +4,7 @@
   --text-color: #000;
   --card-background-color: #fff;
   --border-color: #ccc;
+  --tick-mark-color: #000; /* Default tick mark color */
 }
 
 body {
@@ -134,5 +135,6 @@ body {
     --text-color: #ffffff;
     --card-background-color: #1e1e1e;
     --border-color: #444;
+    --tick-mark-color: #ffffff; /* Tick mark color for dark theme */
   }
   

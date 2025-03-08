@@ -62,12 +62,15 @@ function drawTickMark(aqi) {
     const outerTickX = centerX + (radius + 10) * Math.cos(angle);
     const outerTickY = centerY + (radius + 10) * Math.sin(angle);
 
+    // Get the tick mark color from CSS variables
+    const tickMarkColor = getComputedStyle(document.documentElement).getPropertyValue('--tick-mark-color');
+
     // Draw tick mark
     ctx.beginPath();
     ctx.moveTo(innerTickX, innerTickY);
     ctx.lineTo(outerTickX, outerTickY);
     ctx.lineWidth = 2;
-    ctx.strokeStyle = "#000";
+    ctx.strokeStyle = tickMarkColor;
     ctx.stroke();
 }
 
