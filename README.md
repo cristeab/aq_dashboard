@@ -14,7 +14,7 @@ Install requirements with
 
 Start the server with:
 
-    ./server.py
+    ./aq_dashboard.py
 
 Access the server at: https://\<server URL\>:8888
 
