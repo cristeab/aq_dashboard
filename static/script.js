@@ -145,6 +145,14 @@ function updateDashboard(data)
 }
 
 document.addEventListener("DOMContentLoaded", function() {
+    // Hard-coded variable to set the theme
+    const useDarkTheme = true; // Change this to false for light theme
+    if (useDarkTheme) {
+        document.body.classList.add('dark-theme');
+    } else {
+        document.body.classList.remove('dark-theme');
+    }
+
 	drawArc();
 	addAQILabels();
 	updateDashboard(dummyData);

@@ -1,8 +1,16 @@
-/* styles.css */
+/* Define CSS variables for theme colors */
+:root {
+  --background-color: #f4f4f4;
+  --text-color: #000;
+  --card-background-color: #fff;
+  --border-color: #ccc;
+}
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: var(--background-color);
+    color: var(--text-color);
   }
   
   .dashboard {
@@ -97,7 +105,7 @@ body {
 
   .sensor-item {
     flex: 1;
-    background-color: #fff;
+    background-color: var(--card-background-color);
     padding: 8px;
     border-radius: 8px;
     text-align: center;
@@ -118,5 +126,13 @@ body {
   
   .footer {
     margin-top: 20px;
+  }
+
+  /* Dark theme */
+  body.dark-theme {
+    --background-color: #121212;
+    --text-color: #ffffff;
+    --card-background-color: #1e1e1e;
+    --border-color: #444;
   }
   
