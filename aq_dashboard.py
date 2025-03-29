@@ -4,7 +4,6 @@ from fastapi import FastAPI, WebSocket
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 import asyncio
-import json
 from plantower.persistent_storage import PersistentStorage
 from fastapi.websockets import WebSocketDisconnect
 
