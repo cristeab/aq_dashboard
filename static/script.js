@@ -3,17 +3,20 @@
 // Example data (replace with real sensor data from APIs or devices)
 const dummyData = {
 	aqi: "0",
-	pm10: "0 µg/m³",
-	pm25: "0 µg/m³",
-	pm100: "0 µg/m³",
+	pm10: "0",
+	pm25: "0",
+	pm100: "0",
 	pm03plus: "0",
 	pm05plus: "0",
 	pm10plus: "0",
 	pm25plus: "0",
 	pm50plus: "0",
 	pm100plus: "0",
-	temperature: "0°C",
-	humidity: "0%"
+	temperature: "0",
+	humidity: "0",
+	pressure: "0",
+	tvoc: "0",
+	noise: "0"
 };
 
 // Get the canvas element
@@ -145,6 +148,9 @@ function updateDashboard(data)
 
 	document.getElementById("temp-value").textContent = data.temperature + "°C";
 	document.getElementById("humidity-value").textContent = data.humidity + "%";
+	document.getElementById("pressure-value").textContent = data.pressure + " hPa";
+	document.getElementById("tvoc-value").textContent = data.tvoc + " ppb";
+	document.getElementById("noise-value").textContent = data.noise + " dB";
 }
 
 document.addEventListener("DOMContentLoaded", function() {

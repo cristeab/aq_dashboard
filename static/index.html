@@ -13,10 +13,22 @@
                 <p id="date-time">2025-02-23 18:48</p>
             </div>
             <div class="main-display">
-                <!-- Temperature -->
-                <div class="temp-humidity">
-                    <span>🌡️</span>
-                    <span id="temp-value"></span>
+                <div class="sensor-left">
+                    <!-- Temperature -->
+                    <div class="temp-humidity">
+                        <span>🌡️</span>
+                        <span id="temp-value"></span>
+                    </div>
+                    <!-- Humidity -->
+                    <div class="temp-humidity">
+                        <span>💧</span>
+                        <span id="humidity-value"></span>
+                    </div>
+                    <!-- Air Pressure -->
+                    <div class="temp-humidity">
+                        <span>🌬️</span>
+                        <span id="pressure-value"></span>
+                    </div>
                 </div>
                 <!-- AQI Display -->
                 <div class="aqi-display">
@@ -27,10 +39,17 @@
                         <p id="aqi-label"></p>
                     </div>
                 </div>
-                <!-- Humidity -->
-                <div class="temp-humidity">
-                    <span>💧</span>
-                    <span id="humidity-value"></span>
+                <div class="sensor-right">
+                    <!-- TVOC -->
+                    <div class="temp-humidity">
+                        <span>🧪</span>
+                        <span id="tvoc-value"></span>
+                    </div>
+                    <!-- Noise Level -->
+                    <div class="temp-humidity">
+                        <span>🔊</span>
+                        <span id="noise-value"></span>
+                    </div>
                 </div>
             </div>
             <div class="sensor-data">

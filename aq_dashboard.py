@@ -49,9 +49,13 @@ async def websocket_endpoint(websocket: WebSocket):
                     "pm50plus_" + str(i): pm_data["gr50um"],
                     "pm100plus_" + str(i): pm_data["gr100um"]
                 }
+            noise_level_db = storage.read_noise_level()
             data = data | {
                             "temperature": 0,
-                            "humidity": 0
+                            "humidity": 0,
+                            "pressure": 0,
+                            "tvoc": 0,
+                            "noise": noise_level_db
                     }
 
             # Send data to client

@@ -73,8 +73,16 @@ body {
     margin: 0;
   }
   
+  .sensor-left, .sensor-right {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
   .temp-humidity {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 5px;
   }
   
   .aqi-labels {
