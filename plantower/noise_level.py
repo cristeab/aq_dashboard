@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from noise_detector import NoiseDetector
+from ..noise_detector import NoiseDetector
 from persistent_storage import PersistentStorage
 import argparse
 import time
