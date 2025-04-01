@@ -55,7 +55,7 @@ async def websocket_endpoint(websocket: WebSocket):
                             "humidity": 0,
                             "pressure": 0,
                             "tvoc": 0,
-                            "noise": noise_level_db
+                            "noise": noise_level_db["noise_level"]
                     }
 
             # Send data to client
