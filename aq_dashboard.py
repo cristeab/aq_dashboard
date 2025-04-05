@@ -54,6 +54,7 @@ async def websocket_endpoint(websocket: WebSocket):
                             "temperature": 0,
                             "humidity": 0,
                             "pressure": 0,
+                            "altitude": 0,
                             "tvoc": 0,
                             "noise": noise_level_db["noise_level"]
                     }

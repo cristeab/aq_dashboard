@@ -9,6 +9,7 @@ import time
 from datetime import datetime, timezone
 
 
+SLEEP_DURATION_SECONDS = 2
 parser = argparse.ArgumentParser(description='Script to read the noise level from the serial port')
 parser.add_argument('--port', required=True, help='Serial port to use (e.g., /dev/ttyACM0)')
 
@@ -30,4 +31,4 @@ while True:
         clear_lines(1)
     local_time = timestamp.astimezone().strftime('%d/%m/%Y, %H:%M:%S')
     print(f'Timestamp: {local_time}, Noise level: {noise_level_db} dB')
-    time.sleep(3)
+    time.sleep(SLEEP_DURATION_SECONDS)

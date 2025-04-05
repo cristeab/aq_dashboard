@@ -15,6 +15,7 @@ const dummyData = {
 	temperature: "0",
 	humidity: "0",
 	pressure: "0",
+	altitude: "0",
 	tvoc: "0",
 	noise: "0"
 };
@@ -147,8 +148,9 @@ function updateDashboard(data)
 	document.getElementById("pm10plus_1").textContent = data.pm100plus_1;
 
 	document.getElementById("temp-value").textContent = data.temperature + "°C";
-	document.getElementById("humidity-value").textContent = data.humidity + "%";
+	document.getElementById("humidity-value").textContent = data.humidity + " %";
 	document.getElementById("pressure-value").textContent = data.pressure + " hPa";
+	document.getElementById("altitude-value").textContent = data.altitude + " m";
 	document.getElementById("tvoc-value").textContent = data.tvoc + " ppb";
 	document.getElementById("noise-value").textContent = data.noise + " dB";
 }
