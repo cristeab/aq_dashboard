@@ -147,7 +147,7 @@ function updateDashboard(data)
 	document.getElementById("pm10plus_0").textContent = data.pm100plus_0;
 	document.getElementById("pm10plus_1").textContent = data.pm100plus_1;
 
-	document.getElementById("temp-value").textContent = data.temperature + "°C";
+	document.getElementById("temp-value").textContent = data.temperature + " °C";
 	document.getElementById("humidity-value").textContent = data.humidity + " %";
 	document.getElementById("pressure-value").textContent = data.pressure + " hPa";
 	document.getElementById("altitude-value").textContent = data.altitude + " m";
