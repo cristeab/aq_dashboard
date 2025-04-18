@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
 from noise_detector.noise_detector import NoiseDetector
-from plantower.persistent_storage import PersistentStorage
-from plantower.logger_configurator import LoggerConfigurator
-from plantower.print_utils import clear_lines
+from persistent_storage import PersistentStorage
+from logger_configurator import LoggerConfigurator
+from print_utils import clear_lines
 import argparse
 import time
 from datetime import datetime, timezone
