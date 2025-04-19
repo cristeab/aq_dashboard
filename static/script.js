@@ -153,7 +153,11 @@ function updateDashboard(data)
 	document.getElementById("humidity-value").textContent = parseFloat(data.relative_humidity).toFixed(1) + " %";
 	document.getElementById("pressure-value").textContent = parseFloat(data.pressure).toFixed(1) + " hPa";
 	document.getElementById("altitude-value").textContent = parseFloat(data.altitude).toFixed(1) + " m";
-	document.getElementById("tvoc-value").textContent = data.gas + " \u03A9";
+	if (1000 <= data.gas) {
+		document.getElementById("tvoc-value").textContent = parseFloat(data.gas / 1000).toFixed(1) + " k\u03A9";
+	} else {
+		document.getElementById("tvoc-value").textContent = data.gas + " \u03A9";
+	}
 }
 
 document.addEventListener("DOMContentLoaded", function() {
