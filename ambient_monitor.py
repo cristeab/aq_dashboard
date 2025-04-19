@@ -22,12 +22,11 @@ persistent_storage = PersistentStorage()
 SLEEP_DURATION_SECONDS = 2
 # pressure (hPa) at sea level
 sensor.sea_level_pressure = 1013.25
-temperature_offset = -5
 
 once = True
 while True:
     timestamp = datetime.now(timezone.utc)
-    temperature = sensor.temperature + temperature_offset
+    temperature = sensor.temperature
     gas = sensor.gas
     relative_humidity = sensor.relative_humidity
     pressure = sensor.pressure
