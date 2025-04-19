@@ -17,6 +17,7 @@ class PersistentStorage:
         PM = "pm"
         AQI = "aqi"
         Noise = "noise"
+        Temperature = "temperature"
 
     def __init__(self):
         self._logger = LoggerConfigurator.configure_logger(self.__class__.__name__)
@@ -88,6 +89,18 @@ class PersistentStorage:
         )
         self._write(self.Bucket.Noise, point)
 
+    def write_ambient_data(self, timestamp, temperature, gas, relative_humidity, pressure, altitude):
+        point = (
+            Point("ambient_data")
+            .time(timestamp)
+            .field("temperature", temperature)
+            .field("gas", gas)
+            .field("relative_humidity", relative_humidity)
+            .field("pressure", pressure)
+            .field("altitude", altitude)
+        )
+        self._write(self.Bucket.Temperature, point)
+
     def _read(self, query):
         try:
             tables = self._write_client.query_api().query(query)
@@ -114,6 +127,10 @@ class PersistentStorage:
 
     def read_noise_level(self):
         query = f'from(bucket:"{self.Bucket.Noise.value}") |> range(start: -1m) |> filter(fn: (r) => r._measurement == "noise_level") |> last()'
+        return self._read(query)
+
+    def read_ambient_data(self):
+        query = f'from(bucket:"{self.Bucket.Temperature.value}") |> range(start: -1m) |> filter(fn: (r) => r._measurement == "ambient_data") |> last()'
         return self._read(query)
 
 

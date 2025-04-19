@@ -4,7 +4,7 @@ from fastapi import FastAPI, WebSocket
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 import asyncio
-from plantower.persistent_storage import PersistentStorage
+from persistent_storage import PersistentStorage
 from fastapi.websockets import WebSocketDisconnect
 
 
@@ -55,12 +55,18 @@ async def websocket_endpoint(websocket: WebSocket):
             noise_level_db = storage.read_noise_level()
             try:
                 data = data | {
-                    "temperature": 0,
-                    "humidity": 0,
-                    "pressure": 0,
-                    "altitude": 0,
-                    "tvoc": 0,
                     "noise": noise_level_db["noise_level"]
+                }
+            except KeyError as e:
+                pass
+            ambient_data = storage.read_ambient_data()
+            try:
+                data = data | {
+                    "temperature": ambient_data["temperature"],
+                    "relative_humidity": ambient_data["relative_humidity"],
+                    "pressure": ambient_data["pressure"],
+                    "altitude": ambient_data["altitude"],
+                    "gas": ambient_data["gas"]
                 }
             except KeyError as e:
                 pass

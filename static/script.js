@@ -147,12 +147,13 @@ function updateDashboard(data)
 	document.getElementById("pm10plus_0").textContent = data.pm100plus_0;
 	document.getElementById("pm10plus_1").textContent = data.pm100plus_1;
 
-	document.getElementById("temp-value").textContent = data.temperature + " °C";
-	document.getElementById("humidity-value").textContent = data.humidity + " %";
-	document.getElementById("pressure-value").textContent = data.pressure + " hPa";
-	document.getElementById("altitude-value").textContent = data.altitude + " m";
-	document.getElementById("tvoc-value").textContent = data.tvoc + " ppb";
-	document.getElementById("noise-value").textContent = data.noise + " dB";
+	document.getElementById("noise-value").textContent = parseFloat(data.noise).toFixed(1) + " dB";
+
+	document.getElementById("temp-value").textContent = parseFloat(data.temperature).toFixed(1) + " °C";
+	document.getElementById("humidity-value").textContent = parseFloat(data.relative_humidity).toFixed(1) + " %";
+	document.getElementById("pressure-value").textContent = parseFloat(data.pressure).toFixed(1) + " hPa";
+	document.getElementById("altitude-value").textContent = parseFloat(data.altitude).toFixed(1) + " m";
+	document.getElementById("tvoc-value").textContent = data.gas + " \u03A9";
 }
 
 document.addEventListener("DOMContentLoaded", function() {
