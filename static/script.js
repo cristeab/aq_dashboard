@@ -117,6 +117,9 @@ function updateAQI(aqi)
 		drawTickMark(aqi);
 		document.getElementById('aqi-value').textContent = aqi;
 		document.getElementById('aqi-label').textContent = getLabelForAQI(aqi);
+	} else {
+		document.getElementById('aqi-value').textContent = "N/A";
+		document.getElementById('aqi-label').textContent = "";
 	}
 }
 
