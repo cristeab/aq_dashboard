@@ -113,50 +113,86 @@ function getLabelForAQI(aqi)
 function updateAQI(aqi)
 {
 	drawArc(); // Redraw the arc to clear the previous tick mark
-	drawTickMark(aqi);
-	document.getElementById('aqi-value').textContent = aqi;
-	document.getElementById('aqi-label').textContent = getLabelForAQI(aqi);
+	if (aqi !== undefined) {
+		drawTickMark(aqi);
+		document.getElementById('aqi-value').textContent = aqi;
+		document.getElementById('aqi-label').textContent = getLabelForAQI(aqi);
+	}
+}
+
+function updateElementVisibility(elementId, value, unit = "") {
+	const element = document.getElementById(elementId);
+	if (value !== undefined) {
+		element.textContent = value + (unit ? ` ${unit}` : "");
+		element.parentElement.style.display = ""; // Ensure it's visible
+	} else {
+		element.parentElement.style.display = "none"; // Hide the parent container
+	}
+}
+
+function updateElementPrecisionVisibility(elementId, value, unit = "", precision = 1) {
+	const element = document.getElementById(elementId);
+	if (value !== undefined) {
+		element.textContent = parseFloat(value).toFixed(precision) + (unit ? ` ${unit}` : "");
+		element.parentElement.style.display = ""; // Ensure it's visible
+	} else {
+		element.parentElement.style.display = "none"; // Hide the parent container
+	}
 }
 
 // Function to update the UI with sensor data
 function updateDashboard(data)
 {
 	// Update date-time
-	document.getElementById("date-time").textContent = data.timestamp;
+	updateElementVisibility("date-time", data.timestamp);
 
 	// Draw AQI Arc
 	updateAQI(data.aqi);
 
-	document.getElementById("pm1.0_0").textContent = data.pm10_0 + " µg/m³";
-	document.getElementById("pm1.0_1").textContent = data.pm10_1 + " µg/m³";
-	document.getElementById("pm2.5_0").textContent = data.pm25_0 + " µg/m³";
-	document.getElementById("pm2.5_1").textContent = data.pm25_1 + " µg/m³";
-	document.getElementById("pm10_0").textContent = data.pm100_0 + " µg/m³";
-	document.getElementById("pm10_1").textContent = data.pm100_1 + " µg/m³";
+	updateElementVisibility("pm1.0_0", data.pm10_0, "µg/m³");
+	updateElementVisibility("pm1.0_1", data.pm10_1, "µg/m³");
 
-	document.getElementById("pm0.3plus_0").textContent = data.pm03plus_0;
-	document.getElementById("pm0.3plus_1").textContent = data.pm03plus_1;
-	document.getElementById("pm0.5plus_0").textContent = data.pm05plus_0;
-	document.getElementById("pm0.5plus_1").textContent = data.pm05plus_1;
-	document.getElementById("pm1.0plus_0").textContent = data.pm10plus_0;
-	document.getElementById("pm1.0plus_1").textContent = data.pm10plus_1;
-	document.getElementById("pm2.5plus_0").textContent = data.pm25plus_0;
-	document.getElementById("pm2.5plus_1").textContent = data.pm25plus_1;
-	document.getElementById("pm5.0plus_0").textContent = data.pm50plus_0;
-	document.getElementById("pm5.0plus_1").textContent = data.pm50plus_1;
-	document.getElementById("pm10plus_0").textContent = data.pm100plus_0;
-	document.getElementById("pm10plus_1").textContent = data.pm100plus_1;
+	updateElementVisibility("pm2.5_0", data.pm25_0, "µg/m³");
+	updateElementVisibility("pm2.5_1", data.pm25_1, "µg/m³");
 
-	document.getElementById("noise-value").textContent = parseFloat(data.noise).toFixed(1) + " dB";
+	updateElementVisibility("pm10_0", data.pm100_0, "µg/m³");
+	updateElementVisibility("pm10_1", data.pm100_1, "µg/m³");
 
-	document.getElementById("temp-value").textContent = parseFloat(data.temperature).toFixed(1) + " °C";
-	document.getElementById("humidity-value").textContent = parseFloat(data.relative_humidity).toFixed(1) + " %";
-	document.getElementById("pressure-value").textContent = parseFloat(data.pressure).toFixed(1) + " hPa";
-	document.getElementById("altitude-value").textContent = parseFloat(data.altitude).toFixed(1) + " m";
-	if (1000 <= data.gas) {
-		document.getElementById("tvoc-value").textContent = parseFloat(data.gas / 1000).toFixed(1) + " k\u03A9";
+	updateElementVisibility("pm0.3plus_0", data.pm03plus_0);
+	updateElementVisibility("pm0.3plus_1", data.pm03plus_1);
+
+	updateElementVisibility("pm0.5plus_0", data.pm05plus_0);
+	updateElementVisibility("pm0.5plus_1", data.pm05plus_1);
+
+	updateElementVisibility("pm1.0plus_0", data.pm10plus_0);
+	updateElementVisibility("pm1.0plus_1", data.pm10plus_1);
+
+	updateElementVisibility("pm2.5plus_0", data.pm25plus_0);
+	updateElementVisibility("pm2.5plus_1", data.pm25plus_1);
+
+	updateElementVisibility("pm5.0plus_0", data.pm50plus_0);
+	updateElementVisibility("pm5.0plus_1", data.pm50plus_1);
+
+	updateElementVisibility("pm10plus_0", data.pm100plus_0);
+	updateElementVisibility("pm10plus_1", data.pm100plus_1);
+
+	updateElementPrecisionVisibility("noise-value", data.noise, "dB");
+
+	updateElementPrecisionVisibility("temp-value", data.temperature, "°C");
+	updateElementPrecisionVisibility("humidity-value", data.relative_humidity, "%");
+	updateElementPrecisionVisibility("pressure-value", data.pressure, "hPa");
+	updateElementPrecisionVisibility("altitude-value", data.altitude, "m");
+	
+	const tvocElement = document.getElementById("tvoc-value");
+	if (data.gas !== undefined) {	
+		if (1000 <= data.gas) {
+			tvocElement.textContent = parseFloat(data.gas / 1000).toFixed(1) + " k\u03A9";
+		} else {
+			tvocElement.textContent = data.gas + " \u03A9";
+		}
+		tvocElement.parentElement.style.display = ""; // Ensure it's visible
 	} else {
-		document.getElementById("tvoc-value").textContent = data.gas + " \u03A9";
+		tvocElement.parentElement.style.display = "none"; // Hide the parent container
 	}
 }
 
