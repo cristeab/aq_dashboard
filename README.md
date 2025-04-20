@@ -60,6 +60,8 @@ Access the server at: https://\<server URL\>:8888
 
 ## Bill of Materials
 
+The sensors can be connected on USB ports (4) of a PC.
+
 | Quantity | Item |
 |--------------|----------|
 | **Air Quality Sensors** | |
