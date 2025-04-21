@@ -26,6 +26,5 @@ while True:
             once = False
         else:
             clear_lines(1)
-        local_time = timestamp.astimezone().strftime('%d/%m/%Y, %H:%M:%S')
-        print(f'Timestamp: {local_time}, Temperature: {temperature:.1f} C, Humidity: {humidity:.1f} %, Pressure: {pressure:.2f} hPa, Gas: {gas} ohms, IAQ: {iaq:.1f} %', flush=True)
+        print(f'{monitor.elapsed_time}, Temperature: {temperature:.1f} C, Humidity: {humidity:.1f} %, Pressure: {pressure:.1f} hPa, Gas: {gas} ohms, IAQ: {iaq:.1f}', flush=True)
     time.sleep(SLEEP_DURATION_SECONDS)

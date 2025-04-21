@@ -184,7 +184,7 @@ function updateDashboard(data)
 	updateElementPrecisionVisibility("temp-value", data.temperature, "°C");
 	updateElementPrecisionVisibility("humidity-value", data.relative_humidity, "%");
 	updateElementPrecisionVisibility("pressure-value", data.pressure, "hPa");
-	updateElementPrecisionVisibility("iaq-value", data.iaq, "%");
+	updateElementPrecisionVisibility("iaq-value", data.iaq);
 	
 	const tvocElement = document.getElementById("gas-value");
 	if (data.gas !== undefined) {	
