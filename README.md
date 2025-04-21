@@ -71,7 +71,7 @@ The sensors can be connected on USB ports (4) of a PC.
 | **Noise Sensor** | |
 | 1        | 30db~120db Decibel meter detection noise generator module noise sensor tester RS485 industrial grade sound sensor TTL 5V |
 | 1        | CP2102 USB 2.0 to UART TTL 5PIN Connector Module Serial Converter |
-| **Temperature/Pressure/Humidity Sensor** | |
+| **Temperature/Humidity/Pressure/Gas Sensor** | |
 | 1        | BME688 Environment Sensor Module Temperature/Humidity/Pressure/Gas AI Smart I2C |
 | 1        | FT232H High Speed Multifunction USB to JTAG UART FIFO SPI I2C |
 | 1        | JST1.0 SH1.0 4pin cable with socket male head Dupont wire For STEMMA QT For QWIIC |
