@@ -36,11 +36,11 @@ Several Python scripts must be started to read data from sensors and write the d
     ./noise_level.py --port /dev/ttyACM0
 ```
 
-  - `ambient_monitor.py`: Reads the temperature, the humididy, the pressure, the altitude and the volatile organic components and writes it to the database (temperature bucket). This script must be started as root.
+  - `ambient.py`: Reads the temperature, the humididy, the pressure, the gas resistance and the indoor air quality and writes it to the database (temperature bucket). This script must be started as root.
 
 ```bash
     export INFLUX_TOKEN="<token>"
-    ./ambient_monitor.py
+    ./ambient.py
 ```
 
 The scripts print in the standard output the current data read from the sensors.
