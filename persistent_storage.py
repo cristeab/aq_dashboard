@@ -89,7 +89,7 @@ class PersistentStorage:
         )
         self._write(self.Bucket.Noise, point)
 
-    def write_ambient_data(self, timestamp, temperature, gas, relative_humidity, pressure, altitude):
+    def write_ambient_data(self, timestamp, temperature, gas, relative_humidity, pressure, iaq):
         point = (
             Point("ambient_data")
             .time(timestamp)
@@ -97,7 +97,7 @@ class PersistentStorage:
             .field("gas", gas)
             .field("relative_humidity", relative_humidity)
             .field("pressure", pressure)
-            .field("altitude", altitude)
+            .field("iaq", iaq)
         )
         self._write(self.Bucket.Temperature, point)
 
