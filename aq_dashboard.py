@@ -65,8 +65,8 @@ async def websocket_endpoint(websocket: WebSocket):
                     "temperature": ambient_data["temperature"],
                     "relative_humidity": ambient_data["relative_humidity"],
                     "pressure": ambient_data["pressure"],
-                    "altitude": ambient_data["altitude"],
-                    "gas": ambient_data["gas"]
+                    "gas": ambient_data["gas"],
+                    "iaq": ambient_data["iaq"]
                 }
             except KeyError as e:
                 pass

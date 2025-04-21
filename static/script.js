@@ -12,12 +12,12 @@ const dummyData = {
 	pm25plus: "0",
 	pm50plus: "0",
 	pm100plus: "0",
+	noise: "0",
 	temperature: "0",
 	humidity: "0",
 	pressure: "0",
-	altitude: "0",
-	tvoc: "0",
-	noise: "0"
+	gas: "0",
+	iaq: "0"
 };
 
 // Get the canvas element
@@ -184,9 +184,9 @@ function updateDashboard(data)
 	updateElementPrecisionVisibility("temp-value", data.temperature, "°C");
 	updateElementPrecisionVisibility("humidity-value", data.relative_humidity, "%");
 	updateElementPrecisionVisibility("pressure-value", data.pressure, "hPa");
-	updateElementPrecisionVisibility("altitude-value", data.altitude, "m");
+	updateElementPrecisionVisibility("iaq-value", data.iaq, "%");
 	
-	const tvocElement = document.getElementById("tvoc-value");
+	const tvocElement = document.getElementById("gas-value");
 	if (data.gas !== undefined) {	
 		if (1000 <= data.gas) {
 			tvocElement.textContent = parseFloat(data.gas / 1000).toFixed(1) + " k\u03A9";
