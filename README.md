@@ -68,6 +68,8 @@ Left Column Values:
 
 Center Display:
 
+- The timestamp expressed in local time zone of the most recent dust particle measurement
+
 - The 10-minute Air Quality Index (AQI) - derived from dust particle measurements using a pair of PMSA007 sensors
 
 Right Column Values:
