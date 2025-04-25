@@ -76,13 +76,13 @@ Right Column Values:
 
 -	Gas resistance measurement in kilo ohms from the BME688 sensor - used to detect volatile compounds and gases (higher values mean less volatile compounds)
 
--	Indoor Air Quality index (smell index) calculated using gas resistance and humidity readings. Smaller values mean cleaner air, similar to 10-min AQI scale.
+-	Indoor Air Quality index (smell index) calculated using gas resistance and humidity readings. Smaller values mean cleaner air, similar to 10-min. AQI scale.
 
 Particulate Matter Measurements (from 2 PMSA007 sensors):
 
 -	PM1.0: Concentration of tiny particles smaller than 1.0 microns in diameter
 
--	PM2.5: Concentration of fine particles smaller than 2.5 microns - can penetrate deep into lungs. These values are used to compute the 10-min AQI above.
+-	PM2.5: Concentration of fine particles smaller than 2.5 microns - can penetrate deep into lungs. These values are used to compute the 10-min. AQI.
 
 -	PM10: Concentration of particles smaller than 10 microns - includes dust, pollen, and mold
 
