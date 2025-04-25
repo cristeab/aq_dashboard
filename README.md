@@ -72,11 +72,11 @@ Center Display:
 
 Right Column Values:
 
--	Noise level in the environment (30 dB would be very quiet)
+-	Noise level in the environment in decibels (30 dB would be very quiet)
 
--	Gas resistance measurement from the BME688 sensor - used to detect volatile compounds and gases
+-	Gas resistance measurement in kilo ohms from the BME688 sensor - used to detect volatile compounds and gases (higher values mean less volatile compounds)
 
--	Indoor Air Quality index (smell index) calculated using gas resistance and humidity readings
+-	Indoor Air Quality index (smell index) calculated using gas resistance and humidity readings. Smaller values mean cleaner air, similar to 10-min AQI scale.
 
 Particulate Matter Measurements (from 2 PMSA007 sensors):
 
