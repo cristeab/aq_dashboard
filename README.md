@@ -78,7 +78,7 @@ Right Column Values:
 
 -	Indoor Air Quality index (smell index) calculated using gas resistance and humidity readings. Smaller values mean cleaner air, similar to 10-min. AQI scale.
 
-Particulate Matter Measurements (from 2 PMSA007 sensors):
+Particulate Matter Measurements (from PMSA007 sensors):
 
 -	PM1.0: Concentration of tiny particles smaller than 1.0 microns in diameter
 
@@ -86,7 +86,7 @@ Particulate Matter Measurements (from 2 PMSA007 sensors):
 
 -	PM10: Concentration of particles smaller than 10 microns - includes dust, pollen, and mold
 
-Particle Count Measurements (from 2 PMSA007 sensors):
+Particle Count Measurements (from PMSA007 sensors):
 
 -	PM0.3+(0.1L): Number of particles larger than 0.3 microns per 0.1 liter of air
 
