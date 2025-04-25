@@ -58,6 +58,48 @@ Access the server at: https://\<server URL\>:8888
 
 ![AQD](screenshots/aq_dashboard.png "Air Quality Dashboard")
 
+Left Column Values:
+
+-	Current room temperature in Celsius degrees
+
+-	Relative humidity (amount of moisture in the air) - the normal value is around 40%
+
+-	Atmospheric pressure expressed in hectoPascals
+
+Center Display:
+
+- The 10-minute Air Quality Index (AQI) - derived from dust particle measurements using a pair of PMSA007 sensors
+
+Right Column Values:
+
+-	Noise level in the environment (30 dB would be very quiet)
+
+-	Gas resistance measurement from the BME688 sensor - used to detect volatile compounds and gases
+
+-	Indoor Air Quality index (smell index) calculated using gas resistance and humidity readings
+
+Particulate Matter Measurements (from 2 PMSA007 sensors):
+
+-	PM1.0: Concentration of tiny particles smaller than 1.0 microns in diameter
+
+-	PM2.5: Concentration of fine particles smaller than 2.5 microns - can penetrate deep into lungs. These values are used to compute the 10-min AQI above.
+
+-	PM10: Concentration of particles smaller than 10 microns - includes dust, pollen, and mold
+
+Particle Count Measurements (from 2 PMSA007 sensors):
+
+-	PM0.3+(0.1L): Number of particles larger than 0.3 microns per 0.1 liter of air
+
+-	PM0.5+(0.1L) Number of particles larger than 0.5 microns per 0.1 liter of air
+
+-	PM1.0+(0.1L) Number of particles larger than 1.0 microns per 0.1 liter of air
+
+-	PM2.5+(0.1L): Number of particles larger than 2.5 microns per 0.1 liter of air
+
+-	PM5.0+(0.1L) Number of particles larger than 5.0 microns per 0.1 liter of air
+
+-	PM10+(0.1L) Number of particles larger than 10 microns per 0.1 liter of air
+
 ## Bill of Materials
 
 The sensors can be connected on USB ports (4) of a PC.
