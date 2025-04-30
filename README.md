@@ -22,21 +22,21 @@ The following buckets must be configured: aqi, pm, noise, temperature. A read/wr
 
 Several Python scripts must be started to read data from sensors and write the data into the database:
 
-  - `air_quality.py`: Reads the particle concentration data from two air quality sensors, computes the 10 min AQI and writes it to the database (aqi and pm buckets)
+  - `air_quality.py`: Reads the particle concentration data from two air quality sensors, computes the 10 min AQI and writes it to the database (aqi and pm buckets). The USB ports where the air quality sensors are attached must be provided as inputs.
 
 ```bash
     export INFLUX_TOKEN="<token>"
     ./air_quality.py /dev/ttyUSB1 /dev/ttyUSB2
 ```
 
-  - `noise_level.py`: Reads the noise level and writes it to the database (noise bucket)
+  - `noise_level.py`: Reads the noise level and writes it to the database (noise bucket). The USB port where the noise sensor is attached must be provided as input.
 
 ```bash
     export INFLUX_TOKEN="<token>"
     ./noise_level.py --port /dev/ttyACM0
 ```
 
-  - `ambient.py`: Reads the temperature, the humididy, the pressure, the gas resistance and the indoor air quality and writes it to the database (temperature bucket). This script must be started as root.
+  - `ambient.py`: Reads the temperature, the humididy, the pressure, the gas resistance and the indoor air quality and writes it to the database (temperature bucket). This script must be started as root. The USB port where the BME688 sensor is attached is automatically detected.
 
 ```bash
     export INFLUX_TOKEN="<token>"
