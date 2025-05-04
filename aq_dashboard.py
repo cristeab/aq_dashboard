@@ -33,9 +33,8 @@ async def websocket_endpoint(websocket: WebSocket):
                     "timestamp": aqi_data["time"],
                     "aqi": aqi_data["pm25_cf1_aqi"]
                 }
-            except KeyError as e:
+            except KeyError:
                 data = {}
-                pass
             for i in range(2):
                 pm_data = storage.read_pm(i)
                 try:
@@ -50,14 +49,14 @@ async def websocket_endpoint(websocket: WebSocket):
                         "pm50plus_" + str(i): pm_data["gr50um"],
                         "pm100plus_" + str(i): pm_data["gr100um"]
                     }
-                except KeyError as e:
+                except KeyError:
                     pass
             noise_level_db = storage.read_noise_level()
             try:
                 data = data | {
                     "noise": noise_level_db["noise_level"]
                 }
-            except KeyError as e:
+            except KeyError:
                 pass
             ambient_data = storage.read_ambient_data()
             try:
@@ -68,7 +67,7 @@ async def websocket_endpoint(websocket: WebSocket):
                     "gas": ambient_data["gas"],
                     "iaq": ambient_data["iaq"]
                 }
-            except KeyError as e:
+            except KeyError:
                 pass
 
             # Send data to client

@@ -41,7 +41,6 @@ try:
         else:
             clear_lines(aq_utils._serial_port_count + 1)
 
-        # print data
         print(f'{aq_utils.aqi} | {aq_utils.elapsed_time} | Samples {aq_utils.sample_count} | Rel. err. {aq_utils.sensors_relative_error_percent}% | Spearman corr. {aq_utils.sensors_spearman_corr}%')
         for i in range(aq_utils._serial_port_count):
             line = f'#{i} '

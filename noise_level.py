@@ -24,7 +24,7 @@ while True:
     timestamp = datetime.now(timezone.utc)
     noise_level_db = noise_detector.read_noise_level()
     persistent_storage.write_noise_level(timestamp, noise_level_db)
-    # print data
+
     if once:
         once = False
     else:

@@ -21,7 +21,7 @@ while True:
         pressure = data['pressure']
         iaq = data['iaq']
         persistent_storage.write_ambient_data(timestamp, temperature, gas, humidity, pressure, iaq)
-        # print data
+
         if once:
             once = False
         else:

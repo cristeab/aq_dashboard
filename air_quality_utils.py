@@ -89,7 +89,7 @@ class AirQualityUtils:
             for s in range(0, self.WAKEUP_DELAY_SEC):
                 time.sleep(1)
                 print(f"\rElapsed seconds: {s + 1}", end="", flush=True)
-            print(f"\nDone")
+            print("\nDone")
 
         self._start_continuous_update()
 
@@ -144,7 +144,7 @@ class AirQualityUtils:
         filtered_ports = [port for port in ports if 'ttyACM' in port.device or 'ttyUSB' in port.device]
 
         if not filtered_ports:
-            None
+            return None
 
         serial_ports = []
         for _, port in enumerate(filtered_ports):
@@ -207,7 +207,7 @@ class AirQualityUtils:
         # spearman correlation (pairwise with first sensor)
         values = []
         for arr in arrays[1:]:
-            spearman_corr, p_value = stats.spearmanr(ref, arr)
+            spearman_corr, _ = stats.spearmanr(ref, arr)
             values.append(spearman_corr)
         self.sensors_spearman_corr = round(np.mean(values) * 100) if len(values) > 0 else 0
 
