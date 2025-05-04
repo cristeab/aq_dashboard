@@ -139,6 +139,8 @@ body {
 
   .centered-text {
     text-align: center;
+    margin: 0 auto;
+    display: block;
   }
 
   /* Dark theme */
