@@ -137,6 +137,10 @@ body {
     margin-top: 20px;
   }
 
+  .centered-text {
+    text-align: center;
+  }
+
   /* Dark theme */
   body.dark-theme {
     --background-color: #121212;
