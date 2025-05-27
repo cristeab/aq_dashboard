@@ -209,7 +209,12 @@ class AirQualityUtils:
         for arr in arrays[1:]:
             spearman_corr, _ = stats.spearmanr(ref, arr)
             values.append(spearman_corr)
-        self.sensors_spearman_corr = round(np.mean(values) * 100) if len(values) > 0 else 0
+        self.sensors_spearman_corr = 0
+        if len(values) > 0:
+            mean_values = np.mean(values)
+            if not np.isnan(mean_values):
+                self.sensors_spearman_corr = round(mean_values * 100)
+
 
     def read_sample(self):
         # make sure readings from all sensors are available
