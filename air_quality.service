@@ -2,7 +2,7 @@
 
 # Enable the service
 # sudo systemctl daemon-reload
-# sudo systemctl enable air_quality.service
+# sudo systemctl enable ./air_quality.service
 # sudo systemctl start air_quality.service
 
 # Check status and logs
