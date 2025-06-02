@@ -1,0 +1,25 @@
+# /etc/systemd/system/noise_level.service
+
+# Enable the service
+# sudo systemctl daemon-reload
+# sudo systemctl enable noise_level.service
+# sudo systemctl start noise_level.service
+
+# Check status and logs
+# sudo systemctl status noise_level.service
+# sudo journalctl -u noise_level.service
+
+[Unit]
+Description=Ambiental noise level detector
+After=network.target
+
+[Service]
+Type=simple
+User=bogdan
+WorkingDirectory=/home/bogdan/projects/aq_dashboard
+ExecStart=/home/bogdan/projects/aq_dashboard/.venv/bin/python /home/bogdan/projects/aq_dashboard/noise_level.py --port /dev/ttyACM0
+Environment="INFLUX_TOKEN=7p0mcEmqkyBeeNRC7aSoy3WgE3gJscJCvbYYFUn4CyqekdMfFUjQu5Ejf_4LqtnU43RBwCt32tKWITPoLqRWDQ=="
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
