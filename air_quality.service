@@ -1,0 +1,25 @@
+# /etc/systemd/system/air_quality.service
+
+# Enable the service
+# sudo systemctl daemon-reload
+# sudo systemctl enable air_quality.service
+# sudo systemctl start air_quality.service
+
+# Check status and logs
+# sudo systemctl status air_quality.service
+# sudo journalctl -u air_quality.service
+
+[Unit]
+Description=Air Quality detector from 2 laser based sensors
+After=network.target
+
+[Service]
+Type=simple
+User=bogdan
+WorkingDirectory=/home/bogdan/projects/aq_dashboard
+ExecStart=/home/bogdan/projects/aq_dashboard/.venv/bin/python /home/bogdan/projects/aq_dashboard/air_quality.py /dev/ttyUSB1 /dev/ttyUSB2
+Environment="INFLUX_TOKEN=7p0mcEmqkyBeeNRC7aSoy3WgE3gJscJCvbYYFUn4CyqekdMfFUjQu5Ejf_4LqtnU43RBwCt32tKWITPoLqRWDQ=="
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
