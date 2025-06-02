@@ -1,0 +1,25 @@
+# /etc/systemd/system/aq_dashboard.service
+
+# Enable the service
+# sudo systemctl daemon-reload
+# sudo systemctl enable aq_dashboard.service
+# sudo systemctl start aq_dashboard.service
+
+# Check status and logs
+# sudo systemctl status aq_dashboard.service
+# sudo journalctl -u aq_dashboard.service
+
+[Unit]
+Description=Air quality dashboard web server
+After=network.target
+
+[Service]
+Type=simple
+User=bogdan
+WorkingDirectory=/home/bogdan/projects/aq_dashboard
+ExecStart=/home/bogdan/projects/aq_dashboard/.venv/bin/python /home/bogdan/projects/aq_dashboard/aq_dashboard.py
+Environment="INFLUX_TOKEN=7p0mcEmqkyBeeNRC7aSoy3WgE3gJscJCvbYYFUn4CyqekdMfFUjQu5Ejf_4LqtnU43RBwCt32tKWITPoLqRWDQ=="
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
