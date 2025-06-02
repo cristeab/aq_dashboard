@@ -1,0 +1,25 @@
+# /etc/systemd/system/ambient.service
+
+# Enable the service
+# sudo systemctl daemon-reload
+# sudo systemctl enable ambient.service
+# sudo systemctl start ambient.service
+
+# Check status and logs
+# sudo systemctl status ambient.service
+# sudo journalctl -u ambient.service
+
+[Unit]
+Description=Temperature, pressure, humidity abd VOC detector
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/home/bogdan/projects/aq_dashboard
+ExecStart=/home/bogdan/projects/aq_dashboard/.venv/bin/python /home/bogdan/projects/aq_dashboard/ambient.py
+Environment="INFLUX_TOKEN=7p0mcEmqkyBeeNRC7aSoy3WgE3gJscJCvbYYFUn4CyqekdMfFUjQu5Ejf_4LqtnU43RBwCt32tKWITPoLqRWDQ=="
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
