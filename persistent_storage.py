@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import influxdb_client, os, time
+import influxdb_client, os
 from influxdb_client import Point
 from influxdb_client.client.write_api import SYNCHRONOUS
 from influxdb_client.client.exceptions import InfluxDBError

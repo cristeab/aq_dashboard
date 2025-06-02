@@ -1,7 +1,4 @@
 #!/usr/bin/env python3
-"""
-    Basic test script to demonstrate active mode of the plantower
-"""
 
 from air_quality_utils import AirQualityUtils
 import argparse
@@ -17,9 +14,10 @@ args = parser.parse_args()
 
 if args.list:
     available_ports = AirQualityUtils.find_serial_ports()
-    print("Available serial ports:")
-    for port in available_ports:
-        print(port)
+    if available_ports is not None:
+        print("Available serial ports:")
+        for port in available_ports:
+            print(port)
     exit()
 
 available_ports = None

@@ -28,47 +28,53 @@ async def websocket_endpoint(websocket: WebSocket):
         while True:
             # Query latest data from InfluxDB
             aqi_data = storage.read_aqi()
-            try:
-                data = {
-                    "timestamp": aqi_data["time"],
-                    "aqi": aqi_data["pm25_cf1_aqi"]
-                }
-            except KeyError:
+            if aqi_data is not None:
+                try:
+                    data = {
+                        "timestamp": aqi_data["time"],
+                        "aqi": aqi_data["pm25_cf1_aqi"]
+                    }
+                except KeyError:
+                    data = {}
+            else:
                 data = {}
             for i in range(2):
                 pm_data = storage.read_pm(i)
+                if pm_data is not None:
+                    try:
+                        data = data | {
+                            "pm10_" + str(i): pm_data["pm10_cf1"],
+                            "pm25_" + str(i): pm_data["pm25_cf1"],
+                            "pm100_" + str(i): pm_data["pm100_cf1"],
+                            "pm03plus_" + str(i): pm_data["gr03um"],
+                            "pm05plus_" + str(i): pm_data["gr05um"],
+                            "pm10plus_" + str(i): pm_data["gr10um"],
+                            "pm25plus_" + str(i): pm_data["gr25um"],
+                            "pm50plus_" + str(i): pm_data["gr50um"],
+                            "pm100plus_" + str(i): pm_data["gr100um"]
+                        }
+                    except KeyError:
+                        pass
+            noise_level_db = storage.read_noise_level()
+            if noise_level_db is not None:
                 try:
                     data = data | {
-                        "pm10_" + str(i): pm_data["pm10_cf1"],
-                        "pm25_" + str(i): pm_data["pm25_cf1"],
-                        "pm100_" + str(i): pm_data["pm100_cf1"],
-                        "pm03plus_" + str(i): pm_data["gr03um"],
-                        "pm05plus_" + str(i): pm_data["gr05um"],
-                        "pm10plus_" + str(i): pm_data["gr10um"],
-                        "pm25plus_" + str(i): pm_data["gr25um"],
-                        "pm50plus_" + str(i): pm_data["gr50um"],
-                        "pm100plus_" + str(i): pm_data["gr100um"]
+                        "noise": noise_level_db["noise_level"]
                     }
                 except KeyError:
                     pass
-            noise_level_db = storage.read_noise_level()
-            try:
-                data = data | {
-                    "noise": noise_level_db["noise_level"]
-                }
-            except KeyError:
-                pass
             ambient_data = storage.read_ambient_data()
-            try:
-                data = data | {
-                    "temperature": ambient_data["temperature"],
-                    "relative_humidity": ambient_data["relative_humidity"],
-                    "pressure": ambient_data["pressure"],
-                    "gas": ambient_data["gas"],
-                    "iaq": ambient_data["iaq"]
-                }
-            except KeyError:
-                pass
+            if ambient_data is not None:
+                try:
+                    data = data | {
+                        "temperature": ambient_data["temperature"],
+                        "relative_humidity": ambient_data["relative_humidity"],
+                        "pressure": ambient_data["pressure"],
+                        "gas": ambient_data["gas"],
+                        "iaq": ambient_data["iaq"]
+                    }
+                except KeyError:
+                    pass
 
             # Send data to client
             await websocket.send_json(data)

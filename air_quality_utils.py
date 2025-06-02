@@ -120,8 +120,8 @@ class AirQualityUtils:
             # Calculate weighted average concentration
             weighted_sum = 0
             weight_sum = 0
-            for i, (pm, time) in enumerate(zip(self.pm_readings, self.pm_timestamps)):
-                time_diff = (self.pm_timestamps[-1] - time).total_seconds() / self.MEASUREMENT_WINDOW_LENGTH_SEC  # Normalize to 10 minutes
+            for i, (pm, timestamp) in enumerate(zip(self.pm_readings, self.pm_timestamps)):
+                time_diff = (self.pm_timestamps[-1] - timestamp).total_seconds() / self.MEASUREMENT_WINDOW_LENGTH_SEC  # Normalize to 10 minutes
                 weight = weight_factor ** time_diff
                 weighted_sum += pm * weight
                 weight_sum += weight
