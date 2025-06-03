@@ -1,8 +1,9 @@
 # /etc/systemd/system/aq_dashboard.service
 
 # Enable the service
+# sudo cp aq_dashboard.service /etc/systemd/system/
 # sudo systemctl daemon-reload
-# sudo systemctl enable ./aq_dashboard.service
+# sudo systemctl enable aq_dashboard.service
 # sudo systemctl start aq_dashboard.service
 
 # Check status and logs

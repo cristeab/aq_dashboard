@@ -1,8 +1,9 @@
 # /etc/systemd/system/noise_level.service
 
 # Enable the service
+# sudo cp noise_level.service /etc/systemd/system/
 # sudo systemctl daemon-reload
-# sudo systemctl enable ./noise_level.service
+# sudo systemctl enable noise_level.service
 # sudo systemctl start noise_level.service
 
 # Check status and logs

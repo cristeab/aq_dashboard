@@ -1,8 +1,9 @@
 # /etc/systemd/system/ambient.service
 
 # Enable the service
+# sudo cp ambient.service /etc/systemd/system/
 # sudo systemctl daemon-reload
-# sudo systemctl enable ./ambient.service
+# sudo systemctl enable ambient.service
 # sudo systemctl start ambient.service
 
 # Check status and logs
