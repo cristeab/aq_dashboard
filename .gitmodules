@@ -1,9 +1,9 @@
 [submodule "plantower"]
 	path = plantower
-	url = https://github.com:cristeab/plantower.git
+	url = https://github.com/cristeab/plantower.git
 [submodule "noise_detector"]
 	path = noise_detector
-	url = https://github.com:cristeab/noise_detector.git
+	url = https://github.com/cristeab/noise_detector.git
 [submodule "ambient_monitor"]
 	path = ambient_monitor
-	url = https://github.com:cristeab/ambient_monitor.git
+	url = https://github.com/cristeab/ambient_monitor.git
