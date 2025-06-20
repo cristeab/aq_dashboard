@@ -21,9 +21,9 @@ class PersistentStorage:
 
     def __init__(self):
         self._logger = LoggerConfigurator.configure_logger(self.__class__.__name__)
-        self._token = os.environ.get("INFLUXDB3_ADMIN_TOKEN")
+        self._token = os.environ.get("INFLUXDB3_AUTH_TOKEN")
         if not self._token:
-            print("Error: INFLUXDB3_ADMIN_TOKEN environment variable is not set.")
+            print("Error: INFLUXDB3_AUTH_TOKEN environment variable is not set.")
             sys.exit(1)
         self._verify_token()
         self._clients: Dict[str, InfluxDBClient3] = {}
