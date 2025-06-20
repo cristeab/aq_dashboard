@@ -19,6 +19,12 @@ class PersistentStorage:
         Noise = "noise"
         Temperature = "temperature"
 
+    class Point(Enum):
+        PM = "air_quality_data_"
+        AQI = "air_quality_data"
+        Noise = "noise_level"
+        Temperature = "ambient_data"
+
     def __init__(self):
         self._logger = LoggerConfigurator.configure_logger(self.__class__.__name__)
         self._token = os.environ.get("INFLUXDB3_AUTH_TOKEN")
@@ -66,7 +72,7 @@ class PersistentStorage:
 
     def write_pm(self, i, sample):
         point = (
-            Point(f"air_quality_data_{i}")
+            Point(f"{self.Point.PM.value}{i}")
             .time(sample.timestamp)
             .field("pm10_cf1", sample.pm10_cf1)
             .field("pm25_cf1", sample.pm25_cf1)
@@ -85,7 +91,7 @@ class PersistentStorage:
 
     def write_aqi(self, timestamp, pm25_cf1_aqi):
         point = (
-            Point("air_quality_data")
+            Point(self.Point.AQI.value)
             .time(timestamp)
             .field("pm25_cf1_aqi", pm25_cf1_aqi)
         )
@@ -93,7 +99,7 @@ class PersistentStorage:
 
     def write_noise_level(self, timestamp, noise_level):
         point = (
-            Point("noise_level")
+            Point(self.Point.Noise.value)
             .time(timestamp)
             .field("noise_level", noise_level)
         )
@@ -101,7 +107,7 @@ class PersistentStorage:
 
     def write_ambient_data(self, timestamp, temperature, gas, relative_humidity, pressure, iaq):
         point = (
-            Point("ambient_data")
+            Point(self.Point.Temperature.value)
             .time(timestamp)
             .field("temperature", temperature)
             .field("gas", gas)
@@ -121,16 +127,16 @@ class PersistentStorage:
             return df.to_dict(orient="records")
 
     def read_pm(self, i: int):
-        return self._read(self.Database.PM, f'air_quality_data_{i}')
+        return self._read(self.Database.PM, f'{self.Point.PM.value}{i}')
 
     def read_aqi(self):
-        return self._read(self.Database.AQI, 'air_quality_data')
+        return self._read(self.Database.AQI, self.Point.AQI.value)
 
     def read_noise_level(self):
-        return self._read(self.Database.Noise, 'noise_level')
+        return self._read(self.Database.Noise, self.Point.Noise.value)
 
     def read_ambient_data(self):
-        return self._read(self.Database.Temperature, 'ambient_data')
+        return self._read(self.Database.Temperature, self.Point.Temperature.value)
 
 
 if __name__ == "__main__":
