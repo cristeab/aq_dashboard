@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
+#
+# curl "http://localhost:8181/health" --header "Authorization: Bearer $INFLUXDB3_ADMIN_TOKEN"
 
-import influxdb_client, os
-from influxdb_client import Point
-from influxdb_client.client.write_api import SYNCHRONOUS
-from influxdb_client.client.exceptions import InfluxDBError
+from influxdb_client_3 import InfluxDBClient3, WriteOptions, WritePrecision, Point
+from typing import Dict
 from logger_configurator import LoggerConfigurator
 from enum import Enum
-import sys
+import os, sys
 
 
 class PersistentStorage:
-    org = "home"
-    url = "http://localhost:8086"
+    auth_scheme = "Bearer"
+    host = "http://localhost:8181"
 
-    class Bucket(Enum):
+    class Database(Enum):
         PM = "pm"
         AQI = "aqi"
         Noise = "noise"
@@ -21,38 +21,48 @@ class PersistentStorage:
 
     def __init__(self):
         self._logger = LoggerConfigurator.configure_logger(self.__class__.__name__)
-        token = os.environ.get("INFLUX_TOKEN")
-        if not token:
-            print("Error: INFLUX_TOKEN environment variable is not set.")
+        self._token = os.environ.get("INFLUXDB3_ADMIN_TOKEN")
+        if not self._token:
+            print("Error: INFLUXDB3_ADMIN_TOKEN environment variable is not set.")
             sys.exit(1)
-        self._write_client = influxdb_client.InfluxDBClient(url=self.url, token=token, org=self.org)
-        self._write_api = self._write_client.write_api(write_options=SYNCHRONOUS)
         self._verify_token()
+        self._clients: Dict[str, InfluxDBClient3] = {}
+        # Configure batch writing options
+        self.write_options = WriteOptions(
+                    batch_size=500,
+                    flush_interval=10_000,
+                    max_retries=5,
+                    exponential_base=2
+                )
+
+    def get_client(self, database: str) -> InfluxDBClient3:
+        """Get or create a client for specific database"""
+        if database not in self._clients:
+            self._clients[database] = InfluxDBClient3(
+                host=self.host,
+                token=self._token,
+                database=database,
+                auth_scheme=self.auth_scheme,
+                write_client_options=self.write_options
+            )
+        return self._clients[database]
 
     def _verify_token(self):
         try:
-            test_point = Point("test").field("test_field", 1)
-            self._write_api.write(bucket=self.Bucket.PM.value, org=self.org, record=test_point)
-            print("Token verification successful.")
-        except InfluxDBError as e:
-            print(f"Token verification failed: {e}")
-            sys.exit(1)
+            client = self.get_client(self.Database.PM.value)
+            client.query("SELECT 1")
+            self._logger.info("Token verification successful.")
         except Exception as e:
-            print(f"An unexpected error occurred during token verification: {e}")
+            if "unauthorized" in str(e).lower() or "authentication" in str(e).lower():
+                self._logger.error(f"Token verification failed: {e}")
+            else:
+                self._logger.error(f"An unexpected error occurred during token verification: {e}")
             sys.exit(1)
 
-    def _write(self, bucket: Bucket, point: Point):
-        try:
-            self._write_api.write(bucket=bucket.value, org=self.org, record=point)
-        except InfluxDBError as e:
-            if e.response.status == 401:
-                self._logger.error(f"Authentication error: {e}")
-            elif e.response.status == 404:
-                self._logger.error(f"Bucket or organization not found: {e}")
-            else:
-                self._logger.error(f"An error occurred while writing data: {e}")
-        except Exception as e:
-            self._logger.error(f"An unexpected error occurred: {e}")
+    def _write(self, db: Database, point: Point):
+        with self.get_client(db.value) as client:
+            # Supports writing Points, DataFrames, line protocol
+            client.write(record=point, write_precision=WritePrecision.MS)
 
     def write_pm(self, i, sample):
         point = (
@@ -71,7 +81,7 @@ class PersistentStorage:
             .field("gr50um", sample.gr50um)
             .field("gr100um", sample.gr100um)
         )
-        self._write(self.Bucket.PM, point)
+        self._write(self.Database.PM, point)
 
     def write_aqi(self, timestamp, pm25_cf1_aqi):
         point = (
@@ -79,7 +89,7 @@ class PersistentStorage:
             .time(timestamp)
             .field("pm25_cf1_aqi", pm25_cf1_aqi)
         )
-        self._write(self.Bucket.AQI, point)
+        self._write(self.Database.AQI, point)
 
     def write_noise_level(self, timestamp, noise_level):
         point = (
@@ -87,7 +97,7 @@ class PersistentStorage:
             .time(timestamp)
             .field("noise_level", noise_level)
         )
-        self._write(self.Bucket.Noise, point)
+        self._write(self.Database.Noise, point)
 
     def write_ambient_data(self, timestamp, temperature, gas, relative_humidity, pressure, iaq):
         point = (
@@ -99,39 +109,28 @@ class PersistentStorage:
             .field("pressure", pressure)
             .field("iaq", iaq)
         )
-        self._write(self.Bucket.Temperature, point)
+        self._write(self.Database.Temperature, point)
 
-    def _read(self, query):
-        try:
-            tables = self._write_client.query_api().query(query)
-            data = {}
-            for table in tables:
-                for record in table.records:
-                    local_time = record.get_time().astimezone().strftime('%d/%m/%Y, %H:%M:%S')
-                    data["time"] = local_time
-                    data[record.get_field()] = record.get_value()
-            return data
-        except InfluxDBError as e:
-            self._logger.error(f"InfluxDB query error: {e}")
-        except Exception as e:
-            self._logger.error(f"An unexpected error occurred during query execution: {e}")
-        return None
+    def _read(self, db: Database, point_name):
+        with self.get_client(db.value) as client:
+            df = client.query(
+                        query=f'SELECT * FROM "{point_name}" ORDER BY time DESC LIMIT 1',
+                        language="sql",
+                        mode="pandas"
+                    )
+            return df.to_dict(orient="records")
 
     def read_pm(self, i: int):
-        query = f'from(bucket:"{self.Bucket.PM.value}") |> range(start: -1m) |> filter(fn: (r) => r._measurement == "air_quality_data_{i}") |> last()'
-        return self._read(query)
+        return self._read(self.Database.PM, f'air_quality_data_{i}')
 
     def read_aqi(self):
-        query = f'from(bucket:"{self.Bucket.AQI.value}") |> range(start: -1m) |> filter(fn: (r) => r._measurement == "air_quality_data") |> last()'
-        return self._read(query)
+        return self._read(self.Database.AQI, 'air_quality_data')
 
     def read_noise_level(self):
-        query = f'from(bucket:"{self.Bucket.Noise.value}") |> range(start: -1m) |> filter(fn: (r) => r._measurement == "noise_level") |> last()'
-        return self._read(query)
+        return self._read(self.Database.Noise, 'noise_level')
 
     def read_ambient_data(self):
-        query = f'from(bucket:"{self.Bucket.Temperature.value}") |> range(start: -1m) |> filter(fn: (r) => r._measurement == "ambient_data") |> last()'
-        return self._read(query)
+        return self._read(self.Database.Temperature, 'ambient_data')
 
 
 if __name__ == "__main__":

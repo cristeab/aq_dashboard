@@ -1,6 +1,6 @@
 fastapi
 uvicorn
 websockets
-influxdb-client
+influxdb3-python
 adafruit-blinka
 adafruit-circuitpython-bme680
