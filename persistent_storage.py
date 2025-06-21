@@ -2,7 +2,7 @@
 #
 # curl "http://localhost:8181/health" --header "Authorization: Bearer $INFLUXDB3_ADMIN_TOKEN"
 
-from influxdb_client_3 import InfluxDBClient3, WriteOptions, WritePrecision, Point
+from influxdb_client_3 import InfluxDBClient3, write_client_options, WriteOptions, WritePrecision, Point
 from typing import Dict
 from logger_configurator import LoggerConfigurator
 from enum import Enum
@@ -31,15 +31,16 @@ class PersistentStorage:
         if not self._token:
             print("Error: INFLUXDB3_AUTH_TOKEN environment variable is not set.")
             sys.exit(1)
-        self._verify_token()
+
         self._clients: Dict[str, InfluxDBClient3] = {}
         # Configure batch writing options
-        self.write_options = WriteOptions(
+        self.write_options = write_client_options(write_options=WriteOptions(
                     batch_size=500,
                     flush_interval=10_000,
                     max_retries=5,
                     exponential_base=2
-                )
+                ))
+        self._verify_token()
 
     def get_client(self, database: str) -> InfluxDBClient3:
         """Get or create a client for specific database"""
