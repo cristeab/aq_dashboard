@@ -10,10 +10,12 @@ SERVICE_DIR=/etc/systemd/system
 
 # Usage message
 usage() {
-    echo "Usage: $0 [-i] [-u] [-s]"
+    echo "Usage: $0 [-i] [-u] [-s] [-q] [-t]"
     echo "  -i    Install services"
     echo "  -u    Uninstall services"
-    echo "  -s    Show service status"
+    echo "  -s    Start services"
+    echo "  -q    Stop services"
+    echo "  -t    Show service status"
     exit 1
 }
 
@@ -39,6 +41,20 @@ uninstall() {
     systemctl daemon-reload
 }
 
+start() {
+    echo "Starting services..."
+    for file in "${services[@]}"; do
+        systemctl start ${file}.service
+    done
+}
+
+stop() {
+    echo "Stopping services..."
+    for file in "${services[@]}"; do
+        systemctl stop ${file}.service
+    done
+}
+
 status() {
     echo "Showing service status..."
     for file in "${services[@]}"; do
@@ -52,7 +68,7 @@ if [ $# -eq 0 ]; then
 fi
 
 # Parse the first argument
-while getopts ":ius" opt; do
+while getopts ":iusqt" opt; do
     case $opt in
         i)
             install
@@ -61,6 +77,12 @@ while getopts ":ius" opt; do
             uninstall
             ;;
         s)
+            start
+            ;;
+        q)
+            stop
+            ;;
+        t)
             status
             ;;
         \?)
