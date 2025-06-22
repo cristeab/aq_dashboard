@@ -6,3 +6,4 @@ adafruit-blinka
 adafruit-circuitpython-bme680
 numpy
 scipy
+pandas
