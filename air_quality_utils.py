@@ -74,6 +74,9 @@ class AirQualityUtils:
         self._gr50um = tuple(deque(maxlen=1) for _ in range(self._serial_port_count))
         self._gr100um = tuple(deque(maxlen=1) for _ in range(self._serial_port_count))
 
+        for i in range(self._serial_port_count):
+            self._logger.info(serial_ports[i])
+
         self._pt = tuple(plantower.Plantower(serial_ports[i]) for i in range(self._serial_port_count))
         for pt in self._pt:
             LoggerConfigurator.set_handler(pt.logger)
