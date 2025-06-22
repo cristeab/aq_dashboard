@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 #
+# sudo systemctl status influxdb3-core
+# journalctl -u influxdb3-core
 # curl "http://localhost:8181/health" --header "Authorization: Bearer $INFLUXDB3_ADMIN_TOKEN"
 
-from influxdb_client_3 import InfluxDBClient3, write_client_options, WriteOptions, WritePrecision, Point
+from influxdb_client_3 import InfluxDBClient3, WritePrecision, Point
 from typing import Dict
 from logger_configurator import LoggerConfigurator
 from enum import Enum
@@ -33,13 +35,6 @@ class PersistentStorage:
             sys.exit(1)
 
         self._clients: Dict[str, InfluxDBClient3] = {}
-        # Configure batch writing options
-        self.write_options = write_client_options(write_options=WriteOptions(
-                    batch_size=500,
-                    flush_interval=10_000,
-                    max_retries=5,
-                    exponential_base=2
-                ))
         self._verify_token()
 
     def get_client(self, database: str) -> InfluxDBClient3:
@@ -49,8 +44,7 @@ class PersistentStorage:
                 host=self.host,
                 token=self._token,
                 database=database,
-                auth_scheme=self.auth_scheme,
-                write_client_options=self.write_options
+                auth_scheme=self.auth_scheme
             )
         return self._clients[database]
 
