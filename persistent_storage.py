@@ -8,6 +8,7 @@ from influxdb_client_3 import InfluxDBClient3, WritePrecision, Point
 from typing import Dict
 from logger_configurator import LoggerConfigurator
 from enum import Enum
+import pandas
 import os, sys
 
 
@@ -61,9 +62,9 @@ class PersistentStorage:
             sys.exit(1)
 
     def _write(self, db: Database, point: Point):
-        with self.get_client(db.value) as client:
-            # Supports writing Points, DataFrames, line protocol
-            client.write(record=point, write_precision=WritePrecision.MS)
+        client = self.get_client(db.value)
+        # Supports writing Points, DataFrames, line protocol
+        client.write(record=point, write_precision=WritePrecision.MS)
 
     def write_pm(self, i, sample):
         point = (
@@ -113,13 +114,13 @@ class PersistentStorage:
         self._write(self.Database.Temperature, point)
 
     def _read(self, db: Database, point_name):
-        with self.get_client(db.value) as client:
-            df = client.query(
-                        query=f'SELECT * FROM "{point_name}" ORDER BY time DESC LIMIT 1',
-                        language="sql",
-                        mode="pandas"
-                    )
-            return df.to_dict(orient="records")
+        client = self.get_client(db.value)
+        df = client.query(
+                    query=f'SELECT * FROM "{point_name}" ORDER BY time DESC LIMIT 1',
+                    language="sql",
+                    mode="pandas"
+                )
+        return df.to_dict(orient="records")[-1]
 
     def read_pm(self, i: int):
         return self._read(self.Database.PM, f'{self.Point.PM.value}{i}')
