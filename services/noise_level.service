@@ -18,8 +18,8 @@ After=network.target
 Type=simple
 User=bogdan
 WorkingDirectory=/home/bogdan/projects/aq_dashboard
-ExecStart=/home/bogdan/projects/aq_dashboard/.venv/bin/python /home/bogdan/projects/aq_dashboard/noise_level.py --port /dev/ttyACM0
-Environment="INFLUX_TOKEN=7p0mcEmqkyBeeNRC7aSoy3WgE3gJscJCvbYYFUn4CyqekdMfFUjQu5Ejf_4LqtnU43RBwCt32tKWITPoLqRWDQ=="
+ExecStart=/home/bogdan/.venv/bin/python /home/bogdan/projects/aq_dashboard/noise_level.py --port /dev/ttyACM0
+Environment="INFLUXDB3_AUTH_TOKEN=apiv3_mrYtrK_kbi6dpfx9xdmPn1BkVJ5kQjnL17ag9PXGxiLIUnrvunTqiCnljWhQ8uw2aiWFI3cI6QKLMBHgbKexPA"
 Restart=on-failure
 
 [Install]
