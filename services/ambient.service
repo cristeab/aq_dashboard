@@ -11,12 +11,12 @@
 # sudo journalctl -u ambient.service
 
 [Unit]
-Description=Temperature, pressure, humidity abd VOC detector
+Description=Temperature, pressure, humidity and VOC detector
 After=network.target
 
 [Service]
 Type=simple
-User=root
+User=bogdan
 WorkingDirectory=/home/bogdan/projects/aq_dashboard
 ExecStart=/home/bogdan/.venv/bin/python /home/bogdan/projects/aq_dashboard/ambient.py
 Environment="INFLUXDB3_AUTH_TOKEN=apiv3_mrYtrK_kbi6dpfx9xdmPn1BkVJ5kQjnL17ag9PXGxiLIUnrvunTqiCnljWhQ8uw2aiWFI3cI6QKLMBHgbKexPA"
