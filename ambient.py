@@ -6,7 +6,7 @@ from print_utils import clear_lines
 import time
 
 
-SLEEP_DURATION_SECONDS = 2
+SLEEP_DURATION_SECONDS = 3
 monitor = AmbientMonitor()
 persistent_storage = PersistentStorage()
 
