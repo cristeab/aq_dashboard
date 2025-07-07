@@ -118,7 +118,7 @@ class PersistentStorage:
         try:
             client = self.get_client(db.value)
             df = client.query(
-                        query=f'SELECT * FROM "{point_name}" ORDER BY time DESC LIMIT 1',
+                        query=f'SELECT * FROM "{point_name}" WHERE time > now() - interval \'10 minutes\' ORDER BY time DESC LIMIT 1',
                         language="sql",
                         mode="pandas"
                     )
@@ -126,6 +126,7 @@ class PersistentStorage:
             return records[-1] if records else None
         except Exception as e:
             pass
+            # self._logger.error(f"Cannot read from {point_name}: {e}")
         return None
 
     def read_pm(self, i: int):
