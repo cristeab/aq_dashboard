@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import serial.tools.list_ports
+import serial
 import sys
 import plantower.plantower as plantower
 import time
@@ -226,7 +227,13 @@ class AirQualityUtils:
             try:
                 sample[i] = self._pt[i].read()
             except plantower.PlantowerException as e:
-                print(f"#{i}: {e}")
+                self._logger.error(f"#{i}: {e}")
+                return
+            except serial.serialutil.SerialException as e:
+                self._logger.error(f"#{i}: Serial port error: {e}")
+                return
+            except Exception as e:
+                self._logger.error(f"#{i}: Unexpected error: {e}")
                 return
         # process readings
         self.sample_count += 1
