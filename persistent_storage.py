@@ -22,12 +22,14 @@ class PersistentStorage:
         AQI = "aqi"
         Noise = "noise"
         Temperature = "temperature"
+        Light = "light"
 
     class Point(Enum):
         PM = "air_quality_data_"
         AQI = "air_quality_data"
         Noise = "noise_level"
         Temperature = "ambient_data"
+        Light = "light_data"
 
     def __init__(self):
         self._logger = LoggerConfigurator.configure_logger(self.__class__.__name__)
@@ -114,6 +116,15 @@ class PersistentStorage:
         )
         self._write(self.Database.Temperature, point)
 
+    def write_light_data(self, timestamp, visible_light_lux, uv_index):
+        point = (
+            Point(self.Point.Light.value)
+            .time(timestamp)
+            .field("visible_light_lux", visible_light_lux)
+            .field("uv_index", uv_index)
+        )
+        self._write(self.Database.Light, point)
+
     def _read(self, db: Database, point_name):
         try:
             client = self.get_client(db.value)
@@ -140,6 +151,9 @@ class PersistentStorage:
 
     def read_ambient_data(self):
         return self._read(self.Database.Temperature, self.Point.Temperature.value)
+
+    def read_light_data(self):
+        return self._read(self.Database.Light, self.Point.Light.value)
 
 
 if __name__ == "__main__":

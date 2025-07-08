@@ -6,6 +6,7 @@ from fastapi.responses import HTMLResponse
 import asyncio
 from persistent_storage import PersistentStorage
 from fastapi.websockets import WebSocketDisconnect
+from constants import SLEEP_DURATION_SECONDS
 
 
 app = FastAPI()
@@ -84,7 +85,7 @@ async def websocket_endpoint(websocket: WebSocket):
             await websocket.send_json(data)
 
             # Wait before sending next update
-            await asyncio.sleep(3)
+            await asyncio.sleep(SLEEP_DURATION_SECONDS)
     except WebSocketDisconnect:
         print("Client disconnected")
 

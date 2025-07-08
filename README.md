@@ -8,7 +8,7 @@ as well as the particle concentration for different particle diameters. The temp
 - Debian 12
 
 - An InfluxDB3 database is used to store the data received from different sensors and retrieved it to be shown in a web page.
-The following databases must be configured: aqi, pm, noise, temperature. A read/write access token must be configured.
+The following databases must be configured: aqi, pm, noise, temperature, light. A read/write access token must be configured.
 
 - A Python virtual environment must be setup in order to run the Python scripts:
 
@@ -16,6 +16,28 @@ The following databases must be configured: aqi, pm, noise, temperature. A read/
     python3 -m venv .venv
     source .venv/bin/activate
     pip install -r requirements.txt
+```
+
+## Setup Influxdb3 database
+
+- Show database service status
+
+```bash
+sudo systemctl status influxdb3-core
+```
+
+- Create database
+
+```bash
+  export INFLUXDB3_AUTH_TOKEN="<token>"
+  influxdb3 create database <name>
+```
+
+- Show available databases:
+
+```bash
+  export INFLUXDB3_AUTH_TOKEN="<token>"
+  influxdb3 show databases
 ```
 
 ## Get Sensor Data

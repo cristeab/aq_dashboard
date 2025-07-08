@@ -4,9 +4,9 @@ from ambient_monitor.ambient_monitor import AmbientMonitor
 from persistent_storage import PersistentStorage
 from print_utils import clear_lines
 import time
+from constants import SLEEP_DURATION_SECONDS
 
 
-SLEEP_DURATION_SECONDS = 3
 monitor = AmbientMonitor()
 persistent_storage = PersistentStorage()
 

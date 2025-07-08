@@ -7,9 +7,9 @@ from print_utils import clear_lines
 import argparse
 import time
 from datetime import datetime, timezone
+from constants import SLEEP_DURATION_SECONDS
 
 
-SLEEP_DURATION_SECONDS = 2
 parser = argparse.ArgumentParser(description='Script to read the noise level from the serial port')
 parser.add_argument('--port', required=True, help='Serial port to use (e.g., /dev/ttyACM0)')
 
