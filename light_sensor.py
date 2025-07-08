@@ -5,6 +5,7 @@ import busio
 import adafruit_ltr390
 from persistent_storage import PersistentStorage
 from datetime import datetime, timezone
+import time
 from constants import SLEEP_DURATION_SECONDS
 
 
@@ -19,5 +20,5 @@ while True:
     persistent_storage.write_light_data(timestamp, visible_light_lux, uv_index)
     
     local_time = timestamp.astimezone().strftime('%d/%m/%Y, %H:%M:%S')
-    print(f'Timestamp: {local_time}, Visible Light: {visible_light_lux} lux, UV Index: {uv_index}')
+    print(f'Timestamp: {local_time}, Visible Light: {visible_light_lux:.1f} lux, UV Index: {uv_index:.1f}')
     time.sleep(SLEEP_DURATION_SECONDS)
