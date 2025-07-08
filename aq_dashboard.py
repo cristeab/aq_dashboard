@@ -81,6 +81,16 @@ async def websocket_endpoint(websocket: WebSocket):
                 except KeyError:
                     pass
 
+            light_data = storage.read_light_data()
+            if light_data is not None:
+                try:
+                    data = data | {
+                        "visible_light_lux": light_data["visible_light_lux"],
+                        "uv_index": light_data["uv_index"]
+                    }
+                except KeyError:
+                    pass
+
             # Send data to client
             await websocket.send_json(data)
 

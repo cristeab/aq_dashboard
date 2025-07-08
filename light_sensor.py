@@ -20,5 +20,5 @@ while True:
     persistent_storage.write_light_data(timestamp, visible_light_lux, uv_index)
     
     local_time = timestamp.astimezone().strftime('%d/%m/%Y, %H:%M:%S')
-    print(f'Timestamp: {local_time}, Visible Light: {visible_light_lux:.1f} lux, UV Index: {uv_index:.1f}')
+    print(f'Timestamp: {local_time}, Visible Light: {visible_light_lux:.1f} lux, UV Index: {uv_index:.1f}', flush=True)
     time.sleep(SLEEP_DURATION_SECONDS)

@@ -197,6 +197,9 @@ function updateDashboard(data)
 	} else {
 		tvocElement.parentElement.style.display = "none"; // Hide the parent container
 	}
+
+	updateElementPrecisionVisibility("visible-light-lux-value", data.visible_light_lux, "lux");
+	updateElementPrecisionVisibility("uv-index-value", data.uv_index);
 }
 
 document.addEventListener("DOMContentLoaded", function() {
