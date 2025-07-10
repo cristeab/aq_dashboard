@@ -8,7 +8,7 @@
 
 # Check status and logs
 # sudo systemctl status air_quality.service
-# sudo journalctl -u air_quality.service
+# sudo journalctl -fu air_quality.service
 
 [Unit]
 Description=Air Quality detector from 2 laser based sensors

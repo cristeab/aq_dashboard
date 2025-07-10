@@ -8,7 +8,7 @@
 
 # Check status and logs
 # sudo systemctl status ambient.service
-# sudo journalctl -u ambient.service
+# sudo journalctl -fu ambient.service
 
 [Unit]
 Description=Temperature, pressure, humidity and VOC detector

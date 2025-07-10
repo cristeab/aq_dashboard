@@ -8,7 +8,7 @@
 
 # Check status and logs
 # sudo systemctl status aq_dashboard.service
-# sudo journalctl -u aq_dashboard.service
+# sudo journalctl -fu aq_dashboard.service
 
 [Unit]
 Description=Air quality dashboard web server

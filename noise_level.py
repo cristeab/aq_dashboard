@@ -3,7 +3,6 @@
 from noise_detector.noise_detector import NoiseDetector
 from persistent_storage import PersistentStorage
 from logger_configurator import LoggerConfigurator
-from print_utils import clear_lines
 import argparse
 import time
 from datetime import datetime, timezone
@@ -19,16 +18,11 @@ noise_detector = NoiseDetector(args.port)
 noise_detector.logger = LoggerConfigurator.configure_logger("NoiseDetector")
 persistent_storage = PersistentStorage()
 
-once = True
 while True:
     timestamp = datetime.now(timezone.utc)
     noise_level_db = noise_detector.read_noise_level()
     persistent_storage.write_noise_level(timestamp, noise_level_db)
 
-    if once:
-        once = False
-    else:
-        clear_lines(1)
     local_time = timestamp.astimezone().strftime('%d/%m/%Y, %H:%M:%S')
-    print(f'Timestamp: {local_time}, Noise level: {noise_level_db} dB')
+    print(f'Timestamp: {local_time}, Noise level: {noise_level_db} dB', flush=True)
     time.sleep(SLEEP_DURATION_SECONDS)
