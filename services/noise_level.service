@@ -12,7 +12,7 @@
 
 [Unit]
 Description=Ambiental noise level detector
-After=network.target
+After=multi-user.target
 
 [Service]
 Type=simple

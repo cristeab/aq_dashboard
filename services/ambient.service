@@ -12,7 +12,7 @@
 
 [Unit]
 Description=Temperature, pressure, humidity abd VOC detector
-After=network.target
+After=multi-user.target
 
 [Service]
 Type=simple

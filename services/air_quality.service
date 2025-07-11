@@ -12,7 +12,7 @@
 
 [Unit]
 Description=Air Quality detector from 2 laser based sensors
-After=network.target
+After=multi-user.target
 
 [Service]
 Type=simple
