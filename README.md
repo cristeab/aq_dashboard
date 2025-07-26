@@ -26,6 +26,18 @@ The following databases must be configured: aqi, pm, noise, temperature, light. 
 sudo systemctl status influxdb3-core
 ```
 
+- Show database service logs
+
+```bash
+sudo journalctl -fu influxdb3-core
+```
+
+- Quick fix in case the service does not start
+
+```bash
+sudo rm -rf ~/.influxdb/data/airquality/wal
+```
+
 - Create database
 
 ```bash
