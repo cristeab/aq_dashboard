@@ -134,7 +134,7 @@ def query_latest_data():
     data = {}
 
     # Read AQI data
-    aqi_data = storage.read_aqi_data()
+    aqi_data = storage.read_aqi()
     sendAlert = True
     if aqi_data is not None:
         try:
