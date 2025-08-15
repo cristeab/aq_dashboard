@@ -13,7 +13,7 @@ from constants import SLEEP_DURATION_SECONDS, normalize_and_format_time
 from logger_configurator import LoggerConfigurator
 
 
-MISSING_DATA_ALERT_INTERVAL_SEC = 300
+MISSING_DATA_ALERT_INTERVAL_SEC = 10 * 60
 # Configuration - update with your details
 GMAIL_USER = os.getenv("GMAIL_USER")  # Gmail email address, set as env var
 GMAIL_APP_PASSWORD = os.getenv("GMAIL_APP_PASSWORD")  # Gmail app password, set as env var
@@ -79,6 +79,8 @@ def save_alert_state(state):
         json.dump(state, f)
 
 def send_email_alert(parameter, value, threshold, timestamp):
+    print(f"Sending alert for {parameter}: {value} crossed threshold {threshold} at {timestamp}")
+    return  # Commented out to avoid sending emails during testing
     msg = EmailMessage()
     msg['From'] = GMAIL_USER
     msg['To'] = GMAIL_USER
@@ -100,6 +102,8 @@ def send_email_alert(parameter, value, threshold, timestamp):
         logger.error(f"Error sending email: {e}")
 
 def send_missing_data_alert(parameter):
+    print(f"Sending missing data alert for {parameter}")
+    return  # Commented out to avoid sending emails during testing
     msg = EmailMessage()
     msg['From'] = GMAIL_USER
     msg['To'] = GMAIL_USER
@@ -230,7 +234,7 @@ def check_thresholds_and_alert(data, alert_state):
 def main():
     # Check Gmail credentials environment variables
     if not GMAIL_USER or not GMAIL_APP_PASSWORD:
-        logger.error("Please set GMAIL_USER and GMAIL_APP_PASSWORD environment variables.")
+        print("Error: Please set GMAIL_USER and GMAIL_APP_PASSWORD environment variables.")
         return
 
     alert_state = load_alert_state()
