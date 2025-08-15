@@ -202,6 +202,8 @@ def query_latest_data():
     if sendAlert:
         send_missing_data_alert_if_due("visible_light")
 
+    return data
+
 def check_thresholds_and_alert(data, alert_state):
     for param, info in data.items():
         try:
