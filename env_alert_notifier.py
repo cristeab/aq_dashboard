@@ -61,8 +61,9 @@ THRESHOLDS = {
         "high_kohms": 200
     },
     "visible_light": {
+        "very_low_lux": 5,
         "low_lux": 50,
-        "normal_lux": 150
+        "normal_lux": 100
     }
 }
 
