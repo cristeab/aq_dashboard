@@ -5,19 +5,24 @@ import os
 import sys
 import json
 import smtplib
+import time
 from email.message import EmailMessage
 from datetime import datetime
 from persistent_storage import PersistentStorage
 from constants import SLEEP_DURATION_SECONDS, normalize_and_format_time
-import time
+from logger_configurator import LoggerConfigurator
 
 
+MISSING_DATA_ALERT_INTERVAL_SEC = 300
 # Configuration - update with your details
 GMAIL_USER = os.getenv("GMAIL_USER")  # Gmail email address, set as env var
 GMAIL_APP_PASSWORD = os.getenv("GMAIL_APP_PASSWORD")  # Gmail app password, set as env var
 
 ALERT_STATE_FILE = "alert_state.json"
 
+last_missing_data_alert = {}       # param: last alert timestamp
+
+logger = LoggerConfigurator.configure_logger("EnvAlertNotifier")
 # InfluxDB connection
 storage = PersistentStorage()
 
@@ -89,37 +94,73 @@ def send_email_alert(parameter, value, threshold, timestamp):
             smtp.starttls()
             smtp.login(GMAIL_USER, GMAIL_APP_PASSWORD)
             smtp.send_message(msg)
-        print(f"Alert email sent for {parameter}")
+        logger.info(f"Alert email sent for {parameter}")
     except Exception as e:
-        print(f"Error sending email: {e}")
+        logger.error(f"Error sending email: {e}")
+
+def send_missing_data_alert(parameter):
+    msg = EmailMessage()
+    msg['From'] = GMAIL_USER
+    msg['To'] = GMAIL_USER
+    msg['Subject'] = f"Alert: Missing data for {parameter}!"
+
+    body = (f"Alert: No data received for parameter '{parameter}' in the last check.\n"
+            f"Timestamp: {datetime.now()}\n")
+    msg.set_content(body)
+
+    try:
+        with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
+            smtp.starttls()
+            smtp.login(GMAIL_USER, GMAIL_APP_PASSWORD)
+            smtp.send_message(msg)
+        logger.info(f"Missing data alert email sent for {parameter}")
+    except Exception as e:
+        logger.error(f"Error sending missing data email: {e}")
+
+def send_missing_data_alert_if_due(parameter):
+    global last_missing_data_alert
+    current_time = time.time()
+    last = last_missing_data_alert.get("aqi", 0)
+    if current_time - last > MISSING_DATA_ALERT_INTERVAL_SEC:
+        send_missing_data_alert(parameter)
+        last_missing_data_alert[parameter] = current_time
 
 def query_latest_data():
     data = {}
 
     # Read AQI data
     aqi_data = storage.read_aqi_data()
+    sendAlert = True
     if aqi_data is not None:
         try:
             data["aqi"] = {
                 "timestamp": normalize_and_format_time(aqi_data["time"]),
                 "value": aqi_data["pm25_cf1_aqi"]
             }
+            sendAlert = False
         except KeyError:
             pass
+    if sendAlert:
+        send_missing_data_alert_if_due("aqi")
 
     # Read noise level
     noise_level_db = storage.read_noise_level()
+    sendAlert = True
     if noise_level_db is not None:
         try:
             data["noise"] = {
                 "timestamp": normalize_and_format_time(noise_level_db["time"]),
                 "value": noise_level_db["noise_level"]
             }
+            sendAlert = False
         except KeyError:
             pass
+    if sendAlert:
+        send_missing_data_alert_if_due("noise")
 
     # Read ambient data
     ambient_data = storage.read_ambient_data()
+    sendAlert = True
     if ambient_data is not None:
         try:
             ts = normalize_and_format_time(ambient_data["time"])
@@ -135,19 +176,26 @@ def query_latest_data():
                 "timestamp": ts,
                 "value": ambient_data["gas"]
             }
+            sendAlert = False
         except KeyError:
             pass
+    if sendAlert:
+        send_missing_data_alert_if_due("ambient_data")
 
     # Read light data
     light_data = storage.read_light_data()
+    sendAlert = True
     if light_data is not None:
         try:
             data["visible_light"] = {
                 "timestamp": normalize_and_format_time(light_data["time"]),
                 "value": light_data["visible_light_lux"]
             }
+            sendAlert = False
         except KeyError:
             pass
+    if sendAlert:
+        send_missing_data_alert_if_due("visible_light")
 
 def check_thresholds_and_alert(data, alert_state):
     for param, info in data.items():
@@ -181,7 +229,7 @@ def check_thresholds_and_alert(data, alert_state):
 def main():
     # Check Gmail credentials environment variables
     if not GMAIL_USER or not GMAIL_APP_PASSWORD:
-        print("Please set GMAIL_USER and GMAIL_APP_PASSWORD environment variables.")
+        logger.error("Please set GMAIL_USER and GMAIL_APP_PASSWORD environment variables.")
         return
 
     alert_state = load_alert_state()
@@ -192,7 +240,7 @@ def main():
             check_thresholds_and_alert(data, alert_state)
             save_alert_state(alert_state)
         except Exception as e:
-            print(f"Error during alert check: {e}")
+            logger.error(f"Error during alert check: {e}")
         time.sleep(SLEEP_DURATION_SECONDS)
 
 if __name__ == "__main__":
