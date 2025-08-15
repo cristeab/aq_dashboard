@@ -6,7 +6,7 @@ from fastapi.responses import HTMLResponse
 import asyncio
 from persistent_storage import PersistentStorage
 from fastapi.websockets import WebSocketDisconnect
-from constants import SLEEP_DURATION_SECONDS
+from constants import SLEEP_DURATION_SECONDS, normalize_and_format_time
 
 
 app = FastAPI()
@@ -31,12 +31,8 @@ async def websocket_endpoint(websocket: WebSocket):
             aqi_data = storage.read_aqi()
             if aqi_data is not None:
                 try:
-                    ts = aqi_data["time"]
-                    if ts.tzinfo is None or ts.tz is None:
-                        ts = ts.tz_localize('UTC')
-                    ts = ts.to_pydatetime()
                     data = {
-                        "timestamp": ts.astimezone().strftime('%d/%m/%Y, %H:%M:%S'),
+                        "timestamp": normalize_and_format_time(aqi_data["time"]),
                         "aqi": aqi_data["pm25_cf1_aqi"]
                     }
                 except KeyError:
