@@ -131,6 +131,28 @@ def send_missing_data_alert_if_due(parameter):
         send_missing_data_alert(parameter)
         last_missing_data_alert[parameter] = current_time
 
+def send_stt_alert(txt):
+    localTime = normalize_and_format_time(datetime.now())
+    logger.info(f"STT alert: {txt}, timestamp {localTime}")
+    return  # Commented out to avoid sending emails during testing
+    msg = EmailMessage()
+    msg['From'] = GMAIL_USER
+    msg['To'] = GMAIL_USER
+    msg['Subject'] = f"Alert: STT!"
+
+    body = (f"Alert: STT '{txt}'.\n"
+            f"Timestamp: {localTime}\n")
+    msg.set_content(body)
+
+    try:
+        with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
+            smtp.starttls()
+            smtp.login(GMAIL_USER, GMAIL_APP_PASSWORD)
+            smtp.send_message(msg)
+        logger.info(f"STT email sent")
+    except Exception as e:
+        logger.error(f"Error sending STT email: {e}")
+
 def query_latest_data():
     data = {}
 
