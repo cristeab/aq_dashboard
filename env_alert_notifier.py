@@ -79,7 +79,7 @@ def save_alert_state(state):
         json.dump(state, f)
 
 def send_email_alert(parameter, value, threshold, timestamp):
-    print(f"Sending alert for {parameter}: {value} crossed threshold {threshold} at {timestamp}")
+    logger.info(f"Sending alert for {parameter}: {value} crossed threshold {threshold} at {timestamp}")
     return  # Commented out to avoid sending emails during testing
     msg = EmailMessage()
     msg['From'] = GMAIL_USER
@@ -102,7 +102,8 @@ def send_email_alert(parameter, value, threshold, timestamp):
         logger.error(f"Error sending email: {e}")
 
 def send_missing_data_alert(parameter):
-    print(f"Sending missing data alert for {parameter}")
+    localTime = normalize_and_format_time(datetime.now())
+    logger.info(f"Sending missing data alert for {parameter} at {localTime}")
     return  # Commented out to avoid sending emails during testing
     msg = EmailMessage()
     msg['From'] = GMAIL_USER
@@ -110,7 +111,7 @@ def send_missing_data_alert(parameter):
     msg['Subject'] = f"Alert: Missing data for {parameter}!"
 
     body = (f"Alert: No data received for parameter '{parameter}' in the last check.\n"
-            f"Timestamp: {datetime.now()}\n")
+            f"Timestamp: {localTime}\n")
     msg.set_content(body)
 
     try:
@@ -125,7 +126,7 @@ def send_missing_data_alert(parameter):
 def send_missing_data_alert_if_due(parameter):
     global last_missing_data_alert
     current_time = time.time()
-    last = last_missing_data_alert.get("aqi", 0)
+    last = last_missing_data_alert.get(parameter, 0)
     if current_time - last > MISSING_DATA_ALERT_INTERVAL_SEC:
         send_missing_data_alert(parameter)
         last_missing_data_alert[parameter] = current_time
