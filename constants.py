@@ -9,7 +9,7 @@ SLEEP_DURATION_SECONDS = 3
 def normalize_and_format_pandas_timestamp(timestamp=None):
     """Normalize and format timestamp to UTC."""
     if timestamp is None:
-        timestamp = pd.Timestamp.now()
+        timestamp = pd.Timestamp.now(tz='UTC')
     if timestamp.tzinfo is None or timestamp.tz is None:
         timestamp = timestamp.tz_localize('UTC')
     timestamp = timestamp.to_pydatetime()
