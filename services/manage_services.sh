@@ -5,16 +5,17 @@ if (( EUID != 0 )); then
     exit 1
 fi
 
-services=("air_quality" "ambient" "noise_level" "aq_dashboard" "light_sensor")
+services=("air_quality" "ambient" "noise_level" "aq_dashboard" "light_sensor" "env_alert_notifier")
 SERVICE_DIR=/etc/systemd/system
 
 # Usage message
 usage() {
-    echo "Usage: $0 [-i] [-u] [-s] [-q] [-t]"
+    echo "Usage: $0 [-i] [-u] [-s] [-q] [-r] [-t]"
     echo "  -i    Install services"
     echo "  -u    Uninstall services"
     echo "  -s    Start services"
     echo "  -q    Stop services"
+    echo "  -r    Restart services"
     echo "  -t    Show service status"
     exit 1
 }
@@ -55,6 +56,13 @@ stop() {
     done
 }
 
+restart() {
+    echo "Restarting services..."
+    for file in "${services[@]}"; do
+        systemctl restart ${file}.service
+    done
+}
+
 status() {
     echo "Showing service status..."
     for file in "${services[@]}"; do
@@ -68,7 +76,7 @@ if [ $# -eq 0 ]; then
 fi
 
 # Parse the first argument
-while getopts ":iusqt" opt; do
+while getopts ":iusqrt" opt; do
     case $opt in
         i)
             install
@@ -81,6 +89,9 @@ while getopts ":iusqt" opt; do
             ;;
         q)
             stop
+            ;;
+        r)
+            restart
             ;;
         t)
             status
