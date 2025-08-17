@@ -9,7 +9,7 @@ import time
 from email.message import EmailMessage
 from datetime import datetime
 from persistent_storage import PersistentStorage
-from constants import SLEEP_DURATION_SECONDS, normalize_and_format_time
+from constants import SLEEP_DURATION_SECONDS, normalize_and_format_pandas_timestamp
 from logger_configurator import LoggerConfigurator
 
 
@@ -102,7 +102,7 @@ def send_email_alert(parameter, value, threshold, timestamp):
         logger.error(f"Error sending email: {e}")
 
 def send_missing_data_alert(parameter):
-    localTime = normalize_and_format_time(datetime.now())
+    localTime = normalize_and_format_pandas_timestamp()
     logger.info(f"Sending missing data alert for {parameter} at {localTime}")
     return  # Commented out to avoid sending emails during testing
     msg = EmailMessage()
@@ -132,7 +132,7 @@ def send_missing_data_alert_if_due(parameter):
         last_missing_data_alert[parameter] = current_time
 
 def send_stt_alert(txt):
-    localTime = normalize_and_format_time(datetime.now())
+    localTime = normalize_and_format_pandas_timestamp()
     logger.info(f"STT alert: {txt}, timestamp {localTime}")
     return  # Commented out to avoid sending emails during testing
     msg = EmailMessage()
@@ -162,7 +162,7 @@ def query_latest_data():
     if aqi_data is not None:
         try:
             data["aqi"] = {
-                "timestamp": normalize_and_format_time(aqi_data["time"]),
+                "timestamp": normalize_and_format_pandas_timestamp(aqi_data["time"]),
                 "value": aqi_data["pm25_cf1_aqi"]
             }
             sendAlert = False
@@ -177,7 +177,7 @@ def query_latest_data():
     if noise_level_db is not None:
         try:
             data["noise"] = {
-                "timestamp": normalize_and_format_time(noise_level_db["time"]),
+                "timestamp": normalize_and_format_pandas_timestamp(noise_level_db["time"]),
                 "value": noise_level_db["noise_level"]
             }
             sendAlert = False
@@ -191,7 +191,7 @@ def query_latest_data():
     sendAlert = True
     if ambient_data is not None:
         try:
-            ts = normalize_and_format_time(ambient_data["time"])
+            ts = normalize_and_format_pandas_timestamp(ambient_data["time"])
             data["temperature"] = {
                 "timestamp": ts,
                 "value": ambient_data["temperature"]
@@ -216,7 +216,7 @@ def query_latest_data():
     if light_data is not None:
         try:
             data["visible_light"] = {
-                "timestamp": normalize_and_format_time(light_data["time"]),
+                "timestamp": normalize_and_format_pandas_timestamp(light_data["time"]),
                 "value": light_data["visible_light_lux"]
             }
             sendAlert = False

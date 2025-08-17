@@ -6,7 +6,7 @@ from fastapi.responses import HTMLResponse
 import asyncio
 from persistent_storage import PersistentStorage
 from fastapi.websockets import WebSocketDisconnect
-from constants import SLEEP_DURATION_SECONDS, normalize_and_format_time
+from constants import SLEEP_DURATION_SECONDS, normalize_and_format_pandas_timestamp
 
 
 app = FastAPI()
@@ -32,7 +32,7 @@ async def websocket_endpoint(websocket: WebSocket):
             if aqi_data is not None:
                 try:
                     data = {
-                        "timestamp": normalize_and_format_time(aqi_data["time"]),
+                        "timestamp": normalize_and_format_pandas_timestamp(aqi_data["time"]),
                         "aqi": aqi_data["pm25_cf1_aqi"]
                     }
                 except KeyError:
