@@ -133,7 +133,7 @@ def send_missing_data_alert_if_due(parameter):
 
 def send_stt_alert(txt):
     localTime = normalize_and_format_pandas_timestamp()
-    logger.info(f"STT alert: {txt}, timestamp {localTime}")
+    logger.info(f"STT '{txt}' at {localTime}")
     return  # Commented out to avoid sending emails during testing
     msg = EmailMessage()
     msg['From'] = GMAIL_USER
