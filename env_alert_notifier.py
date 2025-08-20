@@ -37,48 +37,55 @@ THRESHOLDS = {
         "hazardous": 500
     },
     "temperature": {
-        "very_cold_celsius": 0.0,
-        "cold_celsius": 10.0,
-        "cool_celsius": 16.0, # Below optimal comfort but not yet concerning for healthy adults
-        "normal_celsius": 18.0, # minimum safe indoor temperature
-        "comfortable_celsius": 20.0, # Lower end of optimal comfort range
-        "warm_celsius": 24.0, # Upper end of WHO comfort recommendations
-        "hot_celsius": 27.0, # Above this level can begin to impact cognitive performance
-        "very_hot_celsius": 30.0
+        "very_cold_celsius": 0,
+        "cold_celsius": 10,
+        "cool_celsius": 16, # Below optimal comfort but not yet concerning for healthy adults
+        "normal_celsius": 18, # minimum safe indoor temperature
+        "comfortable_celsius": 20, # Lower end of optimal comfort range
+        "warm_celsius": 24, # Upper end of WHO comfort recommendations
+        "hot_celsius": 27, # Above this level can begin to impact cognitive performance
+        "very_hot_celsius": 30
     },
     "relative_humidity": {
-        "very_low_percent": 20.0,
-        "low_percent": 30.0, # Increases virus survival rates, causes respiratory irritation, and compromises natural immune defenses
-        "normal_percent": 40.0,
-        "comfortable_percent": 50.0,
-        "high_percent": 60.0, # Begins promoting dust mite populations
-        "very_high_percent": 70.0, # Creates optimal conditions for mold growth and structural damage
-        "excessive_percent": 80.0 # Significant health risks and potential building damage
+        "very_low_percent": 20,
+        "low_percent": 30, # Increases virus survival rates, causes respiratory irritation, and compromises natural immune defenses
+        "normal_percent": 40,
+        "comfortable_percent": 50,
+        "high_percent": 60, # Begins promoting dust mite populations
+        "very_high_percent": 70, # Creates optimal conditions for mold growth and structural damage
+        "excessive_percent": 80 # Significant health risks and potential building damage
     },
     "noise": {
-        "very_quiet_dB": 25.0, # 
-        "quiet_dB": 30.0, # the maximum for bedroom nighttime environments
-        "normal_dB": 35.0, # daytime living areas
-        "moderate_dB": 45.0, # nighttime outdoor standard
-        "elevated_dB": 55.0, # outdoor residential daytime limits
-        "high_dB": 65.0,
-        "very_high_dB": 75.0, #  typical urban environmental noise from traffic, construction, and community activities
-        "excessive_dB": 85.0 # hearing damage with prolonged exposure
+        "very_quiet_dB": 25,
+        "quiet_dB": 30, # the maximum for bedroom nighttime environments
+        "normal_dB": 35, # daytime living areas
+        "moderate_dB": 45, # nighttime outdoor standard
+        "elevated_dB": 55, # outdoor residential daytime limits
+        "high_dB": 65,
+        "very_high_dB": 75, #  typical urban environmental noise from traffic, construction, and community activities
+        "excessive_dB": 85 # hearing damage with prolonged exposure
     },
     "gas": {
-        "excellent_kohms": 200.0, # outstanding air quality
-        "good_kohms": 150.0,
-        "moderate_kohms": 100.0,
-        "poor_kohms": 75.0, # Sustained periods below can cause headaches, respiratory irritation, and reduced well-being
-        "very_poor_kohms": 50.0,
-        "hazardous_kohms": 30.0 # significant VOC contamination requiring immediate attention
+        "excellent_kohms": 200, # outstanding air quality
+        "good_kohms": 150,
+        "moderate_kohms": 100,
+        "poor_kohms": 75, # Sustained periods below can cause headaches, respiratory irritation, and reduced well-being
+        "very_poor_kohms": 50,
+        "hazardous_kohms": 30 # significant VOC contamination requiring immediate attention
+    },
+    "iaq": {
+        "excellent": 25, # Outstanding indoor air quality
+        "good": 50, # Good air quality with minimal pollutants
+        "moderate": 75, # Moderate air quality, some pollutants present
+        "poor": 100, # Poor air quality, noticeable pollutants affecting comfort
+        "very_poor": 500 # Very poor air quality, significant pollutants affecting health
     },
     "visible_light": {
-        "dark_lux": 10.0, # Typical for night lighting, preserves circadian rhythm during sleep
-        "dim_lux": 50.0, # Sufficient for basic orientation at dawn/dusk
-        "adequate_lux": 100.0, # Meets common indoor living area standards for general activities
-        "bright_lux": 150.0, # Suitable for detailed tasks (reading, cooking) with natural daylight ingress
-        "very_bright_lux": 200.0 # Represents strong daylight exposure near balcony, useful for plant health and mental well-being
+        "dark_lux": 10, # Typical for night lighting, preserves circadian rhythm during sleep
+        "dim_lux": 50, # Sufficient for basic orientation at dawn/dusk
+        "adequate_lux": 100, # Meets common indoor living area standards for general activities
+        "bright_lux": 150, # Suitable for detailed tasks (reading, cooking) with natural daylight ingress
+        "very_bright_lux": 200 # Represents strong daylight exposure near balcony, useful for plant health and mental well-being
     }
 }
 
@@ -218,6 +225,10 @@ def query_latest_data():
             data["gas"] = {
                 "timestamp": ts,
                 "value": ambient_data["gas"]
+            }
+            data["iaq"] = {
+                "timestamp": ts,
+                "value": ambient_data["iaq"]
             }
             sendAlert = False
         except KeyError:
