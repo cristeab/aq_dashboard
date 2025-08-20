@@ -39,31 +39,46 @@ THRESHOLDS = {
     "temperature": {
         "very_cold_celsius": 0.0,
         "cold_celsius": 10.0,
-        "normal_celsius": 20.0,
-        "hot_celsius": 30.0,
-        "very_hot_celsius": 35.0
+        "cool_celsius": 16.0, # Below optimal comfort but not yet concerning for healthy adults
+        "normal_celsius": 18.0, # minimum safe indoor temperature
+        "comfortable_celsius": 20.0, # Lower end of optimal comfort range
+        "warm_celsius": 24.0, # Upper end of WHO comfort recommendations
+        "hot_celsius": 27.0, # Above this level can begin to impact cognitive performance
+        "very_hot_celsius": 30.0
     },
     "relative_humidity": {
-        "low": 30.0,
-        "normal": 40.0,
-        "high": 50.0
+        "very_low_percent": 20.0,
+        "low_percent": 30.0, # Increases virus survival rates, causes respiratory irritation, and compromises natural immune defenses
+        "normal_percent": 40.0,
+        "comfortable_percent": 50.0,
+        "high_percent": 60.0, # Begins promoting dust mite populations
+        "very_high_percent": 70.0, # Creates optimal conditions for mold growth and structural damage
+        "excessive_percent": 80.0 # Significant health risks and potential building damage
     },
     "noise": {
-        "low_dB": 30.0,
-        "normal_dB": 40.0,
-        "high_dB": 50.0,
-        "very_high_dB": 60.0
+        "very_quiet_dB": 25.0, # 
+        "quiet_dB": 30.0, # the maximum for bedroom nighttime environments
+        "normal_dB": 35.0, # daytime living areas
+        "moderate_dB": 45.0, # nighttime outdoor standard
+        "elevated_dB": 55.0, # outdoor residential daytime limits
+        "high_dB": 65.0,
+        "very_high_dB": 75.0, #  typical urban environmental noise from traffic, construction, and community activities
+        "excessive_dB": 85.0 # hearing damage with prolonged exposure
     },
     "gas": {
-        "very_low_kohms": 50,
-        "low_kohms": 100,
-        "normal_kohms": 150,
-        "high_kohms": 200
+        "excellent_kohms": 200.0, # outstanding air quality
+        "good_kohms": 150.0,
+        "moderate_kohms": 100.0,
+        "poor_kohms": 75.0, # Sustained periods below can cause headaches, respiratory irritation, and reduced well-being
+        "very_poor_kohms": 50.0,
+        "hazardous_kohms": 30.0 # significant VOC contamination requiring immediate attention
     },
     "visible_light": {
-        "very_low_lux": 5,
-        "low_lux": 50,
-        "normal_lux": 100
+        "dark_lux": 10.0, # Typical for night lighting, preserves circadian rhythm during sleep
+        "dim_lux": 50.0, # Sufficient for basic orientation at dawn/dusk
+        "adequate_lux": 100.0, # Meets common indoor living area standards for general activities
+        "bright_lux": 150.0, # Suitable for detailed tasks (reading, cooking) with natural daylight ingress
+        "very_bright_lux": 200.0 # Represents strong daylight exposure near balcony, useful for plant health and mental well-being
     }
 }
 
