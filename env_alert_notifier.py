@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 # -*- coding: utf-8 -*-
 
 import os
@@ -12,80 +13,94 @@ from persistent_storage import PersistentStorage
 from constants import SLEEP_DURATION_SECONDS, normalize_and_format_pandas_timestamp
 from logger_configurator import LoggerConfigurator
 
-
 MISSING_DATA_ALERT_INTERVAL_SEC = 10 * 60
-# Configuration - update with your details
-GMAIL_USER = os.getenv("GMAIL_USER")  # Gmail email address, set as env var
-GMAIL_APP_PASSWORD = os.getenv("GMAIL_APP_PASSWORD")  # Gmail app password, set as env var
 
+# Configuration - update with your details
+GMAIL_USER = os.getenv("GMAIL_USER") # Gmail email address, set as env var
+GMAIL_APP_PASSWORD = os.getenv("GMAIL_APP_PASSWORD") # Gmail app password, set as env var
 ALERT_STATE_FILE = "alert_state.json"
 
-last_missing_data_alert = {}       # param: last alert timestamp
+last_missing_data_alert = {} # param: last alert timestamp
 
 logger = LoggerConfigurator.configure_logger("EnvAlertNotifier")
+
 # InfluxDB connection
 storage = PersistentStorage()
 
-# Define thresholds for parameters to monitor
+# Define thresholds as intervals with descriptions
 THRESHOLDS = {
     "aqi": {
-        "good": 50,
-        "moderate": 100,
-        "unhealthy_sensitive": 150,
-        "unhealthy": 200,
-        "very_unhealthy": 300,
-        "hazardous": 500
+        "intervals": [
+            {"min": 0, "max": 50, "name": "good", "description": "Air quality is satisfactory"},
+            {"min": 51, "max": 100, "name": "moderate", "description": "Air quality is acceptable for most people"},
+            {"min": 101, "max": 150, "name": "unhealthy_sensitive", "description": "Members of sensitive groups may experience health effects"},
+            {"min": 151, "max": 200, "name": "unhealthy", "description": "Everyone may begin to experience health effects"},
+            {"min": 201, "max": 300, "name": "very_unhealthy", "description": "Health warnings of emergency conditions"},
+            {"min": 301, "max": 500, "name": "hazardous", "description": "Health alert - everyone may experience serious health effects"}
+        ]
     },
     "temperature": {
-        "very_cold_celsius": 0,
-        "cold_celsius": 10,
-        "cool_celsius": 16, # Below optimal comfort but not yet concerning for healthy adults
-        "normal_celsius": 18, # minimum safe indoor temperature
-        "comfortable_celsius": 20, # Lower end of optimal comfort range
-        "warm_celsius": 24, # Upper end of WHO comfort recommendations
-        "hot_celsius": 27, # Above this level can begin to impact cognitive performance
-        "very_hot_celsius": 30
+        "intervals": [
+            {"min": -50, "max": 0, "name": "very_cold", "description": "Freezing conditions - potential health risk"},
+            {"min": 1, "max": 10, "name": "cold", "description": "Cold conditions - additional heating recommended"},
+            {"min": 11, "max": 16, "name": "cool", "description": "Cool conditions - below optimal comfort"},
+            {"min": 17, "max": 18, "name": "normal", "description": "Acceptable temperature - WHO minimum standard"},
+            {"min": 19, "max": 20, "name": "comfortable", "description": "Comfortable temperature - optimal lower range"},
+            {"min": 21, "max": 24, "name": "warm", "description": "Warm conditions - upper comfort range"},
+            {"min": 25, "max": 27, "name": "hot", "description": "Hot conditions - above optimal comfort"},
+            {"min": 28, "max": 100, "name": "very_hot", "description": "Very hot conditions - potential health concern"}
+        ]
     },
     "relative_humidity": {
-        "very_low_percent": 20,
-        "low_percent": 30, # Increases virus survival rates, causes respiratory irritation, and compromises natural immune defenses
-        "normal_percent": 40,
-        "comfortable_percent": 50,
-        "high_percent": 60, # Begins promoting dust mite populations
-        "very_high_percent": 70, # Creates optimal conditions for mold growth and structural damage
-        "excessive_percent": 80 # Significant health risks and potential building damage
+        "intervals": [
+            {"min": 0, "max": 20, "name": "very_low", "description": "Very low humidity - respiratory discomfort likely"},
+            {"min": 21, "max": 30, "name": "low", "description": "Low humidity - may cause dry skin and respiratory irritation"},
+            {"min": 31, "max": 40, "name": "normal", "description": "Acceptable humidity - WHO minimum comfort standard"},
+            {"min": 41, "max": 50, "name": "comfortable", "description": "Comfortable humidity - optimal mid-range"},
+            {"min": 51, "max": 60, "name": "high", "description": "High humidity - upper comfort limit"},
+            {"min": 61, "max": 70, "name": "very_high", "description": "Very high humidity - dust mite risk"},
+            {"min": 71, "max": 100, "name": "excessive", "description": "Excessive humidity - mold growth risk"}
+        ]
     },
     "noise": {
-        "very_quiet_dB": 25,
-        "quiet_dB": 30, # the maximum for bedroom nighttime environments
-        "normal_dB": 35, # daytime living areas
-        "moderate_dB": 45, # nighttime outdoor standard
-        "elevated_dB": 55, # outdoor residential daytime limits
-        "high_dB": 65,
-        "very_high_dB": 75, #  typical urban environmental noise from traffic, construction, and community activities
-        "excessive_dB": 85 # hearing damage with prolonged exposure
+        "intervals": [
+            {"min": 0, "max": 25, "name": "very_quiet", "description": "Very quiet - ideal for sleep and concentration"},
+            {"min": 26, "max": 30, "name": "quiet", "description": "Quiet - WHO bedroom nighttime standard"},
+            {"min": 31, "max": 35, "name": "normal", "description": "Normal - WHO daytime living areas"},
+            {"min": 36, "max": 45, "name": "moderate", "description": "Moderate - acceptable background noise"},
+            {"min": 46, "max": 55, "name": "elevated", "description": "Elevated - WHO outdoor residential limit"},
+            {"min": 56, "max": 65, "name": "high", "description": "High - may interfere with communication"},
+            {"min": 66, "max": 75, "name": "very_high", "description": "Very high - potential sleep disruption"},
+            {"min": 76, "max": 150, "name": "excessive", "description": "Excessive - hearing damage risk with prolonged exposure"}
+        ]
     },
     "gas": {
-        "excellent_kohms": 200, # outstanding air quality
-        "good_kohms": 150,
-        "moderate_kohms": 100,
-        "poor_kohms": 75, # Sustained periods below can cause headaches, respiratory irritation, and reduced well-being
-        "very_poor_kohms": 50,
-        "hazardous_kohms": 30 # significant VOC contamination requiring immediate attention
-    },
-    "iaq": {
-        "excellent": 25, # Outstanding indoor air quality
-        "good": 50, # Good air quality with minimal pollutants
-        "moderate": 75, # Moderate air quality, some pollutants present
-        "poor": 100, # Poor air quality, noticeable pollutants affecting comfort
-        "very_poor": 500 # Very poor air quality, significant pollutants affecting health
+        "intervals": [
+            {"min": 200, "max": 1000, "name": "excellent", "description": "Excellent air quality - minimal VOCs detected"},
+            {"min": 150, "max": 199, "name": "good", "description": "Good air quality - acceptable VOC levels"},
+            {"min": 100, "max": 149, "name": "moderate", "description": "Moderate air quality - ventilation recommended"},
+            {"min": 75, "max": 99, "name": "poor", "description": "Poor air quality - increase ventilation"},
+            {"min": 50, "max": 74, "name": "very_poor", "description": "Very poor air quality - immediate action needed"},
+            {"min": 0, "max": 49, "name": "hazardous", "description": "Hazardous air quality - source identification required"}
+        ]
     },
     "visible_light": {
-        "dark_lux": 10, # Typical for night lighting, preserves circadian rhythm during sleep
-        "dim_lux": 50, # Sufficient for basic orientation at dawn/dusk
-        "adequate_lux": 100, # Meets common indoor living area standards for general activities
-        "bright_lux": 150, # Suitable for detailed tasks (reading, cooking) with natural daylight ingress
-        "very_bright_lux": 200 # Represents strong daylight exposure near balcony, useful for plant health and mental well-being
+        "intervals": [
+            {"min": 0, "max": 10, "name": "dark", "description": "Dark conditions - suitable for sleep"},
+            {"min": 11, "max": 50, "name": "dim", "description": "Dim lighting - basic orientation possible"},
+            {"min": 51, "max": 100, "name": "adequate", "description": "Adequate lighting - suitable for general activities"},
+            {"min": 101, "max": 150, "name": "bright", "description": "Bright lighting - good for detailed tasks"},
+            {"min": 151, "max": 1000, "name": "very_bright", "description": "Very bright - strong daylight exposure"}
+        ]
+    },
+    "iaq_index": {
+        "intervals": [
+            {"min": 0, "max": 25, "name": "excellent", "description": "Excellent air quality - optimal conditions"},
+            {"min": 26, "max": 50, "name": "good", "description": "Good air quality - healthy comfortable levels"},
+            {"min": 51, "max": 75, "name": "moderate", "description": "Moderate air quality - ventilation advised"},
+            {"min": 76, "max": 100, "name": "poor", "description": "Poor air quality - corrective action needed"},
+            {"min": 101, "max": 500, "name": "very_poor", "description": "Very poor air quality - immediate mitigation required"}
+        ]
     }
 }
 
@@ -100,18 +115,33 @@ def save_alert_state(state):
     with open(ALERT_STATE_FILE, "w") as f:
         json.dump(state, f)
 
-def send_email_alert(parameter, value, threshold, timestamp):
-    logger.info(f"Sending alert for {parameter}: {value} crossed threshold {threshold} at {timestamp}")
-    return  # Commented out to avoid sending emails during testing
+def get_interval_for_value(param, value):
+    """Find which interval a value belongs to for a given parameter"""
+    param_config = THRESHOLDS.get(param)
+    if not param_config:
+        return None
+    
+    for interval in param_config["intervals"]:
+        if interval["min"] <= value <= interval["max"]:
+            return interval
+    
+    return None
+
+def send_email_alert(parameter, value, interval, timestamp):
+    logger.info(f"Sending alert for {parameter}: {value} entered '{interval['name']}' interval at {timestamp}")
+    return # Commented out to avoid sending emails during testing
+
     msg = EmailMessage()
     msg['From'] = GMAIL_USER
     msg['To'] = GMAIL_USER
-    msg['Subject'] = f"Alert: {parameter} crossed threshold!"
+    msg['Subject'] = f"Alert: {parameter} - {interval['name'].title()} Level!"
 
-    body = (f"Alert: {parameter} crossed the threshold!\n"
+    body = (f"Alert: {parameter} has entered the '{interval['name']}' interval!\n\n"
             f"Current value: {value}\n"
-            f"Threshold: {threshold}\n"
+            f"Interval: {interval['name']} ({interval['min']} - {interval['max']})\n"
+            f"Description: {interval['description']}\n"
             f"Timestamp: {timestamp}\n")
+
     msg.set_content(body)
 
     try:
@@ -126,7 +156,8 @@ def send_email_alert(parameter, value, threshold, timestamp):
 def send_missing_data_alert(parameter):
     localTime = normalize_and_format_pandas_timestamp()
     logger.info(f"Sending missing data alert for {parameter} at {localTime}")
-    return  # Commented out to avoid sending emails during testing
+    return # Commented out to avoid sending emails during testing
+
     msg = EmailMessage()
     msg['From'] = GMAIL_USER
     msg['To'] = GMAIL_USER
@@ -134,6 +165,7 @@ def send_missing_data_alert(parameter):
 
     body = (f"Alert: No data received for parameter '{parameter}' in the last check.\n"
             f"Timestamp: {localTime}\n")
+
     msg.set_content(body)
 
     try:
@@ -156,7 +188,8 @@ def send_missing_data_alert_if_due(parameter):
 def send_stt_alert(txt):
     localTime = normalize_and_format_pandas_timestamp()
     logger.info(f"STT '{txt}' at {localTime}")
-    return  # Commented out to avoid sending emails during testing
+    return # Commented out to avoid sending emails during testing
+
     msg = EmailMessage()
     msg['From'] = GMAIL_USER
     msg['To'] = GMAIL_USER
@@ -164,6 +197,7 @@ def send_stt_alert(txt):
 
     body = (f"Alert: STT '{txt}'.\n"
             f"Timestamp: {localTime}\n")
+
     msg.set_content(body)
 
     try:
@@ -177,7 +211,7 @@ def send_stt_alert(txt):
 
 def query_latest_data():
     data = {}
-
+    
     # Read AQI data
     aqi_data = storage.read_aqi()
     sendAlert = True
@@ -226,10 +260,12 @@ def query_latest_data():
                 "timestamp": ts,
                 "value": ambient_data["gas"]
             }
-            data["iaq"] = {
-                "timestamp": ts,
-                "value": ambient_data["iaq"]
-            }
+            # Add IAQ index if available
+            if "iaq_index" in ambient_data:
+                data["iaq_index"] = {
+                    "timestamp": ts,
+                    "value": ambient_data["iaq_index"]
+                }
             sendAlert = False
         except KeyError:
             pass
@@ -259,28 +295,26 @@ def check_thresholds_and_alert(data, alert_state):
             value = info["value"]
             timestamp = info["timestamp"]
             if value is None:
-                continue  # Skip if no data
+                continue # Skip if no data
         except KeyError:
             continue
 
-        param_thresholds = THRESHOLDS.get(param)
-        if param_thresholds is None:
+        # Get current interval for this value
+        current_interval = get_interval_for_value(param, value)
+        if current_interval is None:
             continue
 
-        # Ensure alert_state[param] is a dict
+        # Initialize alert state for this parameter if not exists
         if param not in alert_state:
-            alert_state[param] = {}
+            alert_state[param] = {"current_interval": None}
 
-        for threshold_name, threshold_value in param_thresholds.items():
-            crossed = value > threshold_value
-            previous_state = alert_state[param].get(threshold_name, False)
-            # Send alert only if crossing from False to True
-            if crossed and not previous_state:
-                send_email_alert(f"{param}:{threshold_name}", value, threshold_value, timestamp)
-                alert_state[param][threshold_name] = True
-            # Reset alert state if value goes back below threshold
-            elif not crossed and previous_state:
-                alert_state[param][threshold_name] = False
+        # Get previous interval
+        previous_interval = alert_state[param].get("current_interval")
+
+        # Send alert if interval has changed
+        if current_interval["name"] != previous_interval:
+            send_email_alert(param, value, current_interval, timestamp)
+            alert_state[param]["current_interval"] = current_interval["name"]
 
 def main():
     # Check Gmail credentials environment variables
@@ -297,6 +331,7 @@ def main():
             save_alert_state(alert_state)
         except Exception as e:
             logger.error(f"Error during alert check: {e}")
+
         time.sleep(SLEEP_DURATION_SECONDS)
 
 if __name__ == "__main__":
