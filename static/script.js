@@ -223,7 +223,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	const wsUrl = `wss://${ipAddress}:${port}/ws`;
 	const socket = new WebSocket(wsUrl);
 	socket.onmessage = function(event) {
-		console.log(event.data);
 		const data = JSON.parse(event.data);
 		// Update your dashboard with the received data
 		updateDashboard(data);
