@@ -227,4 +227,19 @@ document.addEventListener("DOMContentLoaded", function() {
 		// Update your dashboard with the received data
 		updateDashboard(data);
 	};
+
+	// Notifications dropdown logic
+    const notificationsBtn = document.getElementById('notifications-btn');
+    const notificationsList = document.getElementById('notifications-list');
+    if (notificationsBtn && notificationsList) {
+        notificationsBtn.addEventListener('click', function(e) {
+            notificationsList.classList.toggle('hidden');
+            e.stopPropagation();
+        });
+        document.addEventListener('click', function(event) {
+            if (!notificationsBtn.contains(event.target) && !notificationsList.contains(event.target)) {
+                notificationsList.classList.add('hidden');
+            }
+        });
+    }
 });
