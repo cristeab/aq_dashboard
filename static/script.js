@@ -225,7 +225,11 @@ document.addEventListener("DOMContentLoaded", function() {
 	socket.onmessage = function(event) {
 		const data = JSON.parse(event.data);
 		// Update your dashboard with the received data
-		updateDashboard(data);
+		if (data.type === "data") {
+			updateDashboard(data.payload);
+		} else if (data.type === "notification") {
+			//TODO
+		}
 	};
 
 	// Notifications dropdown logic

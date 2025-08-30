@@ -31,19 +31,19 @@ async def websocket_endpoint(websocket: WebSocket):
             aqi_data = storage.read_aqi()
             if aqi_data is not None:
                 try:
-                    data = {
+                    payload = {
                         "timestamp": normalize_and_format_pandas_timestamp(aqi_data["time"]),
                         "aqi": aqi_data["pm25_cf1_aqi"]
                     }
                 except KeyError:
-                    data = {}
+                    payload = {}
             else:
-                data = {}
+                payload = {}
             for i in range(2):
                 pm_data = storage.read_pm(i)
                 if pm_data is not None:
                     try:
-                        data = data | {
+                        payload = payload | {
                             "pm10_" + str(i): pm_data["pm10_cf1"],
                             "pm25_" + str(i): pm_data["pm25_cf1"],
                             "pm100_" + str(i): pm_data["pm100_cf1"],
@@ -59,7 +59,7 @@ async def websocket_endpoint(websocket: WebSocket):
             noise_level_db = storage.read_noise_level()
             if noise_level_db is not None:
                 try:
-                    data = data | {
+                    payload = payload | {
                         "noise": noise_level_db["noise_level"]
                     }
                 except KeyError:
@@ -67,7 +67,7 @@ async def websocket_endpoint(websocket: WebSocket):
             ambient_data = storage.read_ambient_data()
             if ambient_data is not None:
                 try:
-                    data = data | {
+                    payload = payload | {
                         "temperature": ambient_data["temperature"],
                         "relative_humidity": ambient_data["relative_humidity"],
                         "pressure": ambient_data["pressure"],
@@ -80,7 +80,7 @@ async def websocket_endpoint(websocket: WebSocket):
             light_data = storage.read_light_data()
             if light_data is not None:
                 try:
-                    data = data | {
+                    payload = payload | {
                         "visible_light_lux": light_data["visible_light_lux"],
                         "uv_index": light_data["uv_index"]
                     }
@@ -88,6 +88,10 @@ async def websocket_endpoint(websocket: WebSocket):
                     pass
 
             # Send data to client
+            data = {
+                "type": "data",
+                "payload": payload
+            }
             await websocket.send_json(data)
 
             # Wait before sending next update
