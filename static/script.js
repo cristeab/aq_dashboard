@@ -202,6 +202,39 @@ function updateDashboard(data)
 	updateElementPrecisionVisibility("uv-index-value", data.uv_index);
 }
 
+function updateNotifications(notifications) {
+    const notificationsList = document.getElementById('notifications-list');
+    if (!notificationsList) return;
+
+    // Clear previous notifications
+    notificationsList.innerHTML = "";
+
+    // If no notifications, show a placeholder
+    if (!notifications || notifications.length === 0) {
+        const emptyItem = document.createElement('div');
+        emptyItem.className = 'notification-item';
+        emptyItem.textContent = "No notifications";
+        notificationsList.appendChild(emptyItem);
+        return;
+    }
+
+    // Add each notification
+    notifications.forEach(n => {
+        const item = document.createElement('div');
+        item.className = 'notification-item';
+
+        // Layout: timestamp (small, right), parameter (bold), message (normal)
+        item.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-weight: bold;">${n.parameter}</span>
+                <span style="font-size: 0.85em; color: #bbb;">${n.timestamp}</span>
+            </div>
+            <div style="margin-top: 0.3em;">${n.message}</div>
+        `;
+        notificationsList.appendChild(item);
+    });
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     // Hard-coded variable to set the theme
     const useDarkTheme = true; // Change this to false for light theme
@@ -228,7 +261,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		if (data.type === "data") {
 			updateDashboard(data.payload);
 		} else if (data.type === "notification") {
-			//TODO
+			updateNotifications(data.payload);
 		}
 	};
 
@@ -245,5 +278,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 notificationsList.classList.add('hidden');
             }
         });
+		updateNotifications([]); // Initialize with empty notifications
     }
 });

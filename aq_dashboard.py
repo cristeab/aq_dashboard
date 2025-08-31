@@ -130,7 +130,7 @@ async def websocket_endpoint(websocket: WebSocket):
             payload = notifier.get_notifications()
             if not payload:
                 data = {
-                    "type": "notifications",
+                    "type": "notification",
                     "payload": payload
                 }
                 await websocket.send_json(data)
