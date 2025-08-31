@@ -37,10 +37,12 @@ async def websocket_endpoint(websocket: WebSocket):
             aqi_data = storage.read_aqi()
             if aqi_data is not None:
                 try:
+                    ts = normalize_and_format_pandas_timestamp(aqi_data["time"])
                     payload = {
-                        "timestamp": normalize_and_format_pandas_timestamp(aqi_data["time"]),
+                        "timestamp": ts,
                         "aqi": aqi_data["pm25_cf1_aqi"]
                     }
+                    notifier.check_thresholds_and_alert("aqi", aqi_data["pm25_cf1_aqi"], ts)
                     isDataMissing = False
                 except KeyError:
                     pass
@@ -69,9 +71,11 @@ async def websocket_endpoint(websocket: WebSocket):
             noise_level_db = storage.read_noise_level()
             if noise_level_db is not None:
                 try:
+                    ts = normalize_and_format_pandas_timestamp(noise_level_db["time"])
                     payload = payload | {
                         "noise": noise_level_db["noise_level"]
                     }
+                    notifier.check_thresholds_and_alert("noise", noise_level_db["noise_level"], ts)
                     isDataMissing = False
                 except KeyError:
                     pass
@@ -82,6 +86,7 @@ async def websocket_endpoint(websocket: WebSocket):
             ambient_data = storage.read_ambient_data()
             if ambient_data is not None:
                 try:
+                    ts = normalize_and_format_pandas_timestamp(ambient_data["time"])
                     payload = payload | {
                         "temperature": ambient_data["temperature"],
                         "relative_humidity": ambient_data["relative_humidity"],
@@ -89,6 +94,10 @@ async def websocket_endpoint(websocket: WebSocket):
                         "gas": ambient_data["gas"],
                         "iaq": ambient_data["iaq"]
                     }
+                    notifier.check_thresholds_and_alert("temperature", ambient_data["temperature"], ts)
+                    notifier.check_thresholds_and_alert("relative_humidity", ambient_data["relative_humidity"], ts)
+                    notifier.check_thresholds_and_alert("gas", ambient_data["gas"], ts)
+                    notifier.check_thresholds_and_alert("iaq_index", ambient_data["iaq"], ts)
                     isDataMissing = False
                 except KeyError:
                     pass
@@ -99,10 +108,12 @@ async def websocket_endpoint(websocket: WebSocket):
             light_data = storage.read_light_data()
             if light_data is not None:
                 try:
+                    ts = normalize_and_format_pandas_timestamp(light_data["time"])
                     payload = payload | {
                         "visible_light_lux": light_data["visible_light_lux"],
                         "uv_index": light_data["uv_index"]
                     }
+                    notifier.check_thresholds_and_alert("visible_light", light_data["visible_light_lux"], ts)
                     isDataMissing = False
                 except KeyError:
                     pass
