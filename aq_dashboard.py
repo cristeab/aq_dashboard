@@ -126,7 +126,6 @@ async def websocket_endpoint(websocket: WebSocket):
             }
             await websocket.send_json(data)
             # Send notifications
-            notifier.save_alert_state()
             payload = notifier.get_notifications()
             if payload:
                 data = {

@@ -13,7 +13,6 @@ from logger_configurator import LoggerConfigurator
 
 class EnvAlertNotifier:
     MISSING_DATA_ALERT_INTERVAL_SEC = 10 * 60
-    ALERT_STATE_FILE = "alert_state.json"
 
     # Define thresholds as intervals with descriptions
     THRESHOLDS = {
@@ -95,24 +94,13 @@ class EnvAlertNotifier:
     def __init__(self):
         self._last_missing_data_alert = {} # param: last alert timestamp
         self._logger = LoggerConfigurator.configure_logger("EnvAlertNotifier")
-        # Load previous alert state
-        self._alert_state = self.load_alert_state()
-        # alerts dictionary
+        # Alerts state
+        self._alert_state = {}
+        # Alerts
         self._alerts = {}
 
     def __del__(self):
         self.save_alert_state()
-
-    def load_alert_state(self):
-        if os.path.exists(self.ALERT_STATE_FILE):
-            with open(self.ALERT_STATE_FILE, "r") as f:
-                return json.load(f)
-        else:
-            return {}
-
-    def save_alert_state(self):
-        with open(self.ALERT_STATE_FILE, "w") as f:
-            json.dump(self._alert_state, f)
 
     def _get_interval_for_value(self, param, value):
         param_config = self.THRESHOLDS.get(param)
