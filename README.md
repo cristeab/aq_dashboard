@@ -148,14 +148,17 @@ The sensors can be connected on USB ports (4) of a PC.
 
 | Quantity | Item |
 |--------------|----------|
+| **Processing Unit** | |
+| 1            | Raspberry Pi 5, 4 GB RAM, 128 GB SSD |
 | **Air Quality Sensors** | |
 | 2            | PLANTOWER PMSA003 Laser PM2.5 dust sensor |
 | 2            | Adapter 4P G7A to G135 and 4pin 2.54mm conversion module G7 G10 G1 G3 G5 laser PM2.5 sensor exchange PLANTOWER |
 | 2            | TZT FT232BL FT232RL Basic Breakout Board FTDI FT232 USB TO TTL 5V 3.3V Debugger Download Cable To Serial Adapter Module |
 | **Noise Sensor** | |
-| 1        | 30db~120db Decibel meter detection noise generator module noise sensor tester RS485 industrial grade sound sensor TTL 5V |
-| 1        | CP2102 USB 2.0 to UART TTL 5PIN Connector Module Serial Converter |
+| 1        | Seeed ReSpeaker Lite Kit-USB 2 Mic Array |
 | **Temperature/Humidity/Pressure/Gas Sensor** | |
 | 1        | BME688 Environment Sensor Module Temperature/Humidity/Pressure/Gas AI Smart I2C |
 | 1        | FT232H High Speed Multifunction USB to JTAG UART FIFO SPI I2C |
 | 1        | JST1.0 SH1.0 4pin cable with socket male head Dupont wire For STEMMA QT For QWIIC |
+| **Light Sensor** | |
+| 1        | LTR390 UV Light Sensor I2C |
