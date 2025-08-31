@@ -97,6 +97,8 @@ class EnvAlertNotifier:
         self._logger = LoggerConfigurator.configure_logger("EnvAlertNotifier")
         # Load previous alert state
         self._alert_state = self.load_alert_state()
+        # alerts dictionary
+        self._alerts = {}
 
     def __del__(self):
         self.save_alert_state()
@@ -113,7 +115,6 @@ class EnvAlertNotifier:
             json.dump(self._alert_state, f)
 
     def _get_interval_for_value(self, param, value):
-        """Find which interval a value belongs to for a given parameter"""
         param_config = self.THRESHOLDS.get(param)
         if not param_config:
             return None
@@ -123,11 +124,15 @@ class EnvAlertNotifier:
         return None
 
     def _send_data_alert(self, parameter, value, interval, timestamp):
-        self._logger.info(f"Sending alert for {parameter}: {value} entered '{interval['name']}' interval, '{interval['description']}', at {timestamp}")
+        msg = f"{value} entered '{interval['name']}' interval, '{interval['description']}'"
+        self._alerts[parameter] = {"message": msg, "timestamp": timestamp}
+        self._logger.info(f"Sending alert for {parameter}: {msg}, at {timestamp}")
 
     def _send_missing_data_alert(self, parameter):
-        localTime = normalize_and_format_pandas_timestamp()
-        self._logger.info(f"Sending missing data alert for {parameter} at {localTime}")
+        timestamp = normalize_and_format_pandas_timestamp()
+        msg = f"No data received for {parameter}"
+        self._alerts[parameter] = {"message": msg, "timestamp": timestamp}
+        self._logger.info(f"Sending missing data alert for {parameter} at {timestamp}")
 
     def send_missing_data_alert_if_due(self, parameter):
         current_time = time.time()
