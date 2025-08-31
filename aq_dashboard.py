@@ -5,6 +5,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 import asyncio
 from persistent_storage import PersistentStorage
+from env_alert_notifier import EnvAlertNotifier
 from fastapi.websockets import WebSocketDisconnect
 from constants import SLEEP_DURATION_SECONDS, normalize_and_format_pandas_timestamp
 
@@ -17,6 +18,9 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 # InfluxDB connection
 storage = PersistentStorage()
 
+# Alert notifier
+notifier = EnvAlertNotifier()
+
 @app.get("/", response_class=HTMLResponse)
 async def root():
     with open("static/index.html", "r") as file:
@@ -28,6 +32,8 @@ async def websocket_endpoint(websocket: WebSocket):
     try:
         while True:
             # Query latest data from InfluxDB
+            # AQI
+            isDataMissing = True
             aqi_data = storage.read_aqi()
             if aqi_data is not None:
                 try:
@@ -35,10 +41,12 @@ async def websocket_endpoint(websocket: WebSocket):
                         "timestamp": normalize_and_format_pandas_timestamp(aqi_data["time"]),
                         "aqi": aqi_data["pm25_cf1_aqi"]
                     }
+                    isDataMissing = False
                 except KeyError:
-                    payload = {}
-            else:
+                    pass
+            if isDataMissing:
                 payload = {}
+                notifier.send_missing_data_alert_if_due("aqi")
             for i in range(2):
                 pm_data = storage.read_pm(i)
                 if pm_data is not None:
@@ -56,14 +64,21 @@ async def websocket_endpoint(websocket: WebSocket):
                         }
                     except KeyError:
                         pass
+            # Noise
+            isDataMissing = True
             noise_level_db = storage.read_noise_level()
             if noise_level_db is not None:
                 try:
                     payload = payload | {
                         "noise": noise_level_db["noise_level"]
                     }
+                    isDataMissing = False
                 except KeyError:
                     pass
+            if isDataMissing:
+                notifier.send_missing_data_alert_if_due("noise")
+            # Ambient
+            isDataMissing = True
             ambient_data = storage.read_ambient_data()
             if ambient_data is not None:
                 try:
@@ -74,9 +89,13 @@ async def websocket_endpoint(websocket: WebSocket):
                         "gas": ambient_data["gas"],
                         "iaq": ambient_data["iaq"]
                     }
+                    isDataMissing = False
                 except KeyError:
                     pass
-
+            if isDataMissing:
+                notifier.send_missing_data_alert_if_due("ambient")
+            # Light
+            isDataMissing = True
             light_data = storage.read_light_data()
             if light_data is not None:
                 try:
@@ -84,16 +103,19 @@ async def websocket_endpoint(websocket: WebSocket):
                         "visible_light_lux": light_data["visible_light_lux"],
                         "uv_index": light_data["uv_index"]
                     }
+                    isDataMissing = False
                 except KeyError:
                     pass
-
+            if isDataMissing:
+                notifier.send_missing_data_alert_if_due("light")
             # Send data to client
             data = {
                 "type": "data",
                 "payload": payload
             }
             await websocket.send_json(data)
-
+            # Send alerts if needed
+            notifier.save_alert_state()
             # Wait before sending next update
             await asyncio.sleep(SLEEP_DURATION_SECONDS)
     except WebSocketDisconnect:
