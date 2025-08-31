@@ -140,6 +140,8 @@ Particle Count Measurements (from PMSA007 sensors):
 
 -	PM10+(0.1L) Number of particles larger than 10 microns per 0.1 liter of air
 
+The notification list shown in the right image is sorted by timestamp in descending order and can be accessed by clicking the bell icon.
+
 ## Bill of Materials
 
 The sensors can be connected on USB ports (4) of a PC.
