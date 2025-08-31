@@ -144,13 +144,11 @@ The notification list shown in the right image is sorted by timestamp in descend
 
 ## Bill of Materials
 
-The sensors can be connected on USB ports (4) of a PC.
-
 | Quantity | Item |
 |--------------|----------|
 | **Processing Unit** | |
 | 1            | Raspberry Pi 5, 4 GB RAM, 128 GB SSD |
-| **Air Quality Sensors** | |
+| **Air Quality Dust Sensors** | |
 | 2            | PLANTOWER PMSA003 Laser PM2.5 dust sensor |
 | 2            | Adapter 4P G7A to G135 and 4pin 2.54mm conversion module G7 G10 G1 G3 G5 laser PM2.5 sensor exchange PLANTOWER |
 | 2            | TZT FT232BL FT232RL Basic Breakout Board FTDI FT232 USB TO TTL 5V 3.3V Debugger Download Cable To Serial Adapter Module |
