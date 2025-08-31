@@ -91,7 +91,10 @@ Start the server with:
 
 Access the server at: https://\<server URL\>:8888
 
-![AQD](screenshots/aq_dashboard.png "Air Quality Dashboard")
+<p align="center">
+  <img src="screenshots/aq_dashboard.png" alt="Air Quality Dashboard" width="45%">
+  <img src="screenshots/aq_dashboard_notifications.png" alt="Air Quality Dashboard with Notifications" width="45%">
+</p>
 
 Left Column Values:
 
