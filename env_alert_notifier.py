@@ -112,7 +112,7 @@ class EnvAlertNotifier:
         with open(self.ALERT_STATE_FILE, "w") as f:
             json.dump(self._alert_state, f)
 
-    def get_interval_for_value(self, param, value):
+    def _get_interval_for_value(self, param, value):
         """Find which interval a value belongs to for a given parameter"""
         param_config = self.THRESHOLDS.get(param)
         if not param_config:
@@ -122,10 +122,10 @@ class EnvAlertNotifier:
                 return interval
         return None
 
-    def send_data_alert(self, parameter, value, interval, timestamp):
+    def _send_data_alert(self, parameter, value, interval, timestamp):
         self._logger.info(f"Sending alert for {parameter}: {value} entered '{interval['name']}' interval, '{interval['description']}', at {timestamp}")
 
-    def send_missing_data_alert(self, parameter):
+    def _send_missing_data_alert(self, parameter):
         localTime = normalize_and_format_pandas_timestamp()
         self._logger.info(f"Sending missing data alert for {parameter} at {localTime}")
 
@@ -133,12 +133,12 @@ class EnvAlertNotifier:
         current_time = time.time()
         last = self._last_missing_data_alert.get(parameter, 0)
         if current_time - last > self.MISSING_DATA_ALERT_INTERVAL_SEC:
-            self.send_missing_data_alert(parameter)
+            self._send_missing_data_alert(parameter)
             self._last_missing_data_alert[parameter] = current_time
 
     def check_thresholds_and_alert(self, param, value, timestamp):
         # Get current interval for this value
-        current_interval = self.get_interval_for_value(param, value)
+        current_interval = self._get_interval_for_value(param, value)
         if current_interval is None:
             return
 
@@ -151,5 +151,5 @@ class EnvAlertNotifier:
 
         # Send alert if interval has changed
         if current_interval["name"] != previous_interval:
-            self.send_data_alert(param, value, current_interval, timestamp)
+            self._send_data_alert(param, value, current_interval, timestamp)
             self._alert_state[param]["current_interval"] = current_interval["name"]

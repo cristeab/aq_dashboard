@@ -102,7 +102,7 @@ async def websocket_endpoint(websocket: WebSocket):
                 except KeyError:
                     pass
             if isDataMissing:
-                notifier.send_missing_data_alert_if_due("ambient")
+                notifier.send_missing_data_alert_if_due("temperature, relative_humidity, gas, iaq_index")
             # Light
             isDataMissing = True
             light_data = storage.read_light_data()
@@ -118,7 +118,7 @@ async def websocket_endpoint(websocket: WebSocket):
                 except KeyError:
                     pass
             if isDataMissing:
-                notifier.send_missing_data_alert_if_due("light")
+                notifier.send_missing_data_alert_if_due("visible_light")
             # Send data to client
             data = {
                 "type": "data",
