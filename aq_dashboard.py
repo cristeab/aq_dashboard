@@ -42,7 +42,7 @@ async def websocket_endpoint(websocket: WebSocket):
                         "timestamp": ts,
                         "aqi": aqi_data["pm25_cf1_aqi"]
                     }
-                    notifier.check_thresholds_and_alert("aqi", aqi_data["pm25_cf1_aqi"], ts)
+                    notifier.check_thresholds_and_alert("aqi", aqi_data["pm25_cf1_aqi"], ts, aqi_data["time"])
                     isDataMissing = False
                 except KeyError:
                     pass
@@ -75,7 +75,7 @@ async def websocket_endpoint(websocket: WebSocket):
                     payload = payload | {
                         "noise": noise_level_db["noise_level"]
                     }
-                    notifier.check_thresholds_and_alert("noise", noise_level_db["noise_level"], ts)
+                    notifier.check_thresholds_and_alert("noise", noise_level_db["noise_level"], ts, noise_level_db["time"])
                     isDataMissing = False
                 except KeyError:
                     pass
@@ -94,10 +94,10 @@ async def websocket_endpoint(websocket: WebSocket):
                         "gas": ambient_data["gas"],
                         "iaq": ambient_data["iaq"]
                     }
-                    notifier.check_thresholds_and_alert("temperature", ambient_data["temperature"], ts)
-                    notifier.check_thresholds_and_alert("relative_humidity", ambient_data["relative_humidity"], ts)
-                    notifier.check_thresholds_and_alert("gas", ambient_data["gas"], ts)
-                    notifier.check_thresholds_and_alert("iaq_index", ambient_data["iaq"], ts)
+                    notifier.check_thresholds_and_alert("temperature", ambient_data["temperature"], ts, ambient_data["time"])
+                    notifier.check_thresholds_and_alert("relative_humidity", ambient_data["relative_humidity"], ts, ambient_data["time"])
+                    notifier.check_thresholds_and_alert("gas", ambient_data["gas"], ts, ambient_data["time"])
+                    notifier.check_thresholds_and_alert("iaq_index", ambient_data["iaq"], ts, ambient_data["time"])
                     isDataMissing = False
                 except KeyError:
                     pass
@@ -113,7 +113,7 @@ async def websocket_endpoint(websocket: WebSocket):
                         "visible_light_lux": light_data["visible_light_lux"],
                         "uv_index": light_data["uv_index"]
                     }
-                    notifier.check_thresholds_and_alert("visible_light", light_data["visible_light_lux"], ts)
+                    notifier.check_thresholds_and_alert("visible_light", light_data["visible_light_lux"], ts, light_data["time"])
                     isDataMissing = False
                 except KeyError:
                     pass

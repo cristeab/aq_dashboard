@@ -8,6 +8,7 @@ import json
 import time
 from datetime import datetime
 from constants import normalize_and_format_pandas_timestamp
+import pandas as pd
 from logger_configurator import LoggerConfigurator
 
 
@@ -111,16 +112,25 @@ class EnvAlertNotifier:
                 return interval
         return None
 
-    def _send_data_alert(self, parameter, value, interval, timestamp):
+    def _send_data_alert(self, parameter, value, interval, formatted_timestamp, timestamp):
         msg = f"{value:.1f} entered '{interval['name']}' interval: {interval['description']}"
-        self._alerts[parameter] = {"message": msg, "timestamp": timestamp}
-        self._logger.info(f"Sending alert for {parameter}: {msg}, at {timestamp}")
+        self._alerts[parameter] = {
+            "message": msg,
+            "formatted_timestamp": formatted_timestamp,
+            "timestamp": timestamp
+            }
+        self._logger.info(f"Sending alert for {parameter}: {msg}, at {formatted_timestamp}")
 
     def _send_missing_data_alert(self, parameter):
-        timestamp = normalize_and_format_pandas_timestamp()
+        timestamp = pd.Timestamp.now(tz='UTC')
+        formatted_timestamp = normalize_and_format_pandas_timestamp(timestamp)
         msg = f"No data received for {parameter}"
-        self._alerts[parameter] = {"message": msg, "timestamp": timestamp}
-        self._logger.info(f"Sending missing data alert for {parameter} at {timestamp}")
+        self._alerts[parameter] = {
+            "message": msg,
+            "formatted_timestamp": formatted_timestamp,
+            "timestamp": timestamp
+            }
+        self._logger.info(f"Sending missing data alert for {parameter} at {formatted_timestamp}")
 
     def send_missing_data_alert_if_due(self, parameter):
         current_time = time.time()
@@ -129,7 +139,7 @@ class EnvAlertNotifier:
             self._send_missing_data_alert(parameter)
             self._last_missing_data_alert[parameter] = current_time
 
-    def check_thresholds_and_alert(self, param, value, timestamp):
+    def check_thresholds_and_alert(self, param, value, formatted_timestamp, timestamp):
         # Get current interval for this value
         current_interval = self._get_interval_for_value(param, value)
         if current_interval is None:
@@ -144,7 +154,7 @@ class EnvAlertNotifier:
 
         # Send alert if interval has changed
         if current_interval["name"] != previous_interval:
-            self._send_data_alert(param, value, current_interval, timestamp)
+            self._send_data_alert(param, value, current_interval, formatted_timestamp, timestamp)
             self._alert_state[param]["current_interval"] = current_interval["name"]
 
     @staticmethod
@@ -161,12 +171,12 @@ class EnvAlertNotifier:
             return []
         notifications = [
             {
-                "timestamp": v["timestamp"],
+                "timestamp": v["formatted_timestamp"],
                 "parameter": EnvAlertNotifier._format_parameter(k),
                 "message": v["message"]
             }
             for k, v in self._alerts.items()
         ]
         # Sort by parameter name
-        notifications.sort(key=lambda x: x["parameter"])
+        notifications.sort(key=lambda x: x["timestamp"], reverse=True)
         return notifications
