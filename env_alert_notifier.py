@@ -124,7 +124,7 @@ class EnvAlertNotifier:
         return None
 
     def _send_data_alert(self, parameter, value, interval, timestamp):
-        msg = f"{value} entered '{interval['name']}' interval, '{interval['description']}'"
+        msg = f"{value:.1f} entered '{interval['name']}' interval, '{interval['description']}'"
         self._alerts[parameter] = {"message": msg, "timestamp": timestamp}
         self._logger.info(f"Sending alert for {parameter}: {msg}, at {timestamp}")
 
