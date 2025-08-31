@@ -159,13 +159,22 @@ class EnvAlertNotifier:
             self._send_data_alert(param, value, current_interval, timestamp)
             self._alert_state[param]["current_interval"] = current_interval["name"]
 
+    @staticmethod
+    def _format_parameter(key):
+        # Capitalize and replace underscores with spaces
+        if "iaq_index" == key:
+            return "IAQ Index"
+        elif "aqi" == key:
+            return "AQI"
+        return key.replace('_', ' ').title()
+
     def get_notifications(self):
         if not self._alerts:
             return []
         notifications = [
             {
                 "timestamp": v["timestamp"],
-                "parameter": k,
+                "parameter": EnvAlertNotifier._format_parameter(k),
                 "message": v["message"]
             }
             for k, v in self._alerts.items()

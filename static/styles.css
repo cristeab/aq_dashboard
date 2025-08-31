@@ -199,7 +199,7 @@ body {
     position: absolute;
     top: 2.5rem;
     right: 0;
-    width: 300px;
+    width: 330px;
     background-color: rgba(0, 0, 0, 0.85); /* semitransparent black background */
     color: #fff;            /* white text */
     border: 1px solid #333;
