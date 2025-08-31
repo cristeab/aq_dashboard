@@ -125,8 +125,15 @@ async def websocket_endpoint(websocket: WebSocket):
                 "payload": payload
             }
             await websocket.send_json(data)
-            # Send alerts if needed
+            # Send notifications
             notifier.save_alert_state()
+            payload = notifier.get_notifications()
+            if not payload:
+                data = {
+                    "type": "notifications",
+                    "payload": payload
+                }
+                await websocket.send_json(data)
             # Wait before sending next update
             await asyncio.sleep(SLEEP_DURATION_SECONDS)
     except WebSocketDisconnect:

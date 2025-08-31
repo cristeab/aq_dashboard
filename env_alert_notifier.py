@@ -158,3 +158,18 @@ class EnvAlertNotifier:
         if current_interval["name"] != previous_interval:
             self._send_data_alert(param, value, current_interval, timestamp)
             self._alert_state[param]["current_interval"] = current_interval["name"]
+
+    def get_notifications(self):
+        if not self._alerts:
+            return []
+        notifications = [
+            {
+                "timestamp": v["timestamp"],
+                "parameter": k,
+                "message": v["message"]
+            }
+            for k, v in self._alerts.items()
+        ]
+        # Sort by parameter name
+        notifications.sort(key=lambda x: x["parameter"])
+        return notifications
