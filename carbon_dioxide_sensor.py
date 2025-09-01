@@ -29,6 +29,6 @@ while True:
         temperature = scd4x.temperature
         relative_humidity = scd4x.relative_humidity
         persistent_storage.write_co2_data(timestamp, co2, temperature, relative_humidity)
-        local_time = timestamp.astimezone().strftime('%d/%m/%Y, %H
+        local_time = timestamp.astimezone().strftime('%d/%m/%Y, %H:%M:%S')
         print(f"Timestamp: {local_time}, CO2: {co2} ppm, Temperature: {temperature:.1f} °C, Humidity: {relative_humidity:.1f} %RH")
     time.sleep(SLEEP_DURATION_SECONDS)
