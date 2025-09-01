@@ -89,7 +89,14 @@ class EnvAlertNotifier:
                 {"min": 75, "max": 100, "name": "poor", "description": "Poor air quality - corrective action needed"},
                 {"min": 100, "max": 500, "name": "very_poor", "description": "Very poor air quality - immediate mitigation required"}
             ]
-        }
+        },
+        "co2": {
+            "intervals": [
+                {"min": 400, "max": 800, "name": "good", "description": "Typical outdoor fresh air levels - considered good/normal indoor air quality"},
+                {"min": 800, "max": 1000, "name": "moderate", "description": "Acceptable indoor air quality - may indicate moderate occupancy or ventilation"},
+                {"min": 1000, "max": 1500, "name": "poor", "description": "Poor indoor air quality - ventilation should be increased to avoid discomfort or health issues"},
+                {"min": 1500, "max": 2500, "name": "very_poor", "description": "High CO₂ concentration - can lead to drowsiness, decreased cognitive function, and discomfort"},
+                {"min": 2500, "max": 5000, "name": "hazardous", "description": "Very high concentration - potential health risk, immediate ventilation required"}
     }
 
     def __init__(self):
@@ -164,6 +171,8 @@ class EnvAlertNotifier:
             return "IAQ Index"
         elif "aqi" == key:
             return "AQI"
+        elif "co2" == key:
+            return "CO2"
         return key.replace('_', ' ').title()
 
     def get_notifications(self):

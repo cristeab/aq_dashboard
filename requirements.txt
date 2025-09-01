@@ -4,6 +4,8 @@ websockets
 influxdb3-python
 adafruit-blinka
 adafruit-circuitpython-bme680
+adafruit-circuitpython-scd4x
+adafruit-circuitpython-ltr390
 numpy
 scipy
 pandas
