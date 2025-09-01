@@ -17,13 +17,13 @@ class PersistentStorage:
     auth_scheme = "Bearer"
     host = "http://localhost:8181"
 
+    # TODO: databases: dust, gas, noise, light
     class Database(Enum):
         PM = "pm"
         AQI = "aqi"
         Noise = "noise"
         Temperature = "temperature"
         Light = "light"
-        CO2 = "carbon_dioxide"
 
     class Point(Enum):
         PM = "air_quality_data_"
@@ -135,7 +135,7 @@ class PersistentStorage:
             .field("temperature", temperature)
             .field("relative_humidity", relative_humidity)
         )
-        self._write(self.Database.CO2, point)
+        self._write(self.Database.Temperature, point)
 
     def _read(self, db: Database, point_name):
         try:
@@ -168,7 +168,7 @@ class PersistentStorage:
         return self._read(self.Database.Light, self.Point.Light.value)
 
     def read_co2_data(self):
-        return self._read(self.Database.CO2, self.Point.CO2.value)
+        return self._read(self.Database.Temperature, self.Point.CO2.value)
 
 
 if __name__ == "__main__":
