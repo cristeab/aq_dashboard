@@ -97,6 +97,8 @@ class EnvAlertNotifier:
                 {"min": 1000, "max": 1500, "name": "poor", "description": "Poor indoor air quality - ventilation should be increased to avoid discomfort or health issues"},
                 {"min": 1500, "max": 2500, "name": "very_poor", "description": "High CO₂ concentration - can lead to drowsiness, decreased cognitive function, and discomfort"},
                 {"min": 2500, "max": 5000, "name": "hazardous", "description": "Very high concentration - potential health risk, immediate ventilation required"}
+            ]
+        }
     }
 
     def __init__(self):
@@ -180,12 +182,13 @@ class EnvAlertNotifier:
             return []
         notifications = [
             {
+                "raw_timestamp": v["timestamp"],  # for sorting
                 "timestamp": v["formatted_timestamp"],
                 "parameter": EnvAlertNotifier._format_parameter(k),
                 "message": v["message"]
             }
             for k, v in self._alerts.items()
         ]
-        # Sort by parameter name
-        notifications.sort(key=lambda x: x["timestamp"], reverse=True)
+        # Sort by timestamp descending
+        notifications.sort(key=lambda x: x["raw_timestamp"], reverse=True)
         return notifications
