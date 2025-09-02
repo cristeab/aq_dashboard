@@ -121,8 +121,22 @@ class EnvAlertNotifier:
                 return interval
         return None
 
+    @staticmethod
+    def _get_measurement_unit(param):
+        units = {
+            "aqi": "",
+            "temperature": "°C",
+            "relative_humidity": "%",
+            "noise": "dB",
+            "gas": "ppb",
+            "visible_light": "lux",
+            "iaq_index": "",
+            "co2": "ppm"
+        }
+        return units.get(param, "")
+
     def _send_data_alert(self, parameter, value, interval, formatted_timestamp, timestamp):
-        msg = f"{value:.1f} entered '{interval['name']}' interval: {interval['description']}"
+        msg = f"{value:.1f} {EnvAlertNotifier._get_measurement_unit(parameter)} entered '{interval['name']}' interval: {interval['description']}"
         self._alerts[parameter] = {
             "message": msg,
             "formatted_timestamp": formatted_timestamp,
