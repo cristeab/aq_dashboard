@@ -191,4 +191,12 @@ class EnvAlertNotifier:
         ]
         # Sort by timestamp descending
         notifications.sort(key=lambda x: x["raw_timestamp"], reverse=True)
-        return notifications
+        # Remove raw_timestamp field before returning
+        return [
+            {
+                "timestamp": n["timestamp"],
+                "parameter": n["parameter"],
+                "message": n["message"]
+            }
+            for n in notifications
+        ]
