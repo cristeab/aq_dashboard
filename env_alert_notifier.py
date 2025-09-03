@@ -128,7 +128,7 @@ class EnvAlertNotifier:
             "temperature": "°C",
             "relative_humidity": "%",
             "noise": "dB",
-            "gas": "ppb",
+            "gas": "kΩ",
             "visible_light": "lux",
             "iaq_index": "",
             "co2": "ppm"
