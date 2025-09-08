@@ -176,8 +176,6 @@ The notification list shown in the right image is sorted by timestamp in descend
 | 1        | Seeed ReSpeaker Lite Kit-USB 2 Mic Array |
 | **Temperature/Humidity/Pressure/Gas Sensor** | |
 | 1        | BME688 Environment Sensor Module Temperature/Humidity/Pressure/Gas AI Smart I2C |
-| 1        | FT232H High Speed Multifunction USB to JTAG UART FIFO SPI I2C |
-| 1        | JST1.0 SH1.0 4pin cable with socket male head Dupont wire For STEMMA QT For QWIIC |
 | **Light Sensor** | |
 | 1        | LTR390 UV Light Sensor I2C |
 | **CO2 Sensor** | |
