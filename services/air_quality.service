@@ -11,7 +11,7 @@
 # sudo journalctl -fu air_quality.service
 
 [Unit]
-Description=Air Quality detector from 2 laser based sensors
+Description=Air Quality detector from 2 dust sensors
 After=network.target
 
 [Service]

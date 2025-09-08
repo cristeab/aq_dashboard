@@ -119,6 +119,21 @@ async def websocket_endpoint(websocket: WebSocket):
                     pass
             if isDataMissing:
                 notifier.send_missing_data_alert_if_due("visible_light")
+            # CO2
+            isDataMissing = True
+            co2_data = storage.read_co2_data()
+            if co2_data is not None:
+                try:
+                    ts = normalize_and_format_pandas_timestamp(co2_data["time"])
+                    payload = payload | {
+                        "co2": co2_data["co2"]
+                    }
+                    notifier.check_thresholds_and_alert("co2", co2_data["co2"], ts, co2_data["time"])
+                    isDataMissing = False
+                except KeyError:
+                    pass
+            if isDataMissing:
+                notifier.send_missing_data_alert_if_due("co2")
             # Send data to client
             data = {
                 "type": "data",

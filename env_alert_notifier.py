@@ -89,6 +89,15 @@ class EnvAlertNotifier:
                 {"min": 75, "max": 100, "name": "poor", "description": "Poor air quality - corrective action needed"},
                 {"min": 100, "max": 500, "name": "very_poor", "description": "Very poor air quality - immediate mitigation required"}
             ]
+        },
+        "co2": {
+            "intervals": [
+                {"min": 400, "max": 800, "name": "good", "description": "Typical outdoor fresh air levels - considered good/normal indoor air quality"},
+                {"min": 800, "max": 1000, "name": "moderate", "description": "Acceptable indoor air quality - may indicate moderate occupancy or ventilation"},
+                {"min": 1000, "max": 1500, "name": "poor", "description": "Poor indoor air quality - ventilation should be increased to avoid discomfort or health issues"},
+                {"min": 1500, "max": 2500, "name": "very_poor", "description": "High CO₂ concentration - can lead to drowsiness, decreased cognitive function, and discomfort"},
+                {"min": 2500, "max": 5000, "name": "hazardous", "description": "Very high concentration - potential health risk, immediate ventilation required"}
+            ]
         }
     }
 
@@ -112,8 +121,22 @@ class EnvAlertNotifier:
                 return interval
         return None
 
+    @staticmethod
+    def _get_measurement_unit(param):
+        units = {
+            "aqi": "",
+            "temperature": "°C",
+            "relative_humidity": "%",
+            "noise": "dB",
+            "gas": "kΩ",
+            "visible_light": "lux",
+            "iaq_index": "",
+            "co2": "ppm"
+        }
+        return units.get(param, "")
+
     def _send_data_alert(self, parameter, value, interval, formatted_timestamp, timestamp):
-        msg = f"{value:.1f} entered '{interval['name']}' interval: {interval['description']}"
+        msg = f"{value:.1f} {EnvAlertNotifier._get_measurement_unit(parameter)} entered '{interval['name']}' interval: {interval['description']}"
         self._alerts[parameter] = {
             "message": msg,
             "formatted_timestamp": formatted_timestamp,
@@ -164,6 +187,8 @@ class EnvAlertNotifier:
             return "IAQ Index"
         elif "aqi" == key:
             return "AQI"
+        elif "co2" == key:
+            return "CO2"
         return key.replace('_', ' ').title()
 
     def get_notifications(self):
@@ -171,12 +196,21 @@ class EnvAlertNotifier:
             return []
         notifications = [
             {
+                "raw_timestamp": v["timestamp"],  # for sorting
                 "timestamp": v["formatted_timestamp"],
                 "parameter": EnvAlertNotifier._format_parameter(k),
                 "message": v["message"]
             }
             for k, v in self._alerts.items()
         ]
-        # Sort by parameter name
-        notifications.sort(key=lambda x: x["timestamp"], reverse=True)
-        return notifications
+        # Sort by timestamp descending
+        notifications.sort(key=lambda x: x["raw_timestamp"], reverse=True)
+        # Remove raw_timestamp field before returning
+        return [
+            {
+                "timestamp": n["timestamp"],
+                "parameter": n["parameter"],
+                "message": n["message"]
+            }
+            for n in notifications
+        ]
