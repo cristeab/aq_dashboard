@@ -56,29 +56,43 @@ sudo rm -rf ~/.influxdb/data/airquality/wal
 
 Several Python scripts must be started to read data from sensors and write the data into the database:
 
-  - `air_quality.py`: Reads the particle concentration data from two air quality dust sensors, computes the 10 min AQI and writes it to the aqi and pm databases. The USB ports where the air quality sensors are attached must be provided as inputs.
+  - `air_quality.py`: Reads the particle concentration data from two PMSA003 air quality dust sensors, computes the 10 min AQI and writes it to the aqi and pm databases. The USB ports where the air quality sensors are attached must be provided as inputs.
 
 ```bash
     export INFLUXDB3_AUTH_TOKEN="<token>"
     ./air_quality.py /dev/ttyUSB1 /dev/ttyUSB2
 ```
 
-  - `noise_level.py`: Reads the noise level and writes it to the noise database. The USB port where the noise sensor is attached must be provided as input.
+  - `noise_level.py`: Reads the noise level from a 2-Mic array sensor and writes it to the noise database. The USB port where the noise sensor is attached must be provided as input.
 
 ```bash
     export INFLUXDB3_AUTH_TOKEN="<token>"
     ./noise_level.py --port /dev/ttyACM0
 ```
 
-  - `ambient.py`: Reads the temperature, the humididy, the pressure, the gas resistance and the indoor air quality and writes it to the temperature database. This script must be started as root. The USB port where the BME688 sensor is attached is automatically detected.
+  - `ambient.py`: Reads the temperature, the humididy, the pressure, the gas resistance and the indoor air quality and writes it to the database. In order to read this sensor and process raw data with BSEC library the user must install this [Python extension for BME68x](https://github.com/cristeab/bme68x-python-library).
 
 ```bash
     export INFLUXDB3_AUTH_TOKEN="<token>"
     ./ambient.py
 ```
 
-The scripts print in the standard output the current data read from the sensors.
-The datasets provided by these scripts can be analysed with the [aq_data_analysis](https://github.com/cristeab/aq_data_analysis) project.
+- `light_sensor.py`: Reads the visible light in lux and the UV index from an LTR390 sensor.
+
+```bash
+    export INFLUXDB3_AUTH_TOKEN="<token>"
+    ./light_sensor.py
+```
+
+- `carbon_dioxide_sensor.py`: Reads the CO2 level in ppm from an SCD41 sensor.
+
+```bash
+    export INFLUXDB3_AUTH_TOKEN="<token>"
+    ./carbon_dioxide_sensor.py
+```
+
+The scripts print in the standard output the current data read from the sensors and can be installed as services using the `services/manage_services.sh` script.
+The datasets provided by these scripts can be analyzed with the [aq_data_analysis](https://github.com/cristeab/aq_data_analysis) project.
 
 ## Start the Web Server
 
@@ -104,6 +118,10 @@ Left Column Values:
 
 -	Atmospheric pressure expressed in hectoPascals
 
+- Visible light expressed in Lux
+
+- UV index
+
 Center Display:
 
 - The timestamp expressed in local time zone of the most recent dust particle measurement
@@ -114,7 +132,9 @@ Right Column Values:
 
 -	Noise level in the environment in decibels (30 dB would be very quiet)
 
--	Gas resistance measurement in kilo ohms from the BME688 sensor - used to detect volatile compounds and gases (higher values mean less volatile compounds)
+- CO2 level in PPM
+
+-	Gas resistance measurement in kilo ohms - used to detect volatile compounds and gases (higher values mean less volatile compounds)
 
 -	Indoor Air Quality index (smell index) calculated using gas resistance and humidity readings. Smaller values mean cleaner air, similar to 10-min. AQI scale.
 
@@ -156,7 +176,7 @@ The notification list shown in the right image is sorted by timestamp in descend
 | 1        | Seeed ReSpeaker Lite Kit-USB 2 Mic Array |
 | **Temperature/Humidity/Pressure/Gas Sensor** | |
 | 1        | BME688 Environment Sensor Module Temperature/Humidity/Pressure/Gas AI Smart I2C |
-| 1        | FT232H High Speed Multifunction USB to JTAG UART FIFO SPI I2C |
-| 1        | JST1.0 SH1.0 4pin cable with socket male head Dupont wire For STEMMA QT For QWIIC |
 | **Light Sensor** | |
 | 1        | LTR390 UV Light Sensor I2C |
+| **CO2 Sensor** | |
+| 1        | SCD41 I2C |
