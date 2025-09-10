@@ -17,7 +17,6 @@ class PersistentStorage:
     auth_scheme = "Bearer"
     host = "http://localhost:8181"
 
-    # TODO: databases: dust, gas, noise, light
     class Database(Enum):
         PM = "pm"
         AQI = "aqi"
