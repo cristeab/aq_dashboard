@@ -7,7 +7,7 @@ as well as the particle concentration for different particle diameters. The temp
 
 - Debian 12
 
-- An InfluxDB3 database is used to store the data received from different sensors and retrieved it to be shown in a web page.
+- An InfluxDB 3 Core database is used to store the data received from different sensors and retrieved it to be shown in a web page.
 The following databases must be configured: dust, gas, climate, sound, light. A read/write access token must be configured.
 
 - A Python virtual environment must be setup in order to run the Python scripts:

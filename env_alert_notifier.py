@@ -50,6 +50,15 @@ class EnvAlertNotifier:
                 {"min": 70, "max": 100, "name": "excessive", "description": "Excessive humidity - mold growth risk"}
             ]
         },
+        "pressure": {
+            "intervals": [
+                {"min": 300, "max": 980, "name": "very_low", "description": "Very low pressure - stormy weather likely"},
+                {"min": 980, "max": 1000, "name": "low", "description": "Low pressure - unsettled weather, possible rain"},
+                {"min": 1000, "max": 1023, "name": "normal", "description": "Normal pressure - stable weather conditions"},
+                {"min": 1023, "max": 1050, "name": "high", "description": "High pressure - fair weather"},
+                {"min": 1050, "max": 1100, "name": "very_high", "description": "Very high pressure - very dry conditions"}
+            ]
+        },
         "noise": {
             "intervals": [
                 {"min": 0, "max": 25, "name": "very_quiet", "description": "Very quiet - ideal for sleep and concentration"},
@@ -127,6 +136,7 @@ class EnvAlertNotifier:
             "aqi": "",
             "temperature": "°C",
             "relative_humidity": "%",
+            "pressure": "hPa",
             "noise": "dB",
             "gas": "kΩ",
             "visible_light": "lux",
