@@ -55,7 +55,7 @@ class PersistentStorage:
 
     def _verify_token(self):
         try:
-            client = self.get_client(self.Database.PM.value)
+            client = self.get_client(self.Database.Dust.value)
             client.query("SELECT 1")
             self._logger.info("Token verification successful.")
         except Exception as e:
@@ -67,7 +67,6 @@ class PersistentStorage:
 
     def _write(self, db: Database, point: Point):
         client = self.get_client(db.value)
-        # Supports writing Points, DataFrames, line protocol
         client.write(record=point, write_precision=WritePrecision.MS)
 
     def write_pm(self, i, sample):
