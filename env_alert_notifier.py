@@ -214,7 +214,10 @@ class EnvAlertNotifier:
             for k, v in self._alerts.items()
         ]
         # Sort by timestamp descending
-        notifications.sort(key=lambda x: x["raw_timestamp"], reverse=True)
+        try:
+            notifications.sort(key=lambda x: x["raw_timestamp"], reverse=True)
+        except Exception as e:
+            self._logger.error(f"Error sorting notifications: {e}")
         # Remove raw_timestamp field before returning
         return [
             {

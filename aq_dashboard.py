@@ -8,6 +8,7 @@ from persistent_storage import PersistentStorage
 from env_alert_notifier import EnvAlertNotifier
 from fastapi.websockets import WebSocketDisconnect
 from constants import SLEEP_DURATION_SECONDS, normalize_and_format_pandas_timestamp
+from logger_configurator import LoggerConfigurator
 
 
 app = FastAPI()
@@ -20,6 +21,9 @@ storage = PersistentStorage()
 
 # Alert notifier
 notifier = EnvAlertNotifier()
+
+# Logger
+logger = LoggerConfigurator.configure_logger("AqDashboard")
 
 @app.get("/", response_class=HTMLResponse)
 async def root():
@@ -44,8 +48,8 @@ async def websocket_endpoint(websocket: WebSocket):
                     }
                     notifier.check_thresholds_and_alert("aqi", aqi_data["pm25_cf1_aqi"], ts, aqi_data["time"])
                     isDataMissing = False
-                except KeyError:
-                    pass
+                except Exception as e:
+                    logger.error(f"Error processing AQI data: {e}")
             if isDataMissing:
                 payload = {}
                 notifier.send_missing_data_alert_if_due("aqi")
@@ -64,8 +68,8 @@ async def websocket_endpoint(websocket: WebSocket):
                             "pm50plus_" + str(i): pm_data["gr50um"],
                             "pm100plus_" + str(i): pm_data["gr100um"]
                         }
-                    except KeyError:
-                        pass
+                    except KeyError as e:
+                        logger.error(f"KeyError processing PM{i} data: {e}")
             # Noise
             isDataMissing = True
             noise_level_db = storage.read_sound_pressure_level()
@@ -77,8 +81,8 @@ async def websocket_endpoint(websocket: WebSocket):
                     }
                     notifier.check_thresholds_and_alert("noise", noise_level_db["sound_pressure_level"], ts, noise_level_db["time"])
                     isDataMissing = False
-                except KeyError:
-                    pass
+                except Exception as e:
+                    logger.error(f"Error processing noise data: {e}")
             if isDataMissing:
                 notifier.send_missing_data_alert_if_due("noise")
             # Ambient
@@ -100,8 +104,8 @@ async def websocket_endpoint(websocket: WebSocket):
                     notifier.check_thresholds_and_alert("gas", ambient_data["gas_resistance"] / 1000, ts, ambient_data["time"])
                     notifier.check_thresholds_and_alert("iaq_index", ambient_data["iaq"], ts, ambient_data["time"])
                     isDataMissing = False
-                except KeyError:
-                    pass
+                except Exception as e:
+                    logger.error(f"Error processing ambient data: {e}")
             if isDataMissing:
                 notifier.send_missing_data_alert_if_due("temperature, relative_humidity, gas, iaq_index")
             # Light
@@ -116,8 +120,8 @@ async def websocket_endpoint(websocket: WebSocket):
                     }
                     notifier.check_thresholds_and_alert("visible_light", light_data["visible_light_lux"], ts, light_data["time"])
                     isDataMissing = False
-                except KeyError:
-                    pass
+                except Exception as e:
+                    logger.error(f"Error processing light data: {e}")
             if isDataMissing:
                 notifier.send_missing_data_alert_if_due("visible_light")
             # CO2
@@ -131,8 +135,8 @@ async def websocket_endpoint(websocket: WebSocket):
                     }
                     notifier.check_thresholds_and_alert("co2", co2_data["co2"], ts, co2_data["time"])
                     isDataMissing = False
-                except KeyError:
-                    pass
+                except Exception as e:
+                    logger.error(f"Error processing CO2 data: {e}")
             if isDataMissing:
                 notifier.send_missing_data_alert_if_due("co2")
             # Send data to client
