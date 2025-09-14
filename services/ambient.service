@@ -19,7 +19,7 @@ Type=simple
 User=bogdan
 WorkingDirectory=/home/bogdan/projects/aq_dashboard
 ExecStart=/home/bogdan/.venv/bin/python /home/bogdan/projects/aq_dashboard/ambient.py
-Environment="INFLUXDB3_AUTH_TOKEN=apiv3_iS-oAmXsO794N_eiX8SY-o_Vfx45Iu3PuoHRvH-1HCZ-_9D4nvWrJJhQo5k0dcn0zVkXoKpIh75YSQTgWJ-LBA"
+EnvironmentFile=/etc/default/aq_dashboard.env
 Restart=on-failure
 
 [Install]
