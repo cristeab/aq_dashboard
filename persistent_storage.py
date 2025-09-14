@@ -30,7 +30,7 @@ class PersistentStorage:
         BME688 = "bme688"
         SCD41 = "scd41"
         Sound = "sound"
-        Light = "ltr390"
+        LTR390 = "ltr390"
 
     def __init__(self):
         self._logger = LoggerConfigurator.configure_logger(self.__class__.__name__)
@@ -123,7 +123,7 @@ class PersistentStorage:
 
     def write_light_data(self, timestamp, visible_light_lux, uv_index):
         point = (
-            Point(self.Point.Light.value)
+            Point(self.Point.LTR390.value)
             .time(timestamp)
             .field("visible_light_lux", visible_light_lux)
             .field("uv_index", uv_index)
@@ -182,7 +182,7 @@ class PersistentStorage:
         return self._read(self.Database.Sound, self.Point.Sound.value)
 
     def read_ambient_data(self):
-        gas = self._read(self.Database.gas, self.Point.BME688.value)
+        gas = self._read(self.Database.Gas, self.Point.BME688.value)
         climate = self._read(self.Database.Climate, self.Point.BME688.value)
         return PersistentStorage._merge(gas, climate)
 
