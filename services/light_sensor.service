@@ -19,7 +19,7 @@ Type=simple
 User=bogdan
 WorkingDirectory=/home/bogdan/projects/aq_dashboard
 ExecStart=/home/bogdan/.venv/bin/python /home/bogdan/projects/aq_dashboard/light_sensor.py
-Environment="INFLUXDB3_AUTH_TOKEN=apiv3_mrYtrK_kbi6dpfx9xdmPn1BkVJ5kQjnL17ag9PXGxiLIUnrvunTqiCnljWhQ8uw2aiWFI3cI6QKLMBHgbKexPA"
+Environment="INFLUXDB3_AUTH_TOKEN=apiv3_iS-oAmXsO794N_eiX8SY-o_Vfx45Iu3PuoHRvH-1HCZ-_9D4nvWrJJhQo5k0dcn0zVkXoKpIh75YSQTgWJ-LBA"
 Restart=on-failure
 
 [Install]

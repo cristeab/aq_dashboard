@@ -18,19 +18,19 @@ class PersistentStorage:
     host = "http://localhost:8181"
 
     class Database(Enum):
-        PM = "pm"
-        AQI = "aqi"
-        Noise = "noise"
-        Temperature = "temperature"
+        Dust = "dust"
+        Gas = "gas"
+        Climate = "climate"
+        Sound = "sound"
         Light = "light"
 
     class Point(Enum):
-        PM = "air_quality_data_"
-        AQI = "air_quality_data"
-        Noise = "noise_level"
-        Temperature = "ambient_data"
-        Light = "light_data"
-        CO2 = "co2_data"
+        PM = "pmsa003_"
+        AQI = "air_quality_index"
+        BME688 = "bme688"
+        SCD41 = "scd41"
+        Sound = "sound"
+        Light = "ltr390"
 
     def __init__(self):
         self._logger = LoggerConfigurator.configure_logger(self.__class__.__name__)
@@ -87,7 +87,7 @@ class PersistentStorage:
             .field("gr50um", sample.gr50um)
             .field("gr100um", sample.gr100um)
         )
-        self._write(self.Database.PM, point)
+        self._write(self.Database.Dust, point)
 
     def write_aqi(self, timestamp, pm25_cf1_aqi):
         point = (
@@ -95,27 +95,32 @@ class PersistentStorage:
             .time(timestamp)
             .field("pm25_cf1_aqi", pm25_cf1_aqi)
         )
-        self._write(self.Database.AQI, point)
+        self._write(self.Database.Dust, point)
 
-    def write_noise_level(self, timestamp, noise_level):
+    def write_sound_pressure_level(self, timestamp, spl):
         point = (
-            Point(self.Point.Noise.value)
+            Point(self.Point.Sound.value)
             .time(timestamp)
-            .field("noise_level", noise_level)
+            .field("sound_pressure_level", spl)
         )
-        self._write(self.Database.Noise, point)
+        self._write(self.Database.Sound, point)
 
     def write_ambient_data(self, timestamp, temperature, gas, relative_humidity, pressure, iaq):
         point = (
-            Point(self.Point.Temperature.value)
+            Point(self.Point.BME688.value)
             .time(timestamp)
-            .field("temperature", temperature)
-            .field("gas", gas)
-            .field("relative_humidity", relative_humidity)
-            .field("pressure", pressure)
+            .field("gas_resistance", gas)
             .field("iaq", iaq)
         )
-        self._write(self.Database.Temperature, point)
+        self._write(self.Database.Gas, point)
+        point = (
+            Point(self.Point.BME688.value)
+            .time(timestamp)
+            .field("temperature", temperature)
+            .field("relative_humidity", relative_humidity)
+            .field("pressure", pressure)
+        )
+        self._write(self.Database.Climate, point)
 
     def write_light_data(self, timestamp, visible_light_lux, uv_index):
         point = (
@@ -128,13 +133,18 @@ class PersistentStorage:
 
     def write_co2_data(self, timestamp, co2, temperature, relative_humidity):
         point = (
-            Point(self.Point.CO2.value)
+            Point(self.Point.SCD41.value)
             .time(timestamp)
             .field("co2", co2)
+        )
+        self._write(self.Database.Gas, point)
+        point = (
+            Point(self.Point.SCD41.value)
+            .time(timestamp)
             .field("temperature", temperature)
             .field("relative_humidity", relative_humidity)
         )
-        self._write(self.Database.Temperature, point)
+        self._write(self.Database.Climate, point)
 
     def _read(self, db: Database, point_name):
         try:
@@ -151,29 +161,36 @@ class PersistentStorage:
             # self._logger.error(f"Cannot read from {point_name}: {e}")
         return None
 
+    @staticmethod
+    def _merge(left, right):
+        if left is None and right is None:
+            return None
+        if left is None:
+            return right
+        if right is None:
+            return left
+        merged = left.copy()
+        merged.update(right)
+        return merged
+
     def read_pm(self, i: int):
-        return self._read(self.Database.PM, f'{self.Point.PM.value}{i}')
+        return self._read(self.Database.Dust, f'{self.Point.PM.value}{i}')
 
     def read_aqi(self):
-        return self._read(self.Database.AQI, self.Point.AQI.value)
+        return self._read(self.Database.Dust, self.Point.AQI.value)
 
-    def read_noise_level(self):
-        return self._read(self.Database.Noise, self.Point.Noise.value)
+    def read_sound_pressure_level(self):
+        return self._read(self.Database.Sound, self.Point.Sound.value)
 
     def read_ambient_data(self):
-        return self._read(self.Database.Temperature, self.Point.Temperature.value)
+        gas = self._read(self.Database.gas, self.Point.BME688.value)
+        climate = self._read(self.Database.Climate, self.Point.BME688.value)
+        return PersistentStorage._merge(gas, climate)
 
     def read_light_data(self):
-        return self._read(self.Database.Light, self.Point.Light.value)
+        return self._read(self.Database.Light, self.Point.LTR390.value)
 
     def read_co2_data(self):
-        return self._read(self.Database.Temperature, self.Point.CO2.value)
-
-
-if __name__ == "__main__":
-    storage = PersistentStorage()
-    for i in range(2):
-        data = storage.read_pm(i)
-        print(data)
-    data = storage.read_aqi()
-    print(data)
+        gas = self._read(self.Database.Gas, self.Point.SCD41.value)
+        climate = self._read(self.Database.Climate, self.Point.SCD41.value)
+        return PersistentStorage._merge(gas, climate)

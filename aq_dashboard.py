@@ -68,14 +68,14 @@ async def websocket_endpoint(websocket: WebSocket):
                         pass
             # Noise
             isDataMissing = True
-            noise_level_db = storage.read_noise_level()
+            noise_level_db = storage.read_sound_pressure_level()
             if noise_level_db is not None:
                 try:
                     ts = normalize_and_format_pandas_timestamp(noise_level_db["time"])
                     payload = payload | {
-                        "noise": noise_level_db["noise_level"]
+                        "noise": noise_level_db["sound_pressure_level"]
                     }
-                    notifier.check_thresholds_and_alert("noise", noise_level_db["noise_level"], ts, noise_level_db["time"])
+                    notifier.check_thresholds_and_alert("noise", noise_level_db["sound_pressure_level"], ts, noise_level_db["time"])
                     isDataMissing = False
                 except KeyError:
                     pass
