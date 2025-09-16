@@ -1,0 +1,26 @@
+# /etc/systemd/system/pressure_temp_sensor.service
+
+# Enable the service
+# sudo cp pressure_temp_sensor.service /etc/systemd/system/
+# sudo systemctl daemon-reload
+# sudo systemctl enable pressure_temp_sensor.service
+# sudo systemctl start pressure_temp_sensor.service
+
+# Check status and logs
+# sudo systemctl status pressure_temp_sensor.service
+# sudo journalctl -fu pressure_temp_sensor.service
+
+[Unit]
+Description=Pressure, temperature and altitude sensor
+After=multi-user.target
+
+[Service]
+Type=simple
+User=bogdan
+WorkingDirectory=/home/bogdan/projects/aq_dashboard
+ExecStart=/home/bogdan/.venv/bin/python /home/bogdan/projects/aq_dashboard/pressure_temp_sensor.py
+EnvironmentFile=/etc/default/aq_dashboard.env
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

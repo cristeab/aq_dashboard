@@ -8,6 +8,7 @@ from logger_configurator import LoggerConfigurator
 import time
 from constants import SLEEP_DURATION_SECONDS
 
+
 # Initialize logger
 logger = LoggerConfigurator.configure_logger("CO2Sensor")
 
@@ -20,7 +21,7 @@ i2c = board.I2C()  # Uses default SDA (GPIO 2) and SCL (GPIO 3) pins on Raspberr
 scd4x = adafruit_scd4x.SCD4X(i2c)
 # Start continuous measurement
 scd4x.start_periodic_measurement()
-logger.info("Waiting for first measurement....")
+logger.info("Waiting for first measurement...")
 
 while True:
     if scd4x.data_ready:

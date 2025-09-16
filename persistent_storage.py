@@ -31,6 +31,7 @@ class PersistentStorage:
         SCD41 = "scd41"
         Sound = "sound"
         LTR390 = "ltr390"
+        BMP390l = "bmp390l"
 
     def __init__(self):
         self._logger = LoggerConfigurator.configure_logger(self.__class__.__name__)
@@ -142,6 +143,16 @@ class PersistentStorage:
             .time(timestamp)
             .field("temperature", temperature)
             .field("relative_humidity", relative_humidity)
+        )
+        self._write(self.Database.Climate, point)
+
+    def write_bmp390l_data(self, timestamp, temperature, pressure, altitude):
+        point = (
+            Point(self.Point.BMP390l.value)
+            .time(timestamp)
+            .field("temperature", temperature)
+            .field("pressure", pressure)
+            .field("altitude", altitude)
         )
         self._write(self.Database.Climate, point)
 
