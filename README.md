@@ -36,6 +36,7 @@ sudo journalctl -fu influxdb3-core
 
 ```bash
 sudo rm -rf ~/.influxdb/data/airquality/wal
+sudo rm -f ~/.influxdb/data/airquality/snapshots/*
 ```
 
 - Create database
