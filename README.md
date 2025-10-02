@@ -182,3 +182,7 @@ The notification list shown in the right image is sorted by timestamp in descend
 | 1        | LTR390 UV Light Sensor I2C |
 | **CO2 Sensor** | |
 | 1        | SCD41 I2C |
+
+## Reference
+
+https://cristeab.medium.com/building-an-air-quality-monitoring-station-ba74098f0528
