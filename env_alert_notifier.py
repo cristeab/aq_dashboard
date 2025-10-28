@@ -107,6 +107,24 @@ class EnvAlertNotifier:
                 {"min": 1500, "max": 2500, "name": "very_poor", "description": "High CO₂ concentration - can lead to drowsiness, decreased cognitive function, and discomfort"},
                 {"min": 2500, "max": 5000, "name": "hazardous", "description": "Very high concentration - potential health risk, immediate ventilation required"}
             ]
+        },
+        "voc_index": {
+            "intervals": [
+                {"min": 0, "max": 200, "name": "good", "description": "The air is typical or better than usual for indoor environments, with minimal or no pollution events"},
+                {"min": 200, "max": 250, "name": "moderate", "description": "Minor pollution event detected; likely due to brief activities such as cooking, cleaning, or transient odors"},
+                {"min": 250, "max": 350, "name": "poor", "description": "Emissions from products, heavier cleaning, or increased occupancy"},
+                {"min": 350, "max": 400, "name": "very_poor", "description": "Persistent emissions or strong pollutant sources present"},
+                {"min": 400, "max": 500, "name": "hazardous", "description": "Prolonged exposure may cause discomfort or health effects"}
+            ]
+        },
+        "nox_index": {
+            "intervals": [
+                {"min": 0, "max": 50, "name": "good", "description": "Near background NOx levels, generally safe for indoor environments"},
+                {"min": 50, "max": 100, "name": "moderate", "description": "Slight increase, often related to brief combustion events (e.g., stove use, traffic infiltration)"},
+                {"min": 100, "max": 300, "name": "poor", "description": "Clear NOx event, likely from prolonged combustion (gas cooking, traffic, nearby industries)"},
+                {"min": 300, "max": 350, "name": "very_poor", "description": "High NOx; frequent and/or intense combustion sources nearby"},
+                {"min": 350, "max": 500, "name": "hazardous", "description": "Critically high NOx, levels associated with acute health risks for sensitive groups"}
+            ]
         }
     }
 

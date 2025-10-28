@@ -5,7 +5,7 @@ if (( EUID != 0 )); then
     exit 1
 fi
 
-services=("air_quality" "ambient" "noise_level" "aq_dashboard" "light_sensor" "carbon_dioxide_sensor")
+services=("air_quality" "ambient" "noise_level" "aq_dashboard" "light_sensor" "carbon_dioxide_sensor" "voc_nox_sensor" "pressure_sensor")
 SERVICE_DIR=/etc/systemd/system
 
 # Usage message

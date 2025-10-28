@@ -1,0 +1,26 @@
+# /etc/systemd/system/voc_nox_sensor.service
+
+# Enable the service
+# sudo cp voc_nox_sensor.service /etc/systemd/system/
+# sudo systemctl daemon-reload
+# sudo systemctl enable voc_nox_sensor.service
+# sudo systemctl start voc_nox_sensor.service
+
+# Check status and logs
+# sudo systemctl status voc_nox_sensor.service
+# sudo journalctl -fu voc_nox_sensor.service
+
+[Unit]
+Description=VOC and NOx sensor
+After=multi-user.target
+
+[Service]
+Type=simple
+User=bogdan
+WorkingDirectory=/home/bogdan/projects/aq_dashboard
+ExecStart=/home/bogdan/.venv/bin/python /home/bogdan/projects/aq_dashboard/voc_nox_sensor.py
+EnvironmentFile=/etc/default/aq_dashboard.env
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

@@ -32,6 +32,7 @@ class PersistentStorage:
         Sound = "sound"
         LTR390 = "ltr390"
         BMP390l = "bmp390l"
+        SGP41 = "sgp41"
 
     def __init__(self):
         self._logger = LoggerConfigurator.configure_logger(self.__class__.__name__)
@@ -156,6 +157,15 @@ class PersistentStorage:
         )
         self._write(self.Database.Climate, point)
 
+    def write_sgp41_data(self, timestamp, voc_index, nox_index):
+        point = (
+            Point(self.Point.SGP41.value)
+            .time(timestamp)
+            .field("voc_index", voc_index)
+            .field("nox_index", nox_index)
+        )
+        self._write(self.Database.Gas, point)
+
     def _read(self, db: Database, point_name):
         try:
             client = self.get_client(db.value)
@@ -204,3 +214,6 @@ class PersistentStorage:
         gas = self._read(self.Database.Gas, self.Point.SCD41.value)
         climate = self._read(self.Database.Climate, self.Point.SCD41.value)
         return PersistentStorage._merge(gas, climate)
+
+    def read_sgp41_data(self):
+        return self._read(self.Database.Gas, self.Point.SGP41.value)

@@ -139,6 +139,23 @@ async def websocket_endpoint(websocket: WebSocket):
                     logger.error(f"Error processing CO2 data: {e}")
             if isDataMissing:
                 notifier.send_missing_data_alert_if_due("co2")
+            # VOC and NOx
+            isDataMissing = True
+            sgp41_data = storage.read_sgp41_data()
+            if sgp41_data is not None:
+                try:
+                    ts = normalize_and_format_pandas_timestamp(sgp41_data["time"])
+                    payload = payload | {
+                        "voc": sgp41_data["voc_index"],
+                        "nox": sgp41_data["nox_index"]
+                    }
+                    notifier.check_thresholds_and_alert("voc_index", sgp41_data["voc_index"], ts, sgp41_data["time"])
+                    notifier.check_thresholds_and_alert("nox_index", sgp41_data["nox_index"], ts, sgp41_data["time"])
+                    isDataMissing = False
+                except Exception as e:
+                    logger.error(f"Error processing SGP41 data: {e}")
+            if isDataMissing:
+                notifier.send_missing_data_alert_if_due("voc_index, nox_index")
             # Send data to client
             data = {
                 "type": "data",

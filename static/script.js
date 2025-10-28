@@ -18,7 +18,9 @@ const dummyData = {
 	pressure: "0",
 	gas: "0",
 	iaq: "0",
-	co2: "0"
+	co2: "0",
+	voc: "0",
+	nox: "0"
 };
 
 // Get the canvas element
@@ -188,6 +190,9 @@ function updateDashboard(data)
 	updateElementPrecisionVisibility("iaq-value", data.iaq);
 	
 	updateElementVisibility("co2-value", data.co2, "ppm");
+	updateElementVisibility("voc-value", data.voc);
+	updateElementVisibility("nox-value", data.nox);
+
 	const tvocElement = document.getElementById("gas-value");
 	if (data.gas !== undefined) {	
 		if (1000 <= data.gas) {
