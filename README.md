@@ -134,11 +134,15 @@ Right Column Values:
 
 -	Noise level in the environment in decibels (30 dB would be very quiet)
 
-- CO2 level in PPM
-
 -	Gas resistance measurement in kilo ohms - used to detect volatile compounds and gases (higher values mean less volatile compounds)
 
 -	Indoor Air Quality index (smell index) calculated using gas resistance and humidity readings. Smaller values mean cleaner air, similar to 10-min. AQI scale.
+
+- CO2 level in PPM
+
+- VOC index
+
+- NOx index
 
 Particulate Matter Measurements (from PMSA007 sensors):
 
@@ -182,6 +186,8 @@ The notification list shown in the right image is sorted by timestamp in descend
 | 1        | LTR390 UV Light Sensor I2C |
 | **CO2 Sensor** | |
 | 1        | SCD41 I2C |
+| **VOC and NOx Sensor** | |
+| 1        | SGP41 I2C |
 
 ## Reference
 
