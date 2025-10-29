@@ -20,21 +20,36 @@ with LinuxI2cTransceiver('/dev/i2c-1') as i2c_transceiver:
     # Print serial number
     logger.info(f"SGP41 Serial: {sgp41.get_serial_number()}")
 
-    # First 10 seconds: conditioning (recommended by Sensirion)
-    logger.info("Running conditioning...")
-    for _ in range(10):
-        voc_raw = sgp41.conditioning()
-        logger.info(f"VOC raw (conditioning): {voc_raw}")
-        time.sleep(1)
-
     # Initialize Gas Index Algorithm
     voc_algorithm = VocAlgorithm()
     nox_algorithm = NoxAlgorithm()
 
+    # First 10 seconds: conditioning (recommended by Sensirion)
+    logger.info("Running conditioning...")
+    for _ in range(10):
+        thp_data = persistent_storage.read_temperature_humidity_pressure_data()
+        if thp_data is not None:
+            temperature = thp_data["temperature"]
+            relative_humidity = thp_data["relative_humidity"]
+            logger.info(f"Using temperature: {temperature}, relative_humidity: {relative_humidity} for conditioning")
+            voc_raw = sgp41.conditioning(temperature=temperature, relative_humidity=relative_humidity)
+        else:
+            voc_raw = sgp41.conditioning()
+        voc_index = voc_algorithm.process(voc_raw.ticks)
+        logger.info(f"VOC index (conditioning): {voc_index}")
+        time.sleep(1)
+
     logger.info("Measuring VOC+NOx...")
     while True:
         timestamp = datetime.now(timezone.utc)
-        raw_voc, raw_nox = sgp41.measure_raw()
+
+        thp_data = persistent_storage.read_temperature_humidity_pressure_data()
+        if thp_data is not None:
+            temperature = thp_data["temperature"]
+            relative_humidity = thp_data["relative_humidity"]
+            raw_voc, raw_nox = sgp41.measure_raw(temperature=temperature, relative_humidity=relative_humidity)
+        else:
+            raw_voc, raw_nox = sgp41.measure_raw()
 
         voc_index = voc_algorithm.process(raw_voc.ticks)
         nox_index = nox_algorithm.process(raw_nox.ticks)
