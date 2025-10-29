@@ -27,10 +27,8 @@ with LinuxI2cTransceiver('/dev/i2c-1') as i2c_transceiver:
     # First 10 seconds: conditioning (recommended by Sensirion)
     logger.info("Running conditioning...")
     for _ in range(10):
-        thp_data = persistent_storage.read_temperature_humidity_pressure_data()
-        if thp_data is not None:
-            temperature = thp_data["temperature"]
-            relative_humidity = thp_data["relative_humidity"]
+        temperature, relative_humidity = persistent_storage.read_temperature_relative_humidity_data()
+        if temperature is not None and relative_humidity is not None:
             logger.info(f"Using temperature: {temperature}, relative_humidity: {relative_humidity} for conditioning")
             voc_raw = sgp41.conditioning(temperature=temperature, relative_humidity=relative_humidity)
         else:
@@ -43,10 +41,8 @@ with LinuxI2cTransceiver('/dev/i2c-1') as i2c_transceiver:
     while True:
         timestamp = datetime.now(timezone.utc)
 
-        thp_data = persistent_storage.read_temperature_humidity_pressure_data()
-        if thp_data is not None:
-            temperature = thp_data["temperature"]
-            relative_humidity = thp_data["relative_humidity"]
+        temperature, relative_humidity = persistent_storage.read_temperature_relative_humidity_data()
+        if temperature is not None and relative_humidity is not None:
             raw_voc, raw_nox = sgp41.measure_raw(temperature=temperature, relative_humidity=relative_humidity)
         else:
             raw_voc, raw_nox = sgp41.measure_raw()

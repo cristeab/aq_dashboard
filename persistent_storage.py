@@ -207,8 +207,11 @@ class PersistentStorage:
         climate = self._read(self.Database.Climate, self.Point.BME688.value)
         return PersistentStorage._merge(gas, climate)
 
-    def read_temperature_humidity_pressure_data(self):
-        return self._read(self.Database.Climate, self.Point.BME688.value)
+    def read_temperature_relative_humidity_data(self):
+        d = self._read(self.Database.Climate, self.Point.BME688.value)
+        if d is not None:
+            return d["temperature"], d["relative_humidity"]
+        return None, None
 
     def read_light_data(self):
         return self._read(self.Database.Light, self.Point.LTR390.value)
