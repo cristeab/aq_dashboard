@@ -1,5 +1,8 @@
 .venv
 *.pem
 *.log
+*.log.*
+static/styles.css
+static/styles.css.map
 
 *.properties
