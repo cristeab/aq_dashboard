@@ -133,17 +133,18 @@ body {
   }
 
   /* Side columns remain in normal flow but are pulled toward the centered AQI */
-  .sensor-left,
-  .sensor-right {
+  .sensor-left {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    /* prevent the side columns from stretching and keep them close to center */
     flex: 0 0 auto;
-    width: 120px; /* narrower so they sit closer */
+    width: 120px;
     align-items: flex-start;
     justify-content: center;
     z-index: 1;
+    /* shift left column right toward the horizontal center */
+    transform: translateX(40px);
+    -webkit-transform: translateX(40px);
 
     .temp-humidity {
       display: flex;
@@ -152,13 +153,50 @@ body {
     }
   }
 
+  .sensor-right {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 0 0 auto;
+    width: 260px;      /* increased width so row text won't wrap */
+    min-width: 220px;  /* keep a sensible minimum */
+    align-items: flex-start;
+    justify-content: center;
+    z-index: 1;
+    box-sizing: border-box;
+    padding-left: 40px; /* keep previous spacing if present */
+    /* shift right column right toward the horizontal center */
+    transform: translateX(80px);
+    -webkit-transform: translateX(80px);
+
+    .temp-humidity {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;   /* prevent wrapping */
+    }
+
+    /* truncate overflowing text instead of wrapping */
+    .temp-humidity > * {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* allow the value element to shrink properly within the flex row */
+    .temp-humidity > span:last-child {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+  }
+
   /* add internal left spacing to the right column only (does not change margin-left) */
   @media (min-width: 400px) {
     .sensor-left  { margin-right: 0px; }     /* keep left column close to center */
     .sensor-right {
       margin-left: 150px;  /* existing rule left untouched */
-      padding-left: 40px;  /* new: creates horizontal space on the left side of the right column */
+      padding-left: 40px;  /* creates horizontal space on the left side of the right column */
       box-sizing: border-box; /* ensure padding doesn't increase layout width unexpectedly */
+      /* removed negative translate so transform above controls position for both columns */
     }
   }
 }
