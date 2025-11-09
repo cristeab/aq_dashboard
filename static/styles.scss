@@ -153,7 +153,7 @@ body {
   }
 
   /* Nudge side columns relative to the centered AQI */
-  @media (min-width: 800px) {
+  @media (min-width: 300px) {
     .sensor-left  { margin-right: 50px; }     /* keep left column close to center */
     .sensor-right { margin-left: 150px; }  /* move right column further away from center */
   }
