@@ -152,10 +152,14 @@ body {
     }
   }
 
-  /* Nudge side columns relative to the centered AQI */
-  @media (min-width: 300px) {
-    .sensor-left  { margin-right: 50px; }     /* keep left column close to center */
-    .sensor-right { margin-left: 150px; }  /* move right column further away from center */
+  /* add internal left spacing to the right column only (does not change margin-left) */
+  @media (min-width: 400px) {
+    .sensor-left  { margin-right: 0px; }     /* keep left column close to center */
+    .sensor-right {
+      margin-left: 150px;  /* existing rule left untouched */
+      padding-left: 40px;  /* new: creates horizontal space on the left side of the right column */
+      box-sizing: border-box; /* ensure padding doesn't increase layout width unexpectedly */
+    }
   }
 }
 
