@@ -52,6 +52,9 @@ body {
     flex: 0 1 auto;
     margin-left: 128px;
 
+    /* add vertical spacing below the header center */
+    margin-bottom: 10px;
+
     h1,
     p {
       margin: 0.2em 0;
@@ -62,13 +65,17 @@ body {
 
 /* Main display */
 .main-display {
+  position: relative; /* allow absolute centering of the AQI block */
   border: none;
   outline: none;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 0;
-  margin: -40px 0;
+  /* keep the same vertical sizing (do not change height) */
+  /* increase space above/below the main display to separate from header and sensor-data */
+  margin: 8px 0 24px;
+  gap: 4px;
 
   /* Ensure child elements do not have unintended borders or margins */
   > * {
@@ -78,8 +85,15 @@ body {
     padding: 0;
   }
 
+  /* Always horizontally center the AQI block on the page */
   .aqi-display {
-    position: relative;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 200px;
+    max-width: 300px;
+    margin: 0;
+    z-index: 2;
 
     .aqi-value {
       position: absolute;
@@ -118,17 +132,30 @@ body {
     }
   }
 
+  /* Side columns remain in normal flow but are pulled toward the centered AQI */
   .sensor-left,
   .sensor-right {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    /* prevent the side columns from stretching and keep them close to center */
+    flex: 0 0 auto;
+    width: 120px; /* narrower so they sit closer */
+    align-items: flex-start;
+    justify-content: center;
+    z-index: 1;
 
     .temp-humidity {
       display: flex;
       align-items: center;
       gap: 5px;
     }
+  }
+
+  /* Nudge side columns inward toward the centered AQI */
+  @media (min-width: 800px) {
+    .sensor-left { margin-right: 100px; } /* pulls left column closer to center */
+    .sensor-right { margin-left:  100px; } /* pulls right column closer to center */
   }
 }
 
@@ -137,6 +164,9 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  /* add top spacing so sensor-data sits further below the main-display */
+  margin-top: 5px;
 
   .sensor-row {
     display: flex;
