@@ -182,18 +182,21 @@ function updateDashboard(data)
 	updateElementVisibility("pm10plus_0", data.pm100plus_0);
 	updateElementVisibility("pm10plus_1", data.pm100plus_1);
 
-	updateElementPrecisionVisibility("noise-value", data.noise, "dB");
-
 	updateElementPrecisionVisibility("temp-value", data.temperature, "°C");
 	updateElementPrecisionVisibility("humidity-value", data.relative_humidity, "%");
 	updateElementPrecisionVisibility("pressure-value", data.pressure, "hPa");
-	updateElementPrecisionVisibility("iaq-value", data.iaq);
+	updateElementPrecisionVisibility("noise-value", data.noise, "dB");
+	updateElementPrecisionVisibility("visible-light-lux-value", data.visible_light_lux, "lux");
+	updateElementPrecisionVisibility("uv-index-value", data.uv_index);
 	
-	updateElementVisibility("co2-value", data.co2, "ppm");
+	updateElementVisibility("no2-value", data.no2);
+	updateElementVisibility("o3-value", data.o3);
+	updateElementVisibility("co-value", data.co);
 	updateElementVisibility("voc-value", data.voc);
 	updateElementVisibility("nox-value", data.nox);
+	updateElementVisibility("co2-value", data.co2, "ppm");
 
-	const tvocElement = document.getElementById("gas-value");
+	/*const tvocElement = document.getElementById("gas-value");
 	if (data.gas !== undefined) {	
 		if (1000 <= data.gas) {
 			tvocElement.textContent = parseFloat(data.gas / 1000).toFixed(1) + " k\u03A9";
@@ -204,9 +207,7 @@ function updateDashboard(data)
 	} else {
 		tvocElement.parentElement.style.display = "none"; // Hide the parent container
 	}
-
-	updateElementPrecisionVisibility("visible-light-lux-value", data.visible_light_lux, "lux");
-	updateElementPrecisionVisibility("uv-index-value", data.uv_index);
+	updateElementPrecisionVisibility("iaq-value", data.iaq);*/
 }
 
 function updateNotifications(notifications) {
