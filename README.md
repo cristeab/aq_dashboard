@@ -94,6 +94,7 @@ Several Python scripts must be started to read data from sensors and write the d
 
 The scripts print in the standard output the current data read from the sensors and can be installed as services using the `services/manage_services.sh` script.
 When installing the Python scripts as services, one must provide in a separate file `/etc/default/aq_dashboard.env` the database access token.
+Also, in order to automatically restart the services if an error occurs, the user running the services must have rights to run "sudo systemctl restart *.service" without requiring a password.
 The datasets provided by these scripts can be analyzed with the [aq_data_analysis](https://github.com/cristeab/aq_data_analysis) project.
 
 ## Start the Web Server

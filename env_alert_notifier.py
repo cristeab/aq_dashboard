@@ -10,6 +10,7 @@ from datetime import datetime
 from constants import normalize_and_format_pandas_timestamp
 import pandas as pd
 from logger_configurator import LoggerConfigurator
+import subprocess
 
 
 class EnvAlertNotifier:
@@ -128,6 +129,16 @@ class EnvAlertNotifier:
         }
     }
 
+    # define service restart mapping
+    SERVICE_RESTARTS = {
+        "aqi": "air_quality.service",
+        "noise": "noise_level.service",
+        "temperature, relative_humidity, gas, iaq_index": "ambient.service",
+        "visible_light": "light_sensor.service",
+        "co2": "carbon_dioxide_sensor.service",
+        "voc_index, nox_index": "voc_nox_sensor.service"
+    }
+
     def __init__(self):
         self._last_missing_data_alert = {} # param: last alert timestamp
         self._logger = LoggerConfigurator.configure_logger("EnvAlertNotifier")
@@ -189,6 +200,11 @@ class EnvAlertNotifier:
         if current_time - last > self.MISSING_DATA_ALERT_INTERVAL_SEC:
             self._send_missing_data_alert(parameter)
             self._last_missing_data_alert[parameter] = current_time
+            service_name = self.SERVICE_RESTARTS.get(param)
+            if service_name:
+                self._restart_service(service_name)
+            else:
+                self._logger.warning(f"No service restart configured for parameter '{parameter}'")
 
     def check_thresholds_and_alert(self, param, value, formatted_timestamp, timestamp):
         # Get current interval for this value
@@ -245,3 +261,29 @@ class EnvAlertNotifier:
             }
             for n in notifications
         ]
+
+    def _restart_service(self, service_name):
+        try:
+            result = subprocess.run(
+                ['sudo', 'systemctl', 'restart', service_name],
+                check=True,
+                capture_output=True,
+                text=True,
+                timeout=30
+            )
+            self._logger.info(f"Service '{service_name}' restarted successfully.")
+            if result.stdout:
+                self._logger.debug(f"Output: {result.stdout}")
+            if result.stderr:
+                self._logger.error(f"Warning/Error Output: {result.stderr}")
+        except subprocess.CalledProcessError as e:
+            self._logger.error(f"Failed to restart service '{service_name}'.")
+            self._logger.error(f"Return code: {e.returncode}")
+            if e.stdout:
+                self._logger.error(f"Output: {e.stdout}")
+            if e.stderr:
+                self._logger.error(f"Error output: {e.stderr}")
+        except subprocess.TimeoutExpired:
+            self._logger.error(f"Timeout expired while trying to restart service '{service_name}'.")
+        except Exception as e:
+            self._logger.error(f"Unexpected error: {e}")
