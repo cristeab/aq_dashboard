@@ -113,17 +113,19 @@ Access the server at: https://\<server URL\>:8888
   <img src="screenshots/aq_dashboard_notifications.png" alt="Air Quality Dashboard with Notifications" width="45%">
 </p>
 
-Left Column Values:
+Left Column Values (Air Pollutants):
 
--	Current room temperature in Celsius degrees
+- Nitrate Dioxide (NO2) level
 
--	Relative humidity (amount of moisture in the air) - the normal value is around 40%
+- Ozone (O3) level
 
--	Atmospheric pressure expressed in hectoPascals
+- Carbon Monoxide (CO) level
 
-- Visible light expressed in Lux
+- Total Volatile Organic Components (TVOC) index
 
-- UV index
+- Nitrate Oxides (NOx) index
+
+- Carbon Dioxide (CO2) level in PPM
 
 Center Display:
 
@@ -131,19 +133,19 @@ Center Display:
 
 - The 10-minute Air Quality Index (AQI) - derived from dust particle measurements using a pair of PMSA007 sensors
 
-Right Column Values:
+Right Column Values (Environment Parameters):
+
+-	Current room temperature in Celsius degrees
+
+-	Relative humidity (amount of moisture in the air) - the normal value is around 40%
+
+-	Atmospheric pressure expressed in hectoPascals
 
 -	Noise level in the environment in decibels (30 dB would be very quiet)
 
--	Gas resistance measurement in kilo ohms - used to detect volatile compounds and gases (higher values mean less volatile compounds)
+- Visible light expressed in Lux
 
--	Indoor Air Quality index (smell index) calculated using gas resistance and humidity readings. Smaller values mean cleaner air, similar to 10-min. AQI scale.
-
-- CO2 level in PPM
-
-- VOC index
-
-- NOx index
+- UV index
 
 Particulate Matter Measurements (from PMSA007 sensors):
 
