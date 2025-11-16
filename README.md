@@ -2,7 +2,8 @@
 
 The software component of the kit is a web server based on FastAPI Python package for displaying in real time the Air Quality Index (AQI),
 as well as the particle concentration for different particle diameters. Other air pollutants (Total Volatile Organic Compounds, Nitrate Oxides, Carbon Dioxide, etc) and
-environmental parameters (Temperature, Pressure, Relative Humidity, Noise Level, etc) are also shown. The data is delivered over websockets periodically to the web page.
+environmental parameters (Temperature, Pressure, Relative Humidity, Noise Level, etc) are also shown. The data is read from different sensors and stored into a database
+before being delivered over websockets periodically to the web page shown in a web browser.
 
 The hardware component relies on a Raspberry Pi as the main processing unit and is designed such that sensors can be easily added, replaced or removed.
 
