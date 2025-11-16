@@ -1,7 +1,7 @@
 # Air Quality Dashboard
 
 Web server based on FastAPI Python package for displaying in real time the Air Quality Index (AQI),
-as well as the particle concentration for different particle diameters. Other air pollutants (Total Volatile Organic Components, Nitrate Oxides, Carbon Dioxide, etc) and
+as well as the particle concentration for different particle diameters. Other air pollutants (Total Volatile Organic Compounds, Nitrate Oxides, Carbon Dioxide, etc) and
 environmental parameters (Temperature, Pressure, Relative Humidity, Noise Level, etc) are also shown. The data is delivered over websockets periodically to the web page.
 
 ## Prerequisites
@@ -122,7 +122,7 @@ Left Column Values (Air Pollutants):
 
 - Carbon Monoxide (CO) level
 
-- Total Volatile Organic Components (TVOC) index
+- Total Volatile Organic Compounds (TVOC) index
 
 - Nitrate Oxides (NOx) index
 
