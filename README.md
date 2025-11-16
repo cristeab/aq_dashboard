@@ -1,4 +1,4 @@
-# Air Quality Dashboard
+# Air Quality Monitoring Kit
 
 Web server based on FastAPI Python package for displaying in real time the Air Quality Index (AQI),
 as well as the particle concentration for different particle diameters. Other air pollutants (Total Volatile Organic Compounds, Nitrate Oxides, Carbon Dioxide, etc) and
