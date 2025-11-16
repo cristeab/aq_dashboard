@@ -4,6 +4,8 @@ The software component of the kit is a web server based on FastAPI Python packag
 as well as the particle concentration for different particle diameters. Other air pollutants (Total Volatile Organic Compounds, Nitrate Oxides, Carbon Dioxide, etc) and
 environmental parameters (Temperature, Pressure, Relative Humidity, Noise Level, etc) are also shown. The data is delivered over websockets periodically to the web page.
 
+The hardware component relies on a Raspberry Pi as the main processing unit and is designed such that sensors can be easily added, replaced or removed.
+
 ## Prerequisites
 
 - Debian 12
