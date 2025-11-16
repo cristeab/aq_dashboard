@@ -1,7 +1,8 @@
 # Air Quality Dashboard
 
 Web server based on FastAPI Python package for displaying in real time the Air Quality Index (AQI),
-as well as the particle concentration for different particle diameters. The temperature, the humididy, the pressure, the noise level, the gas resistance and the indoor air quality are also shown. The data is delivered over websockets periodically to the web page.
+as well as the particle concentration for different particle diameters. Other air pollutants (Total Volatile Organic Components, Nitrate Oxides, Carbon Dioxide, etc) and
+environmental parameters (Temperature, Pressure, Relative Humidity, Noise Level, etc) are also shown. The data is delivered over websockets periodically to the web page.
 
 ## Prerequisites
 
