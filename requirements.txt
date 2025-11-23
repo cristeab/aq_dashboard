@@ -15,3 +15,4 @@ SpeechRecognition
 sensirion-i2c-driver
 sensirion-i2c-sgp4x
 sensirion_gas_index_algorithm
+airthings-ble

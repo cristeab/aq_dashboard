@@ -33,6 +33,7 @@ class PersistentStorage:
         LTR390 = "ltr390"
         BMP390l = "bmp390l"
         SGP41 = "sgp41"
+        AIRTHINGS_RADON = "airthings_radon"
 
     def __init__(self):
         self._logger = LoggerConfigurator.configure_logger(self.__class__.__name__)
@@ -166,6 +167,25 @@ class PersistentStorage:
         )
         self._write(self.Database.Gas, point)
 
+    def write_radon_data(self, timestamp, radon_1day_avg, radon_week_avg, radon_year_avg, temperature, relative_humidity):
+        if radon_1day_avg is not None or radon_week_avg is not None or radon_year_avg is not None:
+            point = (
+                Point(self.Point.AIRTHINGS_RADON.value)
+                .time(timestamp)
+                .field("radon_1day_avg", radon_1day_avg)
+                .field("radon_week_avg", radon_week_avg)
+                .field("radon_year_avg", radon_year_avg)
+            )
+            self._write(self.Database.Gas, point)
+        if temperature is not None or relative_humidity is not None:
+            point = (
+                Point(self.Point.AIRTHINGS_RADON.value)
+                .time(timestamp)
+                .field("temperature", temperature)
+                .field("relative_humidity", relative_humidity)
+            )
+            self._write(self.Database.Climate, point)
+
     def _read(self, db: Database, point_name):
         try:
             client = self.get_client(db.value)
@@ -223,3 +243,9 @@ class PersistentStorage:
 
     def read_sgp41_data(self):
         return self._read(self.Database.Gas, self.Point.SGP41.value)
+    
+    def read_radon_week_avg(self):
+        radon = self._read(self.Database.Gas, self.Point.AIRTHINGS_RADON.value)
+        if radon is not None and "radon_week_avg" in radon:
+            return radon.get("radon_week_avg")
+        return None
