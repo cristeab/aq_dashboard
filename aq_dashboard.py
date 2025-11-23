@@ -156,6 +156,25 @@ async def websocket_endpoint(websocket: WebSocket):
                     logger.error(f"Error processing SGP41 data: {e}")
             if isDataMissing:
                 notifier.send_missing_data_alert_if_due("voc_index, nox_index")
+            # Radon
+            isDataMissing = True
+            radon_data = storage.read_radon_data()
+            if radon_data is not None:
+                try:
+                    ts = normalize_and_format_pandas_timestamp(radon_data["time"])
+                    payload = payload | {
+                        "radon_1day_avg": radon_data["radon_1day_avg"],
+                        "radon_week_avg": radon_data["radon_week_avg"],
+                        "radon_year_avg": radon_data["radon_year_avg"]
+                    }
+                    notifier.check_thresholds_and_alert("radon_1day_avg", radon_data["radon_1day_avg"], ts, radon_data["time"])
+                    notifier.check_thresholds_and_alert("radon_week_avg", radon_data["radon_week_avg"], ts, radon_data["time"])
+                    notifier.check_thresholds_and_alert("radon_year_avg", radon_data["radon_year_avg"], ts, radon_data["time"])
+                    isDataMissing = False
+                except Exception as e:
+                    logger.error(f"Error processing radon data: {e}")
+            if isDataMissing:
+                notifier.send_missing_data_alert_if_due("radon_data")
             # Send data to client
             data = {
                 "type": "data",

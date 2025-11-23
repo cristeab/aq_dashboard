@@ -244,8 +244,8 @@ class PersistentStorage:
     def read_sgp41_data(self):
         return self._read(self.Database.Gas, self.Point.SGP41.value)
     
-    def read_radon_week_avg(self):
+    def read_radon_data(self):
         radon = self._read(self.Database.Gas, self.Point.AIRTHINGS_RADON.value)
-        if radon is not None and "radon_week_avg" in radon:
-            return radon.get("radon_week_avg")
+        if radon is not None:
+            return radon
         return None

@@ -196,6 +196,8 @@ function updateDashboard(data)
 	updateElementVisibility("nox-value", data.nox);
 	updateElementVisibility("co2-value", data.co2, "ppm");
 
+	updateElementVisibility("radon-value", data.radon_week_avg, "Bq/m³");
+
 	/*const tvocElement = document.getElementById("gas-value");
 	if (data.gas !== undefined) {	
 		if (1000 <= data.gas) {
