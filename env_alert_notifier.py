@@ -127,7 +127,16 @@ class EnvAlertNotifier:
                 {"min": 350, "max": 500, "name": "hazardous", "description": "Critically high NOx, levels associated with acute health risks for sensitive groups"}
             ]
         }
+        "radon_1day_avg": {
+            "intervals": [
+                {"min": 0, "max": 100, "name": "good", "description": "Radon levels are within safe limits."},
+                {"min": 100, "max": 150, "name": "fair", "description": "Elevated radon levels detected; consider mitigation."},
+                {"min": 150, "max": 1000, "name": "poor", "description": "Very high radon levels; immediate action required."}
+            ]
+        }
     }
+    THRESHOLDS["radon_week_avg"] = THRESHOLDS["radon_1day_avg"]
+    THRESHOLDS["radon_year_avg"] = THRESHOLDS["radon_1day_avg"]
 
     # define service restart mapping
     SERVICE_RESTARTS = {
@@ -170,7 +179,10 @@ class EnvAlertNotifier:
             "gas": "kΩ",
             "visible_light": "lux",
             "iaq_index": "",
-            "co2": "ppm"
+            "co2": "ppm",
+            "radon_1day_avg": "Bq/m³",
+            "radon_week_avg": "Bq/m³",
+            "radon_year_avg": "Bq/m³"
         }
         return units.get(param, "")
 
@@ -233,6 +245,12 @@ class EnvAlertNotifier:
             return "AQI"
         elif "co2" == key:
             return "CO2"
+        elif "radon_1day_avg" == key:
+            return "Radon 1-Day Avg"
+        elif "radon_week_avg" == key:
+            return "Radon Week Avg"
+        elif "radon_year_avg" == key:
+            return "Radon Year Avg"
         return key.replace('_', ' ').title()
 
     def get_notifications(self):

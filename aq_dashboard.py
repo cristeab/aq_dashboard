@@ -94,15 +94,11 @@ async def websocket_endpoint(websocket: WebSocket):
                     payload = payload | {
                         "temperature": ambient_data["temperature"],
                         "relative_humidity": ambient_data["relative_humidity"],
-                        "pressure": ambient_data["pressure"],
-                        "gas": ambient_data["gas_resistance"],
-                        "iaq": ambient_data["iaq"]
+                        "pressure": ambient_data["pressure"]
                     }
                     notifier.check_thresholds_and_alert("temperature", ambient_data["temperature"], ts, ambient_data["time"])
                     notifier.check_thresholds_and_alert("relative_humidity", ambient_data["relative_humidity"], ts, ambient_data["time"])
                     notifier.check_thresholds_and_alert("pressure", ambient_data["pressure"], ts, ambient_data["time"])
-                    notifier.check_thresholds_and_alert("gas", ambient_data["gas_resistance"] / 1000, ts, ambient_data["time"])
-                    notifier.check_thresholds_and_alert("iaq_index", ambient_data["iaq"], ts, ambient_data["time"])
                     isDataMissing = False
                 except Exception as e:
                     logger.error(f"Error processing ambient data: {e}")

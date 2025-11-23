@@ -197,19 +197,6 @@ function updateDashboard(data)
 	updateElementVisibility("co2-value", data.co2, "ppm");
 
 	updateElementVisibility("radon-value", data.radon_week_avg, "Bq/m³");
-
-	/*const tvocElement = document.getElementById("gas-value");
-	if (data.gas !== undefined) {	
-		if (1000 <= data.gas) {
-			tvocElement.textContent = parseFloat(data.gas / 1000).toFixed(1) + " k\u03A9";
-		} else {
-			tvocElement.textContent = data.gas + " \u03A9";
-		}
-		tvocElement.parentElement.style.display = ""; // Ensure it's visible
-	} else {
-		tvocElement.parentElement.style.display = "none"; // Hide the parent container
-	}
-	updateElementPrecisionVisibility("iaq-value", data.iaq);*/
 }
 
 function updateNotifications(notifications) {

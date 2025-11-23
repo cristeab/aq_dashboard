@@ -247,5 +247,7 @@ class PersistentStorage:
     def read_radon_data(self):
         radon = self._read(self.Database.Gas, self.Point.AIRTHINGS_RADON.value)
         if radon is not None:
+            print(radon)
             return radon
+        print("Radon data not found")
         return None
