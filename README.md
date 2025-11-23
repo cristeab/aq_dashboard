@@ -1,9 +1,13 @@
-# Air Quality Dashboard
+# Air Quality Monitoring Kit
 
-Web server based on FastAPI Python package for displaying in real time the Air Quality Index (AQI),
-as well as the particle concentration for different particle diameters. The temperature, the humididy, the pressure, the noise level, the gas resistance and the indoor air quality are also shown. The data is delivered over websockets periodically to the web page.
+The software component of the kit is a web server based on FastAPI Python package for displaying in real time the Air Quality Index (AQI),
+as well as the particle concentration for different particle diameters. Other air pollutants (Total Volatile Organic Compounds, Nitrate Oxides, Carbon Dioxide, etc) and
+environmental parameters (Temperature, Pressure, Relative Humidity, Noise Level, etc) are also shown. The data is read from different sensors and stored into a local database
+before being delivered over websockets periodically to the web page shown in a web browser.
 
-## Prerequisites
+The hardware component relies on a Raspberry Pi as the main processing unit and is designed such that sensors can be easily added, replaced or removed.
+
+## Software Prerequisites
 
 - Debian 12
 
@@ -18,7 +22,7 @@ The following databases must be configured: dust, gas, climate, sound, light. A 
     pip install -r requirements.txt
 ```
 
-## Setup Influxdb3 database
+## Setup Influxdb3 Database
 
 - Show database service status
 
@@ -53,7 +57,7 @@ sudo rm -f ~/.influxdb/data/airquality/snapshots/*
   influxdb3 show databases
 ```
 
-## Get Sensor Data
+## Obtain Sensor Data
 
 Several Python scripts must be started to read data from sensors and write the data into the database:
 
@@ -97,7 +101,7 @@ When installing the Python scripts as services, one must provide in a separate f
 Also, in order to automatically restart the services if an error occurs, the user running the services must have rights to run "sudo systemctl restart *.service" without requiring a password.
 The datasets provided by these scripts can be analyzed with the [aq_data_analysis](https://github.com/cristeab/aq_data_analysis) project.
 
-## Start the Web Server
+## Web Server User Interface
 
 Start the server with:
 
@@ -121,7 +125,7 @@ Left Column Values (Air Pollutants):
 
 - Carbon Monoxide (CO) level
 
-- Total Volatile Organic Components (TVOC) index
+- Total Volatile Organic Compounds (TVOC) index
 
 - Nitrate Oxides (NOx) index
 
