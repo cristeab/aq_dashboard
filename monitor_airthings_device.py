@@ -49,7 +49,6 @@ async def read_device_once(address: str, timeout: float, is_metric: bool, logger
 def save_radon_data(device) -> None:
     timestamp = datetime.now(timezone.utc)
     sensors = device.sensors
-    print(f'Device sensors: {sensors}', flush=True)
     
     if "radon_1day_avg" in sensors:
         radon_1day = sensors["radon_1day_avg"]
@@ -84,9 +83,9 @@ def save_radon_data(device) -> None:
                                         temperature,
                                         relative_humidity)
     local_time = timestamp.astimezone().strftime('%d/%m/%Y, %H:%M:%S')
-    print(f'Timestamp: {local_time}, Radon 1day: {radon_1day} Bq/m3, '
-          f'week: {radon_week} Bq/m3, year {radon_year} Bq/m3, '
-          f'temperature {temperature} C, relative humidity {relative_humidity} %', flush=True)
+    print(f'Timestamp: {local_time}, Radon 1day: {radon_1day:.1f} Bq/m3, '
+          f'week: {radon_week:.1f} Bq/m3, year {radon_year:.1f} Bq/m3, '
+          f'temperature {temperature:.1f} C, relative humidity {relative_humidity:.1f} %', flush=True)
 
 
 async def monitor_loop(address: str, interval: float, timeout: float):

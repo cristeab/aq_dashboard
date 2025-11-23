@@ -1,0 +1,26 @@
+# /etc/systemd/system/monitor_airthings_device.service
+
+# Enable the service
+# sudo cp monitor_airthings_device.service /etc/systemd/system/
+# sudo systemctl daemon-reload
+# sudo systemctl enable monitor_airthings_device.service
+# sudo systemctl start monitor_airthings_device.service
+
+# Check status and logs
+# sudo systemctl status monitor_airthings_device.service
+# sudo journalctl -fu monitor_airthings_device.service
+
+[Unit]
+Description=Radon, Temperature and Humidity Airthings monitor
+After=network.target
+
+[Service]
+Type=simple
+User=bogdan
+WorkingDirectory=/home/bogdan/projects/aq_dashboard
+ExecStart=/home/bogdan/.venv/bin/python /home/bogdan/projects/aq_dashboard/monitor_airthings_device.py
+EnvironmentFile=/etc/default/aq_dashboard.env
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
