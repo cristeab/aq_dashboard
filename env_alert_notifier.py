@@ -126,7 +126,7 @@ class EnvAlertNotifier:
                 {"min": 300, "max": 350, "name": "very_poor", "description": "High NOx; frequent and/or intense combustion sources nearby"},
                 {"min": 350, "max": 500, "name": "hazardous", "description": "Critically high NOx, levels associated with acute health risks for sensitive groups"}
             ]
-        }
+        },
         "radon_1day_avg": {
             "intervals": [
                 {"min": 0, "max": 100, "name": "good", "description": "Radon levels are within safe limits."},
@@ -146,6 +146,7 @@ class EnvAlertNotifier:
         "visible_light": "light_sensor.service",
         "co2": "carbon_dioxide_sensor.service",
         "voc_index, nox_index": "voc_nox_sensor.service"
+        "radon_data": "monitor_airthings_device.service"
     }
 
     def __init__(self):
@@ -176,9 +177,7 @@ class EnvAlertNotifier:
             "relative_humidity": "%",
             "pressure": "hPa",
             "noise": "dB",
-            "gas": "kΩ",
             "visible_light": "lux",
-            "iaq_index": "",
             "co2": "ppm",
             "radon_1day_avg": "Bq/m³",
             "radon_week_avg": "Bq/m³",
@@ -245,6 +244,10 @@ class EnvAlertNotifier:
             return "AQI"
         elif "co2" == key:
             return "CO2"
+        elif "voc_index" == key:
+            return "TVOC Index"
+        elif "nox_index" == key:
+            return "NOx Index"
         elif "radon_1day_avg" == key:
             return "Radon 1-Day Avg"
         elif "radon_week_avg" == key:
