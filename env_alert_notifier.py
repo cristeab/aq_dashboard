@@ -145,7 +145,7 @@ class EnvAlertNotifier:
         "temperature, relative_humidity, gas, iaq_index": "ambient.service",
         "visible_light": "light_sensor.service",
         "co2": "carbon_dioxide_sensor.service",
-        "voc_index, nox_index": "voc_nox_sensor.service"
+        "voc_index, nox_index": "voc_nox_sensor.service",
         "radon_data": "monitor_airthings_device.service"
     }
 
