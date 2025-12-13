@@ -211,7 +211,7 @@ class EnvAlertNotifier:
         if current_time - last > self.MISSING_DATA_ALERT_INTERVAL_SEC:
             self._send_missing_data_alert(parameter)
             self._last_missing_data_alert[parameter] = current_time
-            service_name = self.SERVICE_RESTARTS.get(param)
+            service_name = self.SERVICE_RESTARTS.get(parameter)
             if service_name:
                 self._restart_service(service_name)
             else:
