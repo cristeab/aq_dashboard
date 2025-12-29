@@ -11,7 +11,7 @@
 # sudo journalctl -fu o3_no2_sensor.service
 
 [Unit]
-Description=VOC and NOx sensor
+Description=O3 and NO2 sensor
 After=multi-user.target
 
 [Service]
