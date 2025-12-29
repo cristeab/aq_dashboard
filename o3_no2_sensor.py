@@ -33,7 +33,7 @@ while True:
             persistent_storage.write_zmod4510_data(timestamp, data.o3_ppb, data.no2_ppb, data.fast_aqi, data.epa_aqi)
 
             local_time = timestamp.astimezone().strftime('%d/%m/%Y, %H:%M:%S')
-            logger.info(f"Timestamp: {local_time}, O3: {data.o3_ppb:.2f} ppb, NO2: {data.no2_ppb:.2f} ppb, "
+            logger.info(f"Timestamp: {local_time}, O3: {data.o3_ppb:.3f} ppb, NO2: {data.no2_ppb:.3f} ppb, "
                         f"Fast AQI: {data.fast_aqi}, EPA AQI: {data.epa_aqi}")
         case ZMODStatus.DAMAGE:
             logger.error("Damaged.")
