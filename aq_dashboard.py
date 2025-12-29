@@ -178,8 +178,8 @@ async def websocket_endpoint(websocket: WebSocket):
                 try:
                     ts = normalize_and_format_pandas_timestamp(zmod4510_data["time"])
                     payload = payload | {
-                        "o3_ppb": zmod4510_data["o3_ppb"],
-                        "no2_ppb": zmod4510_data["no2_ppb"]
+                        "o3": zmod4510_data["o3_ppb"],
+                        "no2": zmod4510_data["no2_ppb"]
                     }
                     notifier.check_thresholds_and_alert("o3", zmod4510_data["o3_ppb"], ts, zmod4510_data["time"])
                     notifier.check_thresholds_and_alert("no2", zmod4510_data["no2_ppb"], ts, zmod4510_data["time"])
