@@ -171,6 +171,23 @@ async def websocket_endpoint(websocket: WebSocket):
                     logger.error(f"Error processing radon data: {e}")
             if isDataMissing:
                 notifier.send_missing_data_alert_if_due("radon_data")
+            # O3 and NO2
+            isDataMissing = True
+            zmod4510_data = storage.read_zmod4510_data()
+            if zmod4510_data is not None:
+                try:
+                    ts = normalize_and_format_pandas_timestamp(zmod4510_data["time"])
+                    payload = payload | {
+                        "o3_ppb": zmod4510_data["o3_ppb"],
+                        "no2_ppb": zmod4510_data["no2_ppb"]
+                    }
+                    notifier.check_thresholds_and_alert("o3", zmod4510_data["o3_ppb"], ts, zmod4510_data["time"])
+                    notifier.check_thresholds_and_alert("no2", zmod4510_data["no2_ppb"], ts, zmod4510_data["time"])
+                    isDataMissing = False
+                except Exception as e:
+                    logger.error(f"Error processing ZMOD4510 data: {e}")
+            if isDataMissing:
+                notifier.send_missing_data_alert_if_due("o3, no2")
             # Send data to client
             data = {
                 "type": "data",

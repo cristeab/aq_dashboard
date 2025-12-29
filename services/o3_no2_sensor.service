@@ -1,0 +1,26 @@
+# /etc/systemd/system/o3_no2_sensor.service
+
+# Enable the service
+# sudo cp o3_no2_sensor.service /etc/systemd/system/
+# sudo systemctl daemon-reload
+# sudo systemctl enable o3_no2_sensor.service
+# sudo systemctl start o3_no2_sensor.service
+
+# Check status and logs
+# sudo systemctl status o3_no2_sensor.service
+# sudo journalctl -fu o3_no2_sensor.service
+
+[Unit]
+Description=VOC and NOx sensor
+After=multi-user.target
+
+[Service]
+Type=simple
+User=bogdan
+WorkingDirectory=/home/bogdan/projects/aq_dashboard
+ExecStart=/home/bogdan/.venv/bin/python /home/bogdan/projects/aq_dashboard/o3_no2_sensor.py
+EnvironmentFile=/etc/default/aq_dashboard.env
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

@@ -20,118 +20,385 @@ class EnvAlertNotifier:
     THRESHOLDS = {
         "aqi": {
             "intervals": [
-                {"min": 0, "max": 50, "name": "good", "description": "Air quality is satisfactory"},
-                {"min": 50, "max": 100, "name": "moderate", "description": "Air quality is acceptable for most people"},
-                {"min": 100, "max": 150, "name": "unhealthy_sensitive", "description": "Members of sensitive groups may experience health effects"},
-                {"min": 150, "max": 200, "name": "unhealthy", "description": "Everyone may begin to experience health effects"},
-                {"min": 200, "max": 300, "name": "very_unhealthy", "description": "Health warnings of emergency conditions"},
-                {"min": 300, "max": 500, "name": "hazardous", "description": "Health alert - everyone may experience serious health effects"}
+                {
+                    "min": 0, "max": 50,
+                    "name": "good",
+                    "description": "Air quality is satisfactory"
+                },
+                {
+                    "min": 50, "max": 100,
+                    "name": "moderate",
+                    "description": "Air quality is acceptable for most people"
+                },
+                {
+                    "min": 100, "max": 150,
+                    "name": "unhealthy_sensitive",
+                    "description": "Members of sensitive groups may experience health effects"
+                },
+                {
+                    "min": 150, "max": 200,
+                    "name": "unhealthy",
+                    "description": "Everyone may begin to experience health effects"
+                },
+                {
+                    "min": 200, "max": 300,
+                    "name": "very_unhealthy",
+                    "description": "Health warnings of emergency conditions"
+                },
+                {
+                    "min": 300, "max": 500,
+                    "name": "hazardous",
+                    "description": "Health alert - everyone may experience serious health effects"
+                }
             ]
         },
         "temperature": {
             "intervals": [
-                {"min": -50, "max": 0, "name": "very_cold", "description": "Freezing conditions - potential health risk"},
-                {"min": 0, "max": 10, "name": "cold", "description": "Cold conditions - additional heating recommended"},
-                {"min": 10, "max": 16, "name": "cool", "description": "Cool conditions - below optimal comfort"},
-                {"min": 16, "max": 18, "name": "normal", "description": "Acceptable temperature - WHO minimum standard"},
-                {"min": 18, "max": 20, "name": "comfortable", "description": "Comfortable temperature - optimal lower range"},
-                {"min": 20, "max": 24, "name": "warm", "description": "Warm conditions - upper comfort range"},
-                {"min": 24, "max": 27, "name": "hot", "description": "Hot conditions - above optimal comfort"},
-                {"min": 27, "max": 100, "name": "very_hot", "description": "Very hot conditions - potential health concern"}
+                {
+                    "min": -50, "max": 0,
+                    "name": "very_cold",
+                    "description": "Freezing conditions - potential health risk"
+                },
+                {
+                    "min": 0, "max": 10,
+                    "name": "cold",
+                    "description": "Cold conditions - additional heating recommended"
+                },
+                {
+                    "min": 10, "max": 16,
+                    "name": "cool",
+                    "description": "Cool conditions - below optimal comfort"
+                },
+                {
+                    "min": 16, "max": 18,
+                    "name": "normal",
+                    "description": "Acceptable temperature - WHO minimum standard"
+                },
+                {
+                    "min": 18, "max": 20,
+                    "name": "comfortable",
+                    "description": "Comfortable temperature - optimal lower range"
+                },
+                {
+                    "min": 20, "max": 24,
+                    "name": "warm",
+                    "description": "Warm conditions - upper comfort range"
+                },
+                {
+                    "min": 24, "max": 27,
+                    "name": "hot",
+                    "description": "Hot conditions - above optimal comfort"
+                },
+                {
+                    "min": 27, "max": 100,
+                    "name": "very_hot",
+                    "description": "Very hot conditions - potential health concern"
+                }
             ]
         },
         "relative_humidity": {
             "intervals": [
-                {"min": 0, "max": 20, "name": "very_low", "description": "Very low humidity - respiratory discomfort likely"},
-                {"min": 20, "max": 30, "name": "low", "description": "Low humidity - may cause dry skin and respiratory irritation"},
-                {"min": 30, "max": 40, "name": "normal", "description": "Acceptable humidity - WHO minimum comfort standard"},
-                {"min": 40, "max": 50, "name": "comfortable", "description": "Comfortable humidity - optimal mid-range"},
-                {"min": 50, "max": 60, "name": "high", "description": "High humidity - upper comfort limit"},
-                {"min": 60, "max": 70, "name": "very_high", "description": "Very high humidity - dust mite risk"},
-                {"min": 70, "max": 100, "name": "excessive", "description": "Excessive humidity - mold growth risk"}
+                {
+                    "min": 0, "max": 20,
+                    "name": "very_low",
+                    "description": "Very low humidity - respiratory discomfort likely"
+                },
+                {
+                    "min": 20, "max": 30,
+                    "name": "low",
+                    "description": "Low humidity - may cause dry skin and respiratory irritation"
+                },
+                {
+                    "min": 30, "max": 40,
+                    "name": "normal",
+                    "description": "Acceptable humidity - WHO minimum comfort standard"
+                },
+                {
+                    "min": 40, "max": 50,
+                    "name": "comfortable",
+                    "description": "Comfortable humidity - optimal mid-range"
+                },
+                {
+                    "min": 50, "max": 60,
+                    "name": "high",
+                    "description": "High humidity - upper comfort limit"
+                },
+                {
+                    "min": 60, "max": 70,
+                    "name": "very_high",
+                    "description": "Very high humidity - dust mite risk"
+                },
+                {
+                    "min": 70, "max": 100,
+                    "name": "excessive",
+                    "description": "Excessive humidity - mold growth risk"
+                }
             ]
         },
         "pressure": {
             "intervals": [
-                {"min": 300, "max": 980, "name": "very_low", "description": "Very low pressure - stormy weather likely"},
-                {"min": 980, "max": 1000, "name": "low", "description": "Low pressure - unsettled weather, possible rain"},
-                {"min": 1000, "max": 1023, "name": "normal", "description": "Normal pressure - stable weather conditions"},
-                {"min": 1023, "max": 1050, "name": "high", "description": "High pressure - fair weather"},
-                {"min": 1050, "max": 1100, "name": "very_high", "description": "Very high pressure - very dry conditions"}
+                {
+                    "min": 300, "max": 980,
+                    "name": "very_low",
+                    "description": "Very low pressure - stormy weather likely"
+                },
+                {
+                    "min": 980, "max": 1000,
+                    "name": "low",
+                    "description": "Low pressure - unsettled weather, possible rain"
+                },
+                {
+                    "min": 1000, "max": 1023,
+                    "name": "normal",
+                    "description": "Normal pressure - stable weather conditions"
+                },
+                {
+                    "min": 1023, "max": 1050,
+                    "name": "high",
+                    "description": "High pressure - fair weather"
+                },
+                {
+                    "min": 1050, "max": 1100,
+                    "name": "very_high",
+                    "description": "Very high pressure - very dry conditions"
+                }
             ]
         },
         "noise": {
             "intervals": [
-                {"min": 0, "max": 25, "name": "very_quiet", "description": "Very quiet - ideal for sleep and concentration"},
-                {"min": 25, "max": 30, "name": "quiet", "description": "Quiet - WHO bedroom nighttime standard"},
-                {"min": 30, "max": 35, "name": "normal", "description": "Normal - WHO daytime living areas"},
-                {"min": 35, "max": 45, "name": "moderate", "description": "Moderate - acceptable background noise"},
-                {"min": 45, "max": 55, "name": "elevated", "description": "Elevated - WHO outdoor residential limit"},
-                {"min": 55, "max": 65, "name": "high", "description": "High - may interfere with communication"},
-                {"min": 65, "max": 75, "name": "very_high", "description": "Very high - potential sleep disruption"},
-                {"min": 75, "max": 150, "name": "excessive", "description": "Excessive - hearing damage risk with prolonged exposure"}
-            ]
-        },
-        "gas": {
-            "intervals": [
-                {"min": 200, "max": 1000, "name": "excellent", "description": "Excellent air quality - minimal VOCs detected"},
-                {"min": 150, "max": 200, "name": "good", "description": "Good air quality - acceptable VOC levels"},
-                {"min": 100, "max": 150, "name": "moderate", "description": "Moderate air quality - ventilation recommended"},
-                {"min": 75, "max": 100, "name": "poor", "description": "Poor air quality - increase ventilation"},
-                {"min": 50, "max": 75, "name": "very_poor", "description": "Very poor air quality - immediate action needed"},
-                {"min": 0, "max": 50, "name": "hazardous", "description": "Hazardous air quality - source identification required"}
+                {
+                    "min": 0, "max": 25,
+                    "name": "very_quiet",
+                    "description": "Very quiet - ideal for sleep and concentration"
+                },
+                {
+                    "min": 25, "max": 30,
+                    "name": "quiet",
+                    "description": "Quiet - WHO bedroom nighttime standard"
+                },
+                {
+                    "min": 30, "max": 35,
+                    "name": "normal",
+                    "description": "Normal - WHO daytime living areas"
+                },
+                {
+                    "min": 35, "max": 45,
+                    "name": "moderate",
+                    "description": "Moderate - acceptable background noise"
+                },
+                {
+                    "min": 45, "max": 55,
+                    "name": "elevated",
+                    "description": "Elevated - WHO outdoor residential limit"
+                },
+                {
+                    "min": 55, "max": 65,
+                    "name": "high",
+                    "description": "High - may interfere with communication"
+                },
+                {
+                    "min": 65, "max": 75,
+                    "name": "very_high",
+                    "description": "Very high - potential sleep disruption"
+                },
+                {
+                    "min": 75, "max": 150,
+                    "name": "excessive",
+                    "description": "Excessive - hearing damage risk with prolonged exposure"
+                }
             ]
         },
         "visible_light": {
             "intervals": [
-                {"min": 0, "max": 10, "name": "dark", "description": "Dark conditions - suitable for sleep"},
-                {"min": 10, "max": 50, "name": "dim", "description": "Dim lighting - basic orientation possible"},
-                {"min": 50, "max": 100, "name": "adequate", "description": "Adequate lighting - suitable for general activities"},
-                {"min": 100, "max": 150, "name": "bright", "description": "Bright lighting - good for detailed tasks"},
-                {"min": 150, "max": 1000, "name": "very_bright", "description": "Very bright - strong daylight exposure"}
-            ]
-        },
-        "iaq_index": {
-            "intervals": [
-                {"min": 0, "max": 25, "name": "excellent", "description": "Excellent air quality - optimal conditions"},
-                {"min": 25, "max": 50, "name": "good", "description": "Good air quality - healthy comfortable levels"},
-                {"min": 50, "max": 75, "name": "moderate", "description": "Moderate air quality - ventilation advised"},
-                {"min": 75, "max": 100, "name": "poor", "description": "Poor air quality - corrective action needed"},
-                {"min": 100, "max": 500, "name": "very_poor", "description": "Very poor air quality - immediate mitigation required"}
+                {
+                    "min": 0, "max": 10,
+                    "name": "dark",
+                    "description": "Dark conditions - suitable for sleep"
+                },
+                {
+                    "min": 10, "max": 50,
+                    "name": "dim",
+                    "description": "Dim lighting - basic orientation possible"
+                },
+                {
+                    "min": 50, "max": 100,
+                    "name": "adequate",
+                    "description": "Adequate lighting - suitable for general activities"
+                },
+                {
+                    "min": 100, "max": 150,
+                    "name": "bright",
+                    "description": "Bright lighting - good for detailed tasks"
+                },
+                {
+                    "min": 150, "max": 1000,
+                    "name": "very_bright",
+                    "description": "Very bright - strong daylight exposure"
+                }
             ]
         },
         "co2": {
             "intervals": [
-                {"min": 400, "max": 800, "name": "good", "description": "Typical outdoor fresh air levels - considered good/normal indoor air quality"},
-                {"min": 800, "max": 1000, "name": "moderate", "description": "Acceptable indoor air quality - may indicate moderate occupancy or ventilation"},
-                {"min": 1000, "max": 1500, "name": "poor", "description": "Poor indoor air quality - ventilation should be increased to avoid discomfort or health issues"},
-                {"min": 1500, "max": 2500, "name": "very_poor", "description": "High CO₂ concentration - can lead to drowsiness, decreased cognitive function, and discomfort"},
-                {"min": 2500, "max": 5000, "name": "hazardous", "description": "Very high concentration - potential health risk, immediate ventilation required"}
+                {
+                    "min": 400, "max": 800,
+                    "name": "good",
+                    "description": "Typical outdoor fresh air levels - considered good/normal indoor air quality"
+                },
+                {
+                    "min": 800, "max": 1000,
+                    "name": "moderate",
+                    "description": "Acceptable indoor air quality - may indicate moderate occupancy or ventilation"
+                },
+                {
+                    "min": 1000, "max": 1500,
+                    "name": "poor",
+                    "description": "Poor indoor air quality - ventilation should be increased to avoid discomfort or health issues"
+                },
+                {
+                    "min": 1500, "max": 2500,
+                    "name": "very_poor",
+                    "description": "High CO₂ concentration - can lead to drowsiness, decreased cognitive function, and discomfort"
+                },
+                {
+                    "min": 2500, "max": 5000,
+                    "name": "hazardous",
+                    "description": "Very high concentration - potential health risk, immediate ventilation required"
+                }
             ]
         },
         "voc_index": {
             "intervals": [
-                {"min": 0, "max": 200, "name": "good", "description": "The air is typical or better than usual for indoor environments, with minimal or no pollution events"},
-                {"min": 200, "max": 250, "name": "moderate", "description": "Minor pollution event detected; likely due to brief activities such as cooking, cleaning, or transient odors"},
-                {"min": 250, "max": 350, "name": "poor", "description": "Emissions from products, heavier cleaning, or increased occupancy"},
-                {"min": 350, "max": 400, "name": "very_poor", "description": "Persistent emissions or strong pollutant sources present"},
-                {"min": 400, "max": 500, "name": "hazardous", "description": "Prolonged exposure may cause discomfort or health effects"}
+                {
+                    "min": 0, "max": 200,
+                    "name": "good",
+                    "description": "The air is typical or better than usual for indoor environments, with minimal or no pollution events"
+                },
+                {
+                    "min": 200, "max": 250,
+                    "name": "moderate",
+                    "description": "Minor pollution event detected; likely due to brief activities such as cooking, cleaning, or transient odors"
+                },
+                {
+                    "min": 250, "max": 350,
+                    "name": "poor",
+                    "description": "Emissions from products, heavier cleaning, or increased occupancy"
+                },
+                {
+                    "min": 350, "max": 400,
+                    "name": "very_poor",
+                    "description": "Persistent emissions or strong pollutant sources present"
+                },
+                {
+                    "min": 400, "max": 500,
+                    "name": "hazardous",
+                    "description": "Prolonged exposure may cause discomfort or health effects"
+                }
             ]
         },
         "nox_index": {
             "intervals": [
-                {"min": 0, "max": 50, "name": "good", "description": "Near background NOx levels, generally safe for indoor environments"},
-                {"min": 50, "max": 100, "name": "moderate", "description": "Slight increase, often related to brief combustion events (e.g., stove use, traffic infiltration)"},
-                {"min": 100, "max": 300, "name": "poor", "description": "Clear NOx event, likely from prolonged combustion (gas cooking, traffic, nearby industries)"},
-                {"min": 300, "max": 350, "name": "very_poor", "description": "High NOx; frequent and/or intense combustion sources nearby"},
-                {"min": 350, "max": 500, "name": "hazardous", "description": "Critically high NOx, levels associated with acute health risks for sensitive groups"}
+                {
+                    "min": 0, "max": 50,
+                    "name": "good",
+                    "description": "Near background NOx levels, generally safe for indoor environments"
+                },
+                {
+                    "min": 50, "max": 100,
+                    "name": "moderate",
+                    "description": "Slight increase, often related to brief combustion events (e.g., stove use, traffic infiltration)"
+                },
+                {
+                    "min": 100, "max": 300,
+                    "name": "poor",
+                    "description": "Clear NOx event, likely from prolonged combustion (gas cooking, traffic, nearby industries)"
+                },
+                {
+                    "min": 300, "max": 350,
+                    "name": "very_poor",
+                    "description": "High NOx; frequent and/or intense combustion sources nearby"
+                },
+                {
+                    "min": 350, "max": 500,
+                    "name": "hazardous",
+                    "description": "Critically high NOx, levels associated with acute health risks for sensitive groups"
+                }
             ]
         },
         "radon_1day_avg": {
             "intervals": [
-                {"min": 0, "max": 100, "name": "good", "description": "Radon levels are within safe limits."},
-                {"min": 100, "max": 150, "name": "fair", "description": "Elevated radon levels detected; consider mitigation."},
-                {"min": 150, "max": 1000, "name": "poor", "description": "Very high radon levels; immediate action required."}
+                {
+                    "min": 0, "max": 100,
+                    "name": "good",
+                    "description": "Radon levels are within safe limits."
+                },
+                {
+                    "min": 100, "max": 150,
+                    "name": "fair",
+                    "description": "Elevated radon levels detected; consider mitigation."
+                },
+                {
+                    "min": 150, "max": 1000,
+                    "name": "poor",
+                    "description": "Very high radon levels; immediate action required."
+                }
+            ]
+        },
+        "o3": {
+            "intervals": [
+                {
+                    "min": 0, "max": 30,
+                    "name": "good",
+                    "description": "Clean air with minimal ozone; typical for well‑ventilated indoor spaces or low‑pollution outdoor conditions."
+                },
+                {
+                    "min": 30, "max": 50,
+                    "name": "moderate",
+                    "description": "Acceptable air quality; sensitive individuals may begin to notice mild irritation during prolonged outdoor exposure."
+                },
+                {
+                    "min": 50, "max": 70,
+                    "name": "poor",
+                    "description": "Above WHO guideline levels; may cause throat irritation, coughing, or reduced lung function during outdoor activity."
+                },
+                {
+                    "min": 70, "max": 100,
+                    "name": "very_poor",
+                    "description": "Unhealthy for most people; prolonged exposure can aggravate respiratory conditions and reduce exercise capacity."
+                },
+                {
+                    "min": 100, "max": 200,
+                    "name": "hazardous",
+                    "description": "High ozone concentration; can trigger asthma symptoms and significant respiratory stress—avoid outdoor exertion."
+                }
+            ]
+        },
+        "no2": {
+            "intervals": [
+                {
+                    "min": 0, "max": 10,
+                    "name": "good",
+                    "description": "Very low NO₂ levels; typical of clean outdoor air or well‑ventilated indoor environments."
+                },
+                {
+                    "min": 10, "max": 20,
+                    "name": "moderate",
+                    "description": "Acceptable air quality; may indicate nearby traffic or combustion sources but generally safe."
+                },
+                {
+                    "min": 20, "max": 40,
+                    "name": "poor",
+                    "description": "Above WHO guideline levels; prolonged exposure may irritate airways, especially for sensitive individuals."
+                },
+                {
+                    "min": 40, "max": 100,
+                    "name": "very_poor",
+                    "description": "Unhealthy concentration; can aggravate asthma and reduce lung function with repeated exposure."
+                },
+                {
+                    "min": 100, "max": 200,
+                    "name": "hazardous",
+                    "description": "High NO₂ levels; associated with significant respiratory inflammation—avoid exposure and improve ventilation immediately."
+                }
             ]
         }
     }
@@ -146,7 +413,8 @@ class EnvAlertNotifier:
         "visible_light": "light_sensor.service",
         "co2": "carbon_dioxide_sensor.service",
         "voc_index, nox_index": "voc_nox_sensor.service",
-        "radon_data": "monitor_airthings_device.service"
+        "radon_data": "monitor_airthings_device.service",
+        "o3, no2": "o3_no2_sensor.service"
     }
 
     def __init__(self):
@@ -182,6 +450,8 @@ class EnvAlertNotifier:
             "radon_1day_avg": "Bq/m³",
             "radon_week_avg": "Bq/m³",
             "radon_year_avg": "Bq/m³"
+            "o3": "ppb",
+            "no2": "ppb"
         }
         return units.get(param, "")
 
@@ -238,9 +508,7 @@ class EnvAlertNotifier:
     @staticmethod
     def _format_parameter(key):
         # Capitalize and replace underscores with spaces
-        if "iaq_index" == key:
-            return "IAQ Index"
-        elif "aqi" == key:
+        if "aqi" == key:
             return "AQI"
         elif "co2" == key:
             return "CO2"
@@ -254,6 +522,10 @@ class EnvAlertNotifier:
             return "Radon Week Avg"
         elif "radon_year_avg" == key:
             return "Radon Year Avg"
+        elif "o3" == key:
+            return "O3"
+        elif "no2" == key:
+            return "NO2"
         return key.replace('_', ' ').title()
 
     def get_notifications(self):

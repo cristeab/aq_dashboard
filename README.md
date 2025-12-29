@@ -21,6 +21,13 @@ The following databases must be configured: dust, gas, climate, sound, light. A 
     source .venv/bin/activate
     pip install -r requirements.txt
 ```
+- The Python module for ZMOD4510 O3 NO2 sensor must be added separately
+
+```bash
+  git clone https://github.com/cristeab/renesas_zmod4510.git
+  cd renesas_zmod4510
+  pip install .
+```
 
 ## Setup Influxdb3 Database
 

@@ -33,6 +33,7 @@ class PersistentStorage:
         LTR390 = "ltr390"
         BMP390l = "bmp390l"
         SGP41 = "sgp41"
+        ZMOD4510 = "zmod4510"
         AIRTHINGS_RADON = "airthings_radon"
 
     def __init__(self):
@@ -186,6 +187,17 @@ class PersistentStorage:
             )
             self._write(self.Database.Climate, point)
 
+    def write_zmod4510_data(self, timestamp, o3_ppb, no2_ppb, fast_aqi, epa_aqi):
+        point = (
+            Point(self.Point.ZMOD4510.value)
+            .time(timestamp)
+            .field("o3_ppb", o3_ppb)
+            .field("no2_ppb", no2_ppb)
+            .field("fast_aqi", fast_aqi)
+            .field("epa_aqi", epa_aqi)
+        )
+        self._write(self.Database.Gas, point)
+
     def _read(self, db: Database, point_name):
         try:
             client = self.get_client(db.value)
@@ -251,3 +263,6 @@ class PersistentStorage:
             return radon
         print("Radon data not found")
         return None
+
+    def read_zmod4510_data(self):
+        return self._read(self.Database.Gas, self.Point.ZMOD4510.value)
