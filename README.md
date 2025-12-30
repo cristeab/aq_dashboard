@@ -103,6 +103,13 @@ Several Python scripts must be started to read data from sensors and write the d
     ./carbon_dioxide_sensor.py
 ```
 
+- `o3_no2_sensor.py`: Reads the O3 and NO2 concentrations in ppb from an ZMOD4510 sensor.
+
+```bash
+    export INFLUXDB3_AUTH_TOKEN="<token>"
+    ./o3_no2_sensor.py
+```
+
 The scripts print in the standard output the current data read from the sensors and can be installed as services using the `services/manage_services.sh` script.
 When installing the Python scripts as services, one must provide in a separate file `/etc/default/aq_dashboard.env` the database access token.
 Also, in order to automatically restart the services if an error occurs, the user running the services must have rights to run "sudo systemctl restart *.service" without requiring a password.
