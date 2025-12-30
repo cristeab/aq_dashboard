@@ -189,8 +189,8 @@ function updateDashboard(data)
 	updateElementPrecisionVisibility("visible-light-lux-value", data.visible_light_lux, "lux");
 	updateElementPrecisionVisibility("uv-index-value", data.uv_index);
 	
-	updateElementPrecisionVisibility("no2-value", data.no2, "ppb", 3);
-	updateElementPrecisionVisibility("o3-value", data.o3, "ppb", 3);
+	updateElementPrecisionVisibility("no2-value", data.no2, "ppb");
+	updateElementPrecisionVisibility("o3-value", data.o3, "ppb");
 	updateElementVisibility("co-value", data.co);
 	updateElementVisibility("voc-value", data.voc);
 	updateElementVisibility("nox-value", data.nox);

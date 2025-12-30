@@ -209,6 +209,8 @@ The notification list shown in the right image is sorted by timestamp in descend
 | 1        | SCD41 I2C |
 | **VOC and NOx Sensor** | |
 | 1        | SGP41 I2C |
+| **O3 and NO2 Sensor** | |
+| 1        | ZMOD4510 I2C |
 
 ## Reference
 
