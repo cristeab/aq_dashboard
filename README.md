@@ -133,9 +133,9 @@ Access the server at: https://\<server URL\>:8888
 
 Left Column Values (Air Pollutants):
 
-- Nitrate Dioxide (NO2) level
+- Nitrate Dioxide (NO2) concentration in PPB
 
-- Ozone (O3) level
+- Ozone (O3) concentration in PPB
 
 - Carbon Monoxide (CO) level
 
@@ -143,7 +143,7 @@ Left Column Values (Air Pollutants):
 
 - Nitrate Oxides (NOx) index
 
-- Carbon Dioxide (CO2) level in PPM
+- Carbon Dioxide (CO2) concentration in PPM
 
 Center Display:
 
