@@ -7,3 +7,6 @@
 [submodule "ambient_monitor"]
 	path = ambient_monitor
 	url = https://github.com/cristeab/ambient_monitor.git
+[submodule "renesas_zmod4510"]
+	path = renesas_zmod4510
+	url = https://github.com/cristeab/renesas_zmod4510.git
