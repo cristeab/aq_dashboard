@@ -13,9 +13,6 @@ persistent_storage = PersistentStorage()
 noise_detector.set_noise_callback(
     lambda timestamp, noise_level_db: persistent_storage.write_sound_pressure_level(timestamp, noise_level_db)
 )
-noise_detector.set_stt_callback(
-    lambda txt: logger.info(f"STT '{txt}'")
-)
 reset_respeaker_lite()
 time.sleep(2)
 noise_detector.run()
