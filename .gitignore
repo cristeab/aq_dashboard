@@ -6,3 +6,7 @@ static/styles.css
 static/styles.css.map
 
 *.properties
+
+.vscode/
+
+.scannerwork/
