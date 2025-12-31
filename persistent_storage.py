@@ -208,9 +208,9 @@ class PersistentStorage:
                     )
             records = df.to_dict(orient="records")
             return records[-1] if records else None
-        except Exception as e:
+        except Exception:
             pass
-            # self._logger.error(f"Cannot read from {point_name}: {e}")
+            # self._logger.error(f"Cannot read from {point_name}")
         return None
 
     @staticmethod

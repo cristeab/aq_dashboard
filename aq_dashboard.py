@@ -37,7 +37,7 @@ async def websocket_endpoint(websocket: WebSocket):
         while True:
             # Query latest data from InfluxDB
             # AQI
-            isDataMissing = True
+            is_data_missing = True
             aqi_data = storage.read_aqi()
             if aqi_data is not None:
                 try:
@@ -47,10 +47,10 @@ async def websocket_endpoint(websocket: WebSocket):
                         "aqi": aqi_data["pm25_cf1_aqi"]
                     }
                     notifier.check_thresholds_and_alert("aqi", aqi_data["pm25_cf1_aqi"], ts, aqi_data["time"])
-                    isDataMissing = False
+                    is_data_missing = False
                 except Exception as e:
                     logger.error(f"Error processing AQI data: {e}")
-            if isDataMissing:
+            if is_data_missing:
                 payload = {}
                 notifier.send_missing_data_alert_if_due("aqi")
             for i in range(2):
@@ -71,7 +71,7 @@ async def websocket_endpoint(websocket: WebSocket):
                     except KeyError as e:
                         logger.error(f"KeyError processing PM{i} data: {e}")
             # Noise
-            isDataMissing = True
+            is_data_missing = True
             noise_level_db = storage.read_sound_pressure_level()
             if noise_level_db is not None:
                 try:
@@ -80,13 +80,13 @@ async def websocket_endpoint(websocket: WebSocket):
                         "noise": noise_level_db["sound_pressure_level"]
                     }
                     notifier.check_thresholds_and_alert("noise", noise_level_db["sound_pressure_level"], ts, noise_level_db["time"])
-                    isDataMissing = False
+                    is_data_missing = False
                 except Exception as e:
                     logger.error(f"Error processing noise data: {e}")
-            if isDataMissing:
+            if is_data_missing:
                 notifier.send_missing_data_alert_if_due("noise")
             # Ambient
-            isDataMissing = True
+            is_data_missing = True
             ambient_data = storage.read_ambient_data()
             if ambient_data is not None:
                 try:
@@ -99,13 +99,13 @@ async def websocket_endpoint(websocket: WebSocket):
                     notifier.check_thresholds_and_alert("temperature", ambient_data["temperature"], ts, ambient_data["time"])
                     notifier.check_thresholds_and_alert("relative_humidity", ambient_data["relative_humidity"], ts, ambient_data["time"])
                     notifier.check_thresholds_and_alert("pressure", ambient_data["pressure"], ts, ambient_data["time"])
-                    isDataMissing = False
+                    is_data_missing = False
                 except Exception as e:
                     logger.error(f"Error processing ambient data: {e}")
-            if isDataMissing:
+            if is_data_missing:
                 notifier.send_missing_data_alert_if_due("temperature, relative_humidity, gas, iaq_index")
             # Light
-            isDataMissing = True
+            is_data_missing = True
             light_data = storage.read_light_data()
             if light_data is not None:
                 try:
@@ -115,13 +115,13 @@ async def websocket_endpoint(websocket: WebSocket):
                         "uv_index": light_data["uv_index"]
                     }
                     notifier.check_thresholds_and_alert("visible_light", light_data["visible_light_lux"], ts, light_data["time"])
-                    isDataMissing = False
+                    is_data_missing = False
                 except Exception as e:
                     logger.error(f"Error processing light data: {e}")
-            if isDataMissing:
+            if is_data_missing:
                 notifier.send_missing_data_alert_if_due("visible_light")
             # CO2
-            isDataMissing = True
+            is_data_missing = True
             co2_data = storage.read_co2_data()
             if co2_data is not None:
                 try:
@@ -130,13 +130,13 @@ async def websocket_endpoint(websocket: WebSocket):
                         "co2": co2_data["co2"]
                     }
                     notifier.check_thresholds_and_alert("co2", co2_data["co2"], ts, co2_data["time"])
-                    isDataMissing = False
+                    is_data_missing = False
                 except Exception as e:
                     logger.error(f"Error processing CO2 data: {e}")
-            if isDataMissing:
+            if is_data_missing:
                 notifier.send_missing_data_alert_if_due("co2")
             # VOC and NOx
-            isDataMissing = True
+            is_data_missing = True
             sgp41_data = storage.read_sgp41_data()
             if sgp41_data is not None:
                 try:
@@ -147,13 +147,13 @@ async def websocket_endpoint(websocket: WebSocket):
                     }
                     notifier.check_thresholds_and_alert("voc_index", sgp41_data["voc_index"], ts, sgp41_data["time"])
                     notifier.check_thresholds_and_alert("nox_index", sgp41_data["nox_index"], ts, sgp41_data["time"])
-                    isDataMissing = False
+                    is_data_missing = False
                 except Exception as e:
                     logger.error(f"Error processing SGP41 data: {e}")
-            if isDataMissing:
+            if is_data_missing:
                 notifier.send_missing_data_alert_if_due("voc_index, nox_index")
             # Radon
-            isDataMissing = True
+            is_data_missing = True
             radon_data = storage.read_radon_data()
             if radon_data is not None:
                 try:
@@ -166,13 +166,13 @@ async def websocket_endpoint(websocket: WebSocket):
                     notifier.check_thresholds_and_alert("radon_1day_avg", radon_data["radon_1day_avg"], ts, radon_data["time"])
                     notifier.check_thresholds_and_alert("radon_week_avg", radon_data["radon_week_avg"], ts, radon_data["time"])
                     notifier.check_thresholds_and_alert("radon_year_avg", radon_data["radon_year_avg"], ts, radon_data["time"])
-                    isDataMissing = False
+                    is_data_missing = False
                 except Exception as e:
                     logger.error(f"Error processing radon data: {e}")
-            if isDataMissing:
+            if is_data_missing:
                 notifier.send_missing_data_alert_if_due("radon_data")
             # O3 and NO2
-            isDataMissing = True
+            is_data_missing = True
             zmod4510_data = storage.read_zmod4510_data()
             if zmod4510_data is not None:
                 try:
@@ -183,10 +183,10 @@ async def websocket_endpoint(websocket: WebSocket):
                     }
                     notifier.check_thresholds_and_alert("o3", zmod4510_data["o3_ppb"], ts, zmod4510_data["time"])
                     notifier.check_thresholds_and_alert("no2", zmod4510_data["no2_ppb"], ts, zmod4510_data["time"])
-                    isDataMissing = False
+                    is_data_missing = False
                 except Exception as e:
                     logger.error(f"Error processing ZMOD4510 data: {e}")
-            if isDataMissing:
+            if is_data_missing:
                 notifier.send_missing_data_alert_if_due("o3, no2")
             # Send data to client
             data = {

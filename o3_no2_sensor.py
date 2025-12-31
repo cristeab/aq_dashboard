@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from zmod4510 import *
+from zmod4510 import ZMOD4510, ZMODStatus
 from persistent_storage import PersistentStorage
 from logger_configurator import LoggerConfigurator
 from datetime import datetime, timezone

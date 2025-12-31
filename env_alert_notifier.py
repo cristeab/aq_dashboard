@@ -439,6 +439,8 @@ class EnvAlertNotifier:
 
     @staticmethod
     def _get_measurement_unit(param):
+        if param.startswith("radon"):
+            return "Bq/m³"
         units = {
             "aqi": "",
             "temperature": "°C",
@@ -447,9 +449,6 @@ class EnvAlertNotifier:
             "noise": "dB",
             "visible_light": "lux",
             "co2": "ppm",
-            "radon_1day_avg": "Bq/m³",
-            "radon_week_avg": "Bq/m³",
-            "radon_year_avg": "Bq/m³",
             "o3": "ppb",
             "no2": "ppb"
         }

@@ -77,13 +77,7 @@ async def monitor_loop(address: str, interval: float, timeout: float, is_metric:
             # Prefer to treat DisconnectedError (from the parser) as an informational
             # transient disconnect rather than an unexpected crash. The exception
             # class may not be importable, so check by name as a fallback.
-            is_disconnected = False
             if DisconnectedError is not None and isinstance(exc, DisconnectedError):
-                is_disconnected = True
-            elif exc.__class__.__name__ == "DisconnectedError":
-                is_disconnected = True
-
-            if is_disconnected:
                 logger.info("Disconnected from %s", address)
             else:
                 logger.exception("Error reading %s", address)

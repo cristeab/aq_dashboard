@@ -116,33 +116,33 @@ function getLabelForAQI(aqi)
 function updateAQI(aqi)
 {
 	drawArc(); // Redraw the arc to clear the previous tick mark
-	if (aqi !== undefined) {
+	if (aqi === undefined) {
+		document.getElementById('aqi-value').textContent = "N/A";
+		document.getElementById('aqi-label').textContent = "";
+	} else {
 		drawTickMark(aqi);
 		document.getElementById('aqi-value').textContent = aqi;
 		document.getElementById('aqi-label').textContent = getLabelForAQI(aqi);
-	} else {
-		document.getElementById('aqi-value').textContent = "N/A";
-		document.getElementById('aqi-label').textContent = "";
 	}
 }
 
 function updateElementVisibility(elementId, value, unit = "") {
 	const element = document.getElementById(elementId);
-	if (value !== undefined) {
+	if (value === undefined) {
+		element.parentElement.style.display = "none"; // Hide the parent container
+	} else {
 		element.textContent = value + (unit ? ` ${unit}` : "");
 		element.parentElement.style.display = ""; // Ensure it's visible
-	} else {
-		element.parentElement.style.display = "none"; // Hide the parent container
 	}
 }
 
 function updateElementPrecisionVisibility(elementId, value, unit = "", precision = 1) {
 	const element = document.getElementById(elementId);
-	if (value !== undefined) {
-		element.textContent = parseFloat(value).toFixed(precision) + (unit ? ` ${unit}` : "");
-		element.parentElement.style.display = ""; // Ensure it's visible
-	} else {
+	if (value === undefined) {
 		element.parentElement.style.display = "none"; // Hide the parent container
+	} else {
+		element.textContent = Number.parseFloat(value).toFixed(precision) + (unit ? ` ${unit}` : "");
+		element.parentElement.style.display = ""; // Ensure it's visible
 	}
 }
 
@@ -246,8 +246,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	updateDashboard(dummyData);
 
 	// Extract the IP address from the current URL
-	const ipAddress = window.location.hostname;
-	const port = window.location.port;
+	const ipAddress = globalThis.location.hostname;
+	const port = globalThis.location.port;
 
 	// Connect to the WebSocket server
 	const wsUrl = `wss://${ipAddress}:${port}/ws`;
