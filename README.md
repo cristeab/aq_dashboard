@@ -199,8 +199,8 @@ The notification list shown in the right image is sorted by timestamp in descend
 
 ## Bill of Materials
 
-| Quantity | Item |
-|--------------|----------|
+| Name/Quantity | Item |
+|---------------|----------|
 | **Processing Unit** | |
 | 1        | Raspberry Pi 5, 4 GB RAM, 128 GB SSD |
 | **Dust Sensors** | |
@@ -213,7 +213,7 @@ The notification list shown in the right image is sorted by timestamp in descend
 | 1        | Lite-On LTR390 I2C |
 | **CO2 Sensor** | |
 | 1        | Sensirion SCD41 I2C |
-| **VOC and NOx Sensor** | |
+| **TVOC and NOx Sensor** | |
 | 1        | Sensirion SGP41 I2C |
 | **O3 and NO2 Sensor** | |
 | 1        | Renesas ZMOD4510 I2C |
