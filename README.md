@@ -136,7 +136,7 @@ Left Column Values (Air Pollutants):
 
 - Ozone (O3) concentration in PPB
 
-- Carbon Monoxide (CO) level
+- Carbon Monoxide (CO) concentration in PPM
 
 - Total Volatile Organic Compounds (TVOC) index
 
@@ -195,17 +195,15 @@ The notification list shown in the right image is sorted by timestamp in descend
 | Quantity | Item |
 |--------------|----------|
 | **Processing Unit** | |
-| 1            | Raspberry Pi 5, 4 GB RAM, 128 GB SSD |
-| **Air Quality Dust Sensors** | |
-| 2            | Plantower PMSA003 Laser PM2.5 dust sensor |
-| 2            | Adapter 4P G7A to G135 and 4pin 2.54mm conversion module G7 G10 G1 G3 G5 laser PM2.5 sensor exchange PLANTOWER |
-| 2            | TZT FT232BL FT232RL Basic Breakout Board FTDI FT232 USB TO TTL 5V 3.3V Debugger Download Cable To Serial Adapter Module |
+| 1        | Raspberry Pi 5, 4 GB RAM, 128 GB SSD |
+| **Dust Sensors** | |
+| 2        | Plantower PMSA003 UART |
 | **Noise Sensor** | |
 | 1        | Seeed ReSpeaker Lite Kit-USB 2 Mic Array |
 | **Temperature/Humidity/Pressure/Gas Sensor** | |
-| 1        | Bosh BME688 Environment Sensor Module Temperature/Humidity/Pressure/Gas AI Smart I2C |
+| 1        | Bosh BME688 I2C |
 | **Light Sensor** | |
-| 1        | Lite-On LTR390 UV Light Sensor I2C |
+| 1        | Lite-On LTR390 I2C |
 | **CO2 Sensor** | |
 | 1        | Sensirion SCD41 I2C |
 | **VOC and NOx Sensor** | |
@@ -214,6 +212,8 @@ The notification list shown in the right image is sorted by timestamp in descend
 | 1        | Renesas ZMOD4510 I2C |
 | **CO Sensor** | |
 | 1        | Winsen ZE07 CO UART |
+| **Radon Sensor** | |
+| 1        | Airthings Corentium Home 2 BLE |
 
 ## Reference
 
