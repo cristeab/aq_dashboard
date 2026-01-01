@@ -144,6 +144,8 @@ Left Column Values (Air Pollutants):
 
 - Carbon Dioxide (CO2) concentration in PPM
 
+- Radon gas concentration in Bq/m3
+
 Center Display:
 
 - The timestamp expressed in local time zone of the most recent dust particle measurement
