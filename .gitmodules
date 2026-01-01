@@ -10,3 +10,6 @@
 [submodule "renesas_zmod4510"]
 	path = renesas_zmod4510
 	url = https://github.com/cristeab/renesas_zmod4510.git
+[submodule "winsen_ze07co"]
+	path = winsen_ze07co
+	url = https://github.com/cristeab/winsen_ze07co.git
