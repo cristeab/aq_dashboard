@@ -195,19 +195,19 @@ The notification list shown in the right image is sorted by timestamp in descend
 | **Processing Unit** | |
 | 1            | Raspberry Pi 5, 4 GB RAM, 128 GB SSD |
 | **Air Quality Dust Sensors** | |
-| 2            | PLANTOWER PMSA003 Laser PM2.5 dust sensor |
+| 2            | Plantower PMSA003 Laser PM2.5 dust sensor |
 | 2            | Adapter 4P G7A to G135 and 4pin 2.54mm conversion module G7 G10 G1 G3 G5 laser PM2.5 sensor exchange PLANTOWER |
 | 2            | TZT FT232BL FT232RL Basic Breakout Board FTDI FT232 USB TO TTL 5V 3.3V Debugger Download Cable To Serial Adapter Module |
 | **Noise Sensor** | |
 | 1        | Seeed ReSpeaker Lite Kit-USB 2 Mic Array |
 | **Temperature/Humidity/Pressure/Gas Sensor** | |
-| 1        | BME688 Environment Sensor Module Temperature/Humidity/Pressure/Gas AI Smart I2C |
+| 1        | Bosh BME688 Environment Sensor Module Temperature/Humidity/Pressure/Gas AI Smart I2C |
 | **Light Sensor** | |
-| 1        | LTR390 UV Light Sensor I2C |
+| 1        | Lite-On LTR390 UV Light Sensor I2C |
 | **CO2 Sensor** | |
-| 1        | SCD41 I2C |
+| 1        | Sensirion SCD41 I2C |
 | **VOC and NOx Sensor** | |
-| 1        | SGP41 I2C |
+| 1        | Sensirion SGP41 I2C |
 | **O3 and NO2 Sensor** | |
 | 1        | Renesas ZMOD4510 I2C |
 | **CO Sensor** | |
