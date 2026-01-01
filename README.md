@@ -102,11 +102,18 @@ Several Python scripts must be started to read data from sensors and write the d
     ./carbon_dioxide_sensor.py
 ```
 
-- `o3_no2_sensor.py`: Reads the O3 and NO2 concentrations in ppb from an ZMOD4510 sensor.
+- `o3_no2_sensor.py`: Reads the O3 and NO2 concentrations in ppb from a ZMOD4510 sensor.
 
 ```bash
     export INFLUXDB3_AUTH_TOKEN="<token>"
     ./o3_no2_sensor.py
+```
+
+- `co_sensor.py`: Reads the CO concentration in ppm from a ZE07 CO sensor.
+
+```bash
+    export INFLUXDB3_AUTH_TOKEN="<token>"
+    ./co_sensor.py /dev/ttyACM0
 ```
 
 The scripts print in the standard output the current data read from the sensors and can be installed as services using the `services/manage_services.sh` script.
