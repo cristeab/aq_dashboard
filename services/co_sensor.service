@@ -1,0 +1,26 @@
+# /etc/systemd/system/co_sensor.service
+
+# Enable the service
+# sudo cp co_sensor.service /etc/systemd/system/
+# sudo systemctl daemon-reload
+# sudo systemctl enable co_sensor.service
+# sudo systemctl start co_sensor.service
+
+# Check status and logs
+# sudo systemctl status co_sensor.service
+# sudo journalctl -fu co_sensor.service
+
+[Unit]
+Description=CO sensor
+After=multi-user.target
+
+[Service]
+Type=simple
+User=bogdan
+WorkingDirectory=/home/bogdan/projects/aq_dashboard
+ExecStart=/home/bogdan/.venv/bin/python /home/bogdan/projects/aq_dashboard/co_sensor.py /dev/ttyACM0
+EnvironmentFile=/etc/default/aq_dashboard.env
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
