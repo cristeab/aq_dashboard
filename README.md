@@ -74,11 +74,11 @@ Several Python scripts must be started to read data from sensors and write the d
     ./air_quality.py /dev/ttyUSB1 /dev/ttyUSB2
 ```
 
-  - `noise_level.py`: Reads the noise level from a 2-Mic array sensor and writes it to the noise database. The USB port where the noise sensor is attached must be provided as input.
+  - `noise_sensor.py`: Reads the ambiental noise level from a 2-Mic array sensor and writes it to the database.
 
 ```bash
     export INFLUXDB3_AUTH_TOKEN="<token>"
-    ./noise_level.py --port /dev/ttyACM0
+    ./noise_sensor.py
 ```
 
   - `ambient.py`: Reads the temperature, the humididy, the pressure, the gas resistance and the indoor air quality and writes it to the database. In order to read this sensor and process raw data with BSEC library the user must install this [Python extension for BME68x](https://github.com/cristeab/bme68x-python-library).

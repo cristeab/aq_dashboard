@@ -1,0 +1,26 @@
+# /etc/systemd/system/noise_sensor.service
+
+# Enable the service
+# sudo cp noise_sensor.service /etc/systemd/system/
+# sudo systemctl daemon-reload
+# sudo systemctl enable noise_sensor.service
+# sudo systemctl start noise_sensor.service
+
+# Check status and logs
+# sudo systemctl status noise_sensor.service
+# sudo journalctl -u noise_sensor.service
+
+[Unit]
+Description=Ambiental noise level detector
+After=network.target
+
+[Service]
+Type=simple
+User=bogdan
+WorkingDirectory=/home/bogdan/projects/aq_dashboard
+ExecStart=/home/bogdan/.venv/bin/python /home/bogdan/projects/aq_dashboard/noise_sensor.py
+EnvironmentFile=/etc/default/aq_dashboard.env
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
