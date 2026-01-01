@@ -512,7 +512,7 @@ class EnvAlertNotifier:
         self._logger.info(f"Sending alert for {parameter}: {msg}, at {formatted_timestamp}")
 
     def _send_missing_data_alert(self, parameter):
-        timestamp = pd.Timestamp.now(tz='UTC')
+        timestamp = pd.Timestamp.now(tz='UTC').tz_localize(None)
         formatted_timestamp = normalize_and_format_pandas_timestamp(timestamp)
         msg = f"No data received for {parameter}"
         self._alerts[parameter] = {
