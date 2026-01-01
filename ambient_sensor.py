@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from ambient_monitor.ambient_monitor import AmbientMonitor
+from bosh_bme68x.ambient_monitor import AmbientMonitor
 from persistent_storage import PersistentStorage
 import time
 from constants import SLEEP_DURATION_SECONDS

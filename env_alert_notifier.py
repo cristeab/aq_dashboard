@@ -455,7 +455,7 @@ class EnvAlertNotifier:
     SERVICE_RESTARTS = {
         "aqi": "air_quality.service",
         "noise": "noise_sensor.service",
-        "temperature, relative_humidity, gas, iaq_index": "ambient.service",
+        "temperature, relative_humidity, gas, iaq_index": "ambient_sensor.service",
         "visible_light": "light_sensor.service",
         "co2": "carbon_dioxide_sensor.service",
         "voc_index, nox_index": "voc_nox_sensor.service",

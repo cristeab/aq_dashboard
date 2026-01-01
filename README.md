@@ -81,11 +81,11 @@ Several Python scripts must be started to read data from sensors and write the d
     ./noise_sensor.py
 ```
 
-  - `ambient.py`: Reads the temperature, the humididy, the pressure, the gas resistance and the indoor air quality and writes it to the database. In order to read this sensor and process raw data with BSEC library the user must install this [Python extension for BME68x](https://github.com/cristeab/bme68x-python-library).
+  - `ambient_sensor.py`: Reads the temperature, the relative humididy, the pressure, the gas resistance and the indoor air quality and writes it to the database. In order to read this sensor and process raw data with BSEC library the user must install this [Python extension for BME68x](https://github.com/cristeab/bme68x-python-library).
 
 ```bash
     export INFLUXDB3_AUTH_TOKEN="<token>"
-    ./ambient.py
+    ./ambient_sensor.py
 ```
 
 - `light_sensor.py`: Reads the visible light in lux and the UV index from an LTR390 sensor.

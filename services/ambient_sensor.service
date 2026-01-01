@@ -1,0 +1,26 @@
+# /etc/systemd/system/ambient_sensor.service
+
+# Enable the service
+# sudo cp ambient_sensor.service /etc/systemd/system/
+# sudo systemctl daemon-reload
+# sudo systemctl enable ambient_sensor.service
+# sudo systemctl start ambient_sensor.service
+
+# Check status and logs
+# sudo systemctl status ambient_sensor.service
+# sudo journalctl -fu ambient_sensor.service
+
+[Unit]
+Description=Temperature, pressure, relative humidity and VOC detector
+After=network.target
+
+[Service]
+Type=simple
+User=bogdan
+WorkingDirectory=/home/bogdan/projects/aq_dashboard
+ExecStart=/home/bogdan/.venv/bin/python /home/bogdan/projects/aq_dashboard/ambient_sensor.py
+EnvironmentFile=/etc/default/aq_dashboard.env
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
