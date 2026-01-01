@@ -459,7 +459,7 @@ class EnvAlertNotifier:
         "visible_light": "light_sensor.service",
         "co2": "carbon_dioxide_sensor.service",
         "voc_index, nox_index": "voc_nox_sensor.service",
-        "radon_data": "monitor_airthings_device.service",
+        "radon_data": "radon_sensor.service",
         "o3, no2": "o3_no2_sensor.service",
         "co": "co_sensor.service"
     }

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Periodically read an Airthings device by Bluetooth address and save sensor data into db.
+Periodically read an Airthings Corentium Hom2 given by its Bluetooth MAC address and save sensor data into db.
 """
 from __future__ import annotations
 import os
@@ -19,11 +19,11 @@ except Exception:
     DisconnectedError = None
 
 
-logger = LoggerConfigurator.configure_logger("AirthingsMonitor")
+logger = LoggerConfigurator.configure_logger("RadonSensor")
 persistent_storage = PersistentStorage()
 device_mac = os.environ.get("AIRTHINGS_DEVICE_MAC")
 if not device_mac:
-    print("Error: AIRTHINGS_DEVICE_MAC environment variable is not set.")
+    logger.error("Error: AIRTHINGS_DEVICE_MAC environment variable is not set.")
     sys.exit(1)
 
 

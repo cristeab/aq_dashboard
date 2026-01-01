@@ -1,0 +1,26 @@
+# /etc/systemd/system/radon_sensor.service
+
+# Enable the service
+# sudo cp radon_sensor.service /etc/systemd/system/
+# sudo systemctl daemon-reload
+# sudo systemctl enable radon_sensor.service
+# sudo systemctl start radon_sensor.service
+
+# Check status and logs
+# sudo systemctl status radon_sensor.service
+# sudo journalctl -fu radon_sensor.service
+
+[Unit]
+Description=Radon, Temperature and Humidity Airthings monitor
+After=network.target
+
+[Service]
+Type=simple
+User=bogdan
+WorkingDirectory=/home/bogdan/projects/aq_dashboard
+ExecStart=/home/bogdan/.venv/bin/python /home/bogdan/projects/aq_dashboard/radon_sensor.py
+EnvironmentFile=/etc/default/aq_dashboard.env
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
