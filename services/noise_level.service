@@ -18,7 +18,7 @@ After=network.target
 Type=simple
 User=bogdan
 WorkingDirectory=/home/bogdan/projects/aq_dashboard
-ExecStart=/home/bogdan/.venv/bin/python /home/bogdan/projects/aq_dashboard/noise_level.py --port /dev/ttyACM0
+ExecStart=/home/bogdan/.venv/bin/python /home/bogdan/projects/aq_dashboard/noise_level.py
 EnvironmentFile=/etc/default/aq_dashboard.env
 Restart=on-failure
 
