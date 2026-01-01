@@ -67,11 +67,11 @@ sudo rm -f ~/.influxdb/data/airquality/snapshots/*
 
 Several Python scripts must be started to read data from sensors and write the data into the database:
 
-  - `air_quality.py`: Reads the particle concentration data from two PMSA003 air quality dust sensors, computes the 10 min AQI and writes it to the aqi and pm databases. The USB ports where the air quality sensors are attached must be provided as inputs.
+  - `dust_sensor.py`: Reads the particle concentration data from two PMSA003 air quality dust sensors, computes the 10 min AQI and writes it to the aqi and pm databases. The USB ports where the air quality sensors are attached must be provided as inputs.
 
 ```bash
     export INFLUXDB3_AUTH_TOKEN="<token>"
-    ./air_quality.py /dev/ttyUSB1 /dev/ttyUSB2
+    ./dust_sensor.py /dev/ttyUSB1 /dev/ttyUSB2
 ```
 
   - `noise_sensor.py`: Reads the ambiental noise level from a 2-Mic array sensor and writes it to the database.

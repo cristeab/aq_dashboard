@@ -14,7 +14,7 @@ from persistent_storage import PersistentStorage
 from logger_configurator import LoggerConfigurator
 
 
-class AirQualityUtils:
+class DustSensorUtils:
     ENABLE_ACTIVE_MODE = True
     MEASUREMENT_WINDOW_LENGTH_SEC = 600 # 10 minutes
     WAKEUP_DELAY_SEC = 30
@@ -53,7 +53,7 @@ class AirQualityUtils:
             self._logger.error('At least one serial port must be provided.')
             sys.exit(1)
 
-        all_serial_ports = AirQualityUtils.find_serial_ports()
+        all_serial_ports = DustSensorUtils.find_serial_ports()
         if all_serial_ports is None:
             self._logger.error('No serial port(s) found.')
             sys.exit(1)
@@ -273,7 +273,7 @@ class AirQualityUtils:
             aqi = self._calculate_nowcast_aqi()
             if aqi is None:
                 continue
-            category = AirQualityUtils._aqi_category(aqi)
+            category = DustSensorUtils._aqi_category(aqi)
             self.aqi = f"{int(self.MEASUREMENT_WINDOW_LENGTH_SEC / 60)} min AQI: {aqi:.2f} | {category}"
 
             with self.lock:

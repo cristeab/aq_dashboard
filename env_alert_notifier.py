@@ -453,7 +453,7 @@ class EnvAlertNotifier:
 
     # define service restart mapping
     SERVICE_RESTARTS = {
-        "aqi": "air_quality.service",
+        "aqi": "dust_sensor.service",
         "noise": "noise_sensor.service",
         "temperature, relative_humidity, gas, iaq_index": "ambient_sensor.service",
         "visible_light": "light_sensor.service",

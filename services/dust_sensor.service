@@ -1,0 +1,26 @@
+# /etc/systemd/system/dust_sensor.service
+
+# Enable the service
+# sudo cp dust_sensor.service /etc/systemd/system/
+# sudo systemctl daemon-reload
+# sudo systemctl enable dust_sensor.service
+# sudo systemctl start dust_sensor.service
+
+# Check status and logs
+# sudo systemctl status dust_sensor.service
+# sudo journalctl -fu dust_sensor.service
+
+[Unit]
+Description=Air Quality detector from 2 dust sensors
+After=network.target
+
+[Service]
+Type=simple
+User=bogdan
+WorkingDirectory=/home/bogdan/projects/aq_dashboard
+ExecStart=/home/bogdan/.venv/bin/python /home/bogdan/projects/aq_dashboard/dust_sensor.py /dev/ttyUSB0 /dev/ttyUSB1
+EnvironmentFile=/etc/default/aq_dashboard.env
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
