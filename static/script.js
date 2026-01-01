@@ -20,7 +20,8 @@ const dummyData = {
 	iaq: "0",
 	co2: "0",
 	voc: "0",
-	nox: "0"
+	nox: "0",
+	co: "0"
 };
 
 // Get the canvas element
@@ -191,7 +192,7 @@ function updateDashboard(data)
 	
 	updateElementPrecisionVisibility("no2-value", data.no2, "ppb");
 	updateElementPrecisionVisibility("o3-value", data.o3, "ppb");
-	updateElementVisibility("co-value", data.co);
+	updateElementVisibility("co-value", data.co, "ppm");
 	updateElementVisibility("voc-value", data.voc);
 	updateElementVisibility("nox-value", data.nox);
 	updateElementVisibility("co2-value", data.co2, "ppm");

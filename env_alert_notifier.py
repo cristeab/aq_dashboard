@@ -400,6 +400,52 @@ class EnvAlertNotifier:
                     "description": "High NO₂ levels; associated with significant respiratory inflammation—avoid exposure and improve ventilation immediately."
                 }
             ]
+        },
+        "co": {
+            "intervals": [
+                {
+                    "min": 0,
+                    "max": 10,
+                    "name": "good",
+                    "description": "Background CO typical of clean indoor or outdoor air; no expected health effects for the general population."
+                },
+                {
+                    "min": 10,
+                    "max": 30,
+                    "name": "moderate",
+                    "description": "Slightly elevated CO often from traffic, cooking, or heaters; generally safe for short exposure but should not be persistent."
+                },
+                {
+                    "min": 30,
+                    "max": 50,
+                    "name": "unhealthy_sensitive",
+                    "description": "Level where repeated or multi‑hour exposure may affect sensitive groups such as people with heart or respiratory conditions."
+                },
+                {
+                    "min": 50,
+                    "max": 100,
+                    "name": "unhealthy",
+                    "description": "Prolonged exposure can cause headache, fatigue, and reduced exercise tolerance; ventilation or source mitigation needed."
+                },
+                {
+                    "min": 100,
+                    "max": 200,
+                    "name": "very_unhealthy",
+                    "description": "Short‑term exposure may cause significant symptoms like dizziness and nausea; indicates a potentially dangerous situation."
+                },
+                {
+                    "min": 200,
+                    "max": 400,
+                    "name": "hazardous",
+                    "description": "High CO where exposure of tens of minutes can be life‑threatening; immediate evacuation and source shutdown required."
+                },
+                {
+                    "min": 400,
+                    "max": 500,
+                    "name": "extreme_hazard",
+                    "description": "Even short exposure can be rapidly fatal and demands urgent emergency response."
+                }
+            ]
         }
     }
     THRESHOLDS["radon_week_avg"] = THRESHOLDS["radon_1day_avg"]
@@ -414,7 +460,8 @@ class EnvAlertNotifier:
         "co2": "carbon_dioxide_sensor.service",
         "voc_index, nox_index": "voc_nox_sensor.service",
         "radon_data": "monitor_airthings_device.service",
-        "o3, no2": "o3_no2_sensor.service"
+        "o3, no2": "o3_no2_sensor.service",
+        "co": "co_sensor.service"
     }
 
     def __init__(self):
@@ -450,7 +497,8 @@ class EnvAlertNotifier:
             "visible_light": "lux",
             "co2": "ppm",
             "o3": "ppb",
-            "no2": "ppb"
+            "no2": "ppb",
+            "co": "ppm"
         }
         return units.get(param, "")
 
@@ -525,6 +573,8 @@ class EnvAlertNotifier:
             return "O3"
         elif "no2" == key:
             return "NO2"
+        elif "co" == key:
+            return "CO"
         return key.replace('_', ' ').title()
 
     def get_notifications(self):

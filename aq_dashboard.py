@@ -188,6 +188,21 @@ async def websocket_endpoint(websocket: WebSocket):
                     logger.error(f"Error processing ZMOD4510 data: {e}")
             if is_data_missing:
                 notifier.send_missing_data_alert_if_due("o3, no2")
+            # CO
+            is_data_missing = True
+            co_data = storage.read_co_data()
+            if co_data is not None:
+                try:
+                    ts = normalize_and_format_pandas_timestamp(co_data["time"])
+                    payload = payload | {
+                        "co": co_data["co_ppm"]
+                    }
+                    notifier.check_thresholds_and_alert("co", co_data["co_ppm"], ts, co_data["time"])
+                    is_data_missing = False
+                except Exception as e:
+                    logger.error(f"Error processing CO data: {e}")
+            if is_data_missing:
+                notifier.send_missing_data_alert_if_due("co")
             # Send data to client
             data = {
                 "type": "data",

@@ -275,3 +275,6 @@ class PersistentStorage:
 
     def read_zmod4510_data(self):
         return self._read(self.Database.Gas, self.Point.ZMOD4510.value)
+    
+    def read_co_data(self):
+        return self._read(self.Database.Gas, self.Point.ZE07CO.value)
