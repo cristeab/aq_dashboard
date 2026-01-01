@@ -20,14 +20,14 @@ while True:
 
     # Get and process sensor data
     if temperature is not None and relative_humidity is not None:
-        logger.info(f"Using temperature: {temperature}, relative_humidity: {relative_humidity}")
+        logger.debug(f"Using temperature: {temperature}, relative_humidity: {relative_humidity}")
         data = sensor.get_data(temperature_celsius_deg=temperature, relative_humidity_percent=relative_humidity)
     else:
         data = sensor.get_data()
             
     match data.status:
         case ZMODStatus.STABILIZATION:
-            logger.info("Warming up...")
+            logger.debug("Warming up...")
         case ZMODStatus.OK:
             timestamp = datetime.now(timezone.utc)
             persistent_storage.write_zmod4510_data(timestamp, data.o3_ppb, data.no2_ppb, data.fast_aqi, data.epa_aqi)
