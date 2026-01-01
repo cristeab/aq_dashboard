@@ -209,7 +209,9 @@ The notification list shown in the right image is sorted by timestamp in descend
 | **VOC and NOx Sensor** | |
 | 1        | SGP41 I2C |
 | **O3 and NO2 Sensor** | |
-| 1        | ZMOD4510 I2C |
+| 1        | Renesas ZMOD4510 I2C |
+| **CO Sensor** | |
+| 1        | Winsen ZE07 CO UART |
 
 ## Reference
 
