@@ -34,6 +34,7 @@ class PersistentStorage:
         BMP390l = "bmp390l"
         SGP41 = "sgp41"
         ZMOD4510 = "zmod4510"
+        ZE07CO = "ze07co"
         AIRTHINGS_RADON = "airthings_radon"
 
     def __init__(self):
@@ -195,6 +196,14 @@ class PersistentStorage:
             .field("no2_ppb", no2_ppb)
             .field("fast_aqi", fast_aqi)
             .field("epa_aqi", epa_aqi)
+        )
+        self._write(self.Database.Gas, point)
+
+    def write_co_data(self, timestamp, co_ppm):
+        point = (
+            Point(self.Point.ZE07CO.value)
+            .time(timestamp)
+            .field("co_ppm", co_ppm)
         )
         self._write(self.Database.Gas, point)
 
