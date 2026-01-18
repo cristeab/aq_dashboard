@@ -14,6 +14,16 @@ The hardware component relies on a Raspberry Pi as the main processing unit and 
 - An InfluxDB 3 Core database is used to store the data received from different sensors and retrieved it to be shown in a web page.
 The following databases must be configured: dust, gas, climate, sound, light. A read/write access token must be configured.
 
+- Installing lgpio Python module requires to install from sources the official lgpio C library from its GitHub repository
+
+```bash
+  wget https://github.com/joan2937/lg/archive/master.zip
+  unzip master.zip
+  cd lg-master
+  make
+  sudo make install
+```
+
 - A Python virtual environment must be setup in order to run the Python scripts:
 
 ```bash
@@ -26,16 +36,6 @@ The following databases must be configured: dust, gas, climate, sound, light. A 
 ```bash
   cd renesas_zmod4510
   pip install .
-```
-
-- Installing lgpio Python module requires to install from sources the official lgpio C library from its GitHub repository
-
-```bash
-  wget https://github.com/joan2937/lg/archive/master.zip
-  unzip master.zip
-  cd lg-master
-  make
-  sudo make install
 ```
 
 ## Setup Influxdb3 Database
