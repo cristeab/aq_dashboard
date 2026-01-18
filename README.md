@@ -28,6 +28,16 @@ The following databases must be configured: dust, gas, climate, sound, light. A 
   pip install .
 ```
 
+- Installing lgpio Python module requires to install from sources the official lgpio C library from its GitHub repository
+
+```bash
+  wget https://github.com/joan2937/lg/archive/master.zip
+  unzip master.zip
+  cd lg-master
+  make
+  sudo make install
+```
+
 ## Setup Influxdb3 Database
 
 - Show database service status
