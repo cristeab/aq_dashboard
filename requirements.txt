@@ -5,6 +5,7 @@ influxdb3-python
 adafruit-blinka
 adafruit-circuitpython-bme680
 adafruit-circuitpython-scd4x
+adafruit-circuitpython-bmp3xx
 lgpio
 adafruit-circuitpython-ltr390
 numpy
