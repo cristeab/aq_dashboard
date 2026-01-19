@@ -40,6 +40,7 @@ async def websocket_endpoint(websocket: WebSocket):
             is_data_missing = True
             aqi_data = storage.read_aqi()
             if aqi_data is not None:
+                notifier.remove_missing_data_alert("aqi")
                 try:
                     ts = normalize_and_format_pandas_timestamp(aqi_data["time"])
                     payload = {
@@ -74,6 +75,7 @@ async def websocket_endpoint(websocket: WebSocket):
             is_data_missing = True
             noise_level_db = storage.read_sound_pressure_level()
             if noise_level_db is not None:
+                notifier.remove_missing_data_alert("noise")
                 try:
                     ts = normalize_and_format_pandas_timestamp(noise_level_db["time"])
                     payload = payload | {
@@ -89,6 +91,7 @@ async def websocket_endpoint(websocket: WebSocket):
             is_data_missing = True
             ambient_data = storage.read_ambient_data()
             if ambient_data is not None:
+                notifier.remove_missing_data_alert("temperature, relative_humidity, gas, iaq_index")
                 try:
                     ts = normalize_and_format_pandas_timestamp(ambient_data["time"])
                     payload = payload | {
@@ -108,6 +111,7 @@ async def websocket_endpoint(websocket: WebSocket):
             is_data_missing = True
             light_data = storage.read_light_data()
             if light_data is not None:
+                notifier.remove_missing_data_alert("visible_light")
                 try:
                     ts = normalize_and_format_pandas_timestamp(light_data["time"])
                     payload = payload | {
@@ -124,6 +128,7 @@ async def websocket_endpoint(websocket: WebSocket):
             is_data_missing = True
             co2_data = storage.read_co2_data()
             if co2_data is not None:
+                notifier.remove_missing_data_alert("co2")
                 try:
                     ts = normalize_and_format_pandas_timestamp(co2_data["time"])
                     payload = payload | {
@@ -139,6 +144,7 @@ async def websocket_endpoint(websocket: WebSocket):
             is_data_missing = True
             sgp41_data = storage.read_sgp41_data()
             if sgp41_data is not None:
+                notifier.remove_missing_data_alert("voc_index, nox_index")
                 try:
                     ts = normalize_and_format_pandas_timestamp(sgp41_data["time"])
                     payload = payload | {
@@ -156,6 +162,7 @@ async def websocket_endpoint(websocket: WebSocket):
             is_data_missing = True
             radon_data = storage.read_radon_data()
             if radon_data is not None:
+                notifier.remove_missing_data_alert("radon_data")
                 try:
                     ts = normalize_and_format_pandas_timestamp(radon_data["time"])
                     payload = payload | {
@@ -175,6 +182,7 @@ async def websocket_endpoint(websocket: WebSocket):
             is_data_missing = True
             zmod4510_data = storage.read_zmod4510_data()
             if zmod4510_data is not None:
+                notifier.remove_missing_data_alert("o3, no2")
                 try:
                     ts = normalize_and_format_pandas_timestamp(zmod4510_data["time"])
                     payload = payload | {
@@ -192,6 +200,7 @@ async def websocket_endpoint(websocket: WebSocket):
             is_data_missing = True
             co_data = storage.read_co_data()
             if co_data is not None:
+                notifier.remove_missing_data_alert("co")
                 try:
                     ts = normalize_and_format_pandas_timestamp(co_data["time"])
                     payload = payload | {
