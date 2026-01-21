@@ -522,10 +522,10 @@ class EnvAlertNotifier:
             }
         self._logger.info(f"Sending missing data alert for {parameter} at {formatted_timestamp}")
 
-    def remove_missing_data_alert(self, parameter):
+    def remove_data_alert(self, parameter):
         if parameter in self._alerts:
             del self._alerts[parameter]
-            self._logger.debug(f"Removed missing data alert for {parameter}")
+            self._logger.debug(f"Removed data alert for {parameter}")
 
     def send_missing_data_alert_if_due(self, parameter):
         current_time = time.time()
@@ -538,6 +538,8 @@ class EnvAlertNotifier:
                 self._restart_service(service_name)
             else:
                 self._logger.warning(f"No service restart configured for parameter '{parameter}'")
+            return True
+        return False
 
     def check_thresholds_and_alert(self, param, value, formatted_timestamp, timestamp):
         # Get current interval for this value

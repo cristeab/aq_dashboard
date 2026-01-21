@@ -54,7 +54,7 @@ async def websocket_endpoint(websocket: WebSocket):
                 payload = {}
                 notifier.send_missing_data_alert_if_due("aqi")
             else:
-                notifier.remove_missing_data_alert("aqi")
+                notifier.remove_data_alert("aqi")
             for i in range(2):
                 pm_data = storage.read_pm(i)
                 if pm_data is not None:
@@ -88,7 +88,7 @@ async def websocket_endpoint(websocket: WebSocket):
             if is_data_missing:
                 notifier.send_missing_data_alert_if_due("noise")
             else:
-                notifier.remove_missing_data_alert("noise")
+                notifier.remove_data_alert("noise")
             # Ambient
             is_data_missing = True
             ambient_data = storage.read_ambient_data()
@@ -107,9 +107,12 @@ async def websocket_endpoint(websocket: WebSocket):
                 except Exception as e:
                     logger.error(f"Error processing ambient data: {e}")
             if is_data_missing:
-                notifier.send_missing_data_alert_if_due("temperature, relative_humidity, gas, iaq_index")
+                if notifier.send_missing_data_alert_if_due("temperature, relative_humidity, gas, iaq_index"):
+                    notifier.remove_data_alert("temperature")
+                    notifier.remove_data_alert("relative_humidity")
+                    notifier.remove_data_alert("pressure")
             else:
-                notifier.remove_missing_data_alert("temperature, relative_humidity, gas, iaq_index")
+                notifier.remove_data_alert("temperature, relative_humidity, gas, iaq_index")
             # Light
             is_data_missing = True
             light_data = storage.read_light_data()
@@ -127,7 +130,7 @@ async def websocket_endpoint(websocket: WebSocket):
             if is_data_missing:
                 notifier.send_missing_data_alert_if_due("visible_light")
             else:
-                notifier.remove_missing_data_alert("visible_light")
+                notifier.remove_data_alert("visible_light")
             # CO2
             is_data_missing = True
             co2_data = storage.read_co2_data()
@@ -144,7 +147,7 @@ async def websocket_endpoint(websocket: WebSocket):
             if is_data_missing:
                 notifier.send_missing_data_alert_if_due("co2")
             else:
-                notifier.remove_missing_data_alert("co2")
+                notifier.remove_data_alert("co2")
             # VOC and NOx
             is_data_missing = True
             sgp41_data = storage.read_sgp41_data()
@@ -161,9 +164,11 @@ async def websocket_endpoint(websocket: WebSocket):
                 except Exception as e:
                     logger.error(f"Error processing SGP41 data: {e}")
             if is_data_missing:
-                notifier.send_missing_data_alert_if_due("voc_index, nox_index")
+                if notifier.send_missing_data_alert_if_due("voc_index, nox_index"):
+                    notifier.remove_data_alert("voc_index")
+                    notifier.remove_data_alert("nox_index")
             else:
-                notifier.remove_missing_data_alert("voc_index, nox_index")
+                notifier.remove_data_alert("voc_index, nox_index")
             # Radon
             is_data_missing = True
             radon_data = storage.read_radon_data()
@@ -182,9 +187,12 @@ async def websocket_endpoint(websocket: WebSocket):
                 except Exception as e:
                     logger.error(f"Error processing radon data: {e}")
             if is_data_missing:
-                notifier.send_missing_data_alert_if_due("radon_data")
+                if notifier.send_missing_data_alert_if_due("radon_data"):
+                    notifier.remove_data_alert("radon_1day_avg")
+                    notifier.remove_data_alert("radon_week_avg")
+                    notifier.remove_data_alert("radon_year_avg")
             else:
-                notifier.remove_missing_data_alert("radon_data")
+                notifier.remove_data_alert("radon_data")
             # O3 and NO2
             is_data_missing = True
             zmod4510_data = storage.read_zmod4510_data()
@@ -201,9 +209,11 @@ async def websocket_endpoint(websocket: WebSocket):
                 except Exception as e:
                     logger.error(f"Error processing ZMOD4510 data: {e}")
             if is_data_missing:
-                notifier.send_missing_data_alert_if_due("o3, no2")
+                if notifier.send_missing_data_alert_if_due("o3, no2"):
+                    notifier.remove_data_alert("o3")
+                    notifier.remove_data_alert("no2")
             else:
-                notifier.remove_missing_data_alert("o3, no2")
+                notifier.remove_data_alert("o3, no2")
             # CO
             is_data_missing = True
             co_data = storage.read_co_data()
@@ -220,7 +230,7 @@ async def websocket_endpoint(websocket: WebSocket):
             if is_data_missing:
                 notifier.send_missing_data_alert_if_due("co")
             else:
-                notifier.remove_missing_data_alert("co")
+                notifier.remove_data_alert("co")
             # Send data to client
             data = {
                 "type": "data",
