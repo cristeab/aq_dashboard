@@ -53,8 +53,6 @@ async def websocket_endpoint(websocket: WebSocket):
             if is_data_missing:
                 payload = {}
                 notifier.send_missing_data_alert_if_due("aqi")
-            else:
-                notifier.remove_data_alert("aqi")
             for i in range(2):
                 pm_data = storage.read_pm(i)
                 if pm_data is not None:
@@ -87,8 +85,6 @@ async def websocket_endpoint(websocket: WebSocket):
                     logger.error(f"Error processing noise data: {e}")
             if is_data_missing:
                 notifier.send_missing_data_alert_if_due("noise")
-            else:
-                notifier.remove_data_alert("noise")
             # Ambient
             is_data_missing = True
             ambient_data = storage.read_ambient_data()
@@ -129,8 +125,6 @@ async def websocket_endpoint(websocket: WebSocket):
                     logger.error(f"Error processing light data: {e}")
             if is_data_missing:
                 notifier.send_missing_data_alert_if_due("visible_light")
-            else:
-                notifier.remove_data_alert("visible_light")
             # CO2
             is_data_missing = True
             co2_data = storage.read_co2_data()
@@ -146,8 +140,6 @@ async def websocket_endpoint(websocket: WebSocket):
                     logger.error(f"Error processing CO2 data: {e}")
             if is_data_missing:
                 notifier.send_missing_data_alert_if_due("co2")
-            else:
-                notifier.remove_data_alert("co2")
             # VOC and NOx
             is_data_missing = True
             sgp41_data = storage.read_sgp41_data()
@@ -229,8 +221,6 @@ async def websocket_endpoint(websocket: WebSocket):
                     logger.error(f"Error processing CO data: {e}")
             if is_data_missing:
                 notifier.send_missing_data_alert_if_due("co")
-            else:
-                notifier.remove_data_alert("co")
             # Send data to client
             data = {
                 "type": "data",
