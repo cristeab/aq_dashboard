@@ -95,7 +95,8 @@ async def monitor_loop(address: str, interval: float, timeout: float):
         try:
             device = await read_device_once(address, timeout, True, logger)
             if device is None:
-                raise ConnectionError("Failed to read device data")
+                logger.error("Failed to read device data")
+                return
             save_radon_data(device)
             backoff = 5.0
         except UnsupportedDeviceError:
@@ -111,7 +112,8 @@ async def monitor_loop(address: str, interval: float, timeout: float):
             if DisconnectedError is not None and isinstance(exc, DisconnectedError):
                 logger.info("Disconnected from %s", address)
             else:
-                logger.exception("Error reading %s", address)
+                logger.error("Error reading %s", address)
+                return
 
             # exponential backoff on repeated failures
             await asyncio.sleep(backoff)
