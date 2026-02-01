@@ -188,7 +188,7 @@ function updateDashboard(data)
 	updateElementPrecisionVisibility("pressure-value", data.pressure, "hPa");
 	updateElementPrecisionVisibility("noise-value", data.noise, "dB");
 	updateElementPrecisionVisibility("visible-light-lux-value", data.visible_light_lux, "lux");
-	updateElementPrecisionVisibility("uv-index-value", data.uv_index);
+	updateElementPrecisionVisibility("uv-index-value", data.uv_index, "", 2);
 	
 	updateElementPrecisionVisibility("no2-value", data.no2, "ppb");
 	updateElementPrecisionVisibility("o3-value", data.o3, "ppb");
