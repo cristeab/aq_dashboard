@@ -84,7 +84,7 @@ Several Python scripts must be started to read data from sensors and write the d
     ./dust_sensor.py /dev/ttyUSB1 /dev/ttyUSB2
 ```
 
-  - `noise_sensor.py`: Reads the ambiental noise level from a 2-Mic array sensor and writes it to the database. A 30 seconds period is used at start to calibrate the algorithm: during this period a quiet environment is needed.
+  - `noise_sensor.py`: Reads the ambiental noise level from a 2-Mic array sensor and writes it to the database. A 30 seconds duration is used at start to calibrate the algorithm: during this duration a quiet environment is needed.
 
 ```bash
     export INFLUXDB3_AUTH_TOKEN="<token>"
