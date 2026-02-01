@@ -177,7 +177,7 @@ Right Column Values (Environment Parameters):
 
 -	Atmospheric pressure expressed in hectoPascals
 
--	Noise level in the environment in decibels (20 dB would be very quiet)
+-	Noise level in the environment in decibels (below 20 dB would be very quiet)
 
 - Visible light expressed in Lux
 
