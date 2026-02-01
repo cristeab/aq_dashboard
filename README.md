@@ -84,7 +84,7 @@ Several Python scripts must be started to read data from sensors and write the d
     ./dust_sensor.py /dev/ttyUSB1 /dev/ttyUSB2
 ```
 
-  - `noise_sensor.py`: Reads the ambiental noise level from a 2-Mic array sensor and writes it to the database.
+  - `noise_sensor.py`: Reads the ambiental noise level from a 2-Mic array sensor and writes it to the database. A 30 seconds period is used at start to calibrate the algorithm: during this period a quiet environment is needed.
 
 ```bash
     export INFLUXDB3_AUTH_TOKEN="<token>"
@@ -177,7 +177,7 @@ Right Column Values (Environment Parameters):
 
 -	Atmospheric pressure expressed in hectoPascals
 
--	Noise level in the environment in decibels (30 dB would be very quiet)
+-	Noise level in the environment in decibels (20 dB would be very quiet)
 
 - Visible light expressed in Lux
 
