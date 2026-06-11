@@ -246,12 +246,10 @@ document.addEventListener("DOMContentLoaded", function() {
 	addAQILabels();
 	updateDashboard(dummyData);
 
-	// Extract the IP address from the current URL
-	const ipAddress = globalThis.location.hostname;
-	const port = globalThis.location.port;
-
 	// Connect to the WebSocket server
-	const wsUrl = `wss://${ipAddress}:${port}/ws`;
+	const protocol = globalThis.location.protocol === 'https:' ? 'wss:' : 'ws:';
+	const host = globalThis.location.host;
+	const wsUrl = `${protocol}//${host}/ws`;
 	const socket = new WebSocket(wsUrl);
 	socket.onmessage = function(event) {
 		const data = JSON.parse(event.data);
