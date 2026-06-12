@@ -249,7 +249,11 @@ document.addEventListener("DOMContentLoaded", function() {
 	// Connect to the WebSocket server
 	const protocol = globalThis.location.protocol === 'https:' ? 'wss:' : 'ws:';
 	const host = globalThis.location.host;
-	const wsUrl = `${protocol}//${host}/ws`;
+	let path = globalThis.location.pathname;
+	if (!path.endsWith('/')) {
+		path += '/';
+	}
+	const wsUrl = `${protocol}//${host}${path}ws`;
 	const socket = new WebSocket(wsUrl);
 	socket.onmessage = function(event) {
 		const data = JSON.parse(event.data);
