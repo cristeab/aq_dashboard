@@ -246,22 +246,38 @@ document.addEventListener("DOMContentLoaded", function() {
 	addAQILabels();
 	updateDashboard(dummyData);
 
-	// Extract the IP address from the current URL
-	const ipAddress = globalThis.location.hostname;
-	const port = globalThis.location.port;
-
-	// Connect to the WebSocket server
-	const wsUrl = `wss://${ipAddress}:${port}/ws`;
-	const socket = new WebSocket(wsUrl);
-	socket.onmessage = function(event) {
-		const data = JSON.parse(event.data);
-		// Update your dashboard with the received data
-		if (data.type === "data") {
-			updateDashboard(data.payload);
-		} else if (data.type === "notification") {
-			updateNotifications(data.payload);
+	// Connect to the WebSocket server with auto-reconnection
+	function connectWebSocket() {
+		const protocol = globalThis.location.protocol === 'https:' ? 'wss:' : 'ws:';
+		const host = globalThis.location.host;
+		let path = globalThis.location.pathname;
+		if (!path.endsWith('/')) {
+			path += '/';
 		}
-	};
+		const wsUrl = `${protocol}//${host}${path}ws`;
+		const socket = new WebSocket(wsUrl);
+
+		socket.onmessage = function(event) {
+			const data = JSON.parse(event.data);
+			if (data.type === "data") {
+				updateDashboard(data.payload);
+			} else if (data.type === "notification") {
+				updateNotifications(data.payload);
+			}
+		};
+
+		socket.onclose = function() {
+			console.warn("WebSocket disconnected. Reconnecting in 5 seconds...");
+			setTimeout(connectWebSocket, 5000);
+		};
+
+		socket.onerror = function(err) {
+			console.error("WebSocket encountered an error:", err);
+			socket.close();
+		};
+	}
+
+	connectWebSocket();
 
 	// Notifications dropdown logic
     const notificationsBtn = document.getElementById('notifications-btn');
