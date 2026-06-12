@@ -131,6 +131,42 @@ When installing the Python scripts as services, one must provide in a separate f
 Also, in order to automatically restart the services if an error occurs, the user running the services must have rights to run "sudo systemctl restart *.service" without requiring a password.
 The datasets provided by these scripts can be analyzed with the [aq_data_analysis](https://github.com/cristeab/aq_data_analysis) project.
 
+## Configure Nginx as Reverse Proxy
+
+On the RPi5 running Debian 12:
+``` bash
+sudo apt update
+sudo apt install nginx -y
+```
+
+Configure default SSL Certificates
+```bash
+sudo apt install ssl-cert -y
+sudo make-ssl-cert generate-default-snakeoil --force
+```
+
+This automatically populates the default certificates at:
+- Cert: /etc/ssl/certs/ssl-cert-snakeoil.pem
+- Key: /etc/ssl/private/ssl-cert-snakeoil.key
+
+Install Nginx Configuration:
+``` bash
+sudo cp services/nginx_aq_dashboard.conf /etc/nginx/sites-available/aq_dashboard
+sudo ln -s /etc/nginx/sites-available/aq_dashboard /etc/nginx/sites-enabled/
+# Remove default site if not needed
+sudo rm -f /etc/nginx/sites-enabled/default
+```
+
+Verify Nginx and Restart Services
+```bash
+sudo nginx -t
+```
+
+```bash
+sudo systemctl restart nginx
+sudo systemctl restart aq_dashboard
+```
+
 ## Web Server User Interface
 
 Start the server with:
@@ -140,7 +176,7 @@ Start the server with:
     ./aq_dashboard.py
 ```
 
-Access the server at: https://\<server URL\>:8888
+Access the server at: https://\<server URL\>/aqd
 
 <p align="center">
   <img src="screenshots/aq_dashboard.png" alt="Air Quality Dashboard" width="45%">
