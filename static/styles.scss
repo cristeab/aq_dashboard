@@ -60,7 +60,7 @@ body {
   position: relative;
   padding: 1rem 0;
   border-bottom: 1px solid var(--border-color);
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
 
   .header-center {
     display: flex;
@@ -113,8 +113,9 @@ body {
   align-items: center;
   width: 100%;
   box-sizing: border-box;
-  margin: 16px 0 32px;
-  gap: 32px;
+  margin: 12px 0 4px;
+  gap: 16px;
+  overflow: visible;
 
   /* Ensure child elements do not have unintended borders or margins */
   > * {
