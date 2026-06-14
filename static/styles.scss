@@ -411,7 +411,7 @@ body {
     top: 2.5rem;
     right: 0;
     width: 320px;
-    max-height: 350px; /* Limit height so it doesn't overflow the viewport */
+    max-height: 560px; /* Show roughly 7 notification rows on desktop */
     overflow-y: auto;   /* Enable vertical scrolling */
     background-color: var(--card-background-color);
     backdrop-filter: blur(16px);
@@ -461,7 +461,7 @@ body {
       left: 50%;
       right: auto;
       width: min(320px, calc(100vw - 32px));
-      max-height: min(175px, calc(50vh - 16px));
+      max-height: min(305px, calc(100vh - 32px));
       transform: translateX(-50%);
     }
   }
