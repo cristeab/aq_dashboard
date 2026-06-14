@@ -461,7 +461,7 @@ body {
       left: 50%;
       right: auto;
       width: min(320px, calc(100vw - 32px));
-      max-height: calc(100vh - 32px);
+      max-height: min(175px, calc(50vh - 16px));
       transform: translateX(-50%);
     }
   }
