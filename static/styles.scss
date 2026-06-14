@@ -56,11 +56,13 @@ body {
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  max-width: 600px;
   box-sizing: border-box;
   position: relative;
   padding: 1rem 0;
   border-bottom: 1px solid var(--border-color);
   margin-bottom: 0;
+  z-index: 20;
 
   .header-center {
     display: flex;
@@ -85,11 +87,11 @@ body {
   .header-right {
     position: absolute;
     right: 0;
-    top: 50%;
-    transform: translateY(-50%);
+    bottom: 0.45rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 30;
   }
 
   @media (max-width: 600px) {
@@ -382,6 +384,7 @@ body {
 /* Notification styles */
 .notifications-container {
   position: relative;
+  z-index: 2000;
 
   .notifications-btn {
     background: none;
@@ -417,7 +420,7 @@ body {
     border: 1px solid var(--border-color);
     border-radius: 12px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-    z-index: 1000;
+    z-index: 2000;
 
     /* Custom thin scrollbar to keep it premium */
     &::-webkit-scrollbar {
