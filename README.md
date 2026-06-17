@@ -20,7 +20,7 @@ flowchart LR
         s9["Corentium Home 2<br>(Radon)"]
     end
 
-    subgraph WK["Workers<br>(1 process per sensor)"]
+    subgraph WK["Workers (one process per sensor)"]
         direction TB
         w1[dust_sensor.py]
         w2[noise_sensor.py]
@@ -33,6 +33,14 @@ flowchart LR
         w9[radon_sensor.py]
     end
 
+    subgraph DB["InfluxDB"]
+      dustdb[("dust")]
+      sounddb[("sound")]
+      climatedb[("climate")]
+      lightdb[("light")]
+      gasdb[("gas")]
+    end
+
     s1 --> w1
     s2 --> w2
     s3 --> w3
@@ -43,17 +51,17 @@ flowchart LR
     s8 --> w8
     s9 --> w9
 
-    w1 --> dustdb[("dust")]
-    w2 --> sounddb[("sound")]
-    w3 --> climatedb[("climate")]
-    w4 --> lightdb[("light")]
-    w5 --> gasdb[("gas")]
+    w1 --> dustdb
+    w2 --> sounddb
+    w3 --> climatedb
+    w4 --> lightdb
+    w5 --> gasdb
     w6 --> gasdb
     w7 --> gasdb
     w8 --> gasdb
     w9 --> gasdb
 
-    dustdb --> ws[Web Server]
+    dustdb --> ws["Web Server<br>(aq_dashboard.py)"]
     sounddb --> ws
     climatedb --> ws
     lightdb --> ws
