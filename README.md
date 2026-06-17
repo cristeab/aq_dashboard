@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The [**software component**](INSTALL.md) of the kit is a web server based on FastAPI Python package for displaying in real time the Air Quality Index (AQI),
+The [**software component**](INSTALL.md) of the kit includes a web server based on FastAPI Python package for displaying in real time the Air Quality Index (AQI),
 as well as the particle concentration for different particle diameters. Other air pollutants (Total Volatile Organic Compounds, Nitrate Oxides, Carbon Dioxide, etc) and
 environmental parameters (Temperature, Pressure, Relative Humidity, Noise Level, etc) are also shown. The data is read from different sensors and stored into a local database
 before being delivered over websockets periodically to the web page shown in a web browser.
