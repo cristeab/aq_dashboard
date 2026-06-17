@@ -5,6 +5,11 @@ as well as the particle concentration for different particle diameters. Other ai
 environmental parameters (Temperature, Pressure, Relative Humidity, Noise Level, etc) are also shown. The data is read from different sensors and stored into a local database
 before being delivered over websockets periodically to the web page shown in a web browser.
 
+```mermaid
+flowchart TB
+Sensors --> wk[Workers] --> if[(Influx DB)] --> bw[Browser]
+```
+
 The hardware component relies on a Raspberry Pi as the main processing unit and is designed such that sensors can be easily added, replaced or removed.
 
 ## Software Prerequisites
