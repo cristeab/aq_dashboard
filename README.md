@@ -6,8 +6,8 @@ environmental parameters (Temperature, Pressure, Relative Humidity, Noise Level,
 before being delivered over websockets periodically to the web page shown in a web browser.
 
 ```mermaid
-flowchart TB
-Sensors --> wk[Workers] --> if[(Influx DB)] --> bw[Browser]
+flowchart LR
+Sensors --> wk["Workers<br>(1 process/sensor)"] --> if[(Influx DB)] --> ws[Web Server] --> rp["Reverse Proxy<br>(Nginx)"] --> bw[Browser]
 ```
 
 The hardware component relies on a Raspberry Pi as the main processing unit and is designed such that sensors can be easily added, replaced or removed.
