@@ -75,8 +75,6 @@ flowchart LR
 
 The hardware component relies on a Raspberry Pi as the main processing unit and is designed such that sensors can be easily added, replaced or removed.
 
-[Installation instructions](INSTALL.md)
-
 ## User Interface
 
 <p align="center">
@@ -143,6 +141,8 @@ Particle Count Measurements (from PMSA007 sensors):
 -	PM10+(0.1L) Number of particles larger than 10 microns per 0.1 liter of air
 
 The notification list shown in the right image is sorted by timestamp in descending order and can be accessed by clicking the bell icon.
+
+[Installation instructions](INSTALL.md)
 
 ## Bill of Materials
 
