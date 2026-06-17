@@ -7,7 +7,60 @@ before being delivered over websockets periodically to the web page shown in a w
 
 ```mermaid
 flowchart LR
-Sensors --> wk["Workers<br>(1 process/sensor)"] --> if[(Influx DB)] --> ws[Web Server] --> rp["Reverse Proxy<br>(Nginx)"] --> bw[Browser]
+    subgraph SENS["Sensors (Hardware)"]
+        direction TB
+        s1["2x PMSA003<br>(Dust)"]
+        s2["ReSpeaker Lite<br>(Noise)"]
+        s3["BME688<br>(Temp/Humidity/<br>Pressure/Gas)"]
+        s4["LTR390<br>(Light/UV)"]
+        s5["SCD41<br>(CO2)"]
+        s6["ZMOD4510<br>(O3/NO2)"]
+        s7["ZE07<br>(CO)"]
+        s8["SGP41<br>(TVOC/NOx)"]
+        s9["Corentium Home 2<br>(Radon)"]
+    end
+
+    subgraph WK["Workers<br>(1 process per sensor)"]
+        direction TB
+        w1[dust_sensor.py]
+        w2[noise_sensor.py]
+        w3[ambient_sensor.py]
+        w4[light_sensor.py]
+        w5[carbon_dioxide_sensor.py]
+        w6[o3_no2_sensor.py]
+        w7[co_sensor.py]
+        w8[voc_nox_sensor.py]
+        w9[radon_sensor.py]
+    end
+
+    s1 --> w1
+    s2 --> w2
+    s3 --> w3
+    s4 --> w4
+    s5 --> w5
+    s6 --> w6
+    s7 --> w7
+    s8 --> w8
+    s9 --> w9
+
+    w1 --> dustdb[("dust")]
+    w2 --> sounddb[("sound")]
+    w3 --> climatedb[("climate")]
+    w4 --> lightdb[("light")]
+    w5 --> gasdb[("gas")]
+    w6 --> gasdb
+    w7 --> gasdb
+    w8 --> gasdb
+    w9 --> gasdb
+
+    dustdb --> ws[Web Server]
+    sounddb --> ws
+    climatedb --> ws
+    lightdb --> ws
+    gasdb --> ws
+
+    ws -- websockets --> rp["Reverse Proxy<br>(Nginx)"]
+    rp -- websockets --> bw[Browser]
 ```
 
 The hardware component relies on a Raspberry Pi as the main processing unit and is designed such that sensors can be easily added, replaced or removed.
@@ -129,6 +182,21 @@ Several Python scripts must be started to read data from sensors and write the d
 ```bash
     export INFLUXDB3_AUTH_TOKEN="<token>"
     ./co_sensor.py /dev/ttyACM0
+```
+
+- `voc_nox_sensor.py`: Reads the Total Volatile Organic Compounds (TVOC) index and the Nitrate Oxides (NOx) index from a Sensirion SGP41 sensor (I2C) and writes it to the database.
+
+```bash
+    export INFLUXDB3_AUTH_TOKEN="<token>"
+    ./voc_nox_sensor.py
+```
+
+- `radon_sensor.py`: Reads the Radon gas concentration in Bq/m3 from an Airthings Corentium Home 2 sensor over Bluetooth Low Energy and writes it to the database. The device's Bluetooth MAC address must be provided via the `AIRTHINGS_DEVICE_MAC` environment variable.
+
+```bash
+    export INFLUXDB3_AUTH_TOKEN="<token>"
+    export AIRTHINGS_DEVICE_MAC="<mac address>"
+    ./radon_sensor.py
 ```
 
 The scripts print in the standard output the current data read from the sensors and can be installed as services using the `services/manage_services.sh` script.
