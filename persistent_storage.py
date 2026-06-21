@@ -101,12 +101,26 @@ class PersistentStorage:
         )
         self._write(self.Database.Dust, point)
 
-    def write_sound_pressure_level(self, timestamp, spl):
+    def write_sound_pressure_level(self, timestamp, spl, diagnostics: Dict = None):
+        """Write the calibrated sound pressure level, plus optional diagnostic
+        fields from NoiseDetector (la90_raw, baseline, offset, is_transient,
+        in_quiet_hours, night_reference, is_night_anomaly) so that nighttime
+        anomalies can be audited after the fact instead of only seeing the
+        final calibrated number."""
         point = (
             Point(self.Point.Sound.value)
             .time(timestamp)
             .field("sound_pressure_level", spl)
         )
+        if diagnostics:
+            for key in ("la90_raw", "baseline", "offset", "night_reference"):
+                value = diagnostics.get(key)
+                if value is not None:
+                    point = point.field(key, float(value))
+            for key in ("is_transient", "in_quiet_hours", "is_night_anomaly"):
+                value = diagnostics.get(key)
+                if value is not None:
+                    point = point.field(key, bool(value))
         self._write(self.Database.Sound, point)
 
     def write_ambient_data(self, timestamp, temperature, gas, relative_humidity, pressure, iaq):
