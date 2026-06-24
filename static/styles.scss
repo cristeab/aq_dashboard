@@ -91,6 +91,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 8px;
     z-index: 30;
   }
 
@@ -470,3 +471,45 @@ body {
     display: none;
   }
 }
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.2s, transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+
+  &:hover {
+    background-color: rgba(128, 128, 128, 0.15);
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  .sun-icon {
+    display: none;
+  }
+  .moon-icon {
+    display: block;
+  }
+}
+
+body.dark-theme {
+  .theme-toggle-btn {
+    .sun-icon {
+      display: block;
+    }
+    .moon-icon {
+      display: none;
+    }
+  }
+}
+

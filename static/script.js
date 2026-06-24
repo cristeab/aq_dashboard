@@ -24,6 +24,8 @@ const dummyData = {
 	co: "0"
 };
 
+let currentData = dummyData;
+
 // Get the canvas element
 const canvas = document.getElementById("aqi-arc");
 const ctx = canvas.getContext("2d");
@@ -71,7 +73,7 @@ function drawTickMark(aqi) {
     const outerTickY = centerY + (radius + 10) * Math.sin(angle);
 
     // Get the tick mark color from CSS variables
-    const tickMarkColor = getComputedStyle(document.documentElement).getPropertyValue('--tick-mark-color');
+    const tickMarkColor = getComputedStyle(document.body).getPropertyValue('--tick-mark-color');
 
     // Draw tick mark
     ctx.beginPath();
@@ -150,6 +152,7 @@ function updateElementPrecisionVisibility(elementId, value, unit = "", precision
 // Function to update the UI with sensor data
 function updateDashboard(data)
 {
+	currentData = data;
 	// Update date-time
 	updateElementVisibility("date-time", data.timestamp);
 
@@ -234,12 +237,40 @@ function updateNotifications(notifications) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    // Hard-coded variable to set the theme
-    const useDarkTheme = true; // Change this to false for light theme
-    if (useDarkTheme) {
-        document.body.classList.add('dark-theme');
-    } else {
-        document.body.classList.remove('dark-theme');
+    // Theme handling logic
+    const themeToggleBtn = document.getElementById('theme-toggle-btn');
+    
+    function getPreferredTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            return savedTheme;
+        }
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    function setTheme(theme) {
+        if (theme === 'dark') {
+            document.body.classList.add('dark-theme');
+        } else {
+            document.body.classList.remove('dark-theme');
+        }
+        localStorage.setItem('theme', theme);
+        // Redraw AQI to update the tick mark color with the new theme colors
+        if (currentData) {
+            updateAQI(currentData.aqi);
+        }
+    }
+
+    // Initialize theme
+    const initialTheme = getPreferredTheme();
+    setTheme(initialTheme);
+
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', function() {
+            const currentTheme = document.body.classList.contains('dark-theme') ? 'dark' : 'light';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
     }
 
 	drawArc();
