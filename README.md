@@ -142,6 +142,8 @@ Particle Count Measurements (from PMSA007 sensors):
 
 The notification list shown in the right image is sorted by timestamp in descending order and can be accessed by clicking the bell icon.
 
+The UI theme can be toggled between dark and light using the button on the left of the notifications button. 
+
 ## Reference
 
 https://cristeab.medium.com/building-an-air-quality-monitoring-station-ba74098f0528
