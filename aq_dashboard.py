@@ -99,16 +99,20 @@ async def websocket_endpoint(websocket: WebSocket):
                     notifier.check_thresholds_and_alert("temperature", ambient_data["temperature"], ts, ambient_data["time"])
                     notifier.check_thresholds_and_alert("relative_humidity", ambient_data["relative_humidity"], ts, ambient_data["time"])
                     notifier.check_thresholds_and_alert("pressure", ambient_data["pressure"], ts, ambient_data["time"])
+                    if ambient_data.get("thom_discomfort_index") is not None:
+                        payload = payload | {"thom_discomfort_index": ambient_data["thom_discomfort_index"]}
+                        notifier.check_thresholds_and_alert("thom_discomfort_index", ambient_data["thom_discomfort_index"], ts, ambient_data["time"])
                     is_data_missing = False
                 except Exception as e:
                     logger.error(f"Error processing ambient data: {e}")
             if is_data_missing:
-                if notifier.send_missing_data_alert_if_due("temperature, relative_humidity, gas, iaq_index"):
+                if notifier.send_missing_data_alert_if_due("temperature, relative_humidity, gas, iaq_index, thom_discomfort_index"):
                     notifier.remove_data_alert("temperature")
                     notifier.remove_data_alert("relative_humidity")
                     notifier.remove_data_alert("pressure")
+                    notifier.remove_data_alert("thom_discomfort_index")
             else:
-                notifier.remove_data_alert("temperature, relative_humidity, gas, iaq_index")
+                notifier.remove_data_alert("temperature, relative_humidity, gas, iaq_index, thom_discomfort_index")
             # Light
             is_data_missing = True
             light_data = storage.read_light_data()

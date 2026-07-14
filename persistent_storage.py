@@ -124,7 +124,7 @@ class PersistentStorage:
                     point = point.field(key, bool(value))
         self._write(self.Database.Sound, point)
 
-    def write_ambient_data(self, timestamp, temperature, gas, relative_humidity, pressure, iaq):
+    def write_ambient_data(self, timestamp, temperature, gas, relative_humidity, pressure, iaq, thom_discomfort_index=None):
         point = (
             Point(self.Point.BME688.value)
             .time(timestamp)
@@ -139,6 +139,8 @@ class PersistentStorage:
             .field("relative_humidity", relative_humidity)
             .field("pressure", pressure)
         )
+        if thom_discomfort_index is not None:
+            point = point.field("thom_discomfort_index", thom_discomfort_index)
         self._write(self.Database.Climate, point)
 
     def write_light_data(self, timestamp, visible_light_lux, uv_index):

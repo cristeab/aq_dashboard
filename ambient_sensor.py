@@ -18,7 +18,8 @@ while True:
         humidity = data['humidity']
         pressure = data['pressure']
         iaq = data['iaq']
-        persistent_storage.write_ambient_data(timestamp, temperature, gas, humidity, pressure, iaq)
+        thom_discomfort_index = data['thom_discomfort_index']
+        persistent_storage.write_ambient_data(timestamp, temperature, gas, humidity, pressure, iaq, thom_discomfort_index)
 
-        print(f'{monitor.elapsed_time}, Temperature: {temperature:.1f} C, Humidity: {humidity:.1f} %, Pressure: {pressure:.1f} hPa, Gas: {gas} ohms, IAQ: {iaq:.1f}', flush=True)
+        print(f'{monitor.elapsed_time}, Temperature: {temperature:.1f} C, Humidity: {humidity:.1f} %, Pressure: {pressure:.1f} hPa, Gas: {gas} ohms, IAQ: {iaq:.1f}, Thom Discomfort Index: {thom_discomfort_index:.1f}', flush=True)
     time.sleep(SLEEP_DURATION_SECONDS)
