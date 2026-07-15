@@ -101,15 +101,30 @@ class PersistentStorage:
         )
         self._write(self.Database.Dust, point)
 
-    def write_sound_pressure_level(self, timestamp, spl):
+    def write_sound_pressure_level(self, timestamp, spl, diagnostics: Dict = None):
+        """Write the calibrated sound pressure level, plus optional diagnostic
+        fields from NoiseDetector (la90_raw, baseline, offset,
+        offset_saturation_pct, is_transient, in_quiet_hours, night_reference,
+        is_night_anomaly) so that nighttime anomalies and calibration health
+        can be audited after the fact instead of only seeing the final
+        calibrated number."""
         point = (
             Point(self.Point.Sound.value)
             .time(timestamp)
             .field("sound_pressure_level", spl)
         )
+        if diagnostics:
+            for key in ("la90_raw", "baseline", "offset", "offset_saturation_pct", "night_reference"):
+                value = diagnostics.get(key)
+                if value is not None:
+                    point = point.field(key, float(value))
+            for key in ("is_transient", "in_quiet_hours", "is_night_anomaly"):
+                value = diagnostics.get(key)
+                if value is not None:
+                    point = point.field(key, bool(value))
         self._write(self.Database.Sound, point)
 
-    def write_ambient_data(self, timestamp, temperature, gas, relative_humidity, pressure, iaq):
+    def write_ambient_data(self, timestamp, temperature, gas, relative_humidity, pressure, iaq, thom_discomfort_index=None):
         point = (
             Point(self.Point.BME688.value)
             .time(timestamp)
@@ -124,6 +139,8 @@ class PersistentStorage:
             .field("relative_humidity", relative_humidity)
             .field("pressure", pressure)
         )
+        if thom_discomfort_index is not None:
+            point = point.field("thom_discomfort_index", thom_discomfort_index)
         self._write(self.Database.Climate, point)
 
     def write_light_data(self, timestamp, visible_light_lux, uv_index):

@@ -164,6 +164,41 @@ class EnvAlertNotifier:
                 }
             ]
         },
+        "thom_discomfort_index": {
+            # Thom (1959) Discomfort Index bands, DI = T - 0.55*(1 - RH/100)*(T - 14.5)
+            "intervals": [
+                {
+                    "min": -50, "max": 21,
+                    "name": "no_discomfort",
+                    "description": "No discomfort - comfortable temperature/humidity combination"
+                },
+                {
+                    "min": 21, "max": 24,
+                    "name": "mild",
+                    "description": "Under 50% of people feel discomfort"
+                },
+                {
+                    "min": 24, "max": 27,
+                    "name": "moderate",
+                    "description": "Over 50% of people feel discomfort"
+                },
+                {
+                    "min": 27, "max": 29,
+                    "name": "high",
+                    "description": "Most people suffer discomfort"
+                },
+                {
+                    "min": 29, "max": 32,
+                    "name": "severe",
+                    "description": "Everyone feels heat stress"
+                },
+                {
+                    "min": 32, "max": 100,
+                    "name": "emergency",
+                    "description": "Thom's medical emergency level - immediate cooling/ventilation advised"
+                }
+            ]
+        },
         "noise": {
             "intervals": [
                 {
@@ -455,7 +490,7 @@ class EnvAlertNotifier:
     SERVICE_RESTARTS = {
         "aqi": "dust_sensor.service",
         "noise": "noise_sensor.service",
-        "temperature, relative_humidity, gas, iaq_index": "ambient_sensor.service",
+        "temperature, relative_humidity, gas, iaq_index, thom_discomfort_index": "ambient_sensor.service",
         "visible_light": "light_sensor.service",
         "co2": "carbon_dioxide_sensor.service",
         "voc_index, nox_index": "voc_nox_sensor.service",
@@ -493,6 +528,7 @@ class EnvAlertNotifier:
             "temperature": "°C",
             "relative_humidity": "%",
             "pressure": "hPa",
+            "thom_discomfort_index": "°C",
             "noise": "dB",
             "visible_light": "lux",
             "co2": "ppm",
@@ -582,6 +618,8 @@ class EnvAlertNotifier:
             return "NO2"
         elif "co" == key:
             return "CO"
+        elif "thom_discomfort_index" == key:
+            return "Thom Discomfort Index"
         return key.replace('_', ' ').title()
 
     def get_notifications(self):
