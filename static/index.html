@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Air Quality Dashboard</title>
+        <title data-i18n="title">Air Quality Dashboard</title>
         <link rel="stylesheet" href="static/styles.css">
         <link rel="icon" href="data:,">
     </head>
@@ -11,11 +11,22 @@
         <div class="dashboard">
             <div class="header">
                 <div class="header-center">
-                    <h1>Air Quality Dashboard</h1>
+                    <h1 data-i18n="header_title">Air Quality Dashboard</h1>
                     <p id="date-time"></p>
                 </div>
                 <div class="header-right">
-                    <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle Theme">
+                    <div class="language-container">
+                        <button id="language-btn" class="language-btn" title="Select Language" data-i18n-title="select_language">
+                            <span id="language-active-code">EN</span>
+                        </button>
+                        <div id="language-dropdown" class="language-dropdown hidden">
+                            <button class="language-option" data-lang="en">English</button>
+                            <button class="language-option" data-lang="ro">Română</button>
+                            <button class="language-option" data-lang="fr">Français</button>
+                            <button class="language-option" data-lang="de">Deutsch</button>
+                        </div>
+                    </div>
+                    <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle Theme" data-i18n-title="theme_toggle_title">
                         <!-- Sun icon (shown in dark theme to switch to light) -->
                         <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="4"></circle>
@@ -34,7 +45,7 @@
                         </svg>
                     </button>
                     <div class="notifications-container">
-                        <button id="notifications-btn" class="notifications-btn" title="Notifications">
+                        <button id="notifications-btn" class="notifications-btn" title="Notifications" data-i18n-title="notifications_title">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                                 <path d="M12 22c1.1 0 2-.9 2-2h-4a2 2 0 0 0 2 2zm6-6V11c0-3.07-1.63-5.64-4.5-6.32V4a1.5 1.5 0 0 0-3 0v.68C7.63 5.36 6 7.92 6 11v5l-1.29 1.29A1 1 0 0 0 6 19h12a1 1 0 0 0 .71-1.71L18 16z" fill="#fff"/>
                             </svg>
@@ -99,7 +110,7 @@
                 <div class="aqi-display">
                     <canvas id="aqi-arc" width="240" height="240"></canvas>
                     <div class="aqi-value">
-                        <p>10-min. AQI</p>
+                        <p data-i18n="aqi_10min">10-min. AQI</p>
                         <h1 id="aqi-value">N/A</h1>
                         <p id="aqi-label"></p>
                     </div>
@@ -197,8 +208,8 @@
             </div>
             <!-- Footer -->
             <footer class="footer">
-                Data from 2 AQ dust sensors | Updated every 3 seconds<br>
-                <div class="centered-text">Project hosted on <a href="https://github.com/cristeab/aq_dashboard" target="_blank">GitHub</a></div>
+                <span data-i18n="footer_text">Data from 2 AQ dust sensors | Updated every 3 seconds</span><br>
+                <div class="centered-text"><span data-i18n="footer_project_link">Project hosted on</span> <a href="https://github.com/cristeab/aq_dashboard" target="_blank">GitHub</a></div>
             </footer>
         </div>
         <!-- JavaScript -->

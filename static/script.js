@@ -28,6 +28,88 @@ let currentData = dummyData;
 let currentNotifications = [];
 const seenNotifications = new Set();
 
+const translations = {
+    en: {
+        title: "Air Quality Dashboard",
+        header_title: "Air Quality Dashboard",
+        theme_toggle_title: "Toggle Theme",
+        notifications_title: "Notifications",
+        no_notifications: "No notifications",
+        aqi_10min: "10-min. AQI",
+        footer_text: "Data from 2 AQ dust sensors | Updated every 3 seconds",
+        footer_project_link: "Project hosted on",
+        aqi_good: "Good",
+        aqi_moderate: "Moderate",
+        aqi_unhealthy_sensitive: "Unhealthy for Sensitive Groups",
+        aqi_unhealthy: "Unhealthy",
+        aqi_very_unhealthy: "Very Unhealthy",
+        aqi_hazardous: "Hazardous",
+        na: "N/A",
+        select_language: "Select Language"
+    },
+    ro: {
+        title: "Panou Calitate Aer",
+        header_title: "Panou Calitate Aer",
+        theme_toggle_title: "Schimbă Tema",
+        notifications_title: "Notificări",
+        no_notifications: "Nu există notificări",
+        aqi_10min: "AQI pe 10 min.",
+        footer_text: "Date de la 2 senzori de praf AQ | Actualizat la fiecare 3 secunde",
+        footer_project_link: "Proiect găzduit pe",
+        aqi_good: "Excelent",
+        aqi_moderate: "Moderat",
+        aqi_unhealthy_sensitive: "Nerecomandat pentru grupuri sensibile",
+        aqi_unhealthy: "Nociv",
+        aqi_very_unhealthy: "Foarte nociv",
+        aqi_hazardous: "Periculos",
+        na: "N/D",
+        select_language: "Selectează limba"
+    },
+    fr: {
+        title: "Tableau de Bord Qualité de l'Air",
+        header_title: "Tableau de Bord Qualité de l'Air",
+        theme_toggle_title: "Changer de Thème",
+        notifications_title: "Notifications",
+        no_notifications: "Aucune notification",
+        aqi_10min: "IQA de 10 min.",
+        footer_text: "Données de 2 capteurs de poussière AQ | Mis à jour toutes les 3 secondes",
+        footer_project_link: "Projet hébergé sur",
+        aqi_good: "Bon",
+        aqi_moderate: "Modéré",
+        aqi_unhealthy_sensitive: "Mauvais pour les groupes sensibles",
+        aqi_unhealthy: "Mauvais",
+        aqi_very_unhealthy: "Très mauvais",
+        aqi_hazardous: "Dangereux",
+        na: "N/D",
+        select_language: "Choisir la langue"
+    },
+    de: {
+        title: "Luftqualitäts-Dashboard",
+        header_title: "Luftqualitäts-Dashboard",
+        theme_toggle_title: "Design umschalten",
+        notifications_title: "Benachrichtigungen",
+        no_notifications: "Keine Benachrichtigungen",
+        aqi_10min: "10-Min. AQI",
+        footer_text: "Daten von 2 AQ-Staubsenoren | Alle 3 Sekunden aktualisiert",
+        footer_project_link: "Projekt gehostet auf",
+        aqi_good: "Gut",
+        aqi_moderate: "Mäßig",
+        aqi_unhealthy_sensitive: "Ungesund für empfindliche Gruppen",
+        aqi_unhealthy: "Ungesund",
+        aqi_very_unhealthy: "Sehr ungesund",
+        aqi_hazardous: "Gefährlich",
+        na: "N/A",
+        select_language: "Sprache auswählen"
+    }
+};
+
+let currentLanguage = localStorage.getItem('language') || 'en';
+
+function t(key) {
+    const lang = currentLanguage || 'en';
+    return (translations[lang] && translations[lang][key]) || (translations['en'] && translations['en'][key]) || key;
+}
+
 // Get the canvas element
 const canvas = document.getElementById("aqi-arc");
 const ctx = canvas.getContext("2d");
@@ -39,12 +121,12 @@ const radius = 80;
 
 // Define colors & labels based on AQI ranges
 const aqiRanges = [
-	{ max: 50, color: '#00E400', label: 'Good' },
-	{ max: 100, color: '#FFFF00', label: 'Moderate' },
-	{ max: 150, color: '#FF7E00', label: 'Unhealthy for Sensitive Groups' },
-	{ max: 200, color: '#FF0000', label: 'Unhealthy' },
-	{ max: 300, color: '#8F3F97', label: 'Very Unhealthy' },
-	{ max: 500, color: '#7E0023', label: 'Hazardous' }
+	{ max: 50, color: '#00E400', labelKey: 'aqi_good' },
+	{ max: 100, color: '#FFFF00', labelKey: 'aqi_moderate' },
+	{ max: 150, color: '#FF7E00', labelKey: 'aqi_unhealthy_sensitive' },
+	{ max: 200, color: '#FF0000', labelKey: 'aqi_unhealthy' },
+	{ max: 300, color: '#8F3F97', labelKey: 'aqi_very_unhealthy' },
+	{ max: 500, color: '#7E0023', labelKey: 'aqi_hazardous' }
 ];
 
 // Draw the colored arc
@@ -114,7 +196,7 @@ function addAQILabels()
 function getLabelForAQI(aqi)
 {
 	const range = aqiRanges.find(range => aqi <= range.max);
-	return range ? range.label : 'N/A';
+	return range ? t(range.labelKey) : t('na');
 }
 
 // Function to update AQI
@@ -219,7 +301,7 @@ function updateNotifications(notifications) {
     if (currentNotifications.length === 0) {
         const emptyItem = document.createElement('div');
         emptyItem.className = 'notification-item';
-        emptyItem.textContent = "No notifications";
+        emptyItem.textContent = t('no_notifications');
         notificationsList.appendChild(emptyItem);
 
         // Hide the red dot
@@ -287,9 +369,54 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+    function updateLanguage(lang) {
+        currentLanguage = lang;
+        localStorage.setItem('language', lang);
+        document.documentElement.lang = lang;
+
+        // Update active class in dropdown options
+        document.querySelectorAll('.language-option').forEach(btn => {
+            if (btn.getAttribute('data-lang') === lang) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+
+        // Update active code display on button
+        const activeCodeEl = document.getElementById('language-active-code');
+        if (activeCodeEl) {
+            activeCodeEl.textContent = lang.toUpperCase();
+        }
+
+        // Translate elements with data-i18n attribute
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            el.textContent = t(key);
+        });
+
+        // Translate title attribute of elements with data-i18n-title attribute
+        document.querySelectorAll('[data-i18n-title]').forEach(el => {
+            const key = el.getAttribute('data-i18n-title');
+            el.setAttribute('title', t(key));
+        });
+
+        // Explicitly update document title
+        document.title = t('title');
+
+        // Force update of AQI text and notifications with the new language text
+        if (currentData) {
+            updateAQI(currentData.aqi);
+        }
+        updateNotifications(currentNotifications);
+    }
+
     // Initialize theme
     const initialTheme = getPreferredTheme();
     setTheme(initialTheme);
+
+    // Initialize language
+    updateLanguage(currentLanguage);
 
     if (themeToggleBtn) {
         themeToggleBtn.addEventListener('click', function() {
@@ -339,10 +466,18 @@ document.addEventListener("DOMContentLoaded", function() {
 	// Notifications dropdown logic
     const notificationsBtn = document.getElementById('notifications-btn');
     const notificationsList = document.getElementById('notifications-list');
+    const languageBtn = document.getElementById('language-btn');
+    const languageDropdown = document.getElementById('language-dropdown');
+
     if (notificationsBtn && notificationsList) {
         notificationsBtn.addEventListener('click', function(e) {
             notificationsList.classList.toggle('hidden');
             
+            // Close language dropdown if open
+            if (languageDropdown) {
+                languageDropdown.classList.add('hidden');
+            }
+
             // Mark all current notifications as seen
             currentNotifications.forEach(n => {
                 const key = `${n.parameter}-${n.timestamp}-${n.message}`;
@@ -363,5 +498,34 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
 		updateNotifications([]); // Initialize with empty notifications
+    }
+
+    // Language selection dropdown logic
+    if (languageBtn && languageDropdown) {
+        languageBtn.addEventListener('click', function(e) {
+            languageDropdown.classList.toggle('hidden');
+            
+            // Close notifications list if open
+            if (notificationsList) {
+                notificationsList.classList.add('hidden');
+            }
+
+            e.stopPropagation();
+        });
+
+        document.querySelectorAll('.language-option').forEach(option => {
+            option.addEventListener('click', function(e) {
+                const lang = this.getAttribute('data-lang');
+                updateLanguage(lang);
+                languageDropdown.classList.add('hidden');
+                e.stopPropagation();
+            });
+        });
+
+        document.addEventListener('click', function(event) {
+            if (!languageBtn.contains(event.target) && !languageDropdown.contains(event.target)) {
+                languageDropdown.classList.add('hidden');
+            }
+        });
     }
 });
