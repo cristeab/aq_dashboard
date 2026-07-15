@@ -16,10 +16,7 @@ flowchart LR
         s3["BME688<br>(Temp/Humidity/<br>Pressure/Gas)"]
         s4["LTR390<br>(Light/UV)"]
         s5["SCD41<br>(CO2)"]
-        s6["ZMOD4510<br>(O3/NO2)"]
-        s7["ZE07<br>(CO)"]
-        s8["SGP41<br>(TVOC/NOx)"]
-        s9["Corentium Home 2<br>(Radon)"]
+        sdots["⋮"]
     end
 
     subgraph WK["Workers (one process per sensor)"]
@@ -29,10 +26,7 @@ flowchart LR
         w3[ambient_sensor.py]
         w4[light_sensor.py]
         w5[carbon_dioxide_sensor.py]
-        w6[o3_no2_sensor.py]
-        w7[co_sensor.py]
-        w8[voc_nox_sensor.py]
-        w9[radon_sensor.py]
+        wdots["⋮"]
     end
 
     subgraph DB["InfluxDB"]
@@ -48,20 +42,12 @@ flowchart LR
     s3 --> w3
     s4 --> w4
     s5 --> w5
-    s6 --> w6
-    s7 --> w7
-    s8 --> w8
-    s9 --> w9
 
     w1 --> dustdb
     w2 --> sounddb
     w3 --> climatedb
     w4 --> lightdb
     w5 --> gasdb
-    w6 --> gasdb
-    w7 --> gasdb
-    w8 --> gasdb
-    w9 --> gasdb
 
     dustdb --> ws["Web Server<br>(aq_dashboard.py)"]
     sounddb --> ws
@@ -71,6 +57,9 @@ flowchart LR
 
     ws -- websockets --> rp["Reverse Proxy<br>(Nginx)"]
     rp -- websockets --> bw[Browser]
+
+    style sdots fill:none,stroke:none
+    style wdots fill:none,stroke:none
 ```
 
 The [**hardware component**](BOM.md) relies on a Raspberry Pi as the main processing unit and is designed such that sensors can be easily added, replaced or removed.
