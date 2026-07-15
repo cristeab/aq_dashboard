@@ -8,7 +8,7 @@ environmental parameters (Temperature, Pressure, Relative Humidity, Noise Level,
 before being delivered over websockets periodically to the web page shown in a web browser.
 
 ```mermaid
-flowchart LR
+flowchart TB
     subgraph SENS["Sensors (Hardware)"]
         direction TB
         s1["2x PMSA003<br>(Dust)"]
