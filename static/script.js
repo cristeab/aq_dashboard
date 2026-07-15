@@ -188,6 +188,7 @@ function updateDashboard(data)
 
 	updateElementPrecisionVisibility("temp-value", data.temperature, "°C");
 	updateElementPrecisionVisibility("humidity-value", data.relative_humidity, "%");
+	updateElementPrecisionVisibility("heat-index-value", data.thom_discomfort_index, "°C");
 	updateElementPrecisionVisibility("pressure-value", data.pressure, "hPa");
 	updateElementPrecisionVisibility("noise-value", data.noise, "dB");
 	updateElementPrecisionVisibility("visible-light-lux-value", data.visible_light_lux, "lux");
