@@ -10,26 +10,27 @@ before being delivered over websockets periodically to the web page shown in a w
 ```mermaid
 flowchart TB
     subgraph SENS["Sensors (Hardware)"]
-        direction TB
+        direction LR
         s1["2x PMSA003<br>(Dust)"]
         s2["ReSpeaker Lite<br>(Noise)"]
         s3["BME688<br>(Temp/Humidity/<br>Pressure/Gas)"]
         s4["LTR390<br>(Light/UV)"]
         s5["SCD41<br>(CO2)"]
-        sdots["⋮"]
+        sdots["..."]
     end
 
     subgraph WK["Workers (one process per sensor)"]
-        direction TB
+        direction LR
         w1[dust_sensor.py]
         w2[noise_sensor.py]
         w3[ambient_sensor.py]
         w4[light_sensor.py]
         w5[carbon_dioxide_sensor.py]
-        wdots["⋮"]
+        wdots["..."]
     end
 
     subgraph DB["InfluxDB"]
+      direction LR
       dustdb[("dust")]
       sounddb[("sound")]
       climatedb[("climate")]
@@ -58,8 +59,8 @@ flowchart TB
     ws -- websockets --> rp["Reverse Proxy<br>(Nginx)"]
     rp -- websockets --> bw[Browser]
 
-    style sdots fill:none,stroke:none
-    style wdots fill:none,stroke:none
+    style sdots fill:none,stroke:none,color:#888,font-size:16px
+    style wdots fill:none,stroke:none,color:#888,font-size:16px
 ```
 
 The [**hardware component**](BOM.md) relies on a Raspberry Pi as the main processing unit and is designed such that sensors can be easily added, replaced or removed.
