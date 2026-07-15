@@ -10,7 +10,7 @@ before being delivered over websockets periodically to the web page shown in a w
 ```mermaid
 flowchart TB
     subgraph SENS["Sensors (Hardware)"]
-        direction LR
+        direction TB
         s1["2x PMSA003<br>(Dust)"]
         s2["ReSpeaker Lite<br>(Noise)"]
         s3["BME688<br>(Temp/Humidity/<br>Pressure/Gas)"]
@@ -20,7 +20,7 @@ flowchart TB
     end
 
     subgraph WK["Workers (one process per sensor)"]
-        direction LR
+        direction TB
         w1[dust_sensor.py]
         w2[noise_sensor.py]
         w3[ambient_sensor.py]
@@ -30,7 +30,7 @@ flowchart TB
     end
 
     subgraph DB["InfluxDB"]
-      direction LR
+      direction TB
       dustdb[("dust")]
       sounddb[("sound")]
       climatedb[("climate")]
