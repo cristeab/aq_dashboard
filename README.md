@@ -110,9 +110,11 @@ Right Column Values (Environment Parameters):
 
 -	Relative humidity (amount of moisture in the air) - the normal value is around 40%
 
+- Thom discomfort index in Celsius degrees (below 21 means no discomfort)
+
 -	Atmospheric pressure expressed in hectoPascals
 
--	Noise level in the environment in decibels (below 20 dB would be very quiet)
+-	Noise level in the environment in decibels (around 20 dB would be very quiet)
 
 - Visible light expressed in Lux
 
