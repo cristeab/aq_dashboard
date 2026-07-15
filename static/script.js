@@ -25,6 +25,8 @@ const dummyData = {
 };
 
 let currentData = dummyData;
+let currentNotifications = [];
+const seenNotifications = new Set();
 
 // Get the canvas element
 const canvas = document.getElementById("aqi-arc");
@@ -208,20 +210,28 @@ function updateNotifications(notifications) {
     const notificationsList = document.getElementById('notifications-list');
     if (!notificationsList) return;
 
+    currentNotifications = notifications || [];
+
     // Clear previous notifications
     notificationsList.innerHTML = "";
 
     // If no notifications, show a placeholder
-    if (!notifications || notifications.length === 0) {
+    if (currentNotifications.length === 0) {
         const emptyItem = document.createElement('div');
         emptyItem.className = 'notification-item';
         emptyItem.textContent = "No notifications";
         notificationsList.appendChild(emptyItem);
+
+        // Hide the red dot
+        const dot = document.getElementById('notification-dot');
+        if (dot) {
+            dot.classList.add('hidden');
+        }
         return;
     }
 
     // Add each notification
-    notifications.forEach(n => {
+    currentNotifications.forEach(n => {
         const item = document.createElement('div');
         item.className = 'notification-item';
 
@@ -235,6 +245,21 @@ function updateNotifications(notifications) {
         `;
         notificationsList.appendChild(item);
     });
+
+    // Show red dot if there are any unseen notifications
+    const hasUnseen = currentNotifications.some(n => {
+        const key = `${n.parameter}-${n.timestamp}-${n.message}`;
+        return !seenNotifications.has(key);
+    });
+
+    const dot = document.getElementById('notification-dot');
+    if (dot) {
+        if (hasUnseen) {
+            dot.classList.remove('hidden');
+        } else {
+            dot.classList.add('hidden');
+        }
+    }
 }
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -317,6 +342,19 @@ document.addEventListener("DOMContentLoaded", function() {
     if (notificationsBtn && notificationsList) {
         notificationsBtn.addEventListener('click', function(e) {
             notificationsList.classList.toggle('hidden');
+            
+            // Mark all current notifications as seen
+            currentNotifications.forEach(n => {
+                const key = `${n.parameter}-${n.timestamp}-${n.message}`;
+                seenNotifications.add(key);
+            });
+
+            // Hide the red dot
+            const dot = document.getElementById('notification-dot');
+            if (dot) {
+                dot.classList.add('hidden');
+            }
+
             e.stopPropagation();
         });
         document.addEventListener('click', function(event) {
