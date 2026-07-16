@@ -168,7 +168,12 @@ class EnvAlertNotifier:
             # Thom (1959) Discomfort Index bands, DI = T - 0.55*(1 - RH/100)*(T - 14.5)
             "intervals": [
                 {
-                    "min": -50, "max": 21,
+                    "min": -50, "max": 15,
+                    "name": "cold",
+                    "description": "Cold - cold temperature/humidity combination"
+                },
+                {
+                    "min": 15, "max": 21,
                     "name": "no_discomfort",
                     "description": "No discomfort - comfortable temperature/humidity combination"
                 },
