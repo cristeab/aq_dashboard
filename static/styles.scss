@@ -429,7 +429,7 @@ body {
     position: absolute;
     top: 2.5rem;
     right: 0;
-    width: 320px;
+    width: 360px;
     max-height: 560px; /* Show roughly 7 notification rows on desktop */
     overflow-y: auto;   /* Enable vertical scrolling */
     background-color: var(--card-background-color);
@@ -479,7 +479,7 @@ body {
       top: calc(100% + 8px);
       left: 50%;
       right: auto;
-      width: min(320px, calc(100vw - 32px));
+      width: min(360px, calc(100vw - 32px));
       max-height: min(305px, calc(100vh - 32px));
       transform: translateX(-50%);
     }
