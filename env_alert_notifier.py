@@ -546,10 +546,14 @@ class EnvAlertNotifier:
     def _send_data_alert(self, parameter, value, interval, formatted_timestamp, timestamp):
         msg = f"{value:.1f} {EnvAlertNotifier._get_measurement_unit(parameter)} entered '{interval['name']}' interval: {interval['description']}"
         self._alerts[parameter] = {
+            "type": "data_alert",
+            "value": value,
+            "interval_name": interval["name"],
+            "interval_description": interval["description"],
             "message": msg,
             "formatted_timestamp": formatted_timestamp,
             "timestamp": timestamp
-            }
+        }
         self._logger.info(f"Sending alert for {parameter}: {msg}, at {formatted_timestamp}")
 
     def _send_missing_data_alert(self, parameter):
@@ -557,10 +561,11 @@ class EnvAlertNotifier:
         formatted_timestamp = normalize_and_format_pandas_timestamp(timestamp)
         msg = f"No data received for {parameter}"
         self._alerts[parameter] = {
+            "type": "missing_data",
             "message": msg,
             "formatted_timestamp": formatted_timestamp,
             "timestamp": timestamp
-            }
+        }
         self._logger.info(f"Sending missing data alert for {parameter} at {formatted_timestamp}")
 
     def remove_data_alert(self, parameter):
@@ -634,7 +639,12 @@ class EnvAlertNotifier:
             {
                 "raw_timestamp": v["timestamp"],  # for sorting
                 "timestamp": v["formatted_timestamp"],
-                "parameter": EnvAlertNotifier._format_parameter(k),
+                "parameter": k,
+                "type": v.get("type", "data_alert"),
+                "value": v.get("value"),
+                "unit": EnvAlertNotifier._get_measurement_unit(k),
+                "interval_name": v.get("interval_name"),
+                "interval_description": v.get("interval_description"),
                 "message": v["message"]
             }
             for k, v in self._alerts.items()
@@ -649,6 +659,11 @@ class EnvAlertNotifier:
             {
                 "timestamp": n["timestamp"],
                 "parameter": n["parameter"],
+                "type": n["type"],
+                "value": n["value"],
+                "unit": n["unit"],
+                "interval_name": n["interval_name"],
+                "interval_description": n["interval_description"],
                 "message": n["message"]
             }
             for n in notifications

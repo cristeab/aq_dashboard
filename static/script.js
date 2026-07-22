@@ -28,80 +28,16 @@ let currentData = dummyData;
 let currentNotifications = [];
 const seenNotifications = new Set();
 
-const translations = {
-    en: {
-        title: "Air Quality Dashboard",
-        header_title: "Air Quality Dashboard",
-        theme_toggle_title: "Toggle Theme",
-        notifications_title: "Notifications",
-        no_notifications: "No notifications",
-        aqi_10min: "10-min. AQI",
-        footer_text: "Data from 2 AQ dust sensors | Updated every 3 seconds",
-        footer_project_link: "Project hosted on",
-        aqi_good: "Good",
-        aqi_moderate: "Moderate",
-        aqi_unhealthy_sensitive: "Unhealthy for Sensitive Groups",
-        aqi_unhealthy: "Unhealthy",
-        aqi_very_unhealthy: "Very Unhealthy",
-        aqi_hazardous: "Hazardous",
-        na: "N/A",
-        select_language: "Select Language"
-    },
-    ro: {
-        title: "Panou Calitate Aer",
-        header_title: "Panou Calitate Aer",
-        theme_toggle_title: "Schimbă Tema",
-        notifications_title: "Notificări",
-        no_notifications: "Nu există notificări",
-        aqi_10min: "AQI pe 10 min.",
-        footer_text: "Date de la 2 senzori de praf AQ | Actualizat la fiecare 3 secunde",
-        footer_project_link: "Proiect găzduit pe",
-        aqi_good: "Excelent",
-        aqi_moderate: "Moderat",
-        aqi_unhealthy_sensitive: "Nerecomandat pentru grupuri sensibile",
-        aqi_unhealthy: "Nociv",
-        aqi_very_unhealthy: "Foarte nociv",
-        aqi_hazardous: "Periculos",
-        na: "N/D",
-        select_language: "Selectează limba"
-    },
-    fr: {
-        title: "Tableau de Bord Qualité de l'Air",
-        header_title: "Tableau de Bord Qualité de l'Air",
-        theme_toggle_title: "Changer de Thème",
-        notifications_title: "Notifications",
-        no_notifications: "Aucune notification",
-        aqi_10min: "IQA de 10 min.",
-        footer_text: "Données de 2 capteurs de poussière AQ | Mis à jour toutes les 3 secondes",
-        footer_project_link: "Projet hébergé sur",
-        aqi_good: "Bon",
-        aqi_moderate: "Modéré",
-        aqi_unhealthy_sensitive: "Mauvais pour les groupes sensibles",
-        aqi_unhealthy: "Mauvais",
-        aqi_very_unhealthy: "Très mauvais",
-        aqi_hazardous: "Dangereux",
-        na: "N/D",
-        select_language: "Choisir la langue"
-    },
-    de: {
-        title: "Luftqualitäts-Dashboard",
-        header_title: "Luftqualitäts-Dashboard",
-        theme_toggle_title: "Design umschalten",
-        notifications_title: "Benachrichtigungen",
-        no_notifications: "Keine Benachrichtigungen",
-        aqi_10min: "10-Min. AQI",
-        footer_text: "Daten von 2 AQ-Staubsenoren | Alle 3 Sekunden aktualisiert",
-        footer_project_link: "Projekt gehostet auf",
-        aqi_good: "Gut",
-        aqi_moderate: "Mäßig",
-        aqi_unhealthy_sensitive: "Ungesund für empfindliche Gruppen",
-        aqi_unhealthy: "Ungesund",
-        aqi_very_unhealthy: "Sehr ungesund",
-        aqi_hazardous: "Gefährlich",
-        na: "N/A",
-        select_language: "Sprache auswählen"
+let translations = {};
+
+async function initTranslations() {
+    try {
+        const response = await fetch('static/translations.json');
+        translations = await response.json();
+    } catch (error) {
+        console.error('Failed to load translations:', error);
     }
-};
+}
 
 let currentLanguage = localStorage.getItem('language') || 'en';
 
@@ -317,13 +253,52 @@ function updateNotifications(notifications) {
         const item = document.createElement('div');
         item.className = 'notification-item';
 
+        // Localize parameter
+        let localizedParam = t(`param_${n.parameter}`);
+        if (localizedParam === `param_${n.parameter}`) {
+            localizedParam = n.parameter.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+        }
+
+        // Localize message
+        let localizedMsg = n.message;
+        if (n.type === 'missing_data') {
+            localizedMsg = t('notification_missing_data')
+                .replace('{parameter}', localizedParam);
+        } else if (n.type === 'data_alert') {
+            const intervalKey = `interval_${n.interval_name}`;
+            let localizedInterval = t(intervalKey);
+            if (localizedInterval === intervalKey) {
+                localizedInterval = n.interval_name;
+            }
+
+            const descKey = `desc_${n.parameter}_${n.interval_name}`;
+            let localizedDesc = t(descKey);
+            if (localizedDesc === descKey) {
+                if (n.parameter === 'radon_week_avg' || n.parameter === 'radon_year_avg') {
+                    const fallbackDescKey = `desc_radon_1day_avg_${n.interval_name}`;
+                    localizedDesc = t(fallbackDescKey);
+                    if (localizedDesc === fallbackDescKey) {
+                        localizedDesc = n.interval_description || "";
+                    }
+                } else {
+                    localizedDesc = n.interval_description || "";
+                }
+            }
+
+            localizedMsg = t('notification_data_alert')
+                .replace('{value}', Number(n.value).toFixed(1))
+                .replace('{unit}', n.unit || '')
+                .replace('{interval_name}', localizedInterval)
+                .replace('{interval_desc}', localizedDesc);
+        }
+
         // Layout: timestamp (small, right), parameter (bold), message (normal)
         item.innerHTML = `
             <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span style="font-weight: bold;">${n.parameter}</span>
+                <span style="font-weight: bold;">${localizedParam}</span>
                 <span style="font-size: 0.85em; color: #bbb;">${n.timestamp}</span>
             </div>
-            <div style="margin-top: 0.3em;">${n.message}</div>
+            <div style="margin-top: 0.3em;">${localizedMsg}</div>
         `;
         notificationsList.appendChild(item);
     });
@@ -344,7 +319,10 @@ function updateNotifications(notifications) {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", async function() {
+    // Fetch translations
+    await initTranslations();
+
     // Theme handling logic
     const themeToggleBtn = document.getElementById('theme-toggle-btn');
     
