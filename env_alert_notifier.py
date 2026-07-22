@@ -170,12 +170,12 @@ class EnvAlertNotifier:
                 {
                     "min": -50, "max": 15,
                     "name": "cold",
-                    "description": "Cold - cold temperature/humidity combination"
+                    "description": "Cold temperature/humidity combination"
                 },
                 {
                     "min": 15, "max": 21,
-                    "name": "no_discomfort",
-                    "description": "No discomfort - comfortable temperature/humidity combination"
+                    "name": "no discomfort",
+                    "description": "Comfortable temperature/humidity combination"
                 },
                 {
                     "min": 21, "max": 24,
@@ -208,43 +208,43 @@ class EnvAlertNotifier:
             "intervals": [
                 {
                     "min": 0, "max": 25,
-                    "name": "very_quiet",
-                    "description": "Very quiet - ideal for sleep and concentration"
+                    "name": "very quiet",
+                    "description": "Ideal for sleep and concentration"
                 },
                 {
                     "min": 25, "max": 30,
                     "name": "quiet",
-                    "description": "Quiet - WHO bedroom nighttime standard"
+                    "description": "WHO bedroom nighttime standard"
                 },
                 {
                     "min": 30, "max": 35,
                     "name": "normal",
-                    "description": "Normal - WHO daytime living areas"
+                    "description": "WHO daytime living areas"
                 },
                 {
                     "min": 35, "max": 45,
                     "name": "moderate",
-                    "description": "Moderate - acceptable background noise"
+                    "description": "Acceptable background noise"
                 },
                 {
                     "min": 45, "max": 55,
                     "name": "elevated",
-                    "description": "Elevated - WHO outdoor residential limit"
+                    "description": "WHO outdoor residential limit"
                 },
                 {
                     "min": 55, "max": 65,
                     "name": "high",
-                    "description": "High - may interfere with communication"
+                    "description": "May interfere with communication"
                 },
                 {
                     "min": 65, "max": 75,
-                    "name": "very_high",
-                    "description": "Very high - potential sleep disruption"
+                    "name": "very high",
+                    "description": "Potential sleep disruption"
                 },
                 {
                     "min": 75, "max": 150,
                     "name": "excessive",
-                    "description": "Excessive - hearing damage risk with prolonged exposure"
+                    "description": "Hearing damage risk with prolonged exposure"
                 }
             ]
         },
@@ -272,8 +272,8 @@ class EnvAlertNotifier:
                 },
                 {
                     "min": 150, "max": 1000,
-                    "name": "very_bright",
-                    "description": "Very bright - strong daylight exposure"
+                    "name": "very bright",
+                    "description": "Strong daylight exposure"
                 }
             ]
         },
