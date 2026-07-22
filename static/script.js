@@ -30,12 +30,25 @@ const seenNotifications = new Set();
 
 let translations = {};
 
+async function loadLanguage(lang) {
+    if (!translations[lang]) {
+        try {
+            const response = await fetch(`static/translations_${lang}.json`);
+            translations[lang] = await response.json();
+        } catch (error) {
+            console.error(`Failed to load translations for language ${lang}:`, error);
+            translations[lang] = {};
+        }
+    }
+}
+
 async function initTranslations() {
-    try {
-        const response = await fetch('static/translations.json');
-        translations = await response.json();
-    } catch (error) {
-        console.error('Failed to load translations:', error);
+    // Always load English first for fallback
+    await loadLanguage('en');
+    
+    // Load current language if not English
+    if (currentLanguage !== 'en') {
+        await loadLanguage(currentLanguage);
     }
 }
 
@@ -347,7 +360,8 @@ document.addEventListener("DOMContentLoaded", async function() {
         }
     }
 
-    function updateLanguage(lang) {
+    async function updateLanguage(lang) {
+        await loadLanguage(lang);
         currentLanguage = lang;
         localStorage.setItem('language', lang);
         document.documentElement.lang = lang;
@@ -394,7 +408,7 @@ document.addEventListener("DOMContentLoaded", async function() {
     setTheme(initialTheme);
 
     // Initialize language
-    updateLanguage(currentLanguage);
+    await updateLanguage(currentLanguage);
 
     if (themeToggleBtn) {
         themeToggleBtn.addEventListener('click', function() {
@@ -492,9 +506,9 @@ document.addEventListener("DOMContentLoaded", async function() {
         });
 
         document.querySelectorAll('.language-option').forEach(option => {
-            option.addEventListener('click', function(e) {
+            option.addEventListener('click', async function(e) {
                 const lang = this.getAttribute('data-lang');
-                updateLanguage(lang);
+                await updateLanguage(lang);
                 languageDropdown.classList.add('hidden');
                 e.stopPropagation();
             });
