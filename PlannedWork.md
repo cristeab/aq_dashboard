@@ -1,0 +1,20 @@
+Work Items
+- Upload data into the cloud using an open-source provider like https://aqi.eco/
+- Redesign the UI to support several Air Quality standards (Europe, North America, China)
+- Improve Thom Discomfort Index icon with color codes
+- Provide on the RPi an AP to access the web server locally, without a wireless router
+- Add support to use an SQLite database instead of the InfluxDB database
+- Implement calibration workflows, RH-corrected PM handling, and dual-PM drift detection.
+- Implement an application for mobile devices that can connect either over Internet or over Bluetooth to the system
+- Ventilation forecasting: Prophet/ARIMA on CO₂ → notify _before_ the room gets stuffy ("Open a window in ~15 min")
+- MQTT + Matter bridge → instant Home Assistant/Apple Home integration
+- Notification delivery channels: Web Push (works on LAN with a self-signed cert), Telegram/email when online
+- RH-corrected PM calibration
+- Calibration wizard — SCD41 forced recalibration
+- Quiet hours per weekday + "snooze this alert 8 h"
+- Alert thresholds per metric with a "strict / normal / relaxed" preset (power users want 800 ppm CO₂, not 1000)
+- Colour-blind palette (AQI relies on colour; deuteranopia is 8 % of men)
+- Fleet view + monthly PDF air report
+- PM source attribution — cooking vs candle vs vacuum vs outdoor infiltration, from the particle-size distribution + noise DoA + time of day
+- natural-language history queries ("when was the air worst last week?") via schema-constrained read-only SQL
+- contextual-bandit ventilation policy that learns when _this_ user actually opens a window
