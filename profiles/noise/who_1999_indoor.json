@@ -1,0 +1,218 @@
+{
+  "id": "who_1999_indoor",
+  "order": 10,
+  "name": {
+    "en": "Indoor noise – WHO Guidelines for Community Noise",
+    "ro": "Zgomot în interior – ghidurile OMS pentru zgomotul comunitar",
+    "fr": "Bruit intérieur – lignes directrices de l'OMS relatives au bruit dans la collectivité",
+    "de": "Innenraumlärm – WHO-Leitlinien für Umgebungslärm"
+  },
+  "short_name": {
+    "en": "WHO indoor",
+    "ro": "OMS interior",
+    "fr": "OMS intérieur",
+    "de": "WHO innen"
+  },
+  "description": {
+    "en": "Equivalent sound level over the last hour (LAeq,1h) compared with the indoor guideline values of the WHO (1999): 35 dB(A) in living areas and classrooms, and in bedrooms 35 dB(A) during the day and 30 dB(A) at night (23:00–07:00). The WHO values refer to 16-hour and 8-hour means, the 1-hour mean is indicative. The 5 and 10 dB bands above the guideline are a convention of this dashboard.",
+    "ro": "Nivelul sonor echivalent din ultima oră (LAeq,1h) comparat cu valorile ghid OMS (1999) pentru interior: 35 dB(A) în spațiile de locuit și în săli de clasă, iar în dormitoare 35 dB(A) ziua și 30 dB(A) noaptea (23:00–07:00). Valorile OMS se referă la medii pe 16 și 8 ore, media pe 1 oră este orientativă. Benzile de 5 și 10 dB peste ghid sunt o convenție a acestui panou.",
+    "fr": "Niveau sonore équivalent de la dernière heure (LAeq,1h) comparé aux valeurs guides intérieures de l'OMS (1999) : 35 dB(A) dans les pièces de vie et les salles de classe, et dans les chambres 35 dB(A) le jour et 30 dB(A) la nuit (23:00–07:00). Les valeurs de l'OMS portent sur des moyennes de 16 et 8 heures, la moyenne horaire est indicative. Les classes de 5 et 10 dB au-dessus du guide sont une convention de ce tableau de bord.",
+    "de": "Äquivalenter Dauerschallpegel der letzten Stunde (LAeq,1h) im Vergleich zu den WHO-Richtwerten für Innenräume (1999): 35 dB(A) in Wohnräumen und Klassenzimmern, in Schlafräumen 35 dB(A) tagsüber und 30 dB(A) nachts (23:00–07:00). Die WHO-Werte beziehen sich auf 16- und 8-Stunden-Mittel, das 1-Stunden-Mittel ist orientierend. Die Stufen 5 und 10 dB über dem Richtwert sind eine Konvention dieses Dashboards."
+  },
+  "reference": "B. Berglund, T. Lindvall, D. H. Schwela (eds.), Guidelines for Community Noise, World Health Organization, Geneva (1999), Table 4.1 (dwellings, school class rooms)",
+  "averaging": {
+    "type": "leq",
+    "minutes": 60
+  },
+  "unit": "dB(A)",
+  "decimals": 0,
+  "upper_bound": "inclusive",
+  "scale": {
+    "min": 20,
+    "max": 70
+  },
+  "options": [
+    {
+      "id": "room",
+      "values": [
+        "living",
+        "bedroom",
+        "classroom"
+      ],
+      "default": "living",
+      "label": {
+        "en": "Room",
+        "ro": "Încăpere",
+        "fr": "Pièce",
+        "de": "Raum"
+      },
+      "value_labels": {
+        "living": {
+          "en": "Living area (35 dB(A))",
+          "ro": "Spațiu de locuit (35 dB(A))",
+          "fr": "Pièce de vie (35 dB(A))",
+          "de": "Wohnraum (35 dB(A))"
+        },
+        "bedroom": {
+          "en": "Bedroom (35 dB(A) day, 30 dB(A) night)",
+          "ro": "Dormitor (35 dB(A) ziua, 30 dB(A) noaptea)",
+          "fr": "Chambre (35 dB(A) le jour, 30 dB(A) la nuit)",
+          "de": "Schlafraum (35 dB(A) tags, 30 dB(A) nachts)"
+        },
+        "classroom": {
+          "en": "Classroom (35 dB(A))",
+          "ro": "Sală de clasă (35 dB(A))",
+          "fr": "Salle de classe (35 dB(A))",
+          "de": "Klassenzimmer (35 dB(A))"
+        }
+      }
+    }
+  ],
+  "limits": {
+    "option": "room",
+    "values": {
+      "living": [
+        {
+          "id": "day",
+          "from": "00:00",
+          "to": "24:00",
+          "limit": 35
+        }
+      ],
+      "bedroom": [
+        {
+          "id": "day",
+          "from": "07:00",
+          "to": "23:00",
+          "limit": 35
+        },
+        {
+          "id": "night",
+          "from": "23:00",
+          "to": "07:00",
+          "limit": 30
+        }
+      ],
+      "classroom": [
+        {
+          "id": "day",
+          "from": "00:00",
+          "to": "24:00",
+          "limit": 35
+        }
+      ]
+    }
+  },
+  "levels": [
+    [
+      "within",
+      0
+    ],
+    [
+      "slightly_above",
+      5
+    ],
+    [
+      "above",
+      10
+    ],
+    [
+      "far_above",
+      null
+    ]
+  ],
+  "categories": [
+    {
+      "id": "within",
+      "color": "#3BB273",
+      "cvd_color": "#009E73",
+      "name": {
+        "en": "Within the guideline",
+        "ro": "În limita ghidului",
+        "fr": "Conforme au guide",
+        "de": "Innerhalb des Richtwerts"
+      },
+      "description": {
+        "en": "At or below the WHO guideline value for this room and time of day.",
+        "ro": "La sau sub valoarea ghid OMS pentru această încăpere și oră.",
+        "fr": "Au niveau ou en dessous de la valeur guide de l'OMS pour cette pièce et cette heure.",
+        "de": "Auf oder unter dem WHO-Richtwert für diesen Raum und diese Tageszeit."
+      },
+      "recommendation": {
+        "en": "No action needed.",
+        "ro": "Nu este necesară nicio acțiune.",
+        "fr": "Aucune action nécessaire.",
+        "de": "Keine Maßnahme erforderlich."
+      }
+    },
+    {
+      "id": "slightly_above",
+      "color": "#F7D038",
+      "cvd_color": "#F0E442",
+      "name": {
+        "en": "Slightly above the guideline",
+        "ro": "Ușor peste ghid",
+        "fr": "Légèrement au-dessus du guide",
+        "de": "Leicht über dem Richtwert"
+      },
+      "description": {
+        "en": "Up to 5 dB above the guideline: can disturb sleep or concentration.",
+        "ro": "Până la 5 dB peste ghid: poate perturba somnul sau concentrarea.",
+        "fr": "Jusqu'à 5 dB au-dessus du guide : peut gêner le sommeil ou la concentration.",
+        "de": "Bis zu 5 dB über dem Richtwert: kann Schlaf oder Konzentration stören."
+      },
+      "recommendation": {
+        "en": "Close the windows or reduce the noise sources if the noise is disturbing.",
+        "ro": "Închideți ferestrele sau reduceți sursele de zgomot dacă zgomotul deranjează.",
+        "fr": "Fermez les fenêtres ou réduisez les sources de bruit si le bruit est gênant.",
+        "de": "Fenster schließen oder Lärmquellen verringern, wenn der Lärm stört."
+      }
+    },
+    {
+      "id": "above",
+      "color": "#F5A623",
+      "cvd_color": "#E69F00",
+      "name": {
+        "en": "Above the guideline",
+        "ro": "Peste ghid",
+        "fr": "Au-dessus du guide",
+        "de": "Über dem Richtwert"
+      },
+      "description": {
+        "en": "5 to 10 dB above the guideline: speech intelligibility and sleep are affected.",
+        "ro": "Între 5 și 10 dB peste ghid: inteligibilitatea vorbirii și somnul sunt afectate.",
+        "fr": "De 5 à 10 dB au-dessus du guide : l'intelligibilité de la parole et le sommeil sont affectés.",
+        "de": "5 bis 10 dB über dem Richtwert: Sprachverständlichkeit und Schlaf sind beeinträchtigt."
+      },
+      "recommendation": {
+        "en": "Reduce the noise sources and close the windows; consider better sound insulation.",
+        "ro": "Reduceți sursele de zgomot și închideți ferestrele; luați în considerare o izolare fonică mai bună.",
+        "fr": "Réduisez les sources de bruit et fermez les fenêtres ; envisagez une meilleure isolation acoustique.",
+        "de": "Lärmquellen verringern und Fenster schließen; bessere Schalldämmung erwägen."
+      }
+    },
+    {
+      "id": "far_above",
+      "color": "#E8513B",
+      "cvd_color": "#D55E00",
+      "name": {
+        "en": "Far above the guideline",
+        "ro": "Mult peste ghid",
+        "fr": "Bien au-dessus du guide",
+        "de": "Weit über dem Richtwert"
+      },
+      "description": {
+        "en": "More than 10 dB above the guideline: annoyance and sleep disturbance are likely.",
+        "ro": "Cu peste 10 dB peste ghid: disconfortul și perturbarea somnului sunt probabile.",
+        "fr": "Plus de 10 dB au-dessus du guide : gêne et perturbation du sommeil probables.",
+        "de": "Mehr als 10 dB über dem Richtwert: Belästigung und Schlafstörungen sind wahrscheinlich."
+      },
+      "recommendation": {
+        "en": "Find and reduce the noise source; use ear plugs for sleeping if it cannot be reduced.",
+        "ro": "Identificați și reduceți sursa de zgomot; folosiți dopuri de urechi pentru somn dacă nu poate fi redusă.",
+        "fr": "Trouvez et réduisez la source de bruit ; utilisez des bouchons d'oreille pour dormir si elle ne peut être réduite.",
+        "de": "Lärmquelle finden und verringern; zum Schlafen Gehörschutzstöpsel verwenden, wenn sie nicht reduziert werden kann."
+      }
+    }
+  ]
+}

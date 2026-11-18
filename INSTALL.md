@@ -184,4 +184,29 @@ Start the server with:
     ./aq_dashboard.py
 ```
 
-Access the server at: https://\<server URL\>/aqd
+Access the server at: https://\<server URL\>/aqd/
+
+## Broadcast the Dashboard Host on the LAN
+
+The dashboard includes optional mDNS/DNS-SD discovery. For a directly exposed
+HTTP instance, run it with `--advertise` and install `zeroconf` from
+`requirements.txt`:
+
+```bash
+./aq_dashboard.py --host 0.0.0.0 --port 8888 --advertise
+./lan_discovery.py
+```
+
+When using the existing Nginx HTTPS reverse proxy, advertise the public URL
+through Avahi instead. Install the service definition and restart Avahi:
+
+```bash
+sudo apt install avahi-daemon
+sudo cp services/avahi/aq_dashboard.service /etc/avahi/services/
+sudo systemctl restart avahi-daemon
+./lan_discovery.py
+```
+
+The Avahi record points clients to `https://<host>/aqd/` on port 443. Nginx
+preserves the external `Host` header and forwards WebSocket upgrades, so the
+dashboard's origin checks and live updates continue to work behind `/aqd/`.

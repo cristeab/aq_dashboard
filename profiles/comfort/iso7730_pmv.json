@@ -1,0 +1,337 @@
+{
+  "id": "iso7730_pmv",
+  "order": 60,
+  "name": {
+    "en": "Office thermal comfort – PMV/PPD (ISO 7730)",
+    "ro": "Confort termic la birou – PMV/PPD (ISO 7730)",
+    "fr": "Confort thermique au bureau – PMV/PPD (ISO 7730)",
+    "de": "Thermische Behaglichkeit im Büro – PMV/PPD (ISO 7730)"
+  },
+  "short_name": {
+    "en": "PMV",
+    "ro": "PMV",
+    "fr": "PMV",
+    "de": "PMV"
+  },
+  "description": {
+    "en": "Predicted mean vote (−3 cold … +3 hot) and predicted percentage of dissatisfied (PPD) of ISO 7730 (Fanger model), classified in the comfort categories A (PPD below 6 %), B (below 10 %) and C (below 15 %). The mean radiant temperature is taken equal to the air temperature; select the clothing, the activity and the air speed. The model is valid from 10 to 30 °C and for PMV between −2 and +2.",
+    "ro": "Votul mediu previzionat (−3 frig … +3 cald) și procentul previzionat de nemulțumiți (PPD) din ISO 7730 (modelul Fanger), clasificate în categoriile de confort A (PPD sub 6 %), B (sub 10 %) și C (sub 15 %). Temperatura medie de radiație este considerată egală cu temperatura aerului; selectați îmbrăcămintea, activitatea și viteza aerului. Modelul este valabil între 10 și 30 °C și pentru PMV între −2 și +2.",
+    "fr": "Vote moyen prévisible (−3 froid … +3 chaud) et pourcentage prévisible d'insatisfaits (PPD) de l'ISO 7730 (modèle de Fanger), classés dans les catégories de confort A (PPD inférieur à 6 %), B (inférieur à 10 %) et C (inférieur à 15 %). La température moyenne de rayonnement est prise égale à la température de l'air ; choisissez l'habillement, l'activité et la vitesse de l'air. Le modèle est valable de 10 à 30 °C et pour un PMV entre −2 et +2.",
+    "de": "Vorausgesagtes mittleres Votum (−3 kalt … +3 heiß) und vorausgesagter Prozentsatz Unzufriedener (PPD) nach ISO 7730 (Fanger-Modell), eingeteilt in die Behaglichkeitskategorien A (PPD unter 6 %), B (unter 10 %) und C (unter 15 %). Die mittlere Strahlungstemperatur wird gleich der Lufttemperatur angenommen; wählen Sie Bekleidung, Aktivität und Luftgeschwindigkeit. Das Modell gilt von 10 bis 30 °C und für PMV zwischen −2 und +2."
+  },
+  "reference": "ISO 7730:2005 (equations unchanged in ISO 7730:2025), Ergonomics of the thermal environment – Analytical determination and interpretation of thermal comfort using calculation of the PMV and PPD indices and local thermal comfort criteria",
+  "formula": "pmv_iso7730",
+  "unit": "",
+  "decimals": 2,
+  "signed": true,
+  "upper_bound": "exclusive",
+  "scale": {
+    "min": -2,
+    "max": 2
+  },
+  "neutral_category": "neutral_a",
+  "options": [
+    {
+      "id": "clo",
+      "values": [
+        "auto",
+        "auto_south",
+        "0.5",
+        "0.7",
+        "1.0",
+        "1.3"
+      ],
+      "default": "auto",
+      "label": {
+        "en": "Clothing",
+        "ro": "Îmbrăcăminte",
+        "fr": "Habillement",
+        "de": "Bekleidung"
+      },
+      "value_labels": {
+        "auto": {
+          "en": "Automatic: 0.5 clo May–September, 1.0 clo October–April",
+          "ro": "Automat: 0,5 clo mai–septembrie, 1,0 clo octombrie–aprilie",
+          "fr": "Automatique : 0,5 clo de mai à septembre, 1,0 clo d'octobre à avril",
+          "de": "Automatisch: 0,5 clo Mai–September, 1,0 clo Oktober–April"
+        },
+        "auto_south": {
+          "en": "Automatic, southern hemisphere: 0.5 clo November–March",
+          "ro": "Automat, emisfera sudică: 0,5 clo noiembrie–martie",
+          "fr": "Automatique, hémisphère sud : 0,5 clo de novembre à mars",
+          "de": "Automatisch, Südhalbkugel: 0,5 clo November–März"
+        },
+        "0.5": {
+          "en": "0.5 clo – light summer clothing",
+          "ro": "0,5 clo – îmbrăcăminte ușoară de vară",
+          "fr": "0,5 clo – vêtements légers d'été",
+          "de": "0,5 clo – leichte Sommerkleidung"
+        },
+        "0.7": {
+          "en": "0.7 clo – trousers and long-sleeved shirt",
+          "ro": "0,7 clo – pantaloni și cămașă cu mânecă lungă",
+          "fr": "0,7 clo – pantalon et chemise à manches longues",
+          "de": "0,7 clo – Hose und langärmeliges Hemd"
+        },
+        "1.0": {
+          "en": "1.0 clo – typical indoor winter clothing",
+          "ro": "1,0 clo – îmbrăcăminte obișnuită de iarnă în interior",
+          "fr": "1,0 clo – tenue d'intérieur d'hiver",
+          "de": "1,0 clo – übliche Winterkleidung in Innenräumen"
+        },
+        "1.3": {
+          "en": "1.3 clo – warm winter clothing",
+          "ro": "1,3 clo – îmbrăcăminte groasă de iarnă",
+          "fr": "1,3 clo – vêtements d'hiver chauds",
+          "de": "1,3 clo – warme Winterkleidung"
+        }
+      }
+    },
+    {
+      "id": "met",
+      "values": [
+        "1.0",
+        "1.2",
+        "1.4",
+        "1.6"
+      ],
+      "default": "1.2",
+      "label": {
+        "en": "Activity",
+        "ro": "Activitate",
+        "fr": "Activité",
+        "de": "Aktivität"
+      },
+      "value_labels": {
+        "1.0": {
+          "en": "1.0 met – seated, relaxed",
+          "ro": "1,0 met – așezat, relaxat",
+          "fr": "1,0 met – assis, détendu",
+          "de": "1,0 met – sitzend, entspannt"
+        },
+        "1.2": {
+          "en": "1.2 met – office work, seated",
+          "ro": "1,2 met – muncă de birou, așezat",
+          "fr": "1,2 met – travail de bureau, assis",
+          "de": "1,2 met – Büroarbeit, sitzend"
+        },
+        "1.4": {
+          "en": "1.4 met – standing, light activity",
+          "ro": "1,4 met – în picioare, activitate ușoară",
+          "fr": "1,4 met – debout, activité légère",
+          "de": "1,4 met – stehend, leichte Tätigkeit"
+        },
+        "1.6": {
+          "en": "1.6 met – standing, moderate activity",
+          "ro": "1,6 met – în picioare, activitate moderată",
+          "fr": "1,6 met – debout, activité modérée",
+          "de": "1,6 met – stehend, mittlere Tätigkeit"
+        }
+      }
+    },
+    {
+      "id": "air_speed",
+      "values": [
+        "0.1",
+        "0.2",
+        "0.3"
+      ],
+      "default": "0.1",
+      "label": {
+        "en": "Air speed",
+        "ro": "Viteza aerului",
+        "fr": "Vitesse de l'air",
+        "de": "Luftgeschwindigkeit"
+      },
+      "value_labels": {
+        "0.1": {
+          "en": "0.1 m/s – still air",
+          "ro": "0,1 m/s – aer liniștit",
+          "fr": "0,1 m/s – air calme",
+          "de": "0,1 m/s – ruhende Luft"
+        },
+        "0.2": {
+          "en": "0.2 m/s – light air movement",
+          "ro": "0,2 m/s – mișcare ușoară a aerului",
+          "fr": "0,2 m/s – léger mouvement d'air",
+          "de": "0,2 m/s – leichte Luftbewegung"
+        },
+        "0.3": {
+          "en": "0.3 m/s – fan",
+          "ro": "0,3 m/s – ventilator",
+          "fr": "0,3 m/s – ventilateur",
+          "de": "0,3 m/s – Ventilator"
+        }
+      }
+    }
+  ],
+  "categories": [
+    {
+      "id": "too_cool",
+      "to": -0.7,
+      "color": "#4A78C2",
+      "cvd_color": "#0072B2",
+      "name": {
+        "en": "Too cool",
+        "ro": "Prea rece",
+        "fr": "Trop frais",
+        "de": "Zu kühl"
+      },
+      "description": {
+        "en": "Outside category C on the cool side (PPD 15 % or more).",
+        "ro": "În afara categoriei C, spre rece (PPD de 15 % sau mai mult).",
+        "fr": "Hors catégorie C, côté frais (PPD de 15 % ou plus).",
+        "de": "Außerhalb von Kategorie C auf der kühlen Seite (PPD 15 % oder mehr)."
+      },
+      "recommendation": {
+        "en": "Raise the temperature or wear warmer clothing.",
+        "ro": "Măriți temperatura sau purtați haine mai groase.",
+        "fr": "Augmentez la température ou portez des vêtements plus chauds.",
+        "de": "Temperatur erhöhen oder wärmere Kleidung tragen."
+      }
+    },
+    {
+      "id": "cool_c",
+      "to": -0.5,
+      "color": "#6FA3D8",
+      "cvd_color": "#56B4E9",
+      "name": {
+        "en": "Slightly cool (C)",
+        "ro": "Ușor răcoros (C)",
+        "fr": "Légèrement frais (C)",
+        "de": "Leicht kühl (C)"
+      },
+      "description": {
+        "en": "Category C, cool side: PPD below 15 %.",
+        "ro": "Categoria C, spre rece: PPD sub 15 %.",
+        "fr": "Catégorie C, côté frais : PPD inférieur à 15 %.",
+        "de": "Kategorie C, kühle Seite: PPD unter 15 %."
+      },
+      "recommendation": {
+        "en": "Raise the temperature slightly or wear an extra layer.",
+        "ro": "Măriți puțin temperatura sau purtați un strat în plus.",
+        "fr": "Augmentez légèrement la température ou ajoutez une couche de vêtements.",
+        "de": "Temperatur leicht erhöhen oder eine zusätzliche Schicht tragen."
+      }
+    },
+    {
+      "id": "cool_b",
+      "to": -0.2,
+      "color": "#9CCBE8",
+      "cvd_color": "#A6D8F0",
+      "name": {
+        "en": "Slightly cool (B)",
+        "ro": "Ușor răcoros (B)",
+        "fr": "Légèrement frais (B)",
+        "de": "Leicht kühl (B)"
+      },
+      "description": {
+        "en": "Category B, cool side: PPD below 10 %.",
+        "ro": "Categoria B, spre rece: PPD sub 10 %.",
+        "fr": "Catégorie B, côté frais : PPD inférieur à 10 %.",
+        "de": "Kategorie B, kühle Seite: PPD unter 10 %."
+      },
+      "recommendation": {
+        "en": "No action needed; raise the temperature slightly if you feel cool.",
+        "ro": "Nu este necesară nicio acțiune; măriți puțin temperatura dacă vă este răcoare.",
+        "fr": "Aucune action nécessaire ; augmentez légèrement la température si vous avez frais.",
+        "de": "Keine Maßnahme erforderlich; bei Kühle die Temperatur leicht erhöhen."
+      }
+    },
+    {
+      "id": "neutral_a",
+      "to": 0.2,
+      "color": "#3BB273",
+      "cvd_color": "#009E73",
+      "name": {
+        "en": "Neutral (A)",
+        "ro": "Neutru (A)",
+        "fr": "Neutre (A)",
+        "de": "Neutral (A)"
+      },
+      "description": {
+        "en": "Category A: PPD below 6 %, the best achievable comfort.",
+        "ro": "Categoria A: PPD sub 6 %, cel mai bun confort posibil.",
+        "fr": "Catégorie A : PPD inférieur à 6 %, le meilleur confort possible.",
+        "de": "Kategorie A: PPD unter 6 %, die bestmögliche Behaglichkeit."
+      },
+      "recommendation": {
+        "en": "No action needed.",
+        "ro": "Nu este necesară nicio acțiune.",
+        "fr": "Aucune action nécessaire.",
+        "de": "Keine Maßnahme erforderlich."
+      }
+    },
+    {
+      "id": "warm_b",
+      "to": 0.5,
+      "color": "#F7D038",
+      "cvd_color": "#F0E442",
+      "name": {
+        "en": "Slightly warm (B)",
+        "ro": "Ușor cald (B)",
+        "fr": "Légèrement chaud (B)",
+        "de": "Leicht warm (B)"
+      },
+      "description": {
+        "en": "Category B, warm side: PPD below 10 %.",
+        "ro": "Categoria B, spre cald: PPD sub 10 %.",
+        "fr": "Catégorie B, côté chaud : PPD inférieur à 10 %.",
+        "de": "Kategorie B, warme Seite: PPD unter 10 %."
+      },
+      "recommendation": {
+        "en": "No action needed; lower the temperature slightly if you feel warm.",
+        "ro": "Nu este necesară nicio acțiune; reduceți puțin temperatura dacă vă este cald.",
+        "fr": "Aucune action nécessaire ; baissez légèrement la température si vous avez chaud.",
+        "de": "Keine Maßnahme erforderlich; bei Wärme die Temperatur leicht senken."
+      }
+    },
+    {
+      "id": "warm_c",
+      "to": 0.7,
+      "color": "#F5A623",
+      "cvd_color": "#E69F00",
+      "name": {
+        "en": "Slightly warm (C)",
+        "ro": "Ușor cald (C)",
+        "fr": "Légèrement chaud (C)",
+        "de": "Leicht warm (C)"
+      },
+      "description": {
+        "en": "Category C, warm side: PPD below 15 %.",
+        "ro": "Categoria C, spre cald: PPD sub 15 %.",
+        "fr": "Catégorie C, côté chaud : PPD inférieur à 15 %.",
+        "de": "Kategorie C, warme Seite: PPD unter 15 %."
+      },
+      "recommendation": {
+        "en": "Lower the temperature slightly, increase the air movement or wear lighter clothing.",
+        "ro": "Reduceți puțin temperatura, măriți mișcarea aerului sau purtați haine mai ușoare.",
+        "fr": "Baissez légèrement la température, augmentez le mouvement d'air ou portez des vêtements plus légers.",
+        "de": "Temperatur leicht senken, Luftbewegung erhöhen oder leichtere Kleidung tragen."
+      }
+    },
+    {
+      "id": "too_warm",
+      "color": "#E8513B",
+      "cvd_color": "#D55E00",
+      "name": {
+        "en": "Too warm",
+        "ro": "Prea cald",
+        "fr": "Trop chaud",
+        "de": "Zu warm"
+      },
+      "description": {
+        "en": "Outside category C on the warm side (PPD 15 % or more).",
+        "ro": "În afara categoriei C, spre cald (PPD de 15 % sau mai mult).",
+        "fr": "Hors catégorie C, côté chaud (PPD de 15 % ou plus).",
+        "de": "Außerhalb von Kategorie C auf der warmen Seite (PPD 15 % oder mehr)."
+      },
+      "recommendation": {
+        "en": "Lower the temperature, increase the air movement or wear lighter clothing.",
+        "ro": "Reduceți temperatura, măriți mișcarea aerului sau purtați haine mai ușoare.",
+        "fr": "Baissez la température, augmentez le mouvement d'air ou portez des vêtements plus légers.",
+        "de": "Temperatur senken, Luftbewegung erhöhen oder leichtere Kleidung tragen."
+      }
+    }
+  ]
+}

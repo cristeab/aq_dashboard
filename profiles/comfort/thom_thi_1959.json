@@ -1,0 +1,129 @@
+{
+  "id": "thom_thi_1959",
+  "order": 30,
+  "name": {
+    "en": "Thom temperature-humidity index (1959, °F)",
+    "ro": "Indicele temperatură-umiditate Thom (1959, °F)",
+    "fr": "Indice température-humidité de Thom (1959, °F)",
+    "de": "Thom-Temperatur-Feuchte-Index (1959, °F)"
+  },
+  "short_name": {
+    "en": "THI",
+    "ro": "THI",
+    "fr": "THI",
+    "de": "THI"
+  },
+  "description": {
+    "en": "Thom's original temperature-humidity index on the Fahrenheit scale, THI = T − (0.55 − 0.0055 · RH) · (T − 58) with T in °F, as published by the US Weather Bureau: at 70 about 10% of people feel uncomfortable, at 75 about half, at 79 almost everyone.",
+    "ro": "Indicele temperatură-umiditate original al lui Thom pe scara Fahrenheit, THI = T − (0,55 − 0,0055 · RH) · (T − 58) cu T în °F, publicat de US Weather Bureau: la 70 circa 10% dintre oameni resimt disconfort, la 75 aproximativ jumătate, la 79 aproape toți.",
+    "fr": "Indice température-humidité original de Thom sur l'échelle Fahrenheit, THI = T − (0,55 − 0,0055 · HR) · (T − 58) avec T en °F, publié par le US Weather Bureau : à 70 environ 10 % des personnes sont incommodées, à 75 environ la moitié, à 79 presque tout le monde.",
+    "de": "Thoms ursprünglicher Temperatur-Feuchte-Index in Fahrenheit, THI = T − (0,55 − 0,0055 · RH) · (T − 58) mit T in °F, veröffentlicht vom US Weather Bureau: bei 70 empfinden etwa 10 % Unbehagen, bei 75 etwa die Hälfte, bei 79 fast alle."
+  },
+  "reference": "E. C. Thom, The discomfort index, Weatherwise 12 (1959) 57–61",
+  "formula": "thom_thi_f",
+  "unit": "°F",
+  "decimals": 0,
+  "upper_bound": "exclusive",
+  "scale": {
+    "min": 55,
+    "max": 90
+  },
+  "neutral_category": "comfortable",
+  "categories": [
+    {
+      "id": "comfortable",
+      "to": 70,
+      "color": "#3BB273",
+      "cvd_color": "#009E73",
+      "name": {
+        "en": "Comfortable",
+        "ro": "Confortabil",
+        "fr": "Confortable",
+        "de": "Behaglich"
+      },
+      "description": {
+        "en": "Practically nobody feels uncomfortable.",
+        "ro": "Practic nimeni nu resimte disconfort.",
+        "fr": "Pratiquement personne ne ressent d'inconfort.",
+        "de": "Praktisch niemand empfindet Unbehagen."
+      },
+      "recommendation": {
+        "en": "No action needed.",
+        "ro": "Nu este necesară nicio acțiune.",
+        "fr": "Aucune action nécessaire.",
+        "de": "Keine Maßnahme erforderlich."
+      }
+    },
+    {
+      "id": "some_uncomfortable",
+      "to": 75,
+      "color": "#F7D038",
+      "cvd_color": "#F0E442",
+      "name": {
+        "en": "Some discomfort",
+        "ro": "Disconfort pentru unii",
+        "fr": "Inconfort pour certains",
+        "de": "Teilweise unbehaglich"
+      },
+      "description": {
+        "en": "From about 10% of people feeling uncomfortable at 70 to about half at 75.",
+        "ro": "De la circa 10% dintre oameni cu disconfort la 70 până la aproximativ jumătate la 75.",
+        "fr": "D'environ 10 % de personnes incommodées à 70 jusqu'à environ la moitié à 75.",
+        "de": "Von etwa 10 % unbehaglich empfindender Menschen bei 70 bis etwa zur Hälfte bei 75."
+      },
+      "recommendation": {
+        "en": "Ventilate or lower the temperature slightly if you feel warm.",
+        "ro": "Aerisiți sau reduceți ușor temperatura dacă vă este cald.",
+        "fr": "Aérez ou baissez légèrement la température si vous avez chaud.",
+        "de": "Lüften oder die Temperatur leicht senken, wenn es Ihnen zu warm ist."
+      }
+    },
+    {
+      "id": "half_uncomfortable",
+      "to": 79,
+      "color": "#F5A623",
+      "cvd_color": "#E69F00",
+      "name": {
+        "en": "Half uncomfortable",
+        "ro": "Jumătate cu disconfort",
+        "fr": "Moitié incommodée",
+        "de": "Hälfte unbehaglich"
+      },
+      "description": {
+        "en": "About half of the people or more feel uncomfortable.",
+        "ro": "Aproximativ jumătate dintre oameni sau mai mulți resimt disconfort.",
+        "fr": "Environ la moitié des personnes ou plus sont incommodées.",
+        "de": "Etwa die Hälfte der Menschen oder mehr empfindet Unbehagen."
+      },
+      "recommendation": {
+        "en": "Cool the room, reduce humidity, wear light clothing and drink water.",
+        "ro": "Răciți camera, reduceți umiditatea, purtați haine ușoare și beți apă.",
+        "fr": "Rafraîchissez la pièce, réduisez l'humidité, portez des vêtements légers et buvez de l'eau.",
+        "de": "Raum kühlen, Luftfeuchtigkeit senken, leichte Kleidung tragen und Wasser trinken."
+      }
+    },
+    {
+      "id": "most_uncomfortable",
+      "color": "#E8513B",
+      "cvd_color": "#D55E00",
+      "name": {
+        "en": "Almost everyone uncomfortable",
+        "ro": "Aproape toți cu disconfort",
+        "fr": "Presque tous incommodés",
+        "de": "Fast alle unbehaglich"
+      },
+      "description": {
+        "en": "Almost everyone feels uncomfortable; heat stress increases above this level.",
+        "ro": "Aproape toată lumea resimte disconfort; stresul termic crește peste acest nivel.",
+        "fr": "Presque tout le monde est incommodé ; le stress thermique augmente au-delà.",
+        "de": "Fast alle empfinden Unbehagen; darüber nimmt die Hitzebelastung zu."
+      },
+      "recommendation": {
+        "en": "Use air conditioning or a fan, avoid strenuous activity and stay hydrated.",
+        "ro": "Folosiți aerul condiționat sau un ventilator, evitați efortul intens și hidratați-vă.",
+        "fr": "Utilisez la climatisation ou un ventilateur, évitez les efforts intenses et hydratez-vous.",
+        "de": "Klimaanlage oder Ventilator nutzen, anstrengende Tätigkeiten meiden und ausreichend trinken."
+      }
+    }
+  ]
+}

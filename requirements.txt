@@ -1,6 +1,7 @@
 fastapi
 uvicorn
 websockets
+zeroconf
 influxdb3-python
 adafruit-blinka
 adafruit-circuitpython-bme680

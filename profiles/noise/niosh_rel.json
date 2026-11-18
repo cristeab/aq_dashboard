@@ -1,0 +1,119 @@
+{
+  "id": "niosh_rel",
+  "order": 30,
+  "name": {
+    "en": "Occupational noise – NIOSH recommended exposure limit",
+    "ro": "Zgomot la locul de muncă – limita de expunere recomandată NIOSH",
+    "fr": "Bruit au travail – limite d'exposition recommandée du NIOSH",
+    "de": "Lärm am Arbeitsplatz – empfohlener Expositionsgrenzwert des NIOSH"
+  },
+  "short_name": {
+    "en": "NIOSH",
+    "ro": "NIOSH",
+    "fr": "NIOSH",
+    "de": "NIOSH"
+  },
+  "description": {
+    "en": "Equivalent sound level over the last 8 hours compared with the recommended exposure limit of the US National Institute for Occupational Safety and Health: 85 dB(A) over 8 hours with a 3 dB exchange rate (100 % of the daily noise dose); the action level 82 dB(A) is 50 % of the dose.",
+    "ro": "Nivelul sonor echivalent din ultimele 8 ore comparat cu limita de expunere recomandată de Institutul Național pentru Securitate și Sănătate Ocupațională din SUA: 85 dB(A) pe 8 ore cu un factor de schimb de 3 dB (100 % din doza zilnică de zgomot); nivelul de acțiune de 82 dB(A) reprezintă 50 % din doză.",
+    "fr": "Niveau sonore équivalent des 8 dernières heures comparé à la limite d'exposition recommandée par l'Institut national américain pour la sécurité et la santé au travail : 85 dB(A) sur 8 heures avec un facteur d'échange de 3 dB (100 % de la dose de bruit quotidienne) ; le niveau d'action de 82 dB(A) correspond à 50 % de la dose.",
+    "de": "Äquivalenter Dauerschallpegel der letzten 8 Stunden im Vergleich zum empfohlenen Expositionsgrenzwert des US-amerikanischen NIOSH: 85 dB(A) über 8 Stunden mit einem Halbierungsparameter von 3 dB (100 % der täglichen Lärmdosis); der Aktionspegel von 82 dB(A) entspricht 50 % der Dosis."
+  },
+  "reference": "NIOSH, Criteria for a Recommended Standard: Occupational Noise Exposure, Revised Criteria 1998, DHHS (NIOSH) Publication No. 98-126",
+  "averaging": {
+    "type": "leq",
+    "minutes": 480
+  },
+  "unit": "dB(A)",
+  "decimals": 0,
+  "upper_bound": "exclusive",
+  "scale": {
+    "min": 40,
+    "max": 100
+  },
+  "levels": [
+    [
+      "below_action",
+      82
+    ],
+    [
+      "action_level",
+      85
+    ],
+    [
+      "above_rel",
+      null
+    ]
+  ],
+  "categories": [
+    {
+      "id": "below_action",
+      "color": "#3BB273",
+      "cvd_color": "#009E73",
+      "name": {
+        "en": "Below the action level",
+        "ro": "Sub nivelul de acțiune",
+        "fr": "Sous le niveau d'action",
+        "de": "Unter dem Aktionspegel"
+      },
+      "description": {
+        "en": "Less than 50 % of the daily noise dose.",
+        "ro": "Sub 50 % din doza zilnică de zgomot.",
+        "fr": "Moins de 50 % de la dose de bruit quotidienne.",
+        "de": "Weniger als 50 % der täglichen Lärmdosis."
+      },
+      "recommendation": {
+        "en": "No action needed.",
+        "ro": "Nu este necesară nicio acțiune.",
+        "fr": "Aucune action nécessaire.",
+        "de": "Keine Maßnahme erforderlich."
+      }
+    },
+    {
+      "id": "action_level",
+      "color": "#F5A623",
+      "cvd_color": "#E69F00",
+      "name": {
+        "en": "Action level",
+        "ro": "Nivel de acțiune",
+        "fr": "Niveau d'action",
+        "de": "Aktionspegel"
+      },
+      "description": {
+        "en": "82–85 dB(A): 50 to 100 % of the daily noise dose.",
+        "ro": "82–85 dB(A): între 50 și 100 % din doza zilnică de zgomot.",
+        "fr": "82–85 dB(A) : de 50 à 100 % de la dose de bruit quotidienne.",
+        "de": "82–85 dB(A): 50 bis 100 % der täglichen Lärmdosis."
+      },
+      "recommendation": {
+        "en": "Limit the exposure time and make hearing protection available.",
+        "ro": "Limitați durata expunerii și puneți la dispoziție protecție auditivă.",
+        "fr": "Limitez la durée d'exposition et mettez des protections auditives à disposition.",
+        "de": "Expositionszeit begrenzen und Gehörschutz bereitstellen."
+      }
+    },
+    {
+      "id": "above_rel",
+      "color": "#E8513B",
+      "cvd_color": "#D55E00",
+      "name": {
+        "en": "Above the REL",
+        "ro": "Peste limita recomandată",
+        "fr": "Au-dessus de la limite recommandée",
+        "de": "Über dem REL"
+      },
+      "description": {
+        "en": "85 dB(A) or more over 8 hours: the recommended exposure limit is exceeded; risk of hearing loss.",
+        "ro": "85 dB(A) sau mai mult pe 8 ore: limita de expunere recomandată este depășită; risc de pierdere a auzului.",
+        "fr": "85 dB(A) ou plus sur 8 heures : la limite d'exposition recommandée est dépassée ; risque de perte auditive.",
+        "de": "85 dB(A) oder mehr über 8 Stunden: der empfohlene Grenzwert ist überschritten; Risiko eines Hörverlusts."
+      },
+      "recommendation": {
+        "en": "Wear hearing protection and reduce the noise or the exposure time.",
+        "ro": "Purtați protecție auditivă și reduceți zgomotul sau durata expunerii.",
+        "fr": "Portez des protections auditives et réduisez le bruit ou la durée d'exposition.",
+        "de": "Gehörschutz tragen und Lärm oder Expositionszeit verringern."
+      }
+    }
+  ]
+}

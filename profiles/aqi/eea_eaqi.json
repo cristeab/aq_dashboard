@@ -1,0 +1,252 @@
+{
+  "id": "eea_eaqi",
+  "order": 20,
+  "kind": "banded",
+  "name": {
+    "en": "European Air Quality Index (EEA)",
+    "ro": "Indicele european al calității aerului (AEM)",
+    "fr": "Indice européen de la qualité de l'air (AEE)",
+    "de": "Europäischer Luftqualitätsindex (EUA)"
+  },
+  "short_name": {
+    "en": "EAQI",
+    "ro": "EAQI",
+    "fr": "EAQI",
+    "de": "EAQI"
+  },
+  "description": {
+    "en": "Official index of the European Environment Agency, with six levels from good to extremely poor (thresholds revised in 2024 to follow the WHO 2021 guidelines). Uses 24-hour running means of PM2.5 and PM10 and 1-hour means of NO₂ and O₃, in µg/m³ at 20 °C. The displayed level (1–6) is the worst level of the pollutants.",
+    "ro": "Indicele oficial al Agenției Europene de Mediu, cu șase niveluri, de la bun la extrem de slab (praguri revizuite în 2024 conform ghidurilor OMS 2021). Folosește medii mobile pe 24 de ore pentru PM2.5 și PM10 și medii pe 1 oră pentru NO₂ și O₃, în µg/m³ la 20 °C. Nivelul afișat (1–6) este cel mai defavorabil nivel al poluanților.",
+    "fr": "Indice officiel de l'Agence européenne pour l'environnement, à six niveaux de bon à extrêmement mauvais (seuils révisés en 2024 selon les lignes directrices OMS 2021). Utilise les moyennes glissantes sur 24 heures des PM2.5 et PM10 et les moyennes horaires du NO₂ et de l'O₃, en µg/m³ à 20 °C. Le niveau affiché (1–6) est le plus mauvais niveau des polluants.",
+    "de": "Offizieller Index der Europäischen Umweltagentur mit sechs Stufen von gut bis extrem schlecht (Schwellenwerte 2024 an die WHO-Leitlinien 2021 angepasst). Verwendet gleitende 24-Stunden-Mittel von PM2.5 und PM10 sowie 1-Stunden-Mittel von NO₂ und O₃ in µg/m³ bei 20 °C. Die angezeigte Stufe (1–6) ist die schlechteste Stufe der Schadstoffe."
+  },
+  "reference": "European Environment Agency, European Air Quality Index, thresholds revised in 2024 (aligned with the WHO 2021 air quality guidelines)",
+  "gas_reference_temperature_c": 20,
+  "dominant_pollutant_min_index": 0,
+  "upper_bound": "inclusive",
+  "scale": {
+    "min": 0,
+    "max": 6
+  },
+  "above_scale_display": "6",
+  "categories": [
+    {
+      "id": "good",
+      "to": 1,
+      "color": "#50F0E6",
+      "cvd_color": "#009E73",
+      "name": {
+        "en": "Good",
+        "ro": "Bună",
+        "fr": "Bonne",
+        "de": "Gut"
+      },
+      "description": {
+        "en": "The air quality is good.",
+        "ro": "Calitatea aerului este bună.",
+        "fr": "La qualité de l'air est bonne.",
+        "de": "Die Luftqualität ist gut."
+      },
+      "recommendation": {
+        "en": "Enjoy your usual outdoor activities.",
+        "ro": "Continuați activitățile obișnuite în aer liber.",
+        "fr": "Profitez de vos activités habituelles en plein air.",
+        "de": "Genießen Sie Ihre gewohnten Aktivitäten im Freien."
+      }
+    },
+    {
+      "id": "fair",
+      "to": 2,
+      "color": "#50CCAA",
+      "cvd_color": "#F0E442",
+      "name": {
+        "en": "Fair",
+        "ro": "Acceptabilă",
+        "fr": "Moyenne",
+        "de": "Ausreichend"
+      },
+      "description": {
+        "en": "The air quality is fair.",
+        "ro": "Calitatea aerului este acceptabilă.",
+        "fr": "La qualité de l'air est moyenne.",
+        "de": "Die Luftqualität ist ausreichend."
+      },
+      "recommendation": {
+        "en": "Enjoy your usual outdoor activities.",
+        "ro": "Continuați activitățile obișnuite în aer liber.",
+        "fr": "Profitez de vos activités habituelles en plein air.",
+        "de": "Genießen Sie Ihre gewohnten Aktivitäten im Freien."
+      }
+    },
+    {
+      "id": "moderate",
+      "to": 3,
+      "color": "#F0E641",
+      "cvd_color": "#E69F00",
+      "name": {
+        "en": "Moderate",
+        "ro": "Moderată",
+        "fr": "Dégradée",
+        "de": "Mäßig"
+      },
+      "description": {
+        "en": "The air quality is moderate.",
+        "ro": "Calitatea aerului este moderată.",
+        "fr": "La qualité de l'air est dégradée.",
+        "de": "Die Luftqualität ist mäßig."
+      },
+      "recommendation": {
+        "en": "Enjoy your usual outdoor activities; sensitive people should consider reducing intense outdoor activities if they experience symptoms.",
+        "ro": "Continuați activitățile obișnuite; persoanele sensibile ar trebui să reducă activitățile intense în aer liber dacă au simptome.",
+        "fr": "Profitez de vos activités habituelles ; les personnes sensibles devraient envisager de réduire les activités intenses en plein air si elles ont des symptômes.",
+        "de": "Gewohnte Aktivitäten sind möglich; empfindliche Personen sollten bei Beschwerden intensive Aktivitäten im Freien reduzieren."
+      }
+    },
+    {
+      "id": "poor",
+      "to": 4,
+      "color": "#FF5050",
+      "cvd_color": "#D55E00",
+      "name": {
+        "en": "Poor",
+        "ro": "Slabă",
+        "fr": "Mauvaise",
+        "de": "Schlecht"
+      },
+      "description": {
+        "en": "The air quality is poor.",
+        "ro": "Calitatea aerului este slabă.",
+        "fr": "La qualité de l'air est mauvaise.",
+        "de": "Die Luftqualität ist schlecht."
+      },
+      "recommendation": {
+        "en": "Consider reducing intense outdoor activities if you have symptoms such as sore eyes, a cough or sore throat; sensitive people should reduce physical activities, particularly outdoors.",
+        "ro": "Reduceți activitățile intense în aer liber dacă aveți simptome precum iritații ale ochilor, tuse sau dureri în gât; persoanele sensibile ar trebui să reducă activitatea fizică, mai ales în aer liber.",
+        "fr": "Envisagez de réduire les activités intenses en plein air en cas de symptômes (yeux irrités, toux, maux de gorge) ; les personnes sensibles devraient réduire l'activité physique, surtout à l'extérieur.",
+        "de": "Bei Beschwerden wie gereizten Augen, Husten oder Halsschmerzen intensive Aktivitäten im Freien reduzieren; empfindliche Personen sollten körperliche Aktivität, besonders im Freien, verringern."
+      }
+    },
+    {
+      "id": "very_poor",
+      "to": 5,
+      "color": "#960032",
+      "cvd_color": "#CC79A7",
+      "name": {
+        "en": "Very poor",
+        "ro": "Foarte slabă",
+        "fr": "Très mauvaise",
+        "de": "Sehr schlecht"
+      },
+      "description": {
+        "en": "The air quality is very poor.",
+        "ro": "Calitatea aerului este foarte slabă.",
+        "fr": "La qualité de l'air est très mauvaise.",
+        "de": "Die Luftqualität ist sehr schlecht."
+      },
+      "recommendation": {
+        "en": "Consider reducing physical activities, particularly outdoors, especially if you have symptoms; sensitive people should reduce them.",
+        "ro": "Reduceți activitatea fizică, mai ales în aer liber și în special dacă aveți simptome; persoanele sensibile ar trebui să o reducă.",
+        "fr": "Envisagez de réduire l'activité physique, surtout à l'extérieur et en cas de symptômes ; les personnes sensibles devraient la réduire.",
+        "de": "Körperliche Aktivität besonders im Freien und bei Beschwerden reduzieren; empfindliche Personen sollten sie verringern."
+      }
+    },
+    {
+      "id": "extremely_poor",
+      "to": 6,
+      "color": "#7D2181",
+      "cvd_color": "#882255",
+      "name": {
+        "en": "Extremely poor",
+        "ro": "Extrem de slabă",
+        "fr": "Extrêmement mauvaise",
+        "de": "Extrem schlecht"
+      },
+      "description": {
+        "en": "The air quality is extremely poor.",
+        "ro": "Calitatea aerului este extrem de slabă.",
+        "fr": "La qualité de l'air est extrêmement mauvaise.",
+        "de": "Die Luftqualität ist extrem schlecht."
+      },
+      "recommendation": {
+        "en": "Reduce physical activities outdoors; sensitive people should avoid them.",
+        "ro": "Reduceți activitatea fizică în aer liber; persoanele sensibile ar trebui să o evite.",
+        "fr": "Réduisez l'activité physique à l'extérieur ; les personnes sensibles devraient l'éviter.",
+        "de": "Körperliche Aktivität im Freien reduzieren; empfindliche Personen sollten sie meiden."
+      }
+    }
+  ],
+  "pollutants": {
+    "pm25": [
+      {
+        "averaging": {
+          "type": "mean",
+          "hours": 24
+        },
+        "unit": "ug/m3",
+        "decimals": 0,
+        "rounding": "round",
+        "thresholds": [
+          5,
+          15,
+          50,
+          90,
+          140
+        ]
+      }
+    ],
+    "pm10": [
+      {
+        "averaging": {
+          "type": "mean",
+          "hours": 24
+        },
+        "unit": "ug/m3",
+        "decimals": 0,
+        "rounding": "round",
+        "thresholds": [
+          15,
+          45,
+          120,
+          195,
+          270
+        ]
+      }
+    ],
+    "no2": [
+      {
+        "averaging": {
+          "type": "mean",
+          "hours": 1
+        },
+        "unit": "ug/m3",
+        "decimals": 0,
+        "rounding": "round",
+        "thresholds": [
+          10,
+          25,
+          60,
+          100,
+          150
+        ]
+      }
+    ],
+    "o3": [
+      {
+        "averaging": {
+          "type": "mean",
+          "hours": 1
+        },
+        "unit": "ug/m3",
+        "decimals": 0,
+        "rounding": "round",
+        "thresholds": [
+          60,
+          100,
+          120,
+          160,
+          180
+        ]
+      }
+    ]
+  }
+}

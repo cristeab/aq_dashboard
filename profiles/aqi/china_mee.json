@@ -1,0 +1,509 @@
+{
+  "id": "china_mee",
+  "order": 40,
+  "kind": "index",
+  "name": {
+    "en": "China Air Quality Index (HJ 633-2012)",
+    "ro": "Indicele calității aerului din China (HJ 633-2012)",
+    "fr": "Indice de qualité de l'air de la Chine (HJ 633-2012)",
+    "de": "Chinesischer Luftqualitätsindex (HJ 633-2012)"
+  },
+  "short_name": {
+    "en": "China AQI",
+    "ro": "AQI China",
+    "fr": "AQI Chine",
+    "de": "China-AQI"
+  },
+  "description": {
+    "en": "Index of the Chinese Ministry of Ecology and Environment (0–500), real-time hourly report: 24-hour moving means for PM2.5 and PM10, 1-hour means for NO₂ and CO, 1-hour and 8-hour means for O₃. Sub-indices are rounded up; the primary pollutant is only reported above 50.",
+    "ro": "Indicele Ministerului Ecologiei și Mediului din China (0–500), raport orar în timp real: medii mobile pe 24 de ore pentru PM2.5 și PM10, medii pe 1 oră pentru NO₂ și CO, medii pe 1 și 8 ore pentru O₃. Subindicii se rotunjesc în sus; poluantul principal se indică doar peste 50.",
+    "fr": "Indice du ministère chinois de l'Écologie et de l'Environnement (0–500), rapport horaire en temps réel : moyennes glissantes sur 24 heures pour PM2.5 et PM10, moyennes horaires pour NO₂ et CO, moyennes sur 1 et 8 heures pour O₃. Les sous-indices sont arrondis à l'entier supérieur ; le polluant principal n'est indiqué qu'au-delà de 50.",
+    "de": "Index des chinesischen Ministeriums für Ökologie und Umwelt (0–500), stündlicher Echtzeitbericht: gleitende 24-Stunden-Mittel für PM2.5 und PM10, 1-Stunden-Mittel für NO₂ und CO, 1- und 8-Stunden-Mittel für O₃. Teilindizes werden aufgerundet; der Hauptschadstoff wird erst über 50 angegeben."
+  },
+  "reference": "HJ 633-2012, Technical Regulation on Ambient Air Quality Index (on trial); GB 3095-2012 (amended 2018, reference state 298.15 K)",
+  "index_rounding": "ceil",
+  "gas_reference_temperature_c": 25,
+  "dominant_pollutant_min_index": 50,
+  "upper_bound": "inclusive",
+  "scale": {
+    "min": 0,
+    "max": 500
+  },
+  "above_scale_display": ">500",
+  "categories": [
+    {
+      "id": "excellent",
+      "to": 50,
+      "color": "#00E400",
+      "cvd_color": "#009E73",
+      "name": {
+        "en": "Excellent",
+        "ro": "Excelent",
+        "fr": "Excellent",
+        "de": "Ausgezeichnet"
+      },
+      "description": {
+        "en": "Air quality is satisfactory; there is basically no air pollution.",
+        "ro": "Calitatea aerului este satisfăcătoare; practic nu există poluare.",
+        "fr": "La qualité de l'air est satisfaisante ; il n'y a pratiquement pas de pollution.",
+        "de": "Die Luftqualität ist zufriedenstellend; es gibt praktisch keine Luftverschmutzung."
+      },
+      "recommendation": {
+        "en": "All groups can carry out normal activities.",
+        "ro": "Toate grupurile își pot desfășura activitățile normale.",
+        "fr": "Tous les groupes peuvent mener leurs activités normales.",
+        "de": "Alle Gruppen können ihren normalen Aktivitäten nachgehen."
+      }
+    },
+    {
+      "id": "good",
+      "to": 100,
+      "color": "#FFFF00",
+      "cvd_color": "#F0E442",
+      "name": {
+        "en": "Good",
+        "ro": "Bună",
+        "fr": "Bon",
+        "de": "Gut"
+      },
+      "description": {
+        "en": "Air quality is acceptable, but some pollutants may slightly affect a very small number of unusually sensitive people.",
+        "ro": "Calitatea aerului este acceptabilă, dar unii poluanți pot afecta ușor un număr foarte mic de persoane neobișnuit de sensibile.",
+        "fr": "La qualité de l'air est acceptable, mais certains polluants peuvent affecter légèrement un très petit nombre de personnes inhabituellement sensibles.",
+        "de": "Die Luftqualität ist akzeptabel, einige Schadstoffe können jedoch sehr wenige ungewöhnlich empfindliche Personen leicht beeinträchtigen."
+      },
+      "recommendation": {
+        "en": "A very small number of unusually sensitive people should reduce outdoor activities.",
+        "ro": "Un număr foarte mic de persoane neobișnuit de sensibile ar trebui să reducă activitățile în aer liber.",
+        "fr": "Un très petit nombre de personnes inhabituellement sensibles devraient réduire leurs activités en plein air.",
+        "de": "Sehr wenige ungewöhnlich empfindliche Personen sollten Aktivitäten im Freien reduzieren."
+      }
+    },
+    {
+      "id": "lightly_polluted",
+      "to": 150,
+      "color": "#FF7E00",
+      "cvd_color": "#E69F00",
+      "name": {
+        "en": "Lightly polluted",
+        "ro": "Poluare ușoară",
+        "fr": "Légèrement pollué",
+        "de": "Leicht verschmutzt"
+      },
+      "description": {
+        "en": "Symptoms of susceptible people are slightly aggravated; healthy people may show irritation symptoms.",
+        "ro": "Simptomele persoanelor sensibile se agravează ușor; persoanele sănătoase pot avea simptome de iritație.",
+        "fr": "Les symptômes des personnes sensibles s'aggravent légèrement ; les personnes en bonne santé peuvent présenter des irritations.",
+        "de": "Symptome empfindlicher Personen verschlimmern sich leicht; gesunde Menschen können Reizsymptome zeigen."
+      },
+      "recommendation": {
+        "en": "Children, older adults and people with heart or respiratory disease should reduce prolonged, high-intensity outdoor exercise.",
+        "ro": "Copiii, vârstnicii și persoanele cu boli de inimă sau respiratorii ar trebui să reducă exercițiile intense și prelungite în aer liber.",
+        "fr": "Les enfants, les personnes âgées et les personnes atteintes de maladies cardiaques ou respiratoires devraient réduire les exercices intenses et prolongés en plein air.",
+        "de": "Kinder, ältere Menschen und Menschen mit Herz- oder Atemwegserkrankungen sollten lange, intensive Bewegung im Freien reduzieren."
+      }
+    },
+    {
+      "id": "moderately_polluted",
+      "to": 200,
+      "color": "#FF0000",
+      "cvd_color": "#D55E00",
+      "name": {
+        "en": "Moderately polluted",
+        "ro": "Poluare moderată",
+        "fr": "Modérément pollué",
+        "de": "Mäßig verschmutzt"
+      },
+      "description": {
+        "en": "Symptoms of susceptible people are further aggravated; the heart and respiratory system of healthy people may be affected.",
+        "ro": "Simptomele persoanelor sensibile se agravează; inima și sistemul respirator al persoanelor sănătoase pot fi afectate.",
+        "fr": "Les symptômes des personnes sensibles s'aggravent ; le cœur et le système respiratoire des personnes en bonne santé peuvent être affectés.",
+        "de": "Symptome empfindlicher Personen verschlimmern sich weiter; Herz und Atemwege gesunder Menschen können beeinträchtigt werden."
+      },
+      "recommendation": {
+        "en": "Sensitive groups should avoid prolonged, high-intensity outdoor exercise; everyone should reduce outdoor exercise.",
+        "ro": "Grupurile sensibile ar trebui să evite exercițiile intense și prelungite în aer liber; toată lumea ar trebui să reducă exercițiile în aer liber.",
+        "fr": "Les groupes sensibles devraient éviter les exercices intenses et prolongés en plein air ; tout le monde devrait réduire l'exercice en plein air.",
+        "de": "Empfindliche Gruppen sollten lange, intensive Bewegung im Freien meiden; alle sollten Bewegung im Freien reduzieren."
+      }
+    },
+    {
+      "id": "heavily_polluted",
+      "to": 300,
+      "color": "#99004C",
+      "cvd_color": "#CC79A7",
+      "name": {
+        "en": "Heavily polluted",
+        "ro": "Poluare puternică",
+        "fr": "Fortement pollué",
+        "de": "Stark verschmutzt"
+      },
+      "description": {
+        "en": "Symptoms of people with heart or lung disease are significantly aggravated and exercise tolerance decreases; symptoms are widespread in healthy people.",
+        "ro": "Simptomele persoanelor cu boli de inimă sau plămâni se agravează semnificativ, iar toleranța la efort scade; simptomele sunt răspândite și la persoanele sănătoase.",
+        "fr": "Les symptômes des personnes atteintes de maladies cardiaques ou pulmonaires s'aggravent nettement et la tolérance à l'effort diminue ; les symptômes sont répandus chez les personnes en bonne santé.",
+        "de": "Symptome bei Herz- oder Lungenkranken verschlimmern sich deutlich, die Belastbarkeit sinkt; auch Gesunde zeigen häufig Symptome."
+      },
+      "recommendation": {
+        "en": "Sensitive groups should stay indoors and stop outdoor activities; everyone should reduce outdoor activities.",
+        "ro": "Grupurile sensibile ar trebui să rămână în interior și să oprească activitățile în aer liber; toată lumea ar trebui să le reducă.",
+        "fr": "Les groupes sensibles devraient rester à l'intérieur et cesser les activités en plein air ; tout le monde devrait les réduire.",
+        "de": "Empfindliche Gruppen sollten drinnen bleiben und Aktivitäten im Freien einstellen; alle sollten sie reduzieren."
+      }
+    },
+    {
+      "id": "severely_polluted",
+      "to": 500,
+      "color": "#7E0023",
+      "cvd_color": "#882255",
+      "name": {
+        "en": "Severely polluted",
+        "ro": "Poluare severă",
+        "fr": "Gravement pollué",
+        "de": "Schwer verschmutzt"
+      },
+      "description": {
+        "en": "Exercise tolerance of healthy people decreases, with strong symptoms and early onset of some diseases.",
+        "ro": "Toleranța la efort a persoanelor sănătoase scade, cu simptome puternice și debutul timpuriu al unor boli.",
+        "fr": "La tolérance à l'effort des personnes en bonne santé diminue, avec des symptômes marqués et l'apparition précoce de certaines maladies.",
+        "de": "Die Belastbarkeit gesunder Menschen sinkt, mit starken Symptomen und frühem Auftreten bestimmter Krankheiten."
+      },
+      "recommendation": {
+        "en": "Sensitive groups should stay indoors and avoid physical exertion; everyone should avoid outdoor activities.",
+        "ro": "Grupurile sensibile ar trebui să rămână în interior și să evite efortul fizic; toată lumea ar trebui să evite activitățile în aer liber.",
+        "fr": "Les groupes sensibles devraient rester à l'intérieur et éviter tout effort physique ; tout le monde devrait éviter les activités en plein air.",
+        "de": "Empfindliche Gruppen sollten drinnen bleiben und körperliche Anstrengung meiden; alle sollten Aktivitäten im Freien meiden."
+      }
+    }
+  ],
+  "pollutants": {
+    "pm25": [
+      {
+        "averaging": {
+          "type": "mean",
+          "hours": 24
+        },
+        "unit": "ug/m3",
+        "decimals": 0,
+        "rounding": "round",
+        "breakpoints": [
+          [
+            0,
+            35,
+            0,
+            50
+          ],
+          [
+            35,
+            75,
+            50,
+            100
+          ],
+          [
+            75,
+            115,
+            100,
+            150
+          ],
+          [
+            115,
+            150,
+            150,
+            200
+          ],
+          [
+            150,
+            250,
+            200,
+            300
+          ],
+          [
+            250,
+            350,
+            300,
+            400
+          ],
+          [
+            350,
+            500,
+            400,
+            500
+          ]
+        ],
+        "above_range": "cap"
+      }
+    ],
+    "pm10": [
+      {
+        "averaging": {
+          "type": "mean",
+          "hours": 24
+        },
+        "unit": "ug/m3",
+        "decimals": 0,
+        "rounding": "round",
+        "breakpoints": [
+          [
+            0,
+            50,
+            0,
+            50
+          ],
+          [
+            50,
+            150,
+            50,
+            100
+          ],
+          [
+            150,
+            250,
+            100,
+            150
+          ],
+          [
+            250,
+            350,
+            150,
+            200
+          ],
+          [
+            350,
+            420,
+            200,
+            300
+          ],
+          [
+            420,
+            500,
+            300,
+            400
+          ],
+          [
+            500,
+            600,
+            400,
+            500
+          ]
+        ],
+        "above_range": "cap"
+      }
+    ],
+    "no2": [
+      {
+        "averaging": {
+          "type": "mean",
+          "hours": 1
+        },
+        "unit": "ug/m3",
+        "decimals": 0,
+        "rounding": "round",
+        "breakpoints": [
+          [
+            0,
+            100,
+            0,
+            50
+          ],
+          [
+            100,
+            200,
+            50,
+            100
+          ],
+          [
+            200,
+            700,
+            100,
+            150
+          ],
+          [
+            700,
+            1200,
+            150,
+            200
+          ],
+          [
+            1200,
+            2340,
+            200,
+            300
+          ],
+          [
+            2340,
+            3090,
+            300,
+            400
+          ],
+          [
+            3090,
+            3840,
+            400,
+            500
+          ]
+        ],
+        "above_range": "cap"
+      }
+    ],
+    "co": [
+      {
+        "averaging": {
+          "type": "mean",
+          "hours": 1
+        },
+        "unit": "mg/m3",
+        "decimals": 1,
+        "rounding": "round",
+        "breakpoints": [
+          [
+            0,
+            5,
+            0,
+            50
+          ],
+          [
+            5,
+            10,
+            50,
+            100
+          ],
+          [
+            10,
+            35,
+            100,
+            150
+          ],
+          [
+            35,
+            60,
+            150,
+            200
+          ],
+          [
+            60,
+            90,
+            200,
+            300
+          ],
+          [
+            90,
+            120,
+            300,
+            400
+          ],
+          [
+            120,
+            150,
+            400,
+            500
+          ]
+        ],
+        "above_range": "cap"
+      }
+    ],
+    "o3": [
+      {
+        "averaging": {
+          "type": "mean",
+          "hours": 1
+        },
+        "unit": "ug/m3",
+        "decimals": 0,
+        "rounding": "round",
+        "breakpoints": [
+          [
+            0,
+            160,
+            0,
+            50
+          ],
+          [
+            160,
+            200,
+            50,
+            100
+          ],
+          [
+            200,
+            300,
+            100,
+            150
+          ],
+          [
+            300,
+            400,
+            150,
+            200
+          ],
+          [
+            400,
+            800,
+            200,
+            300
+          ],
+          [
+            800,
+            1000,
+            300,
+            400
+          ],
+          [
+            1000,
+            1200,
+            400,
+            500
+          ]
+        ],
+        "above_range": "cap"
+      },
+      {
+        "averaging": {
+          "type": "mean",
+          "hours": 8
+        },
+        "unit": "ug/m3",
+        "decimals": 0,
+        "rounding": "round",
+        "breakpoints": [
+          [
+            0,
+            100,
+            0,
+            50
+          ],
+          [
+            100,
+            160,
+            50,
+            100
+          ],
+          [
+            160,
+            215,
+            100,
+            150
+          ],
+          [
+            215,
+            265,
+            150,
+            200
+          ],
+          [
+            265,
+            800,
+            200,
+            300
+          ]
+        ],
+        "above_range": "not_applicable",
+        "note": {
+          "en": "8-hour table; above 800 µg/m³ only the 1-hour table applies.",
+          "ro": "Tabel pe 8 ore; peste 800 µg/m³ se aplică doar tabelul pe 1 oră.",
+          "fr": "Table sur 8 heures ; au-delà de 800 µg/m³, seule la table horaire s'applique.",
+          "de": "8-Stunden-Tabelle; über 800 µg/m³ gilt nur die 1-Stunden-Tabelle."
+        }
+      }
+    ]
+  }
+}

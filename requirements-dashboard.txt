@@ -1,0 +1,6 @@
+# Web server and mocked sensors, no sensor hardware needed
+fastapi
+# >= 0.35 provides the "websockets-sansio" implementation
+uvicorn>=0.35
+websockets
+zeroconf

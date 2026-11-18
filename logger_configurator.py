@@ -21,10 +21,12 @@ class LoggerConfigurator:
     @staticmethod
     def configure_logger(class_name):
         logger = logging.getLogger(f"AQI.{class_name}")
-
-        lc = LoggerConfigurator()
-        logger.setLevel(lc.log_level)
-        logger.addHandler(lc.file_handler)
+        # configured once per logger: several instances of a class (e.g. two database
+        # connections) must not write every line twice
+        if not logger.handlers:
+            lc = LoggerConfigurator()
+            logger.setLevel(lc.log_level)
+            logger.addHandler(lc.file_handler)
         return logger
     
     @staticmethod

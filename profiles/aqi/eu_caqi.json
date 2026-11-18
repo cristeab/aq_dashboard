@@ -1,0 +1,347 @@
+{
+  "id": "eu_caqi",
+  "order": 25,
+  "kind": "index",
+  "name": {
+    "en": "European Common Air Quality Index (CAQI)",
+    "ro": "Indicele european comun al calității aerului (CAQI)",
+    "fr": "Indice européen commun de qualité de l'air (CAQI)",
+    "de": "Europäischer gemeinsamer Luftqualitätsindex (CAQI)"
+  },
+  "short_name": {
+    "en": "CAQI",
+    "ro": "CAQI",
+    "fr": "CAQI",
+    "de": "CAQI"
+  },
+  "description": {
+    "en": "CiteAir common index (0–100, hourly grid for background locations) used to compare European cities. Uses 1-hour means of NO₂, PM10, PM2.5 and O₃ and the 8-hour mean of CO, in µg/m³ at 20 °C. CAQI is not health-based; the advice is adapted from the EEA European Air Quality Index.",
+    "ro": "Indicele comun CiteAir (0–100, grilă orară pentru zone de fond) folosit pentru compararea orașelor europene. Folosește medii pe 1 oră pentru NO₂, PM10, PM2.5 și O₃ și media pe 8 ore pentru CO, în µg/m³ la 20 °C. CAQI nu se bazează pe efecte asupra sănătății; recomandările sunt adaptate după Indicele european al calității aerului (AEM).",
+    "fr": "Indice commun CiteAir (0–100, grille horaire pour les sites de fond) utilisé pour comparer les villes européennes. Utilise les moyennes horaires de NO₂, PM10, PM2.5 et O₃ et la moyenne sur 8 heures du CO, en µg/m³ à 20 °C. Le CAQI n'est pas fondé sur la santé ; les conseils sont adaptés de l'indice européen de qualité de l'air de l'AEE.",
+    "de": "Gemeinsamer CiteAir-Index (0–100, Stundenraster für Hintergrundstandorte) zum Vergleich europäischer Städte. Verwendet 1-Stunden-Mittel von NO₂, PM10, PM2.5 und O₃ sowie das 8-Stunden-Mittel von CO in µg/m³ bei 20 °C. Der CAQI ist nicht gesundheitsbasiert; die Hinweise sind dem Europäischen Luftqualitätsindex der EUA entlehnt."
+  },
+  "reference": "CiteAir II, Common Information to European Air – the Common Air Quality Index (CAQI), revised 2012",
+  "index_rounding": "nearest",
+  "gas_reference_temperature_c": 20,
+  "dominant_pollutant_min_index": 0,
+  "upper_bound": "inclusive",
+  "scale": {
+    "min": 0,
+    "max": 125
+  },
+  "above_scale_display": ">100",
+  "categories": [
+    {
+      "id": "very_low",
+      "to": 25,
+      "color": "#79BC6A",
+      "cvd_color": "#009E73",
+      "name": {
+        "en": "Very low",
+        "ro": "Foarte scăzută",
+        "fr": "Très faible",
+        "de": "Sehr gering"
+      },
+      "description": {
+        "en": "Very low air pollution.",
+        "ro": "Poluare a aerului foarte scăzută.",
+        "fr": "Pollution de l'air très faible.",
+        "de": "Sehr geringe Luftverschmutzung."
+      },
+      "recommendation": {
+        "en": "Enjoy your usual activities.",
+        "ro": "Continuați activitățile obișnuite.",
+        "fr": "Profitez de vos activités habituelles.",
+        "de": "Genießen Sie Ihre gewohnten Aktivitäten."
+      }
+    },
+    {
+      "id": "low",
+      "to": 50,
+      "color": "#BBCF4C",
+      "cvd_color": "#F0E442",
+      "name": {
+        "en": "Low",
+        "ro": "Scăzută",
+        "fr": "Faible",
+        "de": "Gering"
+      },
+      "description": {
+        "en": "Low air pollution.",
+        "ro": "Poluare a aerului scăzută.",
+        "fr": "Pollution de l'air faible.",
+        "de": "Geringe Luftverschmutzung."
+      },
+      "recommendation": {
+        "en": "Enjoy your usual activities.",
+        "ro": "Continuați activitățile obișnuite.",
+        "fr": "Profitez de vos activités habituelles.",
+        "de": "Genießen Sie Ihre gewohnten Aktivitäten."
+      }
+    },
+    {
+      "id": "medium",
+      "to": 75,
+      "color": "#EEC20B",
+      "cvd_color": "#E69F00",
+      "name": {
+        "en": "Medium",
+        "ro": "Medie",
+        "fr": "Moyenne",
+        "de": "Mittel"
+      },
+      "description": {
+        "en": "Medium air pollution.",
+        "ro": "Poluare a aerului medie.",
+        "fr": "Pollution de l'air moyenne.",
+        "de": "Mittlere Luftverschmutzung."
+      },
+      "recommendation": {
+        "en": "Sensitive people should consider reducing intense activities.",
+        "ro": "Persoanele sensibile ar trebui să ia în considerare reducerea activităților intense.",
+        "fr": "Les personnes sensibles devraient envisager de réduire les activités intenses.",
+        "de": "Empfindliche Personen sollten erwägen, intensive Aktivitäten zu reduzieren."
+      }
+    },
+    {
+      "id": "high",
+      "to": 100,
+      "color": "#F29305",
+      "cvd_color": "#D55E00",
+      "name": {
+        "en": "High",
+        "ro": "Ridicată",
+        "fr": "Élevée",
+        "de": "Hoch"
+      },
+      "description": {
+        "en": "High air pollution.",
+        "ro": "Poluare a aerului ridicată.",
+        "fr": "Pollution de l'air élevée.",
+        "de": "Hohe Luftverschmutzung."
+      },
+      "recommendation": {
+        "en": "Sensitive people (asthma, heart or lung disease) should reduce physical activity; everyone should consider reducing intense activities.",
+        "ro": "Persoanele sensibile (astm, boli de inimă sau plămâni) ar trebui să reducă activitatea fizică; toată lumea ar trebui să ia în considerare reducerea activităților intense.",
+        "fr": "Les personnes sensibles (asthme, maladies cardiaques ou pulmonaires) devraient réduire l'activité physique ; tout le monde devrait envisager de réduire les activités intenses.",
+        "de": "Empfindliche Personen (Asthma, Herz- oder Lungenerkrankungen) sollten körperliche Aktivität reduzieren; alle sollten erwägen, intensive Aktivitäten zu reduzieren."
+      }
+    },
+    {
+      "id": "very_high",
+      "to": 125,
+      "color": "#E8416F",
+      "cvd_color": "#CC79A7",
+      "name": {
+        "en": "Very high",
+        "ro": "Foarte ridicată",
+        "fr": "Très élevée",
+        "de": "Sehr hoch"
+      },
+      "description": {
+        "en": "Very high air pollution.",
+        "ro": "Poluare a aerului foarte ridicată.",
+        "fr": "Pollution de l'air très élevée.",
+        "de": "Sehr hohe Luftverschmutzung."
+      },
+      "recommendation": {
+        "en": "Sensitive people should avoid physical activity; everyone should reduce it. Remove the source or use an air purifier.",
+        "ro": "Persoanele sensibile ar trebui să evite activitatea fizică; toată lumea ar trebui să o reducă. Eliminați sursa sau folosiți un purificator de aer.",
+        "fr": "Les personnes sensibles devraient éviter l'activité physique ; tout le monde devrait la réduire. Supprimez la source ou utilisez un purificateur d'air.",
+        "de": "Empfindliche Personen sollten körperliche Aktivität meiden, alle sollten sie reduzieren. Quelle beseitigen oder Luftreiniger verwenden."
+      }
+    }
+  ],
+  "pollutants": {
+    "no2": [
+      {
+        "averaging": {
+          "type": "mean",
+          "hours": 1
+        },
+        "unit": "ug/m3",
+        "decimals": 0,
+        "rounding": "round",
+        "breakpoints": [
+          [
+            0,
+            50,
+            0,
+            25
+          ],
+          [
+            50,
+            100,
+            25,
+            50
+          ],
+          [
+            100,
+            200,
+            50,
+            75
+          ],
+          [
+            200,
+            400,
+            75,
+            100
+          ]
+        ],
+        "above_range": "cap"
+      }
+    ],
+    "pm10": [
+      {
+        "averaging": {
+          "type": "mean",
+          "hours": 1
+        },
+        "unit": "ug/m3",
+        "decimals": 0,
+        "rounding": "round",
+        "breakpoints": [
+          [
+            0,
+            25,
+            0,
+            25
+          ],
+          [
+            25,
+            50,
+            25,
+            50
+          ],
+          [
+            50,
+            90,
+            50,
+            75
+          ],
+          [
+            90,
+            180,
+            75,
+            100
+          ]
+        ],
+        "above_range": "cap"
+      }
+    ],
+    "pm25": [
+      {
+        "averaging": {
+          "type": "mean",
+          "hours": 1
+        },
+        "unit": "ug/m3",
+        "decimals": 0,
+        "rounding": "round",
+        "breakpoints": [
+          [
+            0,
+            15,
+            0,
+            25
+          ],
+          [
+            15,
+            30,
+            25,
+            50
+          ],
+          [
+            30,
+            55,
+            50,
+            75
+          ],
+          [
+            55,
+            110,
+            75,
+            100
+          ]
+        ],
+        "above_range": "cap"
+      }
+    ],
+    "o3": [
+      {
+        "averaging": {
+          "type": "mean",
+          "hours": 1
+        },
+        "unit": "ug/m3",
+        "decimals": 0,
+        "rounding": "round",
+        "breakpoints": [
+          [
+            0,
+            60,
+            0,
+            25
+          ],
+          [
+            60,
+            120,
+            25,
+            50
+          ],
+          [
+            120,
+            180,
+            50,
+            75
+          ],
+          [
+            180,
+            240,
+            75,
+            100
+          ]
+        ],
+        "above_range": "cap"
+      }
+    ],
+    "co": [
+      {
+        "averaging": {
+          "type": "mean",
+          "hours": 8
+        },
+        "unit": "ug/m3",
+        "decimals": 0,
+        "rounding": "round",
+        "breakpoints": [
+          [
+            0,
+            5000,
+            0,
+            25
+          ],
+          [
+            5000,
+            7500,
+            25,
+            50
+          ],
+          [
+            7500,
+            10000,
+            50,
+            75
+          ],
+          [
+            10000,
+            20000,
+            75,
+            100
+          ]
+        ],
+        "above_range": "cap"
+      }
+    ]
+  }
+}

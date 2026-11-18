@@ -1,0 +1,318 @@
+{
+  "id": "us_epa_fast",
+  "order": 15,
+  "extends": "us_epa",
+  "name": {
+    "en": "US EPA scale – fast (10 min, indicative)",
+    "ro": "Scara US EPA – rapidă (10 min, orientativă)",
+    "fr": "Échelle US EPA – rapide (10 min, indicative)",
+    "de": "US-EPA-Skala – schnell (10 min, orientierend)"
+  },
+  "short_name": {
+    "en": "10-min. AQI",
+    "ro": "AQI pe 10 min.",
+    "fr": "IQA de 10 min.",
+    "de": "10-Min. AQI"
+  },
+  "description": {
+    "en": "US EPA breakpoints applied to 10-minute means of all pollutants. Reacts within minutes to indoor events such as cooking or cleaning, but is not comparable with official AQI reports. Closest to the former \"10-min. AQI\" of this dashboard.",
+    "ro": "Pragurile US EPA aplicate mediilor pe 10 minute ale tuturor poluanților. Reacționează în câteva minute la evenimente din interior (gătit, curățenie), dar nu este comparabil cu rapoartele AQI oficiale. Cel mai apropiat de fostul „AQI pe 10 min.” al acestui panou.",
+    "fr": "Seuils US EPA appliqués aux moyennes sur 10 minutes de tous les polluants. Réagit en quelques minutes aux événements intérieurs (cuisine, ménage), mais n'est pas comparable aux rapports AQI officiels. Le plus proche de l'ancien « IQA de 10 min. » de ce tableau de bord.",
+    "de": "US-EPA-Grenzwerte, angewendet auf 10-Minuten-Mittel aller Schadstoffe. Reagiert innerhalb von Minuten auf Ereignisse in Innenräumen wie Kochen oder Putzen, ist aber nicht mit offiziellen AQI-Meldungen vergleichbar. Entspricht am ehesten dem bisherigen „10-Min. AQI“ dieses Dashboards."
+  },
+  "pollutants": {
+    "pm25": [
+      {
+        "averaging": {
+          "type": "mean",
+          "minutes": 10
+        },
+        "unit": "ug/m3",
+        "decimals": 1,
+        "rounding": "truncate",
+        "breakpoints": [
+          [
+            0.0,
+            9.0,
+            0,
+            50
+          ],
+          [
+            9.1,
+            35.4,
+            51,
+            100
+          ],
+          [
+            35.5,
+            55.4,
+            101,
+            150
+          ],
+          [
+            55.5,
+            125.4,
+            151,
+            200
+          ],
+          [
+            125.5,
+            225.4,
+            201,
+            300
+          ],
+          [
+            225.5,
+            325.4,
+            301,
+            500
+          ]
+        ],
+        "above_range": "cap"
+      }
+    ],
+    "pm10": [
+      {
+        "averaging": {
+          "type": "mean",
+          "minutes": 10
+        },
+        "unit": "ug/m3",
+        "decimals": 0,
+        "rounding": "truncate",
+        "breakpoints": [
+          [
+            0,
+            54,
+            0,
+            50
+          ],
+          [
+            55,
+            154,
+            51,
+            100
+          ],
+          [
+            155,
+            254,
+            101,
+            150
+          ],
+          [
+            255,
+            354,
+            151,
+            200
+          ],
+          [
+            355,
+            424,
+            201,
+            300
+          ],
+          [
+            425,
+            604,
+            301,
+            500
+          ]
+        ],
+        "above_range": "cap"
+      }
+    ],
+    "o3": [
+      {
+        "averaging": {
+          "type": "mean",
+          "minutes": 10
+        },
+        "unit": "ppm",
+        "decimals": 3,
+        "rounding": "truncate",
+        "breakpoints": [
+          [
+            0.0,
+            0.054,
+            0,
+            50
+          ],
+          [
+            0.055,
+            0.07,
+            51,
+            100
+          ],
+          [
+            0.071,
+            0.085,
+            101,
+            150
+          ],
+          [
+            0.086,
+            0.105,
+            151,
+            200
+          ],
+          [
+            0.106,
+            0.2,
+            201,
+            300
+          ]
+        ],
+        "above_range": "not_applicable",
+        "note": {
+          "en": "8-hour table; above 0.200 ppm the 1-hour table applies.",
+          "ro": "Tabel pe 8 ore; peste 0,200 ppm se aplică tabelul pe 1 oră.",
+          "fr": "Table sur 8 heures ; au-delà de 0,200 ppm, la table horaire s'applique.",
+          "de": "8-Stunden-Tabelle; über 0,200 ppm gilt die 1-Stunden-Tabelle."
+        }
+      },
+      {
+        "averaging": {
+          "type": "mean",
+          "minutes": 10
+        },
+        "unit": "ppm",
+        "decimals": 3,
+        "rounding": "truncate",
+        "breakpoints": [
+          [
+            0.125,
+            0.164,
+            101,
+            150
+          ],
+          [
+            0.165,
+            0.204,
+            151,
+            200
+          ],
+          [
+            0.205,
+            0.404,
+            201,
+            300
+          ],
+          [
+            0.405,
+            0.604,
+            301,
+            500
+          ]
+        ],
+        "below_range": "not_applicable",
+        "above_range": "cap",
+        "note": {
+          "en": "1-hour table, only used from 0.125 ppm.",
+          "ro": "Tabel pe 1 oră, folosit doar de la 0,125 ppm.",
+          "fr": "Table horaire, utilisée seulement à partir de 0,125 ppm.",
+          "de": "1-Stunden-Tabelle, nur ab 0,125 ppm verwendet."
+        }
+      }
+    ],
+    "co": [
+      {
+        "averaging": {
+          "type": "mean",
+          "minutes": 10
+        },
+        "unit": "ppm",
+        "decimals": 1,
+        "rounding": "truncate",
+        "breakpoints": [
+          [
+            0.0,
+            4.4,
+            0,
+            50
+          ],
+          [
+            4.5,
+            9.4,
+            51,
+            100
+          ],
+          [
+            9.5,
+            12.4,
+            101,
+            150
+          ],
+          [
+            12.5,
+            15.4,
+            151,
+            200
+          ],
+          [
+            15.5,
+            30.4,
+            201,
+            300
+          ],
+          [
+            30.5,
+            50.4,
+            301,
+            500
+          ]
+        ],
+        "above_range": "cap"
+      }
+    ],
+    "no2": [
+      {
+        "averaging": {
+          "type": "mean",
+          "minutes": 10
+        },
+        "unit": "ppb",
+        "decimals": 0,
+        "rounding": "truncate",
+        "breakpoints": [
+          [
+            0,
+            53,
+            0,
+            50
+          ],
+          [
+            54,
+            100,
+            51,
+            100
+          ],
+          [
+            101,
+            360,
+            101,
+            150
+          ],
+          [
+            361,
+            649,
+            151,
+            200
+          ],
+          [
+            650,
+            1249,
+            201,
+            300
+          ],
+          [
+            1250,
+            2049,
+            301,
+            500
+          ]
+        ],
+        "above_range": "cap"
+      }
+    ]
+  }
+}
