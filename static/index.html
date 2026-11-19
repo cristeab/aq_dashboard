@@ -36,39 +36,10 @@
                     <p id="date-time"></p>
                 </div>
                 <div class="header-right">
-                    <div class="language-container">
-                        <button id="language-btn" class="language-btn" title="Select Language" aria-label="EN – Select Language" aria-haspopup="true" aria-expanded="false" aria-controls="language-dropdown">
-                            <span class="language-active-code">EN</span>
-                        </button>
-                        <div id="language-dropdown" class="language-dropdown hidden">
-                            <button type="button" class="language-option" data-lang="en" lang="en">English</button>
-                            <button type="button" class="language-option" data-lang="ro" lang="ro">Română</button>
-                            <button type="button" class="language-option" data-lang="fr" lang="fr">Français</button>
-                            <button type="button" class="language-option" data-lang="de" lang="de">Deutsch</button>
-                        </div>
-                    </div>
                     <button id="settings-btn" class="settings-btn" title="Settings" data-i18n-title="settings_title" data-i18n-aria="settings_title" aria-label="Settings" aria-haspopup="dialog">
                         <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="3"></circle>
                             <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-                        </svg>
-                    </button>
-                    <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle Theme" data-i18n-title="theme_toggle_title" data-i18n-aria="theme_toggle_title" aria-label="Toggle Theme">
-                        <!-- Sun icon (shown in dark theme to switch to light) -->
-                        <svg aria-hidden="true" class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="4"></circle>
-                            <line x1="12" y1="1" x2="12" y2="3"></line>
-                            <line x1="12" y1="21" x2="12" y2="23"></line>
-                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                            <line x1="1" y1="12" x2="3" y2="12"></line>
-                            <line x1="21" y1="12" x2="23" y2="12"></line>
-                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                        </svg>
-                        <!-- Moon icon (shown in light theme to switch to dark) -->
-                        <svg aria-hidden="true" class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
                         </svg>
                     </button>
                     <button id="logout-btn" class="logout-btn" title="Log out" data-i18n-title="logout" data-i18n-aria="logout" aria-label="Log out">
@@ -283,6 +254,41 @@
                 <div class="settings-panel" role="tabpanel" id="panel-display" aria-labelledby="tab-display" tabindex="0" hidden>
                     <section class="settings-section">
                         <h3 data-i18n="settings_display_section">Display (this browser)</h3>
+                        <div class="settings-field">
+                            <span data-i18n="select_language">Select Language</span>
+                            <div class="language-container">
+                                <button id="language-btn" class="language-btn" title="Select Language" aria-label="EN – Select Language" aria-haspopup="true" aria-expanded="false" aria-controls="language-dropdown">
+                                    <span class="language-active-code">EN</span>
+                                </button>
+                                <div id="language-dropdown" class="language-dropdown hidden">
+                                    <button type="button" class="language-option" data-lang="en" lang="en">English</button>
+                                    <button type="button" class="language-option" data-lang="ro" lang="ro">Română</button>
+                                    <button type="button" class="language-option" data-lang="fr" lang="fr">Français</button>
+                                    <button type="button" class="language-option" data-lang="de" lang="de">Deutsch</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="settings-field">
+                            <span data-i18n="settings_theme">Theme</span>
+                            <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle Theme" data-i18n-title="theme_toggle_title" data-i18n-aria="theme_toggle_title" aria-label="Toggle Theme">
+                                <!-- Sun icon (shown in dark theme to switch to light) -->
+                                <svg aria-hidden="true" class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="4"></circle>
+                                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                                </svg>
+                                <!-- Moon icon (shown in light theme to switch to dark) -->
+                                <svg aria-hidden="true" class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                                </svg>
+                            </button>
+                        </div>
                         <label class="settings-field"><span data-i18n="settings_temperature_unit">Temperature</span>
                             <select id="temperature-unit-select">
                                 <option value="C" data-i18n="unit_celsius">Celsius (°C)</option>

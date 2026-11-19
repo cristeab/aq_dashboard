@@ -688,7 +688,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     }
 
-    const languageMenu = initLanguageMenu(document.querySelector('.header .language-container'), lang => updateLanguage(lang));
+    const languageMenu = initLanguageMenu(document.querySelector('#panel-display .language-container'), lang => updateLanguage(lang));
 
     async function updateLanguage(lang) {
         await loadLanguage(lang);

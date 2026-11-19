@@ -119,6 +119,7 @@
   "settings_aqi_section": "Air quality index",
   "settings_comfort_section": "Thermal comfort index",
   "settings_display_section": "Display (this browser)",
+  "settings_theme": "Theme",
   "settings_device_hint": "Applies to all screens and to the notifications.",
   "settings_profile": "Profile",
   "settings_categories": "Categories and recommendations",
