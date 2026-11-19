@@ -1,10 +1,5 @@
 #!/usr/bin/bash
 
-if (( EUID != 0 )); then
-    echo "You must be root to run this script." >&2
-    exit 1
-fi
-
 services=("dust_sensor" "ambient_sensor" "noise_sensor" "aq_dashboard" "light_sensor" "carbon_dioxide_sensor" "voc_nox_sensor" "pressure_temp_sensor" "o3_no2_sensor" "co_sensor" "radon_sensor")
 SERVICE_DIR=/etc/systemd/system
 
@@ -17,8 +12,18 @@ usage() {
     echo "  -q    Stop services"
     echo "  -r    Restart services"
     echo "  -t    Show service status"
-    exit 1
 }
+
+# Help is available without root privileges.
+if [ $# -eq 0 ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    usage
+    exit 0
+fi
+
+if (( EUID != 0 )); then
+    echo "You must be root to run this script." >&2
+    exit 1
+fi
 
 install() {
     echo "Installing services..."
@@ -70,14 +75,12 @@ status() {
     done
 }
 
-# Check for at least one argument
-if [ $# -eq 0 ]; then
-    usage
-fi
-
 # Parse the first argument
-while getopts ":iusqrt" opt; do
+while getopts ":hiusqrt" opt; do
     case $opt in
+        h)
+            usage
+            ;;
         i)
             install
             ;;
