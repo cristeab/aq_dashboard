@@ -43,10 +43,11 @@ CLIENT_SEND_TIMEOUT_SEC = 5
 
 logger = LoggerConfigurator.configure_logger("AqDashboard")
 
-# SQLite database connections: one for the update thread (long queries of the engines and
-# of the sensor validation), one for the web requests, so that the requests never wait for them
-storage = PersistentStorage()
-web_storage = PersistentStorage()
+# Storage connections: one for the update thread (long queries of the engines and
+# of the sensor validation), one for web requests. AQ_DB_PATH explicitly selects
+# the isolated SQLite implementation used by tests; without it, production uses InfluxDB.
+storage = PersistentStorage(os.environ.get("AQ_DB_PATH"))
+web_storage = PersistentStorage(os.environ.get("AQ_DB_PATH"))
 # Index engines and their profiles; the CO2 and noise engines share the history of the AQI engine
 aqi_engine = AqiEngine(storage, logger=logger)
 co2_engine = AqiEngine(storage, logger=logger, kind="co2", history=aqi_engine.history)
