@@ -33,8 +33,7 @@ EN 16798-1, WHO indoor noise, ISO 7730 PMV/PPD).
 The PM2.5 concentrations can be corrected for humidity before any averaging (settings, dust sensors section):
 Barkjohn et al. (2021), its extension for smoke (US EPA 2022) or none (see `pm_correction.py`).
 
-Profiles are validated when the web server starts: an invalid file is skipped and the reason is written to the log
-(`aqi_system.log`). Run `pytest tests/test_profiles.py` after editing a profile.
+Profiles are validated when the web server starts: an invalid file is skipped and the reason is written to the systemd journal. View it with `sudo journalctl -u aq_dashboard.service`. Run `pytest tests/test_profiles.py` after editing a profile.
 
 ## Common Fields
 

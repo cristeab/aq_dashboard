@@ -134,10 +134,21 @@ Several Python scripts must be started to read data from sensors and write the d
     ./radon_sensor.py
 ```
 
-The scripts print in the standard output the current data read from the sensors and can be installed as services using the `services/manage_services.sh` script.
+The scripts print in the standard output the current data read from the sensors and can be installed as services using the `services/manage_services.sh` script. Application logs are written to standard error and captured by systemd in the journal; no `aqi_system.log` file is created.
 When installing the Python scripts as services, one must provide in a separate file `/etc/default/aq_dashboard.env` the database access token.
 Also, in order to automatically restart the services if an error occurs, the user running the services must have rights to run "sudo systemctl restart *.service" without requiring a password.
 The datasets provided by these scripts can be analyzed with the [aq_data_analysis](https://github.com/cristeab/aq_data_analysis) project.
+
+### View application logs
+
+Follow the dashboard or a sensor worker's logs:
+
+```bash
+sudo journalctl -fu aq_dashboard.service
+sudo journalctl -fu dust_sensor.service
+```
+
+Replace the service name to view another worker. To show the most recent 200 lines without following new entries, use `sudo journalctl -u aq_dashboard.service -n 200`.
 
 ## Configure Nginx as Reverse Proxy
 
