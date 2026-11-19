@@ -320,7 +320,7 @@ function updateAirIndex(air) {
         ? `${POLLUTANT_LABELS[air.pollutant]} · ${averagingShortLabel(profile.pollutants[air.pollutant].averaging)}`
         : tl(profile.short_name);
     titleEl.textContent = title;
-    valueEl.textContent = localizeNumberText(air.display) + (air.provisional ? '*' : '');
+    valueEl.textContent = localizeNumberText(air.display);
     unitEl.textContent = profile.kind === 'concentration' ? ` ${air.unit}` : '';
     labelEl.textContent = category ? tl(category.name) : '';
     let description = t('gauge_aria').replace('{title}', title)
@@ -411,7 +411,7 @@ function updateClassifiedReading(kind, result, valueId, badgeId, fallbackValue, 
         : profile.categories;
     const category = findCategory(categories, result.category);
     updateReading(valueId, result.value, result.unit, profile.decimals ?? 0);
-    if (result.provisional) {
+    if (result.provisional && kind !== 'noise') {
         valueEl.textContent += '*';
     }
     const averaging = kind === 'co2' ? profile.pollutants.co2.averaging : profile.averaging;

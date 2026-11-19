@@ -558,7 +558,16 @@ class EnvAlertNotifier:
         ]
         # Sort by timestamp descending
         try:
-            notifications.sort(key=lambda x: x["raw_timestamp"], reverse=True)
+            def sort_timestamp(notification):
+                timestamp = notification["raw_timestamp"]
+                to_pydatetime = getattr(timestamp, "to_pydatetime", None)
+                if to_pydatetime is not None:
+                    timestamp = to_pydatetime()
+                if timestamp.tzinfo is None:
+                    timestamp = timestamp.replace(tzinfo=timezone.utc)
+                return timestamp.timestamp()
+
+            notifications.sort(key=sort_timestamp, reverse=True)
         except Exception as e:
             self._logger.error(f"Error sorting {len(notifications)} notifications: {e}. Raw data: {[(n.get('parameter'), n.get('raw_timestamp')) for n in notifications]}")
         # Remove raw_timestamp field before returning
