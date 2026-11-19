@@ -867,7 +867,7 @@ class _InfluxStorage:
     def read_ambient_data(self):
         gas = self._read(self.Database.Gas, self.Point.BME688.value)
         climate = self._read(self.Database.Climate, self.Point.BME688.value)
-        return PersistentStorage._merge(gas, climate)
+        return self._merge(gas, climate)
 
     def read_temperature_relative_humidity_data(self):
         d = self._read(self.Database.Climate, self.Point.BME688.value)
@@ -881,7 +881,7 @@ class _InfluxStorage:
     def read_co2_data(self):
         gas = self._read(self.Database.Gas, self.Point.SCD41.value)
         climate = self._read(self.Database.Climate, self.Point.SCD41.value)
-        return PersistentStorage._merge(gas, climate)
+        return self._merge(gas, climate)
 
     def read_sgp41_data(self):
         return self._read(self.Database.Gas, self.Point.SGP41.value)
