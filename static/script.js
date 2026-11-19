@@ -680,6 +680,23 @@ function translatePage() {
 document.addEventListener('DOMContentLoaded', async function () {
     await initTranslations();
 
+    const header = document.querySelector('.header');
+    const tilesMatrix = document.getElementById('dust-tiles');
+    const alignHeaderRule = () => {
+        const width = tilesMatrix.getBoundingClientRect().width;
+        if (width > 0) {
+            header.style.setProperty('--tiles-matrix-width', `${width}px`);
+            const rightInset = Math.max(0, (header.getBoundingClientRect().width - width) / 2);
+            header.style.setProperty('--tiles-matrix-right-inset', `${rightInset}px`);
+        }
+    };
+    alignHeaderRule();
+    if (globalThis.ResizeObserver) {
+        new ResizeObserver(alignHeaderRule).observe(tilesMatrix);
+    } else {
+        globalThis.addEventListener('resize', alignHeaderRule);
+    }
+
     function setTheme(theme) {
         document.body.classList.toggle('dark-theme', theme === 'dark');
         localStorage.setItem('theme', theme);
