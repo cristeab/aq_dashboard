@@ -1,0 +1,273 @@
+{
+  "id": "thom_kyle",
+  "order": 20,
+  "name": {
+    "en": "Thom discomfort index – Kyle (1994) bioclimatic classes",
+    "ro": "Indicele de disconfort Thom – clase bioclimatice Kyle (1994)",
+    "fr": "Indice d'inconfort de Thom – classes bioclimatiques de Kyle (1994)",
+    "de": "Thom-Unbehaglichkeitsindex – bioklimatische Klassen nach Kyle (1994)"
+  },
+  "short_name": {
+    "en": "Thom DI",
+    "ro": "Indice Thom",
+    "fr": "Indice Thom",
+    "de": "Thom-Index"
+  },
+  "description": {
+    "en": "Same Thom index (DI = T − 0.55 · (1 − 0.01 · RH) · (T − 14.5)), classified with the ten bioclimatic classes of Kyle (1994), which also cover cold conditions, from hyperglacial to torrid.",
+    "ro": "Același indice Thom (DI = T − 0.55 · (1 − 0.01 · RH) · (T − 14.5)), clasificat cu cele zece clase bioclimatice ale lui Kyle (1994), care acoperă și condițiile reci, de la hiperglaciar la torid.",
+    "fr": "Même indice de Thom (DI = T − 0.55 · (1 − 0.01 · RH) · (T − 14.5)), classé selon les dix classes bioclimatiques de Kyle (1994), qui couvrent aussi le froid, de l'hyperglacial au torride.",
+    "de": "Derselbe Thom-Index (DI = T − 0.55 · (1 − 0.01 · RH) · (T − 14.5)), eingeteilt in die zehn bioklimatischen Klassen nach Kyle (1994), die auch kalte Bedingungen abdecken, von hyperglazial bis glühend heiß."
+  },
+  "reference": "W. J. Kyle, The human bioclimate of Hong Kong, Proc. Contemporary Climatology Conference, Brno (1994) 345–350; classes as used by Toy et al., Int. J. Biometeorol. (2007)",
+  "formula": "thom_di",
+  "unit": "°C",
+  "decimals": 1,
+  "upper_bound": "exclusive",
+  "scale": {
+    "min": 0,
+    "max": 35
+  },
+  "neutral_category": "comfortable",
+  "categories": [
+    {
+      "id": "hyperglacial",
+      "to": -40,
+      "color": "#1B2A6B",
+      "cvd_color": "#332288",
+      "name": {
+        "en": "Hyperglacial",
+        "ro": "Hiperglaciar",
+        "fr": "Hyperglacial",
+        "de": "Hyperglazial"
+      },
+      "description": {
+        "en": "Extreme cold.",
+        "ro": "Frig extrem.",
+        "fr": "Froid extrême.",
+        "de": "Extreme Kälte."
+      },
+      "recommendation": {
+        "en": "Dangerous cold: risk of hypothermia and frostbite; protect yourself and heat the room.",
+        "ro": "Frig periculos: risc de hipotermie și degerături; protejați-vă și încălziți camera.",
+        "fr": "Froid dangereux : risque d'hypothermie et de gelures ; protégez-vous et chauffez la pièce.",
+        "de": "Gefährliche Kälte: Gefahr von Unterkühlung und Erfrierungen; schützen Sie sich und heizen Sie den Raum."
+      }
+    },
+    {
+      "id": "glacial",
+      "to": -20,
+      "color": "#27408B",
+      "cvd_color": "#2A4D9C",
+      "name": {
+        "en": "Glacial",
+        "ro": "Glaciar",
+        "fr": "Glacial",
+        "de": "Glazial"
+      },
+      "description": {
+        "en": "Severe cold.",
+        "ro": "Frig sever.",
+        "fr": "Froid intense.",
+        "de": "Strenge Kälte."
+      },
+      "recommendation": {
+        "en": "Dangerous cold: risk of hypothermia and frostbite; protect yourself and heat the room.",
+        "ro": "Frig periculos: risc de hipotermie și degerături; protejați-vă și încălziți camera.",
+        "fr": "Froid dangereux : risque d'hypothermie et de gelures ; protégez-vous et chauffez la pièce.",
+        "de": "Gefährliche Kälte: Gefahr von Unterkühlung und Erfrierungen; schützen Sie sich und heizen Sie den Raum."
+      }
+    },
+    {
+      "id": "extremely_cold",
+      "to": -10,
+      "color": "#3558A8",
+      "cvd_color": "#0072B2",
+      "name": {
+        "en": "Extremely cold",
+        "ro": "Extrem de rece",
+        "fr": "Extrêmement froid",
+        "de": "Extrem kalt"
+      },
+      "description": {
+        "en": "Extremely cold conditions.",
+        "ro": "Condiții extrem de reci.",
+        "fr": "Conditions extrêmement froides.",
+        "de": "Extrem kalte Bedingungen."
+      },
+      "recommendation": {
+        "en": "Dangerous cold: risk of hypothermia and frostbite; protect yourself and heat the room.",
+        "ro": "Frig periculos: risc de hipotermie și degerături; protejați-vă și încălziți camera.",
+        "fr": "Froid dangereux : risque d'hypothermie et de gelures ; protégez-vous et chauffez la pièce.",
+        "de": "Gefährliche Kälte: Gefahr von Unterkühlung und Erfrierungen; schützen Sie sich und heizen Sie den Raum."
+      }
+    },
+    {
+      "id": "very_cold",
+      "to": -1.8,
+      "color": "#4A78C2",
+      "cvd_color": "#3A8FD0",
+      "name": {
+        "en": "Very cold",
+        "ro": "Foarte rece",
+        "fr": "Très froid",
+        "de": "Sehr kalt"
+      },
+      "description": {
+        "en": "Very cold conditions.",
+        "ro": "Condiții foarte reci.",
+        "fr": "Conditions très froides.",
+        "de": "Sehr kalte Bedingungen."
+      },
+      "recommendation": {
+        "en": "Heat the room and dress warmly; limit time in the cold.",
+        "ro": "Încălziți camera și îmbrăcați-vă gros; limitați timpul petrecut în frig.",
+        "fr": "Chauffez la pièce et habillez-vous chaudement ; limitez le temps passé au froid.",
+        "de": "Raum heizen und warm anziehen; Zeit in der Kälte begrenzen."
+      }
+    },
+    {
+      "id": "cold",
+      "to": 13,
+      "color": "#6FA3D8",
+      "cvd_color": "#56B4E9",
+      "name": {
+        "en": "Cold",
+        "ro": "Rece",
+        "fr": "Froid",
+        "de": "Kalt"
+      },
+      "description": {
+        "en": "Cold conditions.",
+        "ro": "Condiții reci.",
+        "fr": "Conditions froides.",
+        "de": "Kalte Bedingungen."
+      },
+      "recommendation": {
+        "en": "Heat the room and wear warm clothing.",
+        "ro": "Încălziți camera și purtați haine groase.",
+        "fr": "Chauffez la pièce et portez des vêtements chauds.",
+        "de": "Raum heizen und warme Kleidung tragen."
+      }
+    },
+    {
+      "id": "cool",
+      "to": 15,
+      "color": "#9CCBE8",
+      "cvd_color": "#A6D8F0",
+      "name": {
+        "en": "Cool",
+        "ro": "Răcoros",
+        "fr": "Frais",
+        "de": "Kühl"
+      },
+      "description": {
+        "en": "Slightly cool conditions.",
+        "ro": "Condiții ușor răcoroase.",
+        "fr": "Conditions légèrement fraîches.",
+        "de": "Leicht kühle Bedingungen."
+      },
+      "recommendation": {
+        "en": "Heat a little or wear an extra layer.",
+        "ro": "Încălziți puțin sau purtați un strat în plus.",
+        "fr": "Chauffez un peu ou ajoutez une couche de vêtements.",
+        "de": "Etwas heizen oder eine zusätzliche Schicht tragen."
+      }
+    },
+    {
+      "id": "comfortable",
+      "to": 20,
+      "color": "#3BB273",
+      "cvd_color": "#009E73",
+      "name": {
+        "en": "Comfortable",
+        "ro": "Confortabil",
+        "fr": "Confortable",
+        "de": "Behaglich"
+      },
+      "description": {
+        "en": "Comfortable conditions for most people.",
+        "ro": "Condiții confortabile pentru majoritatea oamenilor.",
+        "fr": "Conditions confortables pour la plupart des gens.",
+        "de": "Für die meisten Menschen behagliche Bedingungen."
+      },
+      "recommendation": {
+        "en": "No action needed.",
+        "ro": "Nu este necesară nicio acțiune.",
+        "fr": "Aucune action nécessaire.",
+        "de": "Keine Maßnahme erforderlich."
+      }
+    },
+    {
+      "id": "hot",
+      "to": 26.5,
+      "color": "#F5C242",
+      "cvd_color": "#F0E442",
+      "name": {
+        "en": "Hot",
+        "ro": "Cald",
+        "fr": "Chaud",
+        "de": "Heiß"
+      },
+      "description": {
+        "en": "Warm conditions; some people feel discomfort.",
+        "ro": "Condiții calde; unele persoane resimt disconfort.",
+        "fr": "Conditions chaudes ; certaines personnes ressentent un inconfort.",
+        "de": "Warme Bedingungen; manche Menschen empfinden Unbehagen."
+      },
+      "recommendation": {
+        "en": "Ventilate, reduce humidity or use a fan.",
+        "ro": "Aerisiți, reduceți umiditatea sau folosiți un ventilator.",
+        "fr": "Aérez, réduisez l'humidité ou utilisez un ventilateur.",
+        "de": "Lüften, Luftfeuchtigkeit senken oder Ventilator verwenden."
+      }
+    },
+    {
+      "id": "very_hot",
+      "to": 30,
+      "color": "#F08A3C",
+      "cvd_color": "#E69F00",
+      "name": {
+        "en": "Very hot",
+        "ro": "Foarte cald",
+        "fr": "Très chaud",
+        "de": "Sehr heiß"
+      },
+      "description": {
+        "en": "Heat stress for most people.",
+        "ro": "Stres termic pentru majoritatea oamenilor.",
+        "fr": "Stress thermique pour la plupart des gens.",
+        "de": "Hitzebelastung für die meisten Menschen."
+      },
+      "recommendation": {
+        "en": "Cool the room, avoid strenuous activity and drink water.",
+        "ro": "Răciți camera, evitați efortul intens și beți apă.",
+        "fr": "Rafraîchissez la pièce, évitez les efforts intenses et buvez de l'eau.",
+        "de": "Raum kühlen, Anstrengung meiden und Wasser trinken."
+      }
+    },
+    {
+      "id": "torrid",
+      "color": "#D7263D",
+      "cvd_color": "#D55E00",
+      "name": {
+        "en": "Torrid",
+        "ro": "Torid",
+        "fr": "Torride",
+        "de": "Glühend heiß"
+      },
+      "description": {
+        "en": "Strong heat stress for everyone.",
+        "ro": "Stres termic puternic pentru toată lumea.",
+        "fr": "Fort stress thermique pour tout le monde.",
+        "de": "Starke Hitzebelastung für alle."
+      },
+      "recommendation": {
+        "en": "Move to a cooler place, avoid physical effort and stay hydrated.",
+        "ro": "Mutați-vă într-un loc mai răcoros, evitați efortul fizic și hidratați-vă.",
+        "fr": "Rendez-vous dans un endroit plus frais, évitez tout effort et hydratez-vous.",
+        "de": "An einen kühleren Ort gehen, Anstrengung vermeiden und viel trinken."
+      }
+    }
+  ]
+}

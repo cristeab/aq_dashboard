@@ -1,0 +1,5 @@
+# Tests of the web server, engines, profiles, and storage adapter
+-r requirements-dashboard.txt
+pytest
+httpx
+httpx2

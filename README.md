@@ -65,6 +65,8 @@ flowchart TB
 
 The [**hardware component**](BOM.md) relies on a Raspberry Pi as the main processing unit and is designed such that sensors can be easily added, replaced or removed.
 
+When running under systemd, dashboard and sensor worker logs are available in the journal. For example, follow the dashboard logs with `sudo journalctl -fu aq_dashboard.service` (see [installation instructions](INSTALL.md#view-application-logs)).
+
 ## User Interface
 
 <p align="center">

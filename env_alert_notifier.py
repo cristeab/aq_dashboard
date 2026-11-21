@@ -3,55 +3,22 @@
 # -*- coding: utf-8 -*-
 
 import os
-import sys
-import json
+import shutil
 import time
-from datetime import datetime
-from constants import normalize_and_format_pandas_timestamp
-import pandas as pd
+from datetime import datetime, timezone
+from constants import format_local_timestamp
 from logger_configurator import LoggerConfigurator
 import subprocess
 
 
 class EnvAlertNotifier:
     MISSING_DATA_ALERT_INTERVAL_SEC = 10 * 60
+    SYSTEMD_UNIT_DIR = "/etc/systemd/system"
 
-    # Define thresholds as intervals with descriptions
+    # Define thresholds as intervals with descriptions. The AQI, the CO2 level,
+    # the noise and the thermal comfort index are classified by the profiles of
+    # their engines instead (see check_category_and_alert).
     THRESHOLDS = {
-        "aqi": {
-            "intervals": [
-                {
-                    "min": 0, "max": 50,
-                    "name": "good",
-                    "description": "Air quality is satisfactory"
-                },
-                {
-                    "min": 50, "max": 100,
-                    "name": "moderate",
-                    "description": "Air quality is acceptable for most people"
-                },
-                {
-                    "min": 100, "max": 150,
-                    "name": "unhealthy_sensitive",
-                    "description": "Members of sensitive groups may experience health effects"
-                },
-                {
-                    "min": 150, "max": 200,
-                    "name": "unhealthy",
-                    "description": "Everyone may begin to experience health effects"
-                },
-                {
-                    "min": 200, "max": 300,
-                    "name": "very_unhealthy",
-                    "description": "Health warnings of emergency conditions"
-                },
-                {
-                    "min": 300, "max": 500,
-                    "name": "hazardous",
-                    "description": "Health alert - everyone may experience serious health effects"
-                }
-            ]
-        },
         "temperature": {
             "intervals": [
                 {
@@ -164,90 +131,6 @@ class EnvAlertNotifier:
                 }
             ]
         },
-        "thom_discomfort_index": {
-            # Thom (1959) Discomfort Index bands, DI = T - 0.55*(1 - RH/100)*(T - 14.5)
-            "intervals": [
-                {
-                    "min": -50, "max": 15,
-                    "name": "cold",
-                    "description": "Cold temperature/humidity combination"
-                },
-                {
-                    "min": 15, "max": 21,
-                    "name": "no discomfort",
-                    "description": "Comfortable temperature/humidity combination"
-                },
-                {
-                    "min": 21, "max": 24,
-                    "name": "mild",
-                    "description": "Under 50% of people feel discomfort"
-                },
-                {
-                    "min": 24, "max": 27,
-                    "name": "moderate",
-                    "description": "Over 50% of people feel discomfort"
-                },
-                {
-                    "min": 27, "max": 29,
-                    "name": "high",
-                    "description": "Most people suffer discomfort"
-                },
-                {
-                    "min": 29, "max": 32,
-                    "name": "severe",
-                    "description": "Everyone feels heat stress"
-                },
-                {
-                    "min": 32, "max": 100,
-                    "name": "emergency",
-                    "description": "Thom's medical emergency level - immediate cooling/ventilation advised"
-                }
-            ]
-        },
-        "noise": {
-            "intervals": [
-                {
-                    "min": 0, "max": 25,
-                    "name": "very quiet",
-                    "description": "Ideal for sleep and concentration"
-                },
-                {
-                    "min": 25, "max": 30,
-                    "name": "quiet",
-                    "description": "WHO bedroom nighttime standard"
-                },
-                {
-                    "min": 30, "max": 35,
-                    "name": "normal",
-                    "description": "WHO daytime living areas"
-                },
-                {
-                    "min": 35, "max": 45,
-                    "name": "moderate",
-                    "description": "Acceptable background noise"
-                },
-                {
-                    "min": 45, "max": 55,
-                    "name": "elevated",
-                    "description": "WHO outdoor residential limit"
-                },
-                {
-                    "min": 55, "max": 65,
-                    "name": "high",
-                    "description": "May interfere with communication"
-                },
-                {
-                    "min": 65, "max": 75,
-                    "name": "very high",
-                    "description": "Potential sleep disruption"
-                },
-                {
-                    "min": 75, "max": 150,
-                    "name": "excessive",
-                    "description": "Hearing damage risk with prolonged exposure"
-                }
-            ]
-        },
         "visible_light": {
             "intervals": [
                 {
@@ -274,35 +157,6 @@ class EnvAlertNotifier:
                     "min": 150, "max": 1000,
                     "name": "very bright",
                     "description": "Strong daylight exposure"
-                }
-            ]
-        },
-        "co2": {
-            "intervals": [
-                {
-                    "min": 400, "max": 800,
-                    "name": "good",
-                    "description": "Typical outdoor fresh air levels - considered good/normal indoor air quality"
-                },
-                {
-                    "min": 800, "max": 1000,
-                    "name": "moderate",
-                    "description": "Acceptable indoor air quality - may indicate moderate occupancy or ventilation"
-                },
-                {
-                    "min": 1000, "max": 1500,
-                    "name": "poor",
-                    "description": "Poor indoor air quality - ventilation should be increased to avoid discomfort or health issues"
-                },
-                {
-                    "min": 1500, "max": 2500,
-                    "name": "very_poor",
-                    "description": "High CO₂ concentration - can lead to drowsiness, decreased cognitive function, and discomfort"
-                },
-                {
-                    "min": 2500, "max": 5000,
-                    "name": "hazardous",
-                    "description": "Very high concentration - potential health risk, immediate ventilation required"
                 }
             ]
         },
@@ -512,9 +366,6 @@ class EnvAlertNotifier:
         # Alerts
         self._alerts = {}
 
-    def __del__(self):
-        self.save_alert_state()
-
     def _get_interval_for_value(self, param, value):
         param_config = self.THRESHOLDS.get(param)
         if not param_config:
@@ -557,8 +408,8 @@ class EnvAlertNotifier:
         self._logger.info(f"Sending alert for {parameter}: {msg}, at {formatted_timestamp}")
 
     def _send_missing_data_alert(self, parameter):
-        timestamp = pd.Timestamp.now(tz='UTC').tz_localize(None)
-        formatted_timestamp = normalize_and_format_pandas_timestamp(timestamp)
+        timestamp = datetime.now(timezone.utc)
+        formatted_timestamp = format_local_timestamp(timestamp)
         msg = f"No data received for {parameter}"
         self._alerts[parameter] = {
             "type": "missing_data",
@@ -588,6 +439,8 @@ class EnvAlertNotifier:
         return False
 
     def check_thresholds_and_alert(self, param, value, formatted_timestamp, timestamp):
+        if value is None:
+            return
         # Get current interval for this value
         current_interval = self._get_interval_for_value(param, value)
         if current_interval is None:
@@ -600,10 +453,59 @@ class EnvAlertNotifier:
         # Get previous interval
         previous_interval = self._alert_state[param].get("current_interval")
 
-        # Send alert if interval has changed
-        if current_interval["name"] != previous_interval:
+        # Send alert if interval has changed, or if data is flowing again after
+        # a missing data alert was stored under the same parameter name
+        missing_data_shown = self._alerts.get(param, {}).get("type") == "missing_data"
+        if current_interval["name"] != previous_interval or missing_data_shown:
             self._send_data_alert(param, value, current_interval, formatted_timestamp, timestamp)
             self._alert_state[param]["current_interval"] = current_interval["name"]
+
+    def check_category_and_alert(self, param, value, display, unit, profile_id, category, formatted_timestamp, timestamp):
+        """Alerts when the category computed by an index engine (AQI, thermal
+        comfort) changes, including when another profile is selected."""
+        state = (profile_id, category["id"])
+        missing_data_shown = self._alerts.get(param, {}).get("type") == "missing_data"
+        if self._alert_state.get(param, {}).get("current_interval") == state and not missing_data_shown:
+            return
+        self._alert_state[param] = {"current_interval": state}
+        name, description = category["name"]["en"], category["description"]["en"]
+        msg = f"{display}{' ' + unit if unit else ''} entered '{name}' interval: {description}"
+        self._alerts[param] = {
+            "type": "data_alert",
+            "value": value,
+            "display": display,
+            "unit": unit,
+            "interval_name": category["id"],
+            "interval_description": description,
+            "profile": profile_id,
+            "message": msg,
+            "formatted_timestamp": formatted_timestamp,
+            "timestamp": timestamp
+        }
+        self._logger.info(f"Sending alert for {param} ({profile_id}): {msg}, at {formatted_timestamp}")
+
+    def set_maintenance_alerts(self, group, alarms, messages, formatted_timestamp, timestamp):
+        """Replaces the maintenance alarms of a group (e.g. "dust_sensors") with
+        the current ones: [{"code", "params", "key"?}], messages: {key or code:
+        English text}. An alarm keeps the time of its first detection while it persists."""
+        active = {f"{group}:{alarm.get('key', alarm['code'])}": alarm for alarm in alarms}
+        for key in [k for k, v in self._alerts.items()
+                    if v.get("type") == "maintenance" and k.startswith(group + ":") and k not in active]:
+            del self._alerts[key]
+            self._logger.info(f"Maintenance alarm cleared: {key}")
+        for key, alarm in active.items():
+            existing = self._alerts.get(key)
+            message = messages[alarm.get("key", alarm["code"])]
+            if existing is None:
+                self._logger.warning(f"Maintenance alarm {key}: {message}")
+            self._alerts[key] = {
+                "type": "maintenance",
+                "code": alarm["code"],
+                "params": alarm["params"],
+                "message": message,
+                "formatted_timestamp": existing["formatted_timestamp"] if existing else formatted_timestamp,
+                "timestamp": existing["timestamp"] if existing else timestamp,
+            }
 
     @staticmethod
     def _format_parameter(key):
@@ -638,11 +540,16 @@ class EnvAlertNotifier:
         notifications = [
             {
                 "raw_timestamp": v["timestamp"],  # for sorting
+                "time": v["timestamp"].isoformat() if hasattr(v["timestamp"], "isoformat") else None,
                 "timestamp": v["formatted_timestamp"],
                 "parameter": k,
                 "type": v.get("type", "data_alert"),
                 "value": v.get("value"),
-                "unit": EnvAlertNotifier._get_measurement_unit(k),
+                "unit": v["unit"] if "unit" in v else EnvAlertNotifier._get_measurement_unit(k),
+                "display": v.get("display"),
+                "profile": v.get("profile"),
+                "code": v.get("code"),
+                "params": v.get("params"),
                 "interval_name": v.get("interval_name"),
                 "interval_description": v.get("interval_description"),
                 "message": v["message"]
@@ -651,17 +558,31 @@ class EnvAlertNotifier:
         ]
         # Sort by timestamp descending
         try:
-            notifications.sort(key=lambda x: x["raw_timestamp"], reverse=True)
+            def sort_timestamp(notification):
+                timestamp = notification["raw_timestamp"]
+                to_pydatetime = getattr(timestamp, "to_pydatetime", None)
+                if to_pydatetime is not None:
+                    timestamp = to_pydatetime()
+                if timestamp.tzinfo is None:
+                    timestamp = timestamp.replace(tzinfo=timezone.utc)
+                return timestamp.timestamp()
+
+            notifications.sort(key=sort_timestamp, reverse=True)
         except Exception as e:
             self._logger.error(f"Error sorting {len(notifications)} notifications: {e}. Raw data: {[(n.get('parameter'), n.get('raw_timestamp')) for n in notifications]}")
         # Remove raw_timestamp field before returning
         return [
             {
                 "timestamp": n["timestamp"],
+                "time": n["time"],
                 "parameter": n["parameter"],
                 "type": n["type"],
                 "value": n["value"],
                 "unit": n["unit"],
+                "display": n["display"],
+                "profile": n["profile"],
+                "code": n["code"],
+                "params": n["params"],
                 "interval_name": n["interval_name"],
                 "interval_description": n["interval_description"],
                 "message": n["message"]
@@ -670,9 +591,15 @@ class EnvAlertNotifier:
         ]
 
     def _restart_service(self, service_name):
+        # Only restart services that are actually installed (e.g. not when
+        # running with mocked sensors on a development machine)
+        if shutil.which("systemctl") is None or not os.path.isfile(os.path.join(self.SYSTEMD_UNIT_DIR, service_name)):
+            self._logger.info(f"Service '{service_name}' is not installed, skipping restart.")
+            return
         try:
+            # -n: never prompt for a password (would block the web server)
             result = subprocess.run(
-                ['sudo', 'systemctl', 'restart', service_name],
+                ['sudo', '-n', 'systemctl', 'restart', service_name],
                 check=True,
                 capture_output=True,
                 text=True,

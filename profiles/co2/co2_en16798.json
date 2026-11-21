@@ -1,0 +1,172 @@
+{
+  "id": "co2_en16798",
+  "order": 10,
+  "kind": "concentration",
+  "name": {
+    "en": "Indoor CO₂ – EN 16798-1 ventilation categories",
+    "ro": "CO₂ în interior – categorii de ventilare EN 16798-1",
+    "fr": "CO₂ intérieur – catégories de ventilation EN 16798-1",
+    "de": "CO₂ in Innenräumen – Lüftungskategorien nach EN 16798-1"
+  },
+  "short_name": {
+    "en": "EN 16798-1",
+    "ro": "EN 16798-1",
+    "fr": "EN 16798-1",
+    "de": "EN 16798-1"
+  },
+  "description": {
+    "en": "Indoor environmental quality categories of EN 16798-1:2019 for the ventilation of occupied rooms, from the CO₂ concentration above the outdoor level (10-minute mean): category I up to 550 ppm, II up to 800 ppm, III up to 1350 ppm above the outdoor air. Select the outdoor CO₂ level of your location.",
+    "ro": "Categoriile de calitate a mediului interior din EN 16798-1:2019 pentru ventilarea încăperilor ocupate, pe baza concentrației de CO₂ peste nivelul exterior (medie pe 10 minute): categoria I până la 550 ppm, II până la 800 ppm, III până la 1350 ppm peste aerul exterior. Selectați nivelul de CO₂ exterior al locației.",
+    "fr": "Catégories de qualité de l'environnement intérieur de l'EN 16798-1:2019 pour la ventilation des locaux occupés, selon la concentration de CO₂ au-dessus du niveau extérieur (moyenne sur 10 minutes) : catégorie I jusqu'à 550 ppm, II jusqu'à 800 ppm, III jusqu'à 1350 ppm au-dessus de l'air extérieur. Choisissez le niveau de CO₂ extérieur de votre lieu.",
+    "de": "Raumklimakategorien der EN 16798-1:2019 für die Lüftung genutzter Räume, nach der CO₂-Konzentration über dem Außenluftwert (10-Minuten-Mittel): Kategorie I bis 550 ppm, II bis 800 ppm, III bis 1350 ppm über der Außenluft. Wählen Sie den CO₂-Gehalt der Außenluft an Ihrem Standort."
+  },
+  "reference": "EN 16798-1:2019, Energy performance of buildings – Ventilation for buildings – Part 1, Annex B (default CO₂ concentrations above outdoor for the categories I to IV)",
+  "gas_reference_temperature_c": 25,
+  "upper_bound": "inclusive",
+  "options": [
+    {
+      "id": "outdoor_co2",
+      "values": [
+        "400",
+        "420",
+        "450"
+      ],
+      "default": "420",
+      "unit": "ppm",
+      "label": {
+        "en": "Outdoor CO₂ level",
+        "ro": "Nivelul CO₂ în exterior",
+        "fr": "Niveau de CO₂ extérieur",
+        "de": "CO₂-Gehalt der Außenluft"
+      }
+    }
+  ],
+  "categories": [
+    {
+      "id": "cat_i",
+      "color": "#3BB273",
+      "cvd_color": "#009E73",
+      "name": {
+        "en": "Category I",
+        "ro": "Categoria I",
+        "fr": "Catégorie I",
+        "de": "Kategorie I"
+      },
+      "description": {
+        "en": "High level of expectation, recommended for very sensitive and fragile persons.",
+        "ro": "Nivel ridicat de exigență, recomandat pentru persoane foarte sensibile și fragile.",
+        "fr": "Niveau d'exigence élevé, recommandé pour les personnes très sensibles et fragiles.",
+        "de": "Hohes Maß an Erwartungen, empfohlen für sehr empfindliche und anfällige Personen."
+      },
+      "recommendation": {
+        "en": "No action needed.",
+        "ro": "Nu este necesară nicio acțiune.",
+        "fr": "Aucune action nécessaire.",
+        "de": "Keine Maßnahme erforderlich."
+      }
+    },
+    {
+      "id": "cat_ii",
+      "color": "#A7D129",
+      "cvd_color": "#F0E442",
+      "name": {
+        "en": "Category II",
+        "ro": "Categoria II",
+        "fr": "Catégorie II",
+        "de": "Kategorie II"
+      },
+      "description": {
+        "en": "Normal level of expectation, for new and renovated buildings.",
+        "ro": "Nivel normal de exigență, pentru clădiri noi și renovate.",
+        "fr": "Niveau d'exigence normal, pour les bâtiments neufs et rénovés.",
+        "de": "Normales Maß an Erwartungen, für Neubauten und Renovierungen."
+      },
+      "recommendation": {
+        "en": "No action needed.",
+        "ro": "Nu este necesară nicio acțiune.",
+        "fr": "Aucune action nécessaire.",
+        "de": "Keine Maßnahme erforderlich."
+      }
+    },
+    {
+      "id": "cat_iii",
+      "color": "#F5A623",
+      "cvd_color": "#E69F00",
+      "name": {
+        "en": "Category III",
+        "ro": "Categoria III",
+        "fr": "Catégorie III",
+        "de": "Kategorie III"
+      },
+      "description": {
+        "en": "Moderate level of expectation, acceptable in existing buildings.",
+        "ro": "Nivel moderat de exigență, acceptabil în clădirile existente.",
+        "fr": "Niveau d'exigence modéré, acceptable dans les bâtiments existants.",
+        "de": "Mäßiges Maß an Erwartungen, akzeptabel in Bestandsgebäuden."
+      },
+      "recommendation": {
+        "en": "Increase the ventilation: open a window or raise the ventilation rate.",
+        "ro": "Măriți ventilarea: deschideți o fereastră sau creșteți debitul de ventilare.",
+        "fr": "Augmentez la ventilation : ouvrez une fenêtre ou augmentez le débit de ventilation.",
+        "de": "Lüftung verstärken: Fenster öffnen oder Luftwechsel erhöhen."
+      }
+    },
+    {
+      "id": "cat_iv",
+      "color": "#E8513B",
+      "cvd_color": "#D55E00",
+      "name": {
+        "en": "Category IV",
+        "ro": "Categoria IV",
+        "fr": "Catégorie IV",
+        "de": "Kategorie IV"
+      },
+      "description": {
+        "en": "Low level of expectation, only acceptable for a limited part of the year.",
+        "ro": "Nivel scăzut de exigență, acceptabil doar pentru o parte limitată a anului.",
+        "fr": "Niveau d'exigence faible, acceptable seulement une partie limitée de l'année.",
+        "de": "Geringes Maß an Erwartungen, nur für einen begrenzten Teil des Jahres akzeptabel."
+      },
+      "recommendation": {
+        "en": "Ventilate now: concentration and well-being suffer at this CO₂ level.",
+        "ro": "Aerisiți acum: concentrarea și starea de bine au de suferit la acest nivel de CO₂.",
+        "fr": "Aérez maintenant : la concentration et le bien-être souffrent à ce niveau de CO₂.",
+        "de": "Jetzt lüften: Konzentration und Wohlbefinden leiden bei diesem CO₂-Wert."
+      }
+    }
+  ],
+  "pollutants": {
+    "co2": {
+      "averaging": {
+        "type": "mean",
+        "minutes": 10
+      },
+      "unit": "ppm",
+      "decimals": 0,
+      "rounding": "round",
+      "scale": {
+        "min": 400,
+        "max": 2400
+      },
+      "levels": [
+        [
+          "cat_i",
+          550
+        ],
+        [
+          "cat_ii",
+          800
+        ],
+        [
+          "cat_iii",
+          1350
+        ],
+        [
+          "cat_iv",
+          null
+        ]
+      ],
+      "levels_offset_option": "outdoor_co2"
+    }
+  }
+}

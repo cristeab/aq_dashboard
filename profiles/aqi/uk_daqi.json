@@ -1,0 +1,232 @@
+{
+  "id": "uk_daqi",
+  "order": 30,
+  "kind": "banded",
+  "name": {
+    "en": "UK Daily Air Quality Index (DAQI)",
+    "ro": "Indicele zilnic al calității aerului din Regatul Unit (DAQI)",
+    "fr": "Indice quotidien de la qualité de l'air du Royaume-Uni (DAQI)",
+    "de": "Britischer täglicher Luftqualitätsindex (DAQI)"
+  },
+  "short_name": {
+    "en": "DAQI",
+    "ro": "DAQI",
+    "fr": "DAQI",
+    "de": "DAQI"
+  },
+  "description": {
+    "en": "Index of the UK Department for Environment, Food & Rural Affairs from 1 (low) to 10 (very high), with the health advice of COMEAP: 24-hour means of PM2.5 and PM10, running 8-hour mean of O₃ and 1-hour mean of NO₂, in µg/m³ at 20 °C.",
+    "ro": "Indicele Departamentului pentru Mediu, Alimentație și Afaceri Rurale din Regatul Unit, de la 1 (scăzut) la 10 (foarte ridicat), cu recomandările de sănătate COMEAP: medii pe 24 de ore pentru PM2.5 și PM10, medie mobilă pe 8 ore pentru O₃ și medie pe 1 oră pentru NO₂, în µg/m³ la 20 °C.",
+    "fr": "Indice du ministère britannique de l'Environnement, de l'Alimentation et des Affaires rurales, de 1 (faible) à 10 (très élevé), avec les conseils sanitaires du COMEAP : moyennes sur 24 heures des PM2.5 et PM10, moyenne glissante sur 8 heures de l'O₃ et moyenne horaire du NO₂, en µg/m³ à 20 °C.",
+    "de": "Index des britischen Umweltministeriums (Defra) von 1 (niedrig) bis 10 (sehr hoch) mit den Gesundheitshinweisen des COMEAP: 24-Stunden-Mittel von PM2.5 und PM10, gleitendes 8-Stunden-Mittel von O₃ und 1-Stunden-Mittel von NO₂ in µg/m³ bei 20 °C."
+  },
+  "reference": "Defra, Daily Air Quality Index (COMEAP review of the UK air quality index, 2011), uk-air.defra.gov.uk",
+  "gas_reference_temperature_c": 20,
+  "dominant_pollutant_min_index": 0,
+  "upper_bound": "inclusive",
+  "scale": {
+    "min": 0,
+    "max": 10
+  },
+  "above_scale_display": "10",
+  "level_colors": [
+    "#9CFF9C",
+    "#31FF00",
+    "#31CF00",
+    "#FFFF00",
+    "#FFCF00",
+    "#FF9A00",
+    "#FF6464",
+    "#FF0000",
+    "#990000",
+    "#CE30FF"
+  ],
+  "categories": [
+    {
+      "id": "low",
+      "to": 3,
+      "color": "#31CF00",
+      "cvd_color": "#009E73",
+      "name": {
+        "en": "Low",
+        "ro": "Scăzut",
+        "fr": "Faible",
+        "de": "Niedrig"
+      },
+      "description": {
+        "en": "Low air pollution.",
+        "ro": "Poluare scăzută a aerului.",
+        "fr": "Pollution de l'air faible.",
+        "de": "Niedrige Luftverschmutzung."
+      },
+      "recommendation": {
+        "en": "Enjoy your usual outdoor activities.",
+        "ro": "Continuați activitățile obișnuite în aer liber.",
+        "fr": "Profitez de vos activités habituelles en plein air.",
+        "de": "Genießen Sie Ihre gewohnten Aktivitäten im Freien."
+      }
+    },
+    {
+      "id": "moderate",
+      "to": 6,
+      "color": "#FFCF00",
+      "cvd_color": "#F0E442",
+      "name": {
+        "en": "Moderate",
+        "ro": "Moderat",
+        "fr": "Modéré",
+        "de": "Mäßig"
+      },
+      "description": {
+        "en": "Moderate air pollution.",
+        "ro": "Poluare moderată a aerului.",
+        "fr": "Pollution de l'air modérée.",
+        "de": "Mäßige Luftverschmutzung."
+      },
+      "recommendation": {
+        "en": "Adults and children with lung problems, and adults with heart problems, who have symptoms should consider reducing strenuous physical activity, particularly outdoors.",
+        "ro": "Adulții și copiii cu probleme pulmonare și adulții cu probleme cardiace care au simptome ar trebui să reducă efortul fizic intens, mai ales în aer liber.",
+        "fr": "Les adultes et enfants ayant des problèmes pulmonaires et les adultes ayant des problèmes cardiaques qui ont des symptômes devraient envisager de réduire les efforts intenses, surtout à l'extérieur.",
+        "de": "Erwachsene und Kinder mit Lungenproblemen sowie Erwachsene mit Herzproblemen sollten bei Beschwerden anstrengende körperliche Aktivität, besonders im Freien, reduzieren."
+      }
+    },
+    {
+      "id": "high",
+      "to": 9,
+      "color": "#FF0000",
+      "cvd_color": "#E69F00",
+      "name": {
+        "en": "High",
+        "ro": "Ridicat",
+        "fr": "Élevé",
+        "de": "Hoch"
+      },
+      "description": {
+        "en": "High air pollution.",
+        "ro": "Poluare ridicată a aerului.",
+        "fr": "Pollution de l'air élevée.",
+        "de": "Hohe Luftverschmutzung."
+      },
+      "recommendation": {
+        "en": "People with lung or heart problems and older people should reduce strenuous physical exertion, particularly outdoors; anyone with sore eyes, a cough or sore throat should consider reducing activity.",
+        "ro": "Persoanele cu probleme pulmonare sau cardiace și vârstnicii ar trebui să reducă efortul fizic intens, mai ales în aer liber; cei cu iritații ale ochilor, tuse sau dureri în gât ar trebui să reducă activitatea.",
+        "fr": "Les personnes ayant des problèmes pulmonaires ou cardiaques et les personnes âgées devraient réduire les efforts intenses, surtout à l'extérieur ; toute personne ayant les yeux irrités, une toux ou mal à la gorge devrait envisager de réduire son activité.",
+        "de": "Menschen mit Lungen- oder Herzproblemen und ältere Menschen sollten anstrengende Tätigkeiten besonders im Freien reduzieren; wer gereizte Augen, Husten oder Halsschmerzen hat, sollte die Aktivität verringern."
+      }
+    },
+    {
+      "id": "very_high",
+      "to": 10,
+      "color": "#CE30FF",
+      "cvd_color": "#D55E00",
+      "name": {
+        "en": "Very high",
+        "ro": "Foarte ridicat",
+        "fr": "Très élevé",
+        "de": "Sehr hoch"
+      },
+      "description": {
+        "en": "Very high air pollution.",
+        "ro": "Poluare foarte ridicată a aerului.",
+        "fr": "Pollution de l'air très élevée.",
+        "de": "Sehr hohe Luftverschmutzung."
+      },
+      "recommendation": {
+        "en": "People with lung or heart problems and older people should avoid strenuous physical activity; everyone should reduce physical exertion, particularly outdoors.",
+        "ro": "Persoanele cu probleme pulmonare sau cardiace și vârstnicii ar trebui să evite efortul fizic intens; toată lumea ar trebui să reducă efortul, mai ales în aer liber.",
+        "fr": "Les personnes ayant des problèmes pulmonaires ou cardiaques et les personnes âgées devraient éviter les efforts intenses ; tout le monde devrait réduire l'effort physique, surtout à l'extérieur.",
+        "de": "Menschen mit Lungen- oder Herzproblemen und ältere Menschen sollten anstrengende Aktivität meiden; alle sollten körperliche Anstrengung besonders im Freien reduzieren."
+      }
+    }
+  ],
+  "pollutants": {
+    "o3": [
+      {
+        "averaging": {
+          "type": "mean",
+          "hours": 8
+        },
+        "unit": "ug/m3",
+        "decimals": 0,
+        "rounding": "round",
+        "thresholds": [
+          33,
+          66,
+          100,
+          120,
+          140,
+          160,
+          187,
+          213,
+          240
+        ]
+      }
+    ],
+    "no2": [
+      {
+        "averaging": {
+          "type": "mean",
+          "hours": 1
+        },
+        "unit": "ug/m3",
+        "decimals": 0,
+        "rounding": "round",
+        "thresholds": [
+          67,
+          134,
+          200,
+          267,
+          334,
+          400,
+          467,
+          534,
+          600
+        ]
+      }
+    ],
+    "pm25": [
+      {
+        "averaging": {
+          "type": "mean",
+          "hours": 24
+        },
+        "unit": "ug/m3",
+        "decimals": 0,
+        "rounding": "round",
+        "thresholds": [
+          11,
+          23,
+          35,
+          41,
+          47,
+          53,
+          58,
+          64,
+          70
+        ]
+      }
+    ],
+    "pm10": [
+      {
+        "averaging": {
+          "type": "mean",
+          "hours": 24
+        },
+        "unit": "ug/m3",
+        "decimals": 0,
+        "rounding": "round",
+        "thresholds": [
+          16,
+          33,
+          50,
+          58,
+          66,
+          75,
+          83,
+          91,
+          100
+        ]
+      }
+    ]
+  }
+}

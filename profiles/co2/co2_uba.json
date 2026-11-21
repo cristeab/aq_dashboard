@@ -1,0 +1,126 @@
+{
+  "id": "co2_uba",
+  "order": 20,
+  "kind": "concentration",
+  "name": {
+    "en": "Indoor CO₂ – German Environment Agency guide values",
+    "ro": "CO₂ în interior – valori ghid ale Agenției germane de mediu",
+    "fr": "CO₂ intérieur – valeurs guides de l'Agence allemande de l'environnement",
+    "de": "CO₂ in Innenräumen – Leitwerte des Umweltbundesamts"
+  },
+  "short_name": {
+    "en": "UBA CO₂",
+    "ro": "UBA CO₂",
+    "fr": "UBA CO₂",
+    "de": "UBA CO₂"
+  },
+  "description": {
+    "en": "Hygienic assessment of the indoor CO₂ concentration by the German Environment Agency (Umweltbundesamt, 2008), 10-minute mean: below 1000 ppm harmless, 1000–2000 ppm elevated, above 2000 ppm unacceptable.",
+    "ro": "Evaluarea igienică a concentrației de CO₂ din interior de către Agenția germană de mediu (Umweltbundesamt, 2008), medie pe 10 minute: sub 1000 ppm inofensiv, 1000–2000 ppm ridicat, peste 2000 ppm inacceptabil.",
+    "fr": "Évaluation hygiénique de la concentration de CO₂ intérieure par l'Agence allemande de l'environnement (Umweltbundesamt, 2008), moyenne sur 10 minutes : sous 1000 ppm sans risque, 1000–2000 ppm élevée, au-delà de 2000 ppm inacceptable.",
+    "de": "Hygienische Bewertung der CO₂-Konzentration in Innenräumen durch das Umweltbundesamt (2008), 10-Minuten-Mittel: unter 1000 ppm hygienisch unbedenklich, 1000–2000 ppm hygienisch auffällig, über 2000 ppm hygienisch inakzeptabel."
+  },
+  "reference": "Ad-hoc-Arbeitsgruppe Innenraumrichtwerte (Umweltbundesamt), Gesundheitliche Bewertung von Kohlendioxid in der Innenraumluft, Bundesgesundheitsblatt 51 (2008) 1358–1369",
+  "gas_reference_temperature_c": 25,
+  "upper_bound": "exclusive",
+  "categories": [
+    {
+      "id": "harmless",
+      "color": "#3BB273",
+      "cvd_color": "#009E73",
+      "name": {
+        "en": "Harmless",
+        "ro": "Inofensiv",
+        "fr": "Sans risque",
+        "de": "Hygienisch unbedenklich"
+      },
+      "description": {
+        "en": "Hygienically harmless CO₂ level.",
+        "ro": "Nivel de CO₂ inofensiv din punct de vedere igienic.",
+        "fr": "Niveau de CO₂ sans risque sur le plan hygiénique.",
+        "de": "Hygienisch unbedenklicher CO₂-Wert."
+      },
+      "recommendation": {
+        "en": "No further action needed.",
+        "ro": "Nu sunt necesare alte măsuri.",
+        "fr": "Aucune autre action nécessaire.",
+        "de": "Keine weiteren Maßnahmen erforderlich."
+      }
+    },
+    {
+      "id": "elevated",
+      "color": "#F5A623",
+      "cvd_color": "#E69F00",
+      "name": {
+        "en": "Elevated",
+        "ro": "Ridicat",
+        "fr": "Élevé",
+        "de": "Hygienisch auffällig"
+      },
+      "description": {
+        "en": "Hygienically elevated CO₂ level.",
+        "ro": "Nivel de CO₂ ridicat din punct de vedere igienic.",
+        "fr": "Niveau de CO₂ élevé sur le plan hygiénique.",
+        "de": "Hygienisch auffälliger CO₂-Wert."
+      },
+      "recommendation": {
+        "en": "Improve the ventilation: ventilate more often or increase the outdoor air flow.",
+        "ro": "Îmbunătățiți ventilarea: aerisiți mai des sau măriți debitul de aer exterior.",
+        "fr": "Améliorez la ventilation : aérez plus souvent ou augmentez le débit d'air extérieur.",
+        "de": "Lüftung verbessern: häufiger lüften oder Außenluftvolumenstrom erhöhen."
+      }
+    },
+    {
+      "id": "unacceptable",
+      "color": "#E8513B",
+      "cvd_color": "#D55E00",
+      "name": {
+        "en": "Unacceptable",
+        "ro": "Inacceptabil",
+        "fr": "Inacceptable",
+        "de": "Hygienisch inakzeptabel"
+      },
+      "description": {
+        "en": "Hygienically unacceptable CO₂ level.",
+        "ro": "Nivel de CO₂ inacceptabil din punct de vedere igienic.",
+        "fr": "Niveau de CO₂ inacceptable sur le plan hygiénique.",
+        "de": "Hygienisch inakzeptabler CO₂-Wert."
+      },
+      "recommendation": {
+        "en": "Ventilate now and check the ventilation of the room; further measures may be needed.",
+        "ro": "Aerisiți acum și verificați ventilarea încăperii; pot fi necesare măsuri suplimentare.",
+        "fr": "Aérez maintenant et vérifiez la ventilation de la pièce ; d'autres mesures peuvent être nécessaires.",
+        "de": "Jetzt lüften und die Lüftung des Raums prüfen; weitere Maßnahmen können nötig sein."
+      }
+    }
+  ],
+  "pollutants": {
+    "co2": {
+      "averaging": {
+        "type": "mean",
+        "minutes": 10
+      },
+      "unit": "ppm",
+      "decimals": 0,
+      "rounding": "round",
+      "scale": {
+        "min": 400,
+        "max": 2600
+      },
+      "levels": [
+        [
+          "harmless",
+          1000
+        ],
+        [
+          "elevated",
+          2000
+        ],
+        [
+          "unacceptable",
+          null
+        ]
+      ]
+    }
+  }
+}

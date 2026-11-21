@@ -1,0 +1,476 @@
+{
+  "id": "us_epa",
+  "order": 10,
+  "kind": "index",
+  "name": {
+    "en": "US EPA Air Quality Index",
+    "ro": "Indicele calității aerului US EPA",
+    "fr": "Indice de qualité de l'air US EPA",
+    "de": "US-EPA-Luftqualitätsindex"
+  },
+  "short_name": {
+    "en": "US AQI",
+    "ro": "AQI SUA",
+    "fr": "AQI US",
+    "de": "US-AQI"
+  },
+  "description": {
+    "en": "US Environmental Protection Agency index (0–500, 2024 PM2.5 breakpoints). Particles use the NowCast (12 h weighted average, as published by AirNow), ozone and CO 8-hour means, NO₂ 1-hour means. The highest pollutant sub-index gives the AQI.",
+    "ro": "Indicele Agenției pentru Protecția Mediului din SUA (0–500, praguri PM2.5 din 2024). Particulele folosesc NowCast (medie ponderată pe 12 h, ca AirNow), ozonul și CO medii pe 8 ore, NO₂ medii pe 1 oră. AQI este cel mai mare subindice al poluanților.",
+    "fr": "Indice de l'Agence américaine de protection de l'environnement (0–500, seuils PM2.5 de 2024). Les particules utilisent le NowCast (moyenne pondérée sur 12 h, comme AirNow), l'ozone et le CO des moyennes sur 8 heures, le NO₂ des moyennes horaires. L'AQI est le sous-indice le plus élevé.",
+    "de": "Index der US-Umweltschutzbehörde (0–500, PM2.5-Grenzen von 2024). Partikel verwenden den NowCast (gewichtetes 12-h-Mittel wie AirNow), Ozon und CO 8-Stunden-Mittel, NO₂ 1-Stunden-Mittel. Der höchste Teilindex ergibt den AQI."
+  },
+  "reference": "US EPA, Technical Assistance Document for the Reporting of Daily Air Quality – the Air Quality Index (AQI), EPA-454/B-24-002, May 2024",
+  "index_rounding": "nearest",
+  "gas_reference_temperature_c": 25,
+  "dominant_pollutant_min_index": 0,
+  "upper_bound": "inclusive",
+  "scale": {
+    "min": 0,
+    "max": 500
+  },
+  "above_scale_display": "500+",
+  "categories": [
+    {
+      "id": "good",
+      "to": 50,
+      "color": "#00E400",
+      "cvd_color": "#009E73",
+      "name": {
+        "en": "Good",
+        "ro": "Excelent",
+        "fr": "Bon",
+        "de": "Gut"
+      },
+      "description": {
+        "en": "Air quality is satisfactory, and air pollution poses little or no risk.",
+        "ro": "Calitatea aerului este satisfăcătoare, iar poluarea prezintă un risc mic sau inexistent.",
+        "fr": "La qualité de l'air est satisfaisante et la pollution présente peu ou pas de risque.",
+        "de": "Die Luftqualität ist zufriedenstellend, Luftverschmutzung stellt kaum oder kein Risiko dar."
+      },
+      "recommendation": {
+        "en": "Enjoy your usual activities.",
+        "ro": "Continuați activitățile obișnuite.",
+        "fr": "Profitez de vos activités habituelles.",
+        "de": "Genießen Sie Ihre gewohnten Aktivitäten."
+      }
+    },
+    {
+      "id": "moderate",
+      "to": 100,
+      "color": "#FFFF00",
+      "cvd_color": "#F0E442",
+      "name": {
+        "en": "Moderate",
+        "ro": "Moderat",
+        "fr": "Modéré",
+        "de": "Mäßig"
+      },
+      "description": {
+        "en": "Air quality is acceptable; there may be a risk for people who are unusually sensitive to air pollution.",
+        "ro": "Calitatea aerului este acceptabilă; poate exista un risc pentru persoanele neobișnuit de sensibile la poluare.",
+        "fr": "La qualité de l'air est acceptable ; il peut exister un risque pour les personnes inhabituellement sensibles à la pollution.",
+        "de": "Die Luftqualität ist akzeptabel; für ungewöhnlich empfindliche Personen kann ein Risiko bestehen."
+      },
+      "recommendation": {
+        "en": "Unusually sensitive people should consider reducing prolonged or heavy exertion.",
+        "ro": "Persoanele neobișnuit de sensibile ar trebui să reducă efortul prelungit sau intens.",
+        "fr": "Les personnes inhabituellement sensibles devraient envisager de réduire les efforts prolongés ou intenses.",
+        "de": "Ungewöhnlich empfindliche Personen sollten längere oder schwere Anstrengungen einschränken."
+      }
+    },
+    {
+      "id": "unhealthy_sensitive",
+      "to": 150,
+      "color": "#FF7E00",
+      "cvd_color": "#E69F00",
+      "name": {
+        "en": "Unhealthy for Sensitive Groups",
+        "ro": "Nerecomandat pentru grupuri sensibile",
+        "fr": "Mauvais pour les groupes sensibles",
+        "de": "Ungesund für empfindliche Gruppen"
+      },
+      "description": {
+        "en": "Members of sensitive groups may experience health effects; the general public is less likely to be affected.",
+        "ro": "Persoanele din grupurile sensibile pot avea efecte asupra sănătății; populația generală este mai puțin afectată.",
+        "fr": "Les personnes des groupes sensibles peuvent ressentir des effets sur la santé ; le grand public est moins susceptible d'être affecté.",
+        "de": "Angehörige empfindlicher Gruppen können gesundheitliche Auswirkungen spüren; die Allgemeinheit ist weniger betroffen."
+      },
+      "recommendation": {
+        "en": "People with heart or lung disease, older adults, children and teenagers should reduce prolonged or heavy exertion.",
+        "ro": "Persoanele cu boli de inimă sau plămâni, vârstnicii, copiii și adolescenții ar trebui să reducă efortul prelungit sau intens.",
+        "fr": "Les personnes atteintes de maladies cardiaques ou pulmonaires, les personnes âgées, les enfants et les adolescents devraient réduire les efforts prolongés ou intenses.",
+        "de": "Menschen mit Herz- oder Lungenerkrankungen, ältere Menschen, Kinder und Jugendliche sollten längere oder schwere Anstrengungen reduzieren."
+      }
+    },
+    {
+      "id": "unhealthy",
+      "to": 200,
+      "color": "#FF0000",
+      "cvd_color": "#D55E00",
+      "name": {
+        "en": "Unhealthy",
+        "ro": "Nociv",
+        "fr": "Mauvais",
+        "de": "Ungesund"
+      },
+      "description": {
+        "en": "Some members of the general public may experience health effects; sensitive groups may experience more serious effects.",
+        "ro": "Unele persoane din populația generală pot avea efecte asupra sănătății; grupurile sensibile pot avea efecte mai grave.",
+        "fr": "Certaines personnes du grand public peuvent ressentir des effets sur la santé ; les groupes sensibles peuvent subir des effets plus graves.",
+        "de": "Einige Menschen der Allgemeinheit können gesundheitliche Auswirkungen spüren; empfindliche Gruppen können stärker betroffen sein."
+      },
+      "recommendation": {
+        "en": "Sensitive groups should avoid prolonged or heavy exertion; everyone else should reduce it. Consider using an air purifier.",
+        "ro": "Grupurile sensibile ar trebui să evite efortul prelungit sau intens; ceilalți ar trebui să îl reducă. Folosiți un purificator de aer.",
+        "fr": "Les groupes sensibles devraient éviter les efforts prolongés ou intenses ; les autres devraient les réduire. Envisagez un purificateur d'air.",
+        "de": "Empfindliche Gruppen sollten längere oder schwere Anstrengungen vermeiden, alle anderen sie reduzieren. Erwägen Sie einen Luftreiniger."
+      }
+    },
+    {
+      "id": "very_unhealthy",
+      "to": 300,
+      "color": "#8F3F97",
+      "cvd_color": "#CC79A7",
+      "name": {
+        "en": "Very Unhealthy",
+        "ro": "Foarte nociv",
+        "fr": "Très mauvais",
+        "de": "Sehr ungesund"
+      },
+      "description": {
+        "en": "Health alert: the risk of health effects is increased for everyone.",
+        "ro": "Alertă de sănătate: riscul de efecte asupra sănătății crește pentru toată lumea.",
+        "fr": "Alerte sanitaire : le risque d'effets sur la santé augmente pour tout le monde.",
+        "de": "Gesundheitswarnung: Das Risiko gesundheitlicher Auswirkungen ist für alle erhöht."
+      },
+      "recommendation": {
+        "en": "Sensitive groups should avoid all physical activity; everyone else should avoid prolonged or heavy exertion.",
+        "ro": "Grupurile sensibile ar trebui să evite orice activitate fizică; ceilalți ar trebui să evite efortul prelungit sau intens.",
+        "fr": "Les groupes sensibles devraient éviter toute activité physique ; les autres devraient éviter les efforts prolongés ou intenses.",
+        "de": "Empfindliche Gruppen sollten jede körperliche Aktivität meiden, alle anderen längere oder schwere Anstrengungen."
+      }
+    },
+    {
+      "id": "hazardous",
+      "to": 500,
+      "color": "#7E0023",
+      "cvd_color": "#882255",
+      "name": {
+        "en": "Hazardous",
+        "ro": "Periculos",
+        "fr": "Dangereux",
+        "de": "Gefährlich"
+      },
+      "description": {
+        "en": "Health warning of emergency conditions: everyone is more likely to be affected.",
+        "ro": "Avertizare de urgență: toată lumea este mai probabil să fie afectată.",
+        "fr": "Avertissement sanitaire d'urgence : tout le monde est plus susceptible d'être affecté.",
+        "de": "Gesundheitswarnung vor Notfallbedingungen: Alle sind wahrscheinlicher betroffen."
+      },
+      "recommendation": {
+        "en": "Everyone should avoid all physical activity; remove the pollution source or move to a place with cleaner air.",
+        "ro": "Toată lumea ar trebui să evite orice activitate fizică; eliminați sursa de poluare sau mutați-vă într-un loc cu aer mai curat.",
+        "fr": "Tout le monde devrait éviter toute activité physique ; supprimez la source de pollution ou rendez-vous dans un lieu à l'air plus sain.",
+        "de": "Alle sollten jede körperliche Aktivität meiden; beseitigen Sie die Quelle oder gehen Sie an einen Ort mit sauberer Luft."
+      }
+    }
+  ],
+  "pollutants": {
+    "pm25": [
+      {
+        "averaging": {
+          "type": "nowcast",
+          "hours": 12,
+          "min_weight": 0.5
+        },
+        "unit": "ug/m3",
+        "decimals": 1,
+        "rounding": "truncate",
+        "breakpoints": [
+          [
+            0.0,
+            9.0,
+            0,
+            50
+          ],
+          [
+            9.1,
+            35.4,
+            51,
+            100
+          ],
+          [
+            35.5,
+            55.4,
+            101,
+            150
+          ],
+          [
+            55.5,
+            125.4,
+            151,
+            200
+          ],
+          [
+            125.5,
+            225.4,
+            201,
+            300
+          ],
+          [
+            225.5,
+            325.4,
+            301,
+            500
+          ]
+        ],
+        "above_range": "cap"
+      }
+    ],
+    "pm10": [
+      {
+        "averaging": {
+          "type": "nowcast",
+          "hours": 12,
+          "min_weight": 0.5
+        },
+        "unit": "ug/m3",
+        "decimals": 0,
+        "rounding": "truncate",
+        "breakpoints": [
+          [
+            0,
+            54,
+            0,
+            50
+          ],
+          [
+            55,
+            154,
+            51,
+            100
+          ],
+          [
+            155,
+            254,
+            101,
+            150
+          ],
+          [
+            255,
+            354,
+            151,
+            200
+          ],
+          [
+            355,
+            424,
+            201,
+            300
+          ],
+          [
+            425,
+            604,
+            301,
+            500
+          ]
+        ],
+        "above_range": "cap"
+      }
+    ],
+    "o3": [
+      {
+        "averaging": {
+          "type": "mean",
+          "hours": 8
+        },
+        "unit": "ppm",
+        "decimals": 3,
+        "rounding": "truncate",
+        "breakpoints": [
+          [
+            0.0,
+            0.054,
+            0,
+            50
+          ],
+          [
+            0.055,
+            0.07,
+            51,
+            100
+          ],
+          [
+            0.071,
+            0.085,
+            101,
+            150
+          ],
+          [
+            0.086,
+            0.105,
+            151,
+            200
+          ],
+          [
+            0.106,
+            0.2,
+            201,
+            300
+          ]
+        ],
+        "above_range": "not_applicable",
+        "note": {
+          "en": "8-hour table; above 0.200 ppm the 1-hour table applies.",
+          "ro": "Tabel pe 8 ore; peste 0,200 ppm se aplică tabelul pe 1 oră.",
+          "fr": "Table sur 8 heures ; au-delà de 0,200 ppm, la table horaire s'applique.",
+          "de": "8-Stunden-Tabelle; über 0,200 ppm gilt die 1-Stunden-Tabelle."
+        }
+      },
+      {
+        "averaging": {
+          "type": "mean",
+          "hours": 1
+        },
+        "unit": "ppm",
+        "decimals": 3,
+        "rounding": "truncate",
+        "breakpoints": [
+          [
+            0.125,
+            0.164,
+            101,
+            150
+          ],
+          [
+            0.165,
+            0.204,
+            151,
+            200
+          ],
+          [
+            0.205,
+            0.404,
+            201,
+            300
+          ],
+          [
+            0.405,
+            0.604,
+            301,
+            500
+          ]
+        ],
+        "below_range": "not_applicable",
+        "above_range": "cap",
+        "note": {
+          "en": "1-hour table, only used from 0.125 ppm.",
+          "ro": "Tabel pe 1 oră, folosit doar de la 0,125 ppm.",
+          "fr": "Table horaire, utilisée seulement à partir de 0,125 ppm.",
+          "de": "1-Stunden-Tabelle, nur ab 0,125 ppm verwendet."
+        }
+      }
+    ],
+    "co": [
+      {
+        "averaging": {
+          "type": "mean",
+          "hours": 8
+        },
+        "unit": "ppm",
+        "decimals": 1,
+        "rounding": "truncate",
+        "breakpoints": [
+          [
+            0.0,
+            4.4,
+            0,
+            50
+          ],
+          [
+            4.5,
+            9.4,
+            51,
+            100
+          ],
+          [
+            9.5,
+            12.4,
+            101,
+            150
+          ],
+          [
+            12.5,
+            15.4,
+            151,
+            200
+          ],
+          [
+            15.5,
+            30.4,
+            201,
+            300
+          ],
+          [
+            30.5,
+            50.4,
+            301,
+            500
+          ]
+        ],
+        "above_range": "cap"
+      }
+    ],
+    "no2": [
+      {
+        "averaging": {
+          "type": "mean",
+          "hours": 1
+        },
+        "unit": "ppb",
+        "decimals": 0,
+        "rounding": "truncate",
+        "breakpoints": [
+          [
+            0,
+            53,
+            0,
+            50
+          ],
+          [
+            54,
+            100,
+            51,
+            100
+          ],
+          [
+            101,
+            360,
+            101,
+            150
+          ],
+          [
+            361,
+            649,
+            151,
+            200
+          ],
+          [
+            650,
+            1249,
+            201,
+            300
+          ],
+          [
+            1250,
+            2049,
+            301,
+            500
+          ]
+        ],
+        "above_range": "cap"
+      }
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" standalone='no'?>
+<!DOCTYPE service-group SYSTEM "avahi-service.dtd">
+<!--
+  Advertises the dashboard through mDNS/DNS-SD. Install with:
+    sudo apt install avahi-daemon
+    sudo cp services/avahi/aq_dashboard.service /etc/avahi/services/
+-->
+<service-group>
+  <name replace-wildcards="yes">Air Quality Dashboard (%h)</name>
+  <service>
+    <type>_https._tcp</type>
+    <port>443</port>
+    <txt-record>product=aq_dashboard</txt-record>
+    <txt-record>path=/aqd/</txt-record>
+  </service>
+</service-group>

@@ -134,10 +134,21 @@ Several Python scripts must be started to read data from sensors and write the d
     ./radon_sensor.py
 ```
 
-The scripts print in the standard output the current data read from the sensors and can be installed as services using the `services/manage_services.sh` script.
+The scripts print in the standard output the current data read from the sensors and can be installed as services using the `services/manage_services.sh` script. Application logs are written to standard error and captured by systemd in the journal; no `aqi_system.log` file is created.
 When installing the Python scripts as services, one must provide in a separate file `/etc/default/aq_dashboard.env` the database access token.
 Also, in order to automatically restart the services if an error occurs, the user running the services must have rights to run "sudo systemctl restart *.service" without requiring a password.
 The datasets provided by these scripts can be analyzed with the [aq_data_analysis](https://github.com/cristeab/aq_data_analysis) project.
+
+### View application logs
+
+Follow the dashboard or a sensor worker's logs:
+
+```bash
+sudo journalctl -fu aq_dashboard.service
+sudo journalctl -fu dust_sensor.service
+```
+
+Replace the service name to view another worker. To show the most recent 200 lines without following new entries, use `sudo journalctl -u aq_dashboard.service -n 200`.
 
 ## Configure Nginx as Reverse Proxy
 
@@ -184,4 +195,29 @@ Start the server with:
     ./aq_dashboard.py
 ```
 
-Access the server at: https://\<server URL\>/aqd
+Access the server at: https://\<server URL\>/aqd/
+
+## Broadcast the Dashboard Host on the LAN
+
+The dashboard includes optional mDNS/DNS-SD discovery. For a directly exposed
+HTTP instance, run it with `--advertise` and install `zeroconf` from
+`requirements.txt`:
+
+```bash
+./aq_dashboard.py --host 0.0.0.0 --port 8888 --advertise
+./lan_discovery.py
+```
+
+When using the existing Nginx HTTPS reverse proxy, advertise the public URL
+through Avahi instead. Install the service definition and restart Avahi:
+
+```bash
+sudo apt install avahi-daemon
+sudo cp services/avahi/aq_dashboard.service /etc/avahi/services/
+sudo systemctl restart avahi-daemon
+./lan_discovery.py
+```
+
+The Avahi record points clients to `https://<host>/aqd/` on port 443. Nginx
+preserves the external `Host` header and forwards WebSocket upgrades, so the
+dashboard's origin checks and live updates continue to work behind `/aqd/`.

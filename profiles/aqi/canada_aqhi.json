@@ -1,0 +1,165 @@
+{
+  "id": "canada_aqhi",
+  "order": 55,
+  "kind": "additive_risk",
+  "name": {
+    "en": "Canada Air Quality Health Index (AQHI)",
+    "ro": "Indicele canadian al calității aerului pentru sănătate (AQHI)",
+    "fr": "Cote air santé du Canada (CAS)",
+    "de": "Kanadischer Luftqualitäts-Gesundheitsindex (AQHI)"
+  },
+  "short_name": {
+    "en": "AQHI",
+    "ro": "AQHI",
+    "fr": "CAS",
+    "de": "AQHI"
+  },
+  "description": {
+    "en": "Index of Health Canada and Environment and Climate Change Canada (1 to 10+) based on the added short-term health risks of NO₂, O₃ and PM2.5 (3-hour means): AQHI = 10/10.4 × 100 × Σ(exp(β·C) − 1). Unlike the other indices, all three pollutants always contribute.",
+    "ro": "Indicele Health Canada și al Ministerului Mediului și Schimbărilor Climatice din Canada (de la 1 la 10+), bazat pe suma riscurilor pe termen scurt ale NO₂, O₃ și PM2.5 (medii pe 3 ore): AQHI = 10/10,4 × 100 × Σ(exp(β·C) − 1). Spre deosebire de ceilalți indici, toți cei trei poluanți contribuie mereu.",
+    "fr": "Cote de Santé Canada et d'Environnement et Changement climatique Canada (de 1 à 10+) fondée sur la somme des risques sanitaires à court terme du NO₂, de l'O₃ et des PM2.5 (moyennes sur 3 heures) : CAS = 10/10,4 × 100 × Σ(exp(β·C) − 1). Contrairement aux autres indices, les trois polluants contribuent toujours.",
+    "de": "Index von Health Canada und Environment and Climate Change Canada (1 bis 10+), das die kurzfristigen Gesundheitsrisiken von NO₂, O₃ und PM2.5 (3-Stunden-Mittel) addiert: AQHI = 10/10,4 × 100 × Σ(exp(β·C) − 1). Anders als bei den übrigen Indizes tragen immer alle drei Schadstoffe bei."
+  },
+  "reference": "D. M. Stieb et al., A new multipollutant, no-threshold air quality health index based on short-term associations observed in daily time-series analyses, J. Air Waste Manag. Assoc. 58 (2008) 435–450; Environment and Climate Change Canada",
+  "index_rounding": "nearest",
+  "gas_reference_temperature_c": 25,
+  "scale_factor": 96.15384615,
+  "index_min": 1,
+  "index_max": 10,
+  "above_scale_display": "10+",
+  "upper_bound": "inclusive",
+  "scale": {
+    "min": 0,
+    "max": 11
+  },
+  "categories": [
+    {
+      "id": "low",
+      "to": 3,
+      "color": "#00CCFF",
+      "cvd_color": "#009E73",
+      "name": {
+        "en": "Low risk",
+        "ro": "Risc scăzut",
+        "fr": "Risque faible",
+        "de": "Geringes Risiko"
+      },
+      "description": {
+        "en": "Ideal air quality for outdoor activities.",
+        "ro": "Calitate ideală a aerului pentru activități în aer liber.",
+        "fr": "Qualité de l'air idéale pour les activités extérieures.",
+        "de": "Ideale Luftqualität für Aktivitäten im Freien."
+      },
+      "recommendation": {
+        "en": "Enjoy your usual outdoor activities.",
+        "ro": "Continuați activitățile obișnuite în aer liber.",
+        "fr": "Profitez de vos activités habituelles en plein air.",
+        "de": "Genießen Sie Ihre gewohnten Aktivitäten im Freien."
+      }
+    },
+    {
+      "id": "moderate",
+      "to": 6,
+      "color": "#FFCC00",
+      "cvd_color": "#F0E442",
+      "name": {
+        "en": "Moderate risk",
+        "ro": "Risc moderat",
+        "fr": "Risque modéré",
+        "de": "Mäßiges Risiko"
+      },
+      "description": {
+        "en": "No need to change your usual outdoor activities unless you have symptoms such as coughing and throat irritation.",
+        "ro": "Nu este nevoie să schimbați activitățile obișnuite în aer liber, decât dacă aveți simptome precum tuse și iritații ale gâtului.",
+        "fr": "Inutile de modifier vos activités extérieures habituelles, sauf en cas de symptômes comme la toux et l'irritation de la gorge.",
+        "de": "Gewohnte Aktivitäten im Freien müssen nicht geändert werden, außer bei Beschwerden wie Husten und Halsreizung."
+      },
+      "recommendation": {
+        "en": "People at risk should consider reducing or rescheduling strenuous outdoor activities if they have symptoms.",
+        "ro": "Persoanele la risc ar trebui să reducă sau să amâne activitățile intense în aer liber dacă au simptome.",
+        "fr": "Les personnes à risque devraient envisager de réduire ou de reporter les activités exténuantes à l'extérieur si elles ont des symptômes.",
+        "de": "Gefährdete Personen sollten anstrengende Aktivitäten im Freien bei Beschwerden reduzieren oder verschieben."
+      }
+    },
+    {
+      "id": "high",
+      "to": 10,
+      "color": "#FF3300",
+      "cvd_color": "#E69F00",
+      "name": {
+        "en": "High risk",
+        "ro": "Risc ridicat",
+        "fr": "Risque élevé",
+        "de": "Hohes Risiko"
+      },
+      "description": {
+        "en": "Consider reducing or rescheduling strenuous outdoor activities if you have symptoms such as coughing and throat irritation.",
+        "ro": "Reduceți sau amânați activitățile intense în aer liber dacă aveți simptome precum tuse și iritații ale gâtului.",
+        "fr": "Envisagez de réduire ou de reporter les activités exténuantes à l'extérieur en cas de symptômes comme la toux et l'irritation de la gorge.",
+        "de": "Anstrengende Aktivitäten im Freien bei Beschwerden wie Husten und Halsreizung reduzieren oder verschieben."
+      },
+      "recommendation": {
+        "en": "People at risk should reduce or reschedule strenuous outdoor activities; children and the elderly should also take it easy.",
+        "ro": "Persoanele la risc ar trebui să reducă sau să amâne activitățile intense în aer liber; copiii și vârstnicii ar trebui, de asemenea, să se menajeze.",
+        "fr": "Les personnes à risque devraient réduire ou reporter les activités exténuantes à l'extérieur ; les enfants et les aînés devraient aussi ralentir le rythme.",
+        "de": "Gefährdete Personen sollten anstrengende Aktivitäten im Freien reduzieren oder verschieben; auch Kinder und ältere Menschen sollten sich schonen."
+      }
+    },
+    {
+      "id": "very_high",
+      "to": 11,
+      "color": "#990000",
+      "cvd_color": "#D55E00",
+      "name": {
+        "en": "Very high risk",
+        "ro": "Risc foarte ridicat",
+        "fr": "Risque très élevé",
+        "de": "Sehr hohes Risiko"
+      },
+      "description": {
+        "en": "Reduce or reschedule strenuous outdoor activities, especially if you have symptoms such as coughing and throat irritation.",
+        "ro": "Reduceți sau amânați activitățile intense în aer liber, mai ales dacă aveți simptome precum tuse și iritații ale gâtului.",
+        "fr": "Réduisez ou reportez les activités exténuantes à l'extérieur, surtout en cas de symptômes comme la toux et l'irritation de la gorge.",
+        "de": "Anstrengende Aktivitäten im Freien reduzieren oder verschieben, besonders bei Beschwerden wie Husten und Halsreizung."
+      },
+      "recommendation": {
+        "en": "People at risk should avoid strenuous outdoor activities; children and the elderly should also avoid outdoor physical exertion.",
+        "ro": "Persoanele la risc ar trebui să evite activitățile intense în aer liber; copiii și vârstnicii ar trebui să evite efortul fizic în aer liber.",
+        "fr": "Les personnes à risque devraient éviter les activités exténuantes à l'extérieur ; les enfants et les aînés devraient aussi éviter les efforts physiques à l'extérieur.",
+        "de": "Gefährdete Personen sollten anstrengende Aktivitäten im Freien meiden; auch Kinder und ältere Menschen sollten körperliche Anstrengung im Freien meiden."
+      }
+    }
+  ],
+  "terms": {
+    "no2": {
+      "averaging": {
+        "type": "mean",
+        "hours": 3
+      },
+      "unit": "ppb",
+      "decimals": 1,
+      "rounding": "round",
+      "beta": 0.000871
+    },
+    "o3": {
+      "averaging": {
+        "type": "mean",
+        "hours": 3
+      },
+      "unit": "ppb",
+      "decimals": 1,
+      "rounding": "round",
+      "beta": 0.000537
+    },
+    "pm25": {
+      "averaging": {
+        "type": "mean",
+        "hours": 3
+      },
+      "unit": "ug/m3",
+      "decimals": 1,
+      "rounding": "round",
+      "beta": 0.000487
+    }
+  }
+}

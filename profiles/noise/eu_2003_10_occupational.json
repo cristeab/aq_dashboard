@@ -1,0 +1,146 @@
+{
+  "id": "eu_2003_10_occupational",
+  "order": 20,
+  "name": {
+    "en": "Occupational noise – EU Directive 2003/10/EC",
+    "ro": "Zgomot la locul de muncă – Directiva UE 2003/10/CE",
+    "fr": "Bruit au travail – directive UE 2003/10/CE",
+    "de": "Lärm am Arbeitsplatz – EU-Richtlinie 2003/10/EG"
+  },
+  "short_name": {
+    "en": "EU work",
+    "ro": "UE muncă",
+    "fr": "UE travail",
+    "de": "EU Arbeit"
+  },
+  "description": {
+    "en": "Equivalent sound level over the last 8 hours (approximation of the daily exposure LEX,8h) compared with the action values of Directive 2003/10/EC: lower action value 80 dB(A), upper action value 85 dB(A), exposure limit value 87 dB(A) (the limit takes hearing protectors into account).",
+    "ro": "Nivelul sonor echivalent din ultimele 8 ore (aproximare a expunerii zilnice LEX,8h) comparat cu valorile de declanșare a acțiunii din Directiva 2003/10/CE: valoarea inferioară 80 dB(A), valoarea superioară 85 dB(A), valoarea limită de expunere 87 dB(A) (limita ține seama de protectoarele auditive).",
+    "fr": "Niveau sonore équivalent des 8 dernières heures (approximation de l'exposition quotidienne LEX,8h) comparé aux valeurs d'action de la directive 2003/10/CE : valeur inférieure 80 dB(A), valeur supérieure 85 dB(A), valeur limite d'exposition 87 dB(A) (la limite tient compte des protecteurs auditifs).",
+    "de": "Äquivalenter Dauerschallpegel der letzten 8 Stunden (Näherung des Tages-Lärmexpositionspegels LEX,8h) im Vergleich zu den Auslösewerten der Richtlinie 2003/10/EG: unterer Auslösewert 80 dB(A), oberer Auslösewert 85 dB(A), Expositionsgrenzwert 87 dB(A) (der Grenzwert berücksichtigt Gehörschutz)."
+  },
+  "reference": "Directive 2003/10/EC of the European Parliament and of the Council on the minimum health and safety requirements regarding the exposure of workers to the risks arising from noise, Article 3",
+  "averaging": {
+    "type": "leq",
+    "minutes": 480
+  },
+  "unit": "dB(A)",
+  "decimals": 0,
+  "upper_bound": "exclusive",
+  "scale": {
+    "min": 40,
+    "max": 100
+  },
+  "levels": [
+    [
+      "below_action",
+      80
+    ],
+    [
+      "lower_action",
+      85
+    ],
+    [
+      "upper_action",
+      87
+    ],
+    [
+      "limit_value",
+      null
+    ]
+  ],
+  "categories": [
+    {
+      "id": "below_action",
+      "color": "#3BB273",
+      "cvd_color": "#009E73",
+      "name": {
+        "en": "Below the action values",
+        "ro": "Sub valorile de acțiune",
+        "fr": "Sous les valeurs d'action",
+        "de": "Unter den Auslösewerten"
+      },
+      "description": {
+        "en": "Exposure below the lower exposure action value (80 dB(A)).",
+        "ro": "Expunere sub valoarea inferioară de expunere de la care se declanșează acțiunea (80 dB(A)).",
+        "fr": "Exposition inférieure à la valeur d'exposition inférieure déclenchant l'action (80 dB(A)).",
+        "de": "Exposition unter dem unteren Auslösewert (80 dB(A))."
+      },
+      "recommendation": {
+        "en": "No action needed.",
+        "ro": "Nu este necesară nicio acțiune.",
+        "fr": "Aucune action nécessaire.",
+        "de": "Keine Maßnahme erforderlich."
+      }
+    },
+    {
+      "id": "lower_action",
+      "color": "#F7D038",
+      "cvd_color": "#F0E442",
+      "name": {
+        "en": "Lower action value",
+        "ro": "Valoarea inferioară de acțiune",
+        "fr": "Valeur d'action inférieure",
+        "de": "Unterer Auslösewert"
+      },
+      "description": {
+        "en": "80–85 dB(A): hearing protectors must be made available; the workers must be informed and trained.",
+        "ro": "80–85 dB(A): protectoarele auditive trebuie puse la dispoziție; lucrătorii trebuie informați și instruiți.",
+        "fr": "80–85 dB(A) : des protecteurs auditifs doivent être mis à disposition ; les travailleurs doivent être informés et formés.",
+        "de": "80–85 dB(A): Gehörschutz muss zur Verfügung gestellt werden; die Beschäftigten sind zu unterweisen."
+      },
+      "recommendation": {
+        "en": "Make hearing protection available and reduce the exposure where possible.",
+        "ro": "Puneți la dispoziție protecție auditivă și reduceți expunerea acolo unde este posibil.",
+        "fr": "Mettez des protections auditives à disposition et réduisez l'exposition lorsque c'est possible.",
+        "de": "Gehörschutz bereitstellen und die Exposition nach Möglichkeit verringern."
+      }
+    },
+    {
+      "id": "upper_action",
+      "color": "#F5A623",
+      "cvd_color": "#E69F00",
+      "name": {
+        "en": "Upper action value",
+        "ro": "Valoarea superioară de acțiune",
+        "fr": "Valeur d'action supérieure",
+        "de": "Oberer Auslösewert"
+      },
+      "description": {
+        "en": "85–87 dB(A): hearing protectors must be worn and a programme of noise reduction measures is required.",
+        "ro": "85–87 dB(A): protectoarele auditive trebuie purtate și este necesar un program de reducere a zgomotului.",
+        "fr": "85–87 dB(A) : les protecteurs auditifs doivent être portés et un programme de réduction du bruit est requis.",
+        "de": "85–87 dB(A): Gehörschutz muss getragen werden, ein Lärmminderungsprogramm ist erforderlich."
+      },
+      "recommendation": {
+        "en": "Wear hearing protection and reduce the noise at the source.",
+        "ro": "Purtați protecție auditivă și reduceți zgomotul la sursă.",
+        "fr": "Portez des protections auditives et réduisez le bruit à la source.",
+        "de": "Gehörschutz tragen und den Lärm an der Quelle verringern."
+      }
+    },
+    {
+      "id": "limit_value",
+      "color": "#E8513B",
+      "cvd_color": "#D55E00",
+      "name": {
+        "en": "Exposure limit value",
+        "ro": "Valoarea limită de expunere",
+        "fr": "Valeur limite d'exposition",
+        "de": "Expositionsgrenzwert"
+      },
+      "description": {
+        "en": "87 dB(A) or more: the exposure limit value must not be exceeded, even with hearing protectors.",
+        "ro": "87 dB(A) sau mai mult: valoarea limită de expunere nu trebuie depășită, nici cu protectoare auditive.",
+        "fr": "87 dB(A) ou plus : la valeur limite d'exposition ne doit pas être dépassée, même avec des protecteurs auditifs.",
+        "de": "87 dB(A) oder mehr: der Expositionsgrenzwert darf auch mit Gehörschutz nicht überschritten werden."
+      },
+      "recommendation": {
+        "en": "Stop the exposure now and reduce it below the limit value.",
+        "ro": "Opriți expunerea acum și reduceți-o sub valoarea limită.",
+        "fr": "Arrêtez l'exposition maintenant et réduisez-la sous la valeur limite.",
+        "de": "Exposition sofort beenden und unter den Grenzwert senken."
+      }
+    }
+  ]
+}

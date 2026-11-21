@@ -1,0 +1,153 @@
+{
+  "id": "nws_heat_index",
+  "order": 50,
+  "name": {
+    "en": "Heat index (US National Weather Service)",
+    "ro": "Indicele de căldură (Serviciul Meteorologic Național al SUA)",
+    "fr": "Indice de chaleur (National Weather Service des États-Unis)",
+    "de": "Hitzeindex (US National Weather Service)"
+  },
+  "short_name": {
+    "en": "Heat index",
+    "ro": "Indice căldură",
+    "fr": "Indice chaleur",
+    "de": "Hitzeindex"
+  },
+  "description": {
+    "en": "Apparent temperature of the US National Weather Service (Rothfusz regression with the NWS adjustments), shown in °C. Categories of the current NWS chart: caution from 80 °F (26.7 °C), extreme caution from 90 °F (32.2 °C), danger from 103 °F (39.4 °C), extreme danger from 125 °F (51.7 °C).",
+    "ro": "Temperatura resimțită a Serviciului Meteorologic Național al SUA (regresia Rothfusz cu ajustările NWS), afișată în °C. Categoriile graficului NWS actual: atenție de la 80 °F (26,7 °C), atenție sporită de la 90 °F (32,2 °C), pericol de la 103 °F (39,4 °C), pericol extrem de la 125 °F (51,7 °C).",
+    "fr": "Température apparente du National Weather Service des États-Unis (régression de Rothfusz avec les ajustements du NWS), affichée en °C. Catégories du tableau NWS actuel : prudence dès 80 °F (26,7 °C), prudence extrême dès 90 °F (32,2 °C), danger dès 103 °F (39,4 °C), danger extrême dès 125 °F (51,7 °C).",
+    "de": "Gefühlte Temperatur des US National Weather Service (Rothfusz-Regression mit den NWS-Korrekturen), angezeigt in °C. Kategorien der aktuellen NWS-Tabelle: Vorsicht ab 80 °F (26,7 °C), erhöhte Vorsicht ab 90 °F (32,2 °C), Gefahr ab 103 °F (39,4 °C), extreme Gefahr ab 125 °F (51,7 °C)."
+  },
+  "reference": "L. P. Rothfusz, The heat index equation, NWS Southern Region Technical Attachment SR 90-23 (1990); NWS heat index chart and equation, weather.gov",
+  "formula": "heat_index_c",
+  "unit": "°C",
+  "decimals": 1,
+  "upper_bound": "exclusive",
+  "scale": {
+    "min": 20,
+    "max": 55
+  },
+  "neutral_category": "no_caution",
+  "categories": [
+    {
+      "id": "no_caution",
+      "to": 26.7,
+      "color": "#3BB273",
+      "cvd_color": "#009E73",
+      "name": {
+        "en": "No heat caution",
+        "ro": "Fără avertizare de căldură",
+        "fr": "Aucune vigilance chaleur",
+        "de": "Keine Hitzewarnung"
+      },
+      "description": {
+        "en": "No heat related risk at this level.",
+        "ro": "Fără risc legat de căldură la acest nivel.",
+        "fr": "Aucun risque lié à la chaleur à ce niveau.",
+        "de": "Kein hitzebedingtes Risiko auf dieser Stufe."
+      },
+      "recommendation": {
+        "en": "No action needed.",
+        "ro": "Nu este necesară nicio acțiune.",
+        "fr": "Aucune action nécessaire.",
+        "de": "Keine Maßnahme erforderlich."
+      }
+    },
+    {
+      "id": "caution",
+      "to": 32.2,
+      "color": "#F7D038",
+      "cvd_color": "#F0E442",
+      "name": {
+        "en": "Caution",
+        "ro": "Atenție",
+        "fr": "Prudence",
+        "de": "Vorsicht"
+      },
+      "description": {
+        "en": "Fatigue possible with prolonged exposure and/or physical activity.",
+        "ro": "Oboseală posibilă la expunere prelungită și/sau activitate fizică.",
+        "fr": "Fatigue possible en cas d'exposition prolongée et/ou d'activité physique.",
+        "de": "Erschöpfung bei längerer Exposition und/oder körperlicher Aktivität möglich."
+      },
+      "recommendation": {
+        "en": "Drink water and take breaks during physical activity.",
+        "ro": "Beți apă și faceți pauze în timpul activității fizice.",
+        "fr": "Buvez de l'eau et faites des pauses pendant l'activité physique.",
+        "de": "Wasser trinken und bei körperlicher Aktivität Pausen machen."
+      }
+    },
+    {
+      "id": "extreme_caution",
+      "to": 39.4,
+      "color": "#F5A623",
+      "cvd_color": "#E69F00",
+      "name": {
+        "en": "Extreme caution",
+        "ro": "Atenție sporită",
+        "fr": "Prudence extrême",
+        "de": "Erhöhte Vorsicht"
+      },
+      "description": {
+        "en": "Heat cramps or heat exhaustion possible with prolonged exposure and/or physical activity.",
+        "ro": "Crampe sau epuizare de căldură posibile la expunere prelungită și/sau activitate fizică.",
+        "fr": "Crampes ou épuisement dus à la chaleur possibles en cas d'exposition prolongée et/ou d'activité physique.",
+        "de": "Hitzekrämpfe oder Hitzeerschöpfung bei längerer Exposition und/oder körperlicher Aktivität möglich."
+      },
+      "recommendation": {
+        "en": "Limit physical activity, cool the room and drink regularly.",
+        "ro": "Limitați activitatea fizică, răciți camera și beți regulat.",
+        "fr": "Limitez l'activité physique, rafraîchissez la pièce et buvez régulièrement.",
+        "de": "Körperliche Aktivität begrenzen, Raum kühlen und regelmäßig trinken."
+      }
+    },
+    {
+      "id": "danger",
+      "to": 51.7,
+      "color": "#E8513B",
+      "cvd_color": "#D55E00",
+      "name": {
+        "en": "Danger",
+        "ro": "Pericol",
+        "fr": "Danger",
+        "de": "Gefahr"
+      },
+      "description": {
+        "en": "Heat cramps or heat exhaustion likely; heat stroke possible with prolonged exposure and/or physical activity.",
+        "ro": "Crampe sau epuizare de căldură probabile; șoc termic posibil la expunere prelungită și/sau activitate fizică.",
+        "fr": "Crampes ou épuisement dus à la chaleur probables ; coup de chaleur possible en cas d'exposition prolongée et/ou d'activité physique.",
+        "de": "Hitzekrämpfe oder Hitzeerschöpfung wahrscheinlich; Hitzschlag bei längerer Exposition und/oder körperlicher Aktivität möglich."
+      },
+      "recommendation": {
+        "en": "Avoid physical activity, move to a cooler place and drink water.",
+        "ro": "Evitați activitatea fizică, mutați-vă într-un loc mai răcoros și beți apă.",
+        "fr": "Évitez l'activité physique, rendez-vous dans un endroit plus frais et buvez de l'eau.",
+        "de": "Körperliche Aktivität meiden, an einen kühleren Ort gehen und Wasser trinken."
+      }
+    },
+    {
+      "id": "extreme_danger",
+      "color": "#9E1F3D",
+      "cvd_color": "#CC79A7",
+      "name": {
+        "en": "Extreme danger",
+        "ro": "Pericol extrem",
+        "fr": "Danger extrême",
+        "de": "Extreme Gefahr"
+      },
+      "description": {
+        "en": "Heat stroke highly likely.",
+        "ro": "Șoc termic foarte probabil.",
+        "fr": "Coup de chaleur très probable.",
+        "de": "Hitzschlag sehr wahrscheinlich."
+      },
+      "recommendation": {
+        "en": "Move to a cool place immediately and seek medical help if feeling unwell.",
+        "ro": "Mutați-vă imediat într-un loc răcoros și cereți ajutor medical dacă nu vă simțiți bine.",
+        "fr": "Rendez-vous immédiatement dans un endroit frais et consultez un médecin en cas de malaise.",
+        "de": "Sofort an einen kühlen Ort gehen und bei Unwohlsein ärztliche Hilfe suchen."
+      }
+    }
+  ]
+}

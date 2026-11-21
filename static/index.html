@@ -6,213 +6,326 @@
         <title data-i18n="title">Air Quality Dashboard</title>
         <link rel="stylesheet" href="static/styles.css">
         <link rel="icon" href="data:,">
+        <meta name="color-scheme" content="light dark">
     </head>
     <body>
+        <!-- Icons (SVG sprite, referenced with <use href="#..."/>) -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon-sprite" aria-hidden="true" focusable="false">
+            <!-- reading icons: colored parts with the custom properties --ic-fill, --ic-outline, --ic-accent, --ic-glyph
+                 of the <svg> using them (colors of the original emoji, or of the colour-blind safe palette) -->
+            <symbol id="i-thermometer" viewBox="0 0 24 24"><path class="ic-fill" d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/><rect class="ic-accent" x="10.2" y="7" width="2.6" height="10" rx="1.3"/><circle class="ic-accent" cx="11.5" cy="18.3" r="2.9"/></symbol>
+            <symbol id="i-droplet" viewBox="0 0 24 24"><path class="ic-fill" d="M12 2.7l5.7 5.7a8 8 0 1 1-11.3 0z"/><path class="ic-highlight" d="M8.3 13.6a3.9 3.9 0 0 0 2.6 3.9"/></symbol>
+            <symbol id="i-gauge" viewBox="0 0 24 24"><circle class="ic-fill" cx="12" cy="13" r="9"/><path class="ic-outline" d="M6.8 13h1.2M16 13h1.2M12 7.8V9M8.3 9.3l.8.8M15.7 9.3l-.8.8"/><path class="ic-accent-line" d="M12 13l3.6-3.6"/><circle class="ic-accent" cx="12" cy="13" r="1.5"/></symbol>
+            <symbol id="i-volume" viewBox="0 0 24 24"><path class="ic-fill" d="M11 5L6 9H2v6h4l5 4V5z"/><path class="ic-accent-line" d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></symbol>
+            <symbol id="i-sun" viewBox="0 0 24 24"><path class="ic-accent-line" d="M12 1.8v2.4M12 19.8v2.4M4.8 4.8l1.7 1.7M17.5 17.5l1.7 1.7M1.8 12h2.4M19.8 12h2.4M4.8 19.2l1.7-1.7M17.5 6.5l1.7-1.7"/><circle class="ic-fill" cx="12" cy="12" r="4.6"/></symbol>
+            <symbol id="i-radiation" viewBox="0 0 24 24"><circle class="ic-fill" cx="12" cy="12" r="10.6"/><g transform="translate(12 12) scale(0.74) translate(-12 -12)"><circle class="ic-glyph" cx="12" cy="12" r="1.8"/><path class="ic-glyph" d="M12 9.6 8.2 3a10 10 0 0 0-6.2 9h7.6a2.4 2.4 0 0 1 2.4-2.4z"/><path class="ic-glyph" d="M12 9.6 8.2 3a10 10 0 0 0-6.2 9h7.6a2.4 2.4 0 0 1 2.4-2.4z" transform="rotate(120 12 12)"/><path class="ic-glyph" d="M12 9.6 8.2 3a10 10 0 0 0-6.2 9h7.6a2.4 2.4 0 0 1 2.4-2.4z" transform="rotate(240 12 12)"/></g></symbol>
+            <symbol id="i-flag" viewBox="0 0 24 24"><path class="flag-shape" d="M12 2.5 22.5 20.5H1.5Z"/><path class="flag-glyph" d="M12 9v5M12 17.2v.1"/></symbol>
+            <symbol id="i-logout" viewBox="0 0 24 24"><path class="line" d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></symbol>
+            <!-- category badges: the shape tells the severity, not only the color -->
+            <symbol id="sev-ok" viewBox="0 0 24 24"><circle class="b-shape" cx="12" cy="12" r="10"/><path class="b-glyph" d="M7.5 12.5l3 3 6-6"/></symbol>
+            <symbol id="sev-low" viewBox="0 0 24 24"><circle class="b-shape" cx="12" cy="12" r="10"/><path class="b-glyph" d="M7.5 12h9"/></symbol>
+            <symbol id="sev-mid" viewBox="0 0 24 24"><path class="b-shape" d="M12 2.2 22.8 21H1.2Z"/><path class="b-glyph" d="M12 9v5M12 17.3v.1"/></symbol>
+            <symbol id="sev-high" viewBox="0 0 24 24"><path class="b-shape" d="M7.7 1.5h8.6l6.2 6.2v8.6l-6.2 6.2H7.7l-6.2-6.2V7.7Z"/><path class="b-glyph" d="M12 6.5v7M12 17.2v.1"/></symbol>
+            <symbol id="sev-cold" viewBox="0 0 24 24"><circle class="b-shape" cx="12" cy="12" r="10"/><path class="b-glyph" d="M12 5.5v13M6.4 8.75l11.2 6.5M6.4 15.25l11.2-6.5"/></symbol>
+        </svg>
+        <a class="skip-link" href="#main" data-i18n="skip_to_content">Skip to the content</a>
         <div class="dashboard">
-            <div class="header">
+            <header class="header">
                 <div class="header-center">
                     <h1 data-i18n="header_title">Air Quality Dashboard</h1>
                     <p id="date-time"></p>
                 </div>
                 <div class="header-right">
-                    <div class="language-container">
-                        <button id="language-btn" class="language-btn" title="Select Language" data-i18n-title="select_language">
-                            <span id="language-active-code">EN</span>
-                        </button>
-                        <div id="language-dropdown" class="language-dropdown hidden">
-                            <button class="language-option" data-lang="en">English</button>
-                            <button class="language-option" data-lang="ro">Română</button>
-                            <button class="language-option" data-lang="fr">Français</button>
-                            <button class="language-option" data-lang="de">Deutsch</button>
-                        </div>
-                    </div>
-                    <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle Theme" data-i18n-title="theme_toggle_title">
-                        <!-- Sun icon (shown in dark theme to switch to light) -->
-                        <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="4"></circle>
-                            <line x1="12" y1="1" x2="12" y2="3"></line>
-                            <line x1="12" y1="21" x2="12" y2="23"></line>
-                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                            <line x1="1" y1="12" x2="3" y2="12"></line>
-                            <line x1="21" y1="12" x2="23" y2="12"></line>
-                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                        </svg>
-                        <!-- Moon icon (shown in light theme to switch to dark) -->
-                        <svg class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                    <button id="settings-btn" class="settings-btn" title="Settings" data-i18n-title="settings_title" data-i18n-aria="settings_title" aria-label="Settings" aria-haspopup="dialog">
+                        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
                         </svg>
                     </button>
                     <div class="notifications-container">
-                        <button id="notifications-btn" class="notifications-btn" title="Notifications" data-i18n-title="notifications_title">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <button id="notifications-btn" class="notifications-btn" title="Notifications" data-i18n-title="notifications_title" data-i18n-aria="notifications_title" aria-label="Notifications" aria-haspopup="true" aria-expanded="false" aria-controls="notifications-list">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                 <path d="M12 22c1.1 0 2-.9 2-2h-4a2 2 0 0 0 2 2zm6-6V11c0-3.07-1.63-5.64-4.5-6.32V4a1.5 1.5 0 0 0-3 0v.68C7.63 5.36 6 7.92 6 11v5l-1.29 1.29A1 1 0 0 0 6 19h12a1 1 0 0 0 .71-1.71L18 16z" fill="#fff"/>
                             </svg>
                             <span id="notification-dot" class="notification-dot hidden"></span>
                         </button>
-                        <div id="notifications-list" class="notifications-list hidden">
+                        <div id="notifications-list" class="notifications-list hidden" tabindex="0" role="region" aria-live="polite" data-i18n-aria="notifications_title" aria-label="Notifications">
                         </div>
                     </div>
                 </div>
-            </div>
+            </header>
+            <main id="main">
             <div class="main-display">
                 <div class="sensor-left">
-                    <!-- NO2 index -->
-                    <div class="temp-humidity">
-                        <span style="font-family: Arial, sans-serif; font-weight: bold; font-size: 0.9em; color: #C45A3F;">
-                            NO<sub>2</sub>
-                        </span>
-                        <span id="no2-value"></span>
+                    <div class="temp-humidity reading" data-sensor="zmod4510">
+                        <span class="reading-label label-no2">NO<sub>2</sub></span>
+                        <span class="reading-value" id="no2-value"></span>
+                        <span class="cat-badge" id="dot-no2" role="img" hidden></span>
+                        <span class="sensor-flag" data-flag="zmod4510" role="img" hidden><svg class="icon" aria-hidden="true"><use href="#i-flag"></use></svg></span>
                     </div>
-                    <!-- O3 index -->
-                    <div class="temp-humidity">
-                        <span style="font-family: Arial, sans-serif; font-weight: bold; font-size: 0.9em; color: #5BC0EB;">
-                            O<sub>3</sub>
-                        </span>
-                        <span id="o3-value"></span>
+                    <div class="temp-humidity reading" data-sensor="zmod4510">
+                        <span class="reading-label label-o3">O<sub>3</sub></span>
+                        <span class="reading-value" id="o3-value"></span>
+                        <span class="cat-badge" id="dot-o3" role="img" hidden></span>
+                        <span class="sensor-flag" data-flag="zmod4510" role="img" hidden><svg class="icon" aria-hidden="true"><use href="#i-flag"></use></svg></span>
                     </div>
-                    <!-- CO Level -->
-                    <div class="temp-humidity">
-                        <span style="font-family: Arial, sans-serif; font-weight: bold; font-size: 0.9em; color: #b0b0b0;">
-                            CO
-                        </span>
-                        <span id="co-value"></span>
+                    <div class="temp-humidity reading" data-sensor="ze07co">
+                        <span class="reading-label label-co">CO</span>
+                        <span class="reading-value" id="co-value"></span>
+                        <span class="cat-badge" id="dot-co" role="img" hidden></span>
+                        <span class="sensor-flag" data-flag="ze07co" role="img" hidden><svg class="icon" aria-hidden="true"><use href="#i-flag"></use></svg></span>
                     </div>
-                    <!-- TVOC index -->
-                    <div class="temp-humidity">
-                        <span style="font-family: Arial, sans-serif; font-weight: bold; font-size: 0.9em; color: #39d353;">
-                            TVOC
-                        </span>
-                        <span id="voc-value"></span>
+                    <div class="temp-humidity reading" data-sensor="sgp41">
+                        <span class="reading-label label-voc">TVOC</span>
+                        <span class="reading-value" id="voc-value"></span>
+                        <span class="sensor-flag" data-flag="sgp41" role="img" hidden><svg class="icon" aria-hidden="true"><use href="#i-flag"></use></svg></span>
                     </div>
-                    <!-- NOx index -->
-                     <div class="temp-humidity">
-                        <span style="font-family: Arial, sans-serif; font-weight: bold; font-size: 0.9em; color: #C45A3F;">
-                            NO<sub>x</sub>
-                        </span>
-                        <span id="nox-value"></span>
+                    <div class="temp-humidity reading" data-sensor="sgp41">
+                        <span class="reading-label label-nox">NO<sub>x</sub></span>
+                        <span class="reading-value" id="nox-value"></span>
+                        <span class="sensor-flag" data-flag="sgp41" role="img" hidden><svg class="icon" aria-hidden="true"><use href="#i-flag"></use></svg></span>
                     </div>
-                    <!-- CO2 Level -->
-                    <div class="temp-humidity">
-                        <span style="font-family: Arial, sans-serif; font-weight: bold; font-size: 0.9em; color: #b0b0b0;">
-                            CO<sub>2</sub>
-                        </span>
-                        <span id="co2-value"></span>
+                    <div class="temp-humidity reading" data-sensor="scd41">
+                        <span class="reading-label label-co2">CO<sub>2</sub></span>
+                        <span class="reading-value" id="co2-value"></span>
+                        <span class="cat-badge" id="dot-co2" role="img" hidden></span>
+                        <span class="sensor-flag" data-flag="scd41" role="img" hidden><svg class="icon" aria-hidden="true"><use href="#i-flag"></use></svg></span>
                     </div>
-                    <!-- Radon Level -->
-                    <div class="temp-humidity">
-                        <span>☢️</span>
-                        <span id="radon-value"></span>
+                    <div class="temp-humidity reading" data-sensor="airthings">
+                        <span class="reading-label label-radon"><svg class="icon reading-icon ic-radon" aria-hidden="true"><use href="#i-radiation"></use></svg><span class="sr-only" data-i18n="label_radon"></span></span>
+                        <span class="reading-value" id="radon-value"></span>
+                        <span class="sensor-flag" data-flag="airthings" role="img" hidden><svg class="icon" aria-hidden="true"><use href="#i-flag"></use></svg></span>
                     </div>
                 </div>
-                <!-- AQI Display -->
-                <div class="aqi-display">
-                    <canvas id="aqi-arc" width="240" height="240"></canvas>
-                    <div class="aqi-value">
-                        <p data-i18n="aqi_10min">10-min. AQI</p>
-                        <h1 id="aqi-value">N/A</h1>
+                <!-- Air quality index gauge -->
+                <div class="aqi-display" id="aqi-gauge">
+                    <canvas id="aqi-arc" width="240" height="240" role="img" aria-label=""></canvas>
+                    <div class="aqi-value" aria-hidden="true">
+                        <p id="aqi-title"></p>
+                        <h2 class="aqi-number"><span id="aqi-value">N/A</span><span id="aqi-unit" class="gauge-unit"></span></h2>
                         <p id="aqi-label"></p>
                     </div>
                 </div>
                 <div class="sensor-right">
-                    <!-- Temperature -->
-                    <div class="temp-humidity">
-                        <span>🌡️</span>
-                        <span id="temp-value"></span>
+                    <div class="temp-humidity reading" data-sensor="bme688">
+                        <svg class="icon reading-icon ic-temp" aria-hidden="true"><use href="#i-thermometer"></use></svg>
+                        <span class="sr-only" data-i18n="label_temperature"></span>
+                        <span class="reading-value" id="temp-value"></span>
+                        <span class="sensor-flag" data-flag="bme688" role="img" hidden><svg class="icon" aria-hidden="true"><use href="#i-flag"></use></svg></span>
                     </div>
-                    <!-- Humidity -->
-                    <div class="temp-humidity">
-                        <span>💧</span>
-                        <span id="humidity-value"></span>
+                    <div class="temp-humidity reading" data-sensor="bme688">
+                        <svg class="icon reading-icon ic-humidity" aria-hidden="true"><use href="#i-droplet"></use></svg>
+                        <span class="sr-only" data-i18n="label_humidity"></span>
+                        <span class="reading-value" id="humidity-value"></span>
+                        <span class="sensor-flag" data-flag="bme688" role="img" hidden><svg class="icon" aria-hidden="true"><use href="#i-flag"></use></svg></span>
                     </div>
-                    <!-- Heat Index -->
-                    <div class="temp-humidity">
-                        <span>🌡️♨️</span>
-                        <span id="heat-index-value"></span>
+                    <div class="temp-humidity reading" data-sensor="bme688">
+                        <svg class="icon reading-icon ic-pressure" aria-hidden="true"><use href="#i-gauge"></use></svg>
+                        <span class="sr-only" data-i18n="label_pressure"></span>
+                        <span class="reading-value" id="pressure-value"></span>
+                        <span class="sensor-flag" data-flag="bme688" role="img" hidden><svg class="icon" aria-hidden="true"><use href="#i-flag"></use></svg></span>
                     </div>
-                    <!-- Air Pressure -->
-                    <div class="temp-humidity">
-                        <span>💨</span>
-                        <span id="pressure-value"></span>
+                    <div class="temp-humidity reading" data-sensor="sound">
+                        <svg class="icon reading-icon ic-noise" aria-hidden="true"><use href="#i-volume"></use></svg>
+                        <span class="sr-only" data-i18n="label_noise"></span>
+                        <span class="reading-value" id="noise-value"></span>
+                        <span class="cat-badge" id="dot-noise" role="img" hidden></span>
+                        <span class="sensor-flag" data-flag="sound" role="img" hidden><svg class="icon" aria-hidden="true"><use href="#i-flag"></use></svg></span>
                     </div>
-                    <!-- Noise Level -->
-                    <div class="temp-humidity">
-                        <span>🔊</span>
-                        <span id="noise-value"></span>
+                    <div class="temp-humidity reading" data-sensor="ltr390">
+                        <svg class="icon reading-icon ic-light" aria-hidden="true"><use href="#i-sun"></use></svg>
+                        <span class="sr-only" data-i18n="label_light"></span>
+                        <span class="reading-value" id="visible-light-lux-value"></span>
+                        <span class="sensor-flag" data-flag="ltr390" role="img" hidden><svg class="icon" aria-hidden="true"><use href="#i-flag"></use></svg></span>
                     </div>
-                    <!-- Visible Light Intensity -->
-                    <div class="temp-humidity">
-                        <span>☀️</span>
-                        <span id="visible-light-lux-value"></span>
+                    <div class="temp-humidity reading" data-sensor="ltr390">
+                        <span class="reading-label label-uv"><span class="uv-label">UV</span></span>
+                        <span class="reading-value" id="uv-index-value"></span>
+                        <span class="sensor-flag" data-flag="ltr390" role="img" hidden><svg class="icon" aria-hidden="true"><use href="#i-flag"></use></svg></span>
                     </div>
-                    <!-- UV Index -->
-                    <div class="temp-humidity">
-                        <span>🌞</span>
-                        <span id="uv-index-value"></span>
+                </div>
+                <!-- Thermal comfort index: below the AQI gauge and the two columns, from the left margin of the left column, centered -->
+                <div class="comfort-display" id="comfort-display">
+                    <div class="comfort-header">
+                        <span class="comfort-title" id="comfort-title"></span>
+                        <span class="comfort-category" id="comfort-category"><span class="cat-badge" id="comfort-badge" aria-hidden="true"></span><span id="comfort-category-text"></span></span>
+                        <span class="comfort-value"><span id="comfort-value"></span><span id="comfort-unit" class="gauge-unit"></span><span id="comfort-secondary" class="comfort-secondary"></span></span>
+                    </div>
+                    <div class="comfort-bar" id="comfort-bar" role="img" aria-label=""></div>
+                </div>
+            </div>
+            <!-- Raw measurements of the two dust sensors (can be hidden in the settings) -->
+            <div class="sensor-data" id="dust-tiles">
+                <div class="sensor-row">
+                    <div class="sensor-item">
+                        <p class="tile-title">PM1.0</p>
+                        <p class="tile-value" id="pm1.0_0">0</p>
+                        <p class="tile-value" id="pm1.0_1">0</p>
+                    </div>
+                    <div class="sensor-item">
+                        <p class="tile-title">PM2.5 <span class="cat-badge" id="dot-pm25" role="img" hidden></span></p>
+                        <p class="tile-value" id="pm2.5_0">0</p>
+                        <p class="tile-value" id="pm2.5_1">0</p>
+                    </div>
+                    <div class="sensor-item">
+                        <p class="tile-title">PM10 <span class="cat-badge" id="dot-pm10" role="img" hidden></span></p>
+                        <p class="tile-value" id="pm10_0">0</p>
+                        <p class="tile-value" id="pm10_1">0</p>
+                    </div>
+                </div>
+                <div class="sensor-row">
+                    <div class="sensor-item">
+                        <p class="tile-title">PM0.3+(0.1L)</p>
+                        <p class="tile-value" id="pm0.3plus_0">0</p>
+                        <p class="tile-value" id="pm0.3plus_1">0</p>
+                    </div>
+                    <div class="sensor-item">
+                        <p class="tile-title">PM0.5+(0.1L)</p>
+                        <p class="tile-value" id="pm0.5plus_0">0</p>
+                        <p class="tile-value" id="pm0.5plus_1">0</p>
+                    </div>
+                    <div class="sensor-item">
+                        <p class="tile-title">PM1.0+(0.1L)</p>
+                        <p class="tile-value" id="pm1.0plus_0">0</p>
+                        <p class="tile-value" id="pm1.0plus_1">0</p>
+                    </div>
+                </div>
+                <div class="sensor-row">
+                    <div class="sensor-item">
+                        <p class="tile-title">PM2.5+(0.1L)</p>
+                        <p class="tile-value" id="pm2.5plus_0">0</p>
+                        <p class="tile-value" id="pm2.5plus_1">0</p>
+                    </div>
+                    <div class="sensor-item">
+                        <p class="tile-title">PM5.0+(0.1L)</p>
+                        <p class="tile-value" id="pm5.0plus_0">0</p>
+                        <p class="tile-value" id="pm5.0plus_1">0</p>
+                    </div>
+                    <div class="sensor-item">
+                        <p class="tile-title">PM10+(0.1L)</p>
+                        <p class="tile-value" id="pm10plus_0">0</p>
+                        <p class="tile-value" id="pm10plus_1">0</p>
                     </div>
                 </div>
             </div>
-            <div class="sensor-data">
-                <div class="sensor-row">
-                    <div class="sensor-item">
-                        <p>PM1.0</p>
-                        <h3 id="pm1.0_0">0</h3>
-                        <h3 id="pm1.0_1">0</h3>
-                    </div>
-                    <div class="sensor-item">
-                        <p>PM2.5</p>
-                        <h3 id="pm2.5_0">0</h3>
-                        <h3 id="pm2.5_1">0</h3>
-                    </div>
-                    <div class="sensor-item">
-                        <p>PM10</p>
-                        <h3 id="pm10_0">0</h3>
-                        <h3 id="pm10_1">0</h3>
-                    </div>
-                </div>
-                <div class="sensor-row">
-                    <div class="sensor-item">
-                        <p>PM0.3+(0.1L)</p>
-                        <h3 id="pm0.3plus_0">0</h3>
-                        <h3 id="pm0.3plus_1">0</h3>
-                    </div>
-                    <div class="sensor-item">
-                        <p>PM0.5+(0.1L)</p>
-                        <h3 id="pm0.5plus_0">0</h3>
-                        <h3 id="pm0.5plus_1">0</h3>
-                    </div>
-                    <div class="sensor-item">
-                        <p>PM1.0+(0.1L)</p>
-                        <h3 id="pm1.0plus_0">0</h3>
-                        <h3 id="pm1.0plus_1">0</h3>
-                    </div>
-                </div>
-                <div class="sensor-row">
-                    <div class="sensor-item">
-                        <p>PM2.5+(0.1L)</p>
-                        <h3 id="pm2.5plus_0">0</h3>
-                        <h3 id="pm2.5plus_1">0</h3>
-                    </div>
-                    <div class="sensor-item">
-                        <p>PM5.0+(0.1L)</p>
-                        <h3 id="pm5.0plus_0">0</h3>
-                        <h3 id="pm5.0plus_1">0</h3>
-                    </div>
-                    <div class="sensor-item">
-                        <p>PM10+(0.1L)</p>
-                        <h3 id="pm10plus_0">0</h3>
-                        <h3 id="pm10plus_1">0</h3>
-                    </div>
-                </div>
-            </div>
+            </main>
             <!-- Footer -->
             <footer class="footer">
                 <span data-i18n="footer_text">Data from 2 AQ dust sensors | Updated every 3 seconds</span><br>
-                <div class="centered-text"><span data-i18n="footer_project_link">Project hosted on</span> <a href="https://github.com/cristeab/aq_dashboard" target="_blank">GitHub</a></div>
+                <div class="centered-text"><span data-i18n="footer_project_link">Project hosted on</span> <a href="https://github.com/cristeab/aq_dashboard" target="_blank" rel="noopener">GitHub</a></div>
             </footer>
         </div>
+        <!-- Settings -->
+        <dialog id="settings-dialog" class="settings-dialog" aria-labelledby="settings-dialog-title">
+            <div class="settings-header">
+                <h2 id="settings-dialog-title" data-i18n="settings_title">Settings</h2>
+                <button type="button" class="settings-close" id="settings-close" title="Close" data-i18n-title="settings_close" data-i18n-aria="settings_close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <!-- categories of settings, one tab each (WAI-ARIA tabs pattern) -->
+            <div class="settings-tabs" role="tablist" aria-labelledby="settings-dialog-title">
+                <button type="button" role="tab" id="tab-air" aria-controls="panel-air" aria-selected="true" data-i18n="tab_air">Air quality</button>
+                <button type="button" role="tab" id="tab-co2" aria-controls="panel-co2" aria-selected="false" tabindex="-1">CO₂</button>
+                <button type="button" role="tab" id="tab-noise" aria-controls="panel-noise" aria-selected="false" tabindex="-1" data-i18n="tab_noise">Noise</button>
+                <button type="button" role="tab" id="tab-comfort" aria-controls="panel-comfort" aria-selected="false" tabindex="-1" data-i18n="tab_comfort">Comfort</button>
+                <button type="button" role="tab" id="tab-sensors" aria-controls="panel-sensors" aria-selected="false" tabindex="-1"><span data-i18n="tab_sensors">Sensors</span><span class="sensor-flag tab-flag" id="tab-sensors-flag" role="img" hidden><svg class="icon" aria-hidden="true"><use href="#i-flag"></use></svg></span></button>
+                <button type="button" role="tab" id="tab-display" aria-controls="panel-display" aria-selected="false" tabindex="-1" data-i18n="tab_display">Display</button>
+                <button type="button" role="tab" id="tab-account" aria-controls="panel-account" aria-selected="false" tabindex="-1" data-i18n="tab_account">Account</button>
+            </div>
+            <div class="settings-body">
+                <div class="settings-panel" role="tabpanel" id="panel-air" aria-labelledby="tab-air" tabindex="0">
+                    <section class="settings-section" id="settings-aqi"></section>
+                </div>
+                <div class="settings-panel" role="tabpanel" id="panel-co2" aria-labelledby="tab-co2" tabindex="0" hidden>
+                    <section class="settings-section" id="settings-co2"></section>
+                </div>
+                <div class="settings-panel" role="tabpanel" id="panel-noise" aria-labelledby="tab-noise" tabindex="0" hidden>
+                    <section class="settings-section" id="settings-noise"></section>
+                </div>
+                <div class="settings-panel" role="tabpanel" id="panel-comfort" aria-labelledby="tab-comfort" tabindex="0" hidden>
+                    <section class="settings-section" id="settings-comfort"></section>
+                </div>
+                <div class="settings-panel" role="tabpanel" id="panel-sensors" aria-labelledby="tab-sensors" tabindex="0" hidden>
+                    <section class="settings-section" id="settings-health"></section>
+                    <section class="settings-section" id="settings-dust"></section>
+                </div>
+                <div class="settings-panel" role="tabpanel" id="panel-display" aria-labelledby="tab-display" tabindex="0" hidden>
+                    <section class="settings-section">
+                        <h3 data-i18n="settings_display_section">Display (this browser)</h3>
+                        <div class="settings-field">
+                            <span data-i18n="select_language">Select Language</span>
+                            <div class="language-container">
+                                <button id="language-btn" class="language-btn" title="Select Language" aria-label="EN – Select Language" aria-haspopup="true" aria-expanded="false" aria-controls="language-dropdown">
+                                    <span class="language-active-code">EN</span>
+                                </button>
+                                <div id="language-dropdown" class="language-dropdown hidden">
+                                    <button type="button" class="language-option" data-lang="en" lang="en">English</button>
+                                    <button type="button" class="language-option" data-lang="ro" lang="ro">Română</button>
+                                    <button type="button" class="language-option" data-lang="fr" lang="fr">Français</button>
+                                    <button type="button" class="language-option" data-lang="de" lang="de">Deutsch</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="settings-field">
+                            <span data-i18n="settings_theme">Theme</span>
+                            <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle Theme" data-i18n-title="theme_toggle_title" data-i18n-aria="theme_toggle_title" aria-label="Toggle Theme">
+                                <!-- Sun icon (shown in dark theme to switch to light) -->
+                                <svg aria-hidden="true" class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="4"></circle>
+                                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                                </svg>
+                                <!-- Moon icon (shown in light theme to switch to dark) -->
+                                <svg aria-hidden="true" class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <label class="settings-field"><span data-i18n="settings_temperature_unit">Temperature</span>
+                            <select id="temperature-unit-select">
+                                <option value="C" data-i18n="unit_celsius">Celsius (°C)</option>
+                                <option value="F" data-i18n="unit_fahrenheit">Fahrenheit (°F)</option>
+                            </select>
+                        </label>
+                        <label class="settings-field"><span data-i18n="settings_palette">Colors</span>
+                            <select id="palette-select">
+                                <option value="cvd" data-i18n="palette_cvd">Colour-blind safe</option>
+                                <option value="official" data-i18n="palette_official">Official colors of the indices</option>
+                            </select>
+                        </label>
+                        <label class="settings-check">
+                            <input type="checkbox" id="show-dust-tiles">
+                            <span data-i18n="settings_show_dust_tiles">Show the measurements of the dust sensors</span>
+                        </label>
+                    </section>
+                </div>
+                <div class="settings-panel" role="tabpanel" id="panel-account" aria-labelledby="tab-account" tabindex="0" hidden>
+                    <section class="settings-section" id="settings-account"></section>
+                    <section class="settings-section">
+                        <button id="logout-btn" class="logout-btn settings-logout-btn" title="Log out" data-i18n-title="logout" data-i18n-aria="logout" aria-label="Log out">
+                            <svg class="icon" aria-hidden="true"><use href="#i-logout"></use></svg>
+                            <span data-i18n="logout">Log out</span>
+                        </button>
+                    </section>
+                </div>
+            </div>
+            <!-- always visible, whatever the tab -->
+            <div class="settings-footer">
+                <p class="settings-error" id="settings-error" role="alert"></p>
+                <button type="button" class="settings-button" id="restore-defaults" data-i18n="settings_restore_defaults" aria-describedby="restore-defaults-hint">Restore the defaults</button>
+                <span class="sr-only" id="restore-defaults-hint" data-i18n="settings_defaults_hint">Restores the recommended profiles and options, and the display options of this browser.</span>
+            </div>
+        </dialog>
         <!-- JavaScript -->
+        <script src="static/password_strength.js"></script>
+        <script src="static/common.js"></script>
+        <script src="static/gauges.js"></script>
+        <script src="static/settings.js"></script>
         <script src="static/script.js"></script>
     </body>
 </html>

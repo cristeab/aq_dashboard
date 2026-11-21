@@ -16,6 +16,8 @@ After=network.target
 
 [Service]
 Type=simple
+StandardOutput=journal
+StandardError=journal
 User=bogdan
 WorkingDirectory=/home/bogdan/projects/aq_dashboard
 ExecStart=/home/bogdan/.venv/bin/python /home/bogdan/projects/aq_dashboard/ambient_sensor.py
