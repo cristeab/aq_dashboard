@@ -104,7 +104,12 @@ function fmtDateTime(isoOrText) {
     if (!date || Number.isNaN(date.getTime())) {
         return isoOrText || '';
     }
-    return new Intl.DateTimeFormat(pageLocale(), { dateStyle: 'short', timeStyle: 'medium' }).format(date);
+    const browserTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    return new Intl.DateTimeFormat(pageLocale(), {
+        dateStyle: 'short',
+        timeStyle: 'medium',
+        timeZone: browserTimeZone,
+    }).format(date);
 }
 
 // ---------------------------------------------------------------- display options of this browser
@@ -467,7 +472,7 @@ function updateSensorFlags(status) {
 
 function updateDashboard(data) {
     currentData = data;
-    document.getElementById('date-time').textContent = data.time ? fmtDateTime(data.time) : (data.timestamp || '');
+    document.getElementById('date-time').textContent = data.timestamp || (data.time ? fmtDateTime(data.time) : '');
     renderIndices();
 
     const pm = [['pm1.0', 'pm10'], ['pm2.5', 'pm25'], ['pm10', 'pm100']];
