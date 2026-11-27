@@ -114,13 +114,13 @@ function fmtDateTime(isoOrText) {
 
 // ---------------------------------------------------------------- display options of this browser
 
-/** Temperature unit: "C" or "F" (default: Fahrenheit only for the United States). */
+/** Temperature unit: "C" or "F" (default: Celsius). */
 function temperatureUnit() {
     const stored = localStorage.getItem('temperatureUnit');
     if (stored === 'C' || stored === 'F') {
         return stored;
     }
-    return (validLocale(navigator.language) || '').toLowerCase() === 'en-us' ? 'F' : 'C';
+    return 'C';
 }
 
 /** Converts a temperature-like value ("°C" or "°F") to the selected unit. */
@@ -135,9 +135,9 @@ function convertTemperature(value, unit) {
     return { value, unit };
 }
 
-/** Colour palette: "cvd" (colour-blind safe, default) or "official" (colors of the standards). */
+/** Colour palette: "official" (default) or "cvd" (colour-blind safe). */
 function palette() {
-    return localStorage.getItem('palette') === 'official' ? 'official' : 'cvd';
+    return localStorage.getItem('palette') === 'cvd' ? 'cvd' : 'official';
 }
 
 /** Classes of the body for the colors of the icons (palette-cvd or palette-official). */

@@ -19,8 +19,8 @@ class DashboardSettings:
     # - EN 16798-1 CO2 categories: the European standard for the ventilation of
     #   occupied rooms (outdoor level 420 ppm);
     # - WHO indoor noise guidelines (living area);
-    # - ISO 7730 PMV/PPD: the international standard of indoor thermal comfort
-    #   (the Thom index describes outdoor heat stress), with the clothing of the season;
+    # - Thom discomfort index – Kyle (1994), a simple temperature/humidity
+    #   index for thermal discomfort;
     # - PM2.5 humidity correction of Barkjohn et al. (2021).
     DEFAULTS = {
         "aqi_profile": "us_epa",
@@ -30,7 +30,7 @@ class DashboardSettings:
         "co2_profile_options": {},
         "noise_profile": "who_1999_indoor",
         "noise_profile_options": {},
-        "comfort_profile": "iso7730_pmv",
+        "comfort_profile": "thom_kyle",
         "comfort_profile_options": {},
         # humidity correction of the PM2.5 readings of the Plantower sensors
         "pm25_correction": DEFAULT_PM25_CORRECTION,

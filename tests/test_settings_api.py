@@ -35,7 +35,7 @@ def storage(tmp_path):
 def test_defaults_and_persistence(storage):
     settings = make_settings(storage)
     assert settings.current == DashboardSettings.DEFAULTS
-    assert settings.current["comfort_profile"] == "iso7730_pmv" and settings.current["co2_profile"] == "co2_en16798"
+    assert settings.current["comfort_profile"] == "thom_kyle" and settings.current["co2_profile"] == "co2_en16798"
     settings.update({"aqi_profile": "raw_who", "aqi_profile_options": {"raw_who": {"pollutant": "no2"}}})
     settings.update({"comfort_profile": "humidex"})
     reloaded = make_settings(storage).current

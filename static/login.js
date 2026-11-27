@@ -89,7 +89,7 @@ function newPasswordError(meter, password, repeat) {
 document.addEventListener('DOMContentLoaded', async () => {
     const theme = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     document.body.classList.toggle('dark-theme', theme === 'dark');
-    const palette = localStorage.getItem('palette') === 'official' ? 'official' : 'cvd';
+    const palette = localStorage.getItem('palette') === 'cvd' ? 'cvd' : 'official';
     document.body.classList.add(`palette-${palette}`);
     languageMenu = initLanguageMenu(document.querySelector('.language-container'), setLanguage);
     ['password', 'new-password', 'repeat-password', 'change-current', 'change-new', 'change-repeat']

@@ -4,7 +4,7 @@ The air quality index (`aqi/`), the indoor CO₂ classification (`co2/`), the no
 index (`comfort/`) are computed by configurable engines (`aqi_engine.py`, `noise_engine.py`, `comfort_engine.py`) from the
 profiles of this directory. The profiles used by all screens and by the notifications are selected in the web interface
 (settings button) and stored in the database; "Restore the defaults" selects the recommended ones (US EPA AQI,
-EN 16798-1, WHO indoor noise, ISO 7730 PMV/PPD).
+EN 16798-1, WHO indoor noise, Thom discomfort index – Kyle (1994)).
 
 | Profile | File | Kind | Summary |
 |---|---|---|---|
