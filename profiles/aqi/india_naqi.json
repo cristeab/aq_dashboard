@@ -4,9 +4,9 @@
   "kind": "index",
   "name": {
     "en": "India National Air Quality Index (NAQI)",
-    "ro": "Indicele național al calității aerului din India (NAQI)",
-    "fr": "Indice national de la qualité de l'air de l'Inde (NAQI)",
-    "de": "Indischer nationaler Luftqualitätsindex (NAQI)"
+    "ro": "Indicele na\u021bional al calit\u0103\u021bii aerului din India (NAQI)",
+    "fr": "Indice national de la qualit\u00e9 de l'air de l'Inde (NAQI)",
+    "de": "Indischer nationaler Luftqualit\u00e4tsindex (NAQI)"
   },
   "short_name": {
     "en": "India AQI",
@@ -15,10 +15,10 @@
     "de": "Indien-AQI"
   },
   "description": {
-    "en": "Index of India's Central Pollution Control Board (0–500): 24-hour means of PM2.5, PM10 and NO₂ and 8-hour means of O₃ and CO (mg/m³). Computed only when at least three pollutants, including PM2.5 or PM10, are available. The standard leaves the concentration range of the 'severe' band open; its upper limits are extrapolated from the previous band.",
-    "ro": "Indicele Comitetului Central pentru Controlul Poluării din India (0–500): medii pe 24 de ore pentru PM2.5, PM10 și NO₂ și medii pe 8 ore pentru O₃ și CO (mg/m³). Se calculează doar când sunt disponibili cel puțin trei poluanți, inclusiv PM2.5 sau PM10. Standardul lasă deschis intervalul de concentrații al benzii „severe”; limitele superioare sunt extrapolate din banda anterioară.",
-    "fr": "Indice du Central Pollution Control Board de l'Inde (0–500) : moyennes sur 24 heures des PM2.5, PM10 et NO₂ et moyennes sur 8 heures de l'O₃ et du CO (mg/m³). Calculé seulement si au moins trois polluants, dont PM2.5 ou PM10, sont disponibles. La norme laisse ouverte la plage de concentrations de la classe « sévère » ; ses limites supérieures sont extrapolées de la classe précédente.",
-    "de": "Index des indischen Central Pollution Control Board (0–500): 24-Stunden-Mittel von PM2.5, PM10 und NO₂ sowie 8-Stunden-Mittel von O₃ und CO (mg/m³). Wird nur berechnet, wenn mindestens drei Schadstoffe verfügbar sind, darunter PM2.5 oder PM10. Die Norm lässt den Konzentrationsbereich der Klasse „schwerwiegend“ offen; ihre Obergrenzen sind aus der vorherigen Klasse extrapoliert."
+    "en": "Index of India's Central Pollution Control Board (0\u2013500): 24-hour means of PM2.5, PM10 and NO\u2082 and 8-hour means of O\u2083 and CO (mg/m\u00b3). Computed only when at least three pollutants, including PM2.5 or PM10, are available. The standard leaves the concentration range of the 'severe' band open; its upper limits are extrapolated from the previous band. The dashboard currently lacks SO\u2082, NH\u2083 and Pb sensors; its reported value uses available pollutants only.",
+    "ro": "Indicele Comitetului Central pentru Controlul Polu\u0103rii din India (0\u2013500): medii pe 24 de ore pentru PM2.5, PM10 \u0219i NO\u2082 \u0219i medii pe 8 ore pentru O\u2083 \u0219i CO (mg/m\u00b3). Se calculeaz\u0103 doar c\u00e2nd sunt disponibili cel pu\u021bin trei poluan\u021bi, inclusiv PM2.5 sau PM10. Standardul las\u0103 deschis intervalul de concentra\u021bii al benzii \u201esevere\u201d; limitele superioare sunt extrapolate din banda anterioar\u0103. Tabloul de bord nu are senzori SO\u2082, NH\u2083 sau Pb; valoarea folose\u0219te doar poluan\u021bii disponibili.",
+    "fr": "Indice du Central Pollution Control Board de l'Inde (0\u2013500) : moyennes sur 24 heures des PM2.5, PM10 et NO\u2082 et moyennes sur 8 heures de l'O\u2083 et du CO (mg/m\u00b3). Calcul\u00e9 seulement si au moins trois polluants, dont PM2.5 ou PM10, sont disponibles. La norme laisse ouverte la plage de concentrations de la classe \u00ab s\u00e9v\u00e8re \u00bb ; ses limites sup\u00e9rieures sont extrapol\u00e9es de la classe pr\u00e9c\u00e9dente. Ce tableau de bord ne mesure pas SO\u2082, NH\u2083 ou Pb ; la valeur utilise uniquement les polluants disponibles.",
+    "de": "Index des indischen Central Pollution Control Board (0\u2013500): 24-Stunden-Mittel von PM2.5, PM10 und NO\u2082 sowie 8-Stunden-Mittel von O\u2083 und CO (mg/m\u00b3). Wird nur berechnet, wenn mindestens drei Schadstoffe verf\u00fcgbar sind, darunter PM2.5 oder PM10. Die Norm l\u00e4sst den Konzentrationsbereich der Klasse \u201eschwerwiegend\u201c offen; ihre Obergrenzen sind aus der vorherigen Klasse extrapoliert. Dieses Dashboard misst SO\u2082, NH\u2083 und Pb nicht; der Wert nutzt nur verf\u00fcgbare Schadstoffe."
   },
   "reference": "Central Pollution Control Board (India), National Air Quality Index, Control of Urban Pollution Series CUPS/82/2014-15",
   "index_rounding": "nearest",
@@ -45,7 +45,7 @@
       "cvd_color": "#009E73",
       "name": {
         "en": "Good",
-        "ro": "Bună",
+        "ro": "Bun\u0103",
         "fr": "Bonne",
         "de": "Gut"
       },
@@ -57,9 +57,9 @@
       },
       "recommendation": {
         "en": "Enjoy your usual activities.",
-        "ro": "Continuați activitățile obișnuite.",
-        "fr": "Profitez de vos activités habituelles.",
-        "de": "Genießen Sie Ihre gewohnten Aktivitäten."
+        "ro": "Continua\u021bi activit\u0103\u021bile obi\u0219nuite.",
+        "fr": "Profitez de vos activit\u00e9s habituelles.",
+        "de": "Genie\u00dfen Sie Ihre gewohnten Aktivit\u00e4ten."
       }
     },
     {
@@ -69,20 +69,20 @@
       "cvd_color": "#F0E442",
       "name": {
         "en": "Satisfactory",
-        "ro": "Satisfăcătoare",
+        "ro": "Satisf\u0103c\u0103toare",
         "fr": "Satisfaisante",
         "de": "Zufriedenstellend"
       },
       "description": {
         "en": "May cause minor breathing discomfort to sensitive people.",
-        "ro": "Poate provoca un ușor disconfort respirator persoanelor sensibile.",
-        "fr": "Peut causer une légère gêne respiratoire aux personnes sensibles.",
+        "ro": "Poate provoca un u\u0219or disconfort respirator persoanelor sensibile.",
+        "fr": "Peut causer une l\u00e9g\u00e8re g\u00eane respiratoire aux personnes sensibles.",
         "de": "Kann bei empfindlichen Personen leichte Atembeschwerden verursachen."
       },
       "recommendation": {
         "en": "Sensitive people should watch for symptoms.",
-        "ro": "Persoanele sensibile ar trebui să fie atente la simptome.",
-        "fr": "Les personnes sensibles devraient surveiller leurs symptômes.",
+        "ro": "Persoanele sensibile ar trebui s\u0103 fie atente la simptome.",
+        "fr": "Les personnes sensibles devraient surveiller leurs sympt\u00f4mes.",
         "de": "Empfindliche Personen sollten auf Beschwerden achten."
       }
     },
@@ -93,21 +93,21 @@
       "cvd_color": "#E69F00",
       "name": {
         "en": "Moderately polluted",
-        "ro": "Poluare moderată",
-        "fr": "Modérément pollué",
-        "de": "Mäßig verschmutzt"
+        "ro": "Poluare moderat\u0103",
+        "fr": "Mod\u00e9r\u00e9ment pollu\u00e9",
+        "de": "M\u00e4\u00dfig verschmutzt"
       },
       "description": {
         "en": "May cause breathing discomfort to people with lung disease such as asthma, and discomfort to people with heart disease, children and older adults.",
-        "ro": "Poate provoca disconfort respirator persoanelor cu boli pulmonare precum astmul și disconfort persoanelor cu boli cardiace, copiilor și vârstnicilor.",
-        "fr": "Peut causer une gêne respiratoire aux personnes atteintes de maladies pulmonaires comme l'asthme, et une gêne aux cardiaques, aux enfants et aux personnes âgées.",
-        "de": "Kann bei Lungenkranken (z. B. Asthma) Atembeschwerden und bei Herzkranken, Kindern und älteren Menschen Beschwerden verursachen."
+        "ro": "Poate provoca disconfort respirator persoanelor cu boli pulmonare precum astmul \u0219i disconfort persoanelor cu boli cardiace, copiilor \u0219i v\u00e2rstnicilor.",
+        "fr": "Peut causer une g\u00eane respiratoire aux personnes atteintes de maladies pulmonaires comme l'asthme, et une g\u00eane aux cardiaques, aux enfants et aux personnes \u00e2g\u00e9es.",
+        "de": "Kann bei Lungenkranken (z. B. Asthma) Atembeschwerden und bei Herzkranken, Kindern und \u00e4lteren Menschen Beschwerden verursachen."
       },
       "recommendation": {
         "en": "People with lung or heart disease, children and older adults should reduce prolonged exertion.",
-        "ro": "Persoanele cu boli pulmonare sau cardiace, copiii și vârstnicii ar trebui să reducă efortul prelungit.",
-        "fr": "Les personnes atteintes de maladies pulmonaires ou cardiaques, les enfants et les personnes âgées devraient réduire les efforts prolongés.",
-        "de": "Menschen mit Lungen- oder Herzerkrankungen, Kinder und ältere Menschen sollten längere Anstrengungen reduzieren."
+        "ro": "Persoanele cu boli pulmonare sau cardiace, copiii \u0219i v\u00e2rstnicii ar trebui s\u0103 reduc\u0103 efortul prelungit.",
+        "fr": "Les personnes atteintes de maladies pulmonaires ou cardiaques, les enfants et les personnes \u00e2g\u00e9es devraient r\u00e9duire les efforts prolong\u00e9s.",
+        "de": "Menschen mit Lungen- oder Herzerkrankungen, Kinder und \u00e4ltere Menschen sollten l\u00e4ngere Anstrengungen reduzieren."
       }
     },
     {
@@ -117,21 +117,21 @@
       "cvd_color": "#D55E00",
       "name": {
         "en": "Poor",
-        "ro": "Slabă",
+        "ro": "Slab\u0103",
         "fr": "Mauvaise",
         "de": "Schlecht"
       },
       "description": {
         "en": "May cause breathing discomfort to most people on prolonged exposure, and discomfort to people with heart disease.",
-        "ro": "Poate provoca disconfort respirator majorității oamenilor la expunere prelungită și disconfort persoanelor cu boli cardiace.",
-        "fr": "Peut causer une gêne respiratoire à la plupart des gens en cas d'exposition prolongée, et une gêne aux personnes cardiaques.",
-        "de": "Kann bei längerer Exposition bei den meisten Menschen Atembeschwerden und bei Herzkranken Beschwerden verursachen."
+        "ro": "Poate provoca disconfort respirator majorit\u0103\u021bii oamenilor la expunere prelungit\u0103 \u0219i disconfort persoanelor cu boli cardiace.",
+        "fr": "Peut causer une g\u00eane respiratoire \u00e0 la plupart des gens en cas d'exposition prolong\u00e9e, et une g\u00eane aux personnes cardiaques.",
+        "de": "Kann bei l\u00e4ngerer Exposition bei den meisten Menschen Atembeschwerden und bei Herzkranken Beschwerden verursachen."
       },
       "recommendation": {
         "en": "Everyone should reduce prolonged exertion; sensitive groups should avoid it.",
-        "ro": "Toată lumea ar trebui să reducă efortul prelungit; grupurile sensibile ar trebui să îl evite.",
-        "fr": "Tout le monde devrait réduire les efforts prolongés ; les groupes sensibles devraient les éviter.",
-        "de": "Alle sollten längere Anstrengungen reduzieren; empfindliche Gruppen sollten sie meiden."
+        "ro": "Toat\u0103 lumea ar trebui s\u0103 reduc\u0103 efortul prelungit; grupurile sensibile ar trebui s\u0103 \u00eel evite.",
+        "fr": "Tout le monde devrait r\u00e9duire les efforts prolong\u00e9s ; les groupes sensibles devraient les \u00e9viter.",
+        "de": "Alle sollten l\u00e4ngere Anstrengungen reduzieren; empfindliche Gruppen sollten sie meiden."
       }
     },
     {
@@ -141,21 +141,21 @@
       "cvd_color": "#CC79A7",
       "name": {
         "en": "Very poor",
-        "ro": "Foarte slabă",
-        "fr": "Très mauvaise",
+        "ro": "Foarte slab\u0103",
+        "fr": "Tr\u00e8s mauvaise",
         "de": "Sehr schlecht"
       },
       "description": {
         "en": "May cause respiratory illness on prolonged exposure; the effect may be more pronounced in people with lung and heart diseases.",
-        "ro": "Poate provoca afecțiuni respiratorii la expunere prelungită; efectul poate fi mai pronunțat la persoanele cu boli pulmonare și cardiace.",
-        "fr": "Peut provoquer des maladies respiratoires en cas d'exposition prolongée ; l'effet peut être plus marqué chez les personnes atteintes de maladies pulmonaires et cardiaques.",
-        "de": "Kann bei längerer Exposition Atemwegserkrankungen verursachen; bei Lungen- und Herzkranken kann die Wirkung stärker sein."
+        "ro": "Poate provoca afec\u021biuni respiratorii la expunere prelungit\u0103; efectul poate fi mai pronun\u021bat la persoanele cu boli pulmonare \u0219i cardiace.",
+        "fr": "Peut provoquer des maladies respiratoires en cas d'exposition prolong\u00e9e ; l'effet peut \u00eatre plus marqu\u00e9 chez les personnes atteintes de maladies pulmonaires et cardiaques.",
+        "de": "Kann bei l\u00e4ngerer Exposition Atemwegserkrankungen verursachen; bei Lungen- und Herzkranken kann die Wirkung st\u00e4rker sein."
       },
       "recommendation": {
         "en": "Avoid prolonged exertion; sensitive groups should avoid physical activity. Use an air purifier.",
-        "ro": "Evitați efortul prelungit; grupurile sensibile ar trebui să evite activitatea fizică. Folosiți un purificator de aer.",
-        "fr": "Évitez les efforts prolongés ; les groupes sensibles devraient éviter l'activité physique. Utilisez un purificateur d'air.",
-        "de": "Längere Anstrengungen vermeiden; empfindliche Gruppen sollten körperliche Aktivität meiden. Einen Luftreiniger verwenden."
+        "ro": "Evita\u021bi efortul prelungit; grupurile sensibile ar trebui s\u0103 evite activitatea fizic\u0103. Folosi\u021bi un purificator de aer.",
+        "fr": "\u00c9vitez les efforts prolong\u00e9s ; les groupes sensibles devraient \u00e9viter l'activit\u00e9 physique. Utilisez un purificateur d'air.",
+        "de": "L\u00e4ngere Anstrengungen vermeiden; empfindliche Gruppen sollten k\u00f6rperliche Aktivit\u00e4t meiden. Einen Luftreiniger verwenden."
       }
     },
     {
@@ -165,21 +165,21 @@
       "cvd_color": "#882255",
       "name": {
         "en": "Severe",
-        "ro": "Severă",
-        "fr": "Sévère",
+        "ro": "Sever\u0103",
+        "fr": "S\u00e9v\u00e8re",
         "de": "Schwerwiegend"
       },
       "description": {
         "en": "Affects healthy people and seriously impacts those with existing diseases; effects may be felt even during light physical activity.",
-        "ro": "Afectează persoanele sănătoase și are un impact grav asupra celor cu boli existente; efectele se pot simți chiar și la activitate fizică ușoară.",
-        "fr": "Affecte les personnes en bonne santé et gravement celles qui ont des maladies ; les effets peuvent se faire sentir même lors d'une activité légère.",
-        "de": "Betrifft auch Gesunde und beeinträchtigt Vorerkrankte schwer; Auswirkungen können schon bei leichter körperlicher Aktivität auftreten."
+        "ro": "Afecteaz\u0103 persoanele s\u0103n\u0103toase \u0219i are un impact grav asupra celor cu boli existente; efectele se pot sim\u021bi chiar \u0219i la activitate fizic\u0103 u\u0219oar\u0103.",
+        "fr": "Affecte les personnes en bonne sant\u00e9 et gravement celles qui ont des maladies ; les effets peuvent se faire sentir m\u00eame lors d'une activit\u00e9 l\u00e9g\u00e8re.",
+        "de": "Betrifft auch Gesunde und beeintr\u00e4chtigt Vorerkrankte schwer; Auswirkungen k\u00f6nnen schon bei leichter k\u00f6rperlicher Aktivit\u00e4t auftreten."
       },
       "recommendation": {
         "en": "Everyone should avoid physical activity; remove the source or use an air purifier.",
-        "ro": "Toată lumea ar trebui să evite activitatea fizică; eliminați sursa sau folosiți un purificator de aer.",
-        "fr": "Tout le monde devrait éviter l'activité physique ; supprimez la source ou utilisez un purificateur d'air.",
-        "de": "Alle sollten körperliche Aktivität meiden; Quelle beseitigen oder Luftreiniger verwenden."
+        "ro": "Toat\u0103 lumea ar trebui s\u0103 evite activitatea fizic\u0103; elimina\u021bi sursa sau folosi\u021bi un purificator de aer.",
+        "fr": "Tout le monde devrait \u00e9viter l'activit\u00e9 physique ; supprimez la source ou utilisez un purificateur d'air.",
+        "de": "Alle sollten k\u00f6rperliche Aktivit\u00e4t meiden; Quelle beseitigen oder Luftreiniger verwenden."
       }
     }
   ],
@@ -428,6 +428,156 @@
             34.1,
             51,
             401,
+            500
+          ]
+        ],
+        "above_range": "cap"
+      }
+    ],
+    "so2": [
+      {
+        "averaging": {
+          "type": "mean",
+          "hours": 24
+        },
+        "unit": "ug/m3",
+        "decimals": 0,
+        "rounding": "round",
+        "breakpoints": [
+          [
+            0,
+            40,
+            0,
+            50
+          ],
+          [
+            40,
+            80,
+            50,
+            100
+          ],
+          [
+            80,
+            380,
+            100,
+            200
+          ],
+          [
+            380,
+            800,
+            200,
+            300
+          ],
+          [
+            800,
+            1600,
+            300,
+            400
+          ],
+          [
+            1600,
+            2000,
+            400,
+            500
+          ]
+        ],
+        "above_range": "cap"
+      }
+    ],
+    "nh3": [
+      {
+        "averaging": {
+          "type": "mean",
+          "hours": 24
+        },
+        "unit": "ug/m3",
+        "decimals": 0,
+        "rounding": "round",
+        "breakpoints": [
+          [
+            0,
+            200,
+            0,
+            50
+          ],
+          [
+            200,
+            400,
+            50,
+            100
+          ],
+          [
+            400,
+            800,
+            100,
+            200
+          ],
+          [
+            800,
+            1200,
+            200,
+            300
+          ],
+          [
+            1200,
+            1600,
+            300,
+            400
+          ],
+          [
+            1600,
+            2000,
+            400,
+            500
+          ]
+        ],
+        "above_range": "cap"
+      }
+    ],
+    "pb": [
+      {
+        "averaging": {
+          "type": "mean",
+          "hours": 24
+        },
+        "unit": "ug/m3",
+        "decimals": 1,
+        "rounding": "round",
+        "breakpoints": [
+          [
+            0,
+            0.5,
+            0,
+            50
+          ],
+          [
+            0.5,
+            1,
+            50,
+            100
+          ],
+          [
+            1,
+            2,
+            100,
+            200
+          ],
+          [
+            2,
+            3,
+            200,
+            300
+          ],
+          [
+            3,
+            3.5,
+            300,
+            400
+          ],
+          [
+            3.5,
+            5,
+            400,
             500
           ]
         ],

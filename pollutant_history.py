@@ -149,6 +149,8 @@ Correction = Callable[[float, float], float]
 def _bucket_geometry(spec: Dict) -> Tuple[int, int]:
     if spec["type"] == "mean" and "minutes" in spec:
         return spec["minutes"], 1
+    if spec["type"] == "korea_pm24":
+        return 60, 16
     return 60, spec["hours"]
 
 
@@ -184,11 +186,30 @@ def compute_average(history: PollutantHistory, pollutant: str, spec: Dict,
             buckets, corrected = corrected_buckets, True
     if spec["type"] == "mean":
         average = _mean(buckets)
+    elif spec["type"] == "korea_pm24":
+        average = _korea_pm24(buckets, float(spec["min_concentration"]))
     else:
         average = _nowcast(buckets, spec["min_weight"])
     if average is not None:
         average.corrected = corrected
     return average
+
+
+def _korea_pm24(buckets: List[Bucket], minimum: float) -> Optional[Average]:
+    """AirKorea C24E estimate: half past-12-hour mean, half adjusted recent-4-hour mean."""
+    recent = [b.mean for b in buckets[:4] if b.is_valid]
+    previous = [b.mean for b in buckets[4:16] if b.is_valid]
+    if not recent or not previous:
+        return None
+    c12 = sum(previous) / len(previous)
+    adjusted = []
+    for value in recent:
+        ratio = value / c12 if c12 > 0 else 0
+        adjusted.append(value * 0.75 if value >= minimum and 0.9 <= ratio <= 1.7 else value)
+    c4 = sum(adjusted) / len(adjusted)
+    coverage = _coverage(buckets)
+    provisional = len(recent) < 3 or len(previous) < 9
+    return Average((c12 + c4) / 2, provisional, coverage)
 
 
 def _coverage(buckets: List[Bucket]) -> float:

@@ -3,10 +3,10 @@
   "order": 40,
   "kind": "index",
   "name": {
-    "en": "China Air Quality Index (HJ 633-2012)",
-    "ro": "Indicele calității aerului din China (HJ 633-2012)",
-    "fr": "Indice de qualité de l'air de la Chine (HJ 633-2012)",
-    "de": "Chinesischer Luftqualitätsindex (HJ 633-2012)"
+    "en": "China Air Quality Index (HJ 633-2026)",
+    "ro": "Indicele calității aerului din China (HJ 633-2026)",
+    "fr": "Indice de qualité de l’air de la Chine (HJ 633-2026)",
+    "de": "Chinesischer Luftqualitätsindex (HJ 633-2026)"
   },
   "short_name": {
     "en": "China AQI",
@@ -15,12 +15,12 @@
     "de": "China-AQI"
   },
   "description": {
-    "en": "Index of the Chinese Ministry of Ecology and Environment (0–500), real-time hourly report: 24-hour moving means for PM2.5 and PM10, 1-hour means for NO₂ and CO, 1-hour and 8-hour means for O₃. Sub-indices are rounded up; the primary pollutant is only reported above 50.",
-    "ro": "Indicele Ministerului Ecologiei și Mediului din China (0–500), raport orar în timp real: medii mobile pe 24 de ore pentru PM2.5 și PM10, medii pe 1 oră pentru NO₂ și CO, medii pe 1 și 8 ore pentru O₃. Subindicii se rotunjesc în sus; poluantul principal se indică doar peste 50.",
-    "fr": "Indice du ministère chinois de l'Écologie et de l'Environnement (0–500), rapport horaire en temps réel : moyennes glissantes sur 24 heures pour PM2.5 et PM10, moyennes horaires pour NO₂ et CO, moyennes sur 1 et 8 heures pour O₃. Les sous-indices sont arrondis à l'entier supérieur ; le polluant principal n'est indiqué qu'au-delà de 50.",
-    "de": "Index des chinesischen Ministeriums für Ökologie und Umwelt (0–500), stündlicher Echtzeitbericht: gleitende 24-Stunden-Mittel für PM2.5 und PM10, 1-Stunden-Mittel für NO₂ und CO, 1- und 8-Stunden-Mittel für O₃. Teilindizes werden aufgerundet; der Hauptschadstoff wird erst über 50 angegeben."
+    "en": "Real-time HJ 633-2026 method: current-hour means for PM2.5, PM10, NO₂, CO and O₃, plus the rolling 8-hour O₃ table. PM uses the standard daily breakpoints applied to current-hour means. This dashboard has no SO₂ sensor, so SO₂ cannot contribute.",
+    "ro": "Metoda în timp real HJ 633-2026: medii ale orei curente pentru PM2.5, PM10, NO₂, CO și O₃, plus tabelul O₃ pe 8 ore. Pentru PM, pragurile standard zilnice se aplică mediilor orei curente. Tabloul de bord nu are senzor SO₂, deci SO₂ nu poate contribui.",
+    "fr": "Méthode temps réel HJ 633-2026 : moyennes de l’heure courante pour PM2.5, PM10, NO₂, CO et O₃, plus le tableau O₃ glissant sur 8 heures. Les seuils journaliers standard des particules sont appliqués aux moyennes horaires courantes. Ce tableau de bord ne mesure pas le SO₂ ; il ne peut donc pas contribuer.",
+    "de": "Echtzeitverfahren nach HJ 633-2026: Mittelwerte der aktuellen Stunde für PM2.5, PM10, NO₂, CO und O₃ sowie die rollierende 8-Stunden-O₃-Tabelle. Für Partikel gelten die täglichen Standardgrenzwerte auf aktuelle Stundenmittel. Dieses Dashboard misst kein SO₂; es kann daher nicht einfließen."
   },
-  "reference": "HJ 633-2012, Technical Regulation on Ambient Air Quality Index (on trial); GB 3095-2012 (amended 2018, reference state 298.15 K)",
+  "reference": "Ministry of Ecology and Environment of China, HJ 633-2026, Technical specifications on ambient air quality index (effective 2026-03-01)",
   "index_rounding": "ceil",
   "gas_reference_temperature_c": 25,
   "dominant_pollutant_min_index": 50,
@@ -181,7 +181,7 @@
       {
         "averaging": {
           "type": "mean",
-          "hours": 24
+          "hours": 1
         },
         "unit": "ug/m3",
         "decimals": 0,
@@ -195,12 +195,12 @@
           ],
           [
             35,
-            75,
+            60,
             50,
             100
           ],
           [
-            75,
+            60,
             115,
             100,
             150
@@ -237,7 +237,7 @@
       {
         "averaging": {
           "type": "mean",
-          "hours": 24
+          "hours": 1
         },
         "unit": "ug/m3",
         "decimals": 0,
@@ -251,12 +251,12 @@
           ],
           [
             50,
-            150,
+            120,
             50,
             100
           ],
           [
-            150,
+            120,
             250,
             100,
             150
@@ -503,6 +503,44 @@
           "fr": "Table sur 8 heures ; au-delà de 800 µg/m³, seule la table horaire s'applique.",
           "de": "8-Stunden-Tabelle; über 800 µg/m³ gilt nur die 1-Stunden-Tabelle."
         }
+      }
+    ],
+    "so2": [
+      {
+        "averaging": {
+          "type": "mean",
+          "hours": 1
+        },
+        "unit": "ug/m3",
+        "decimals": 0,
+        "rounding": "round",
+        "breakpoints": [
+          [
+            0,
+            150,
+            0,
+            50
+          ],
+          [
+            150,
+            500,
+            50,
+            100
+          ],
+          [
+            500,
+            650,
+            100,
+            150
+          ],
+          [
+            650,
+            800,
+            150,
+            200
+          ]
+        ],
+        "above_range": "cap"
       }
     ]
   }

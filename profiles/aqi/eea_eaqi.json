@@ -4,9 +4,9 @@
   "kind": "banded",
   "name": {
     "en": "European Air Quality Index (EEA)",
-    "ro": "Indicele european al calității aerului (AEM)",
-    "fr": "Indice européen de la qualité de l'air (AEE)",
-    "de": "Europäischer Luftqualitätsindex (EUA)"
+    "ro": "Indicele european al calit\u0103\u021bii aerului (AEM)",
+    "fr": "Indice europ\u00e9en de la qualit\u00e9 de l'air (AEE)",
+    "de": "Europ\u00e4ischer Luftqualit\u00e4tsindex (EUA)"
   },
   "short_name": {
     "en": "EAQI",
@@ -15,10 +15,10 @@
     "de": "EAQI"
   },
   "description": {
-    "en": "Official index of the European Environment Agency, with six levels from good to extremely poor (thresholds revised in 2024 to follow the WHO 2021 guidelines). Uses 24-hour running means of PM2.5 and PM10 and 1-hour means of NO₂ and O₃, in µg/m³ at 20 °C. The displayed level (1–6) is the worst level of the pollutants.",
-    "ro": "Indicele oficial al Agenției Europene de Mediu, cu șase niveluri, de la bun la extrem de slab (praguri revizuite în 2024 conform ghidurilor OMS 2021). Folosește medii mobile pe 24 de ore pentru PM2.5 și PM10 și medii pe 1 oră pentru NO₂ și O₃, în µg/m³ la 20 °C. Nivelul afișat (1–6) este cel mai defavorabil nivel al poluanților.",
-    "fr": "Indice officiel de l'Agence européenne pour l'environnement, à six niveaux de bon à extrêmement mauvais (seuils révisés en 2024 selon les lignes directrices OMS 2021). Utilise les moyennes glissantes sur 24 heures des PM2.5 et PM10 et les moyennes horaires du NO₂ et de l'O₃, en µg/m³ à 20 °C. Le niveau affiché (1–6) est le plus mauvais niveau des polluants.",
-    "de": "Offizieller Index der Europäischen Umweltagentur mit sechs Stufen von gut bis extrem schlecht (Schwellenwerte 2024 an die WHO-Leitlinien 2021 angepasst). Verwendet gleitende 24-Stunden-Mittel von PM2.5 und PM10 sowie 1-Stunden-Mittel von NO₂ und O₃ in µg/m³ bei 20 °C. Die angezeigte Stufe (1–6) ist die schlechteste Stufe der Schadstoffe."
+    "en": "EEA short-term index with hourly concentrations of PM2.5, PM10, NO\u2082, O\u2083 and SO\u2082. This dashboard has no SO\u2082 sensor, so the displayed level uses the available pollutants only and may be lower than the complete EEA index.",
+    "ro": "Indicele oficial al Agen\u021biei Europene de Mediu, cu \u0219ase niveluri, de la bun la extrem de slab (praguri revizuite \u00een 2024 conform ghidurilor OMS 2021). Folose\u0219te medii mobile pe 24 de ore pentru PM2.5 \u0219i PM10 \u0219i medii pe 1 or\u0103 pentru NO\u2082 \u0219i O\u2083, \u00een \u00b5g/m\u00b3 la 20 \u00b0C. Nivelul afi\u0219at (1\u20136) este cel mai defavorabil nivel al poluan\u021bilor. Tabloul de bord nu are senzor SO\u2082, astfel \u00eenc\u00e2t nivelul afi\u0219at folose\u0219te doar poluan\u021bii disponibili.",
+    "fr": "Indice officiel de l'Agence europ\u00e9enne pour l'environnement, \u00e0 six niveaux de bon \u00e0 extr\u00eamement mauvais (seuils r\u00e9vis\u00e9s en 2024 selon les lignes directrices OMS 2021). Utilise les moyennes glissantes sur 24 heures des PM2.5 et PM10 et les moyennes horaires du NO\u2082 et de l'O\u2083, en \u00b5g/m\u00b3 \u00e0 20 \u00b0C. Le niveau affich\u00e9 (1\u20136) est le plus mauvais niveau des polluants. Ce tableau de bord ne mesure pas le SO\u2082 ; le niveau affich\u00e9 ne tient compte que des polluants disponibles.",
+    "de": "Offizieller Index der Europ\u00e4ischen Umweltagentur mit sechs Stufen von gut bis extrem schlecht (Schwellenwerte 2024 an die WHO-Leitlinien 2021 angepasst). Verwendet gleitende 24-Stunden-Mittel von PM2.5 und PM10 sowie 1-Stunden-Mittel von NO\u2082 und O\u2083 in \u00b5g/m\u00b3 bei 20 \u00b0C. Die angezeigte Stufe (1\u20136) ist die schlechteste Stufe der Schadstoffe. Dieses Dashboard misst kein SO\u2082; die angezeigte Stufe ber\u00fccksichtigt nur die verf\u00fcgbaren Schadstoffe."
   },
   "reference": "European Environment Agency, European Air Quality Index, thresholds revised in 2024 (aligned with the WHO 2021 air quality guidelines)",
   "gas_reference_temperature_c": 20,
@@ -37,21 +37,21 @@
       "cvd_color": "#009E73",
       "name": {
         "en": "Good",
-        "ro": "Bună",
+        "ro": "Bun\u0103",
         "fr": "Bonne",
         "de": "Gut"
       },
       "description": {
         "en": "The air quality is good.",
-        "ro": "Calitatea aerului este bună.",
-        "fr": "La qualité de l'air est bonne.",
-        "de": "Die Luftqualität ist gut."
+        "ro": "Calitatea aerului este bun\u0103.",
+        "fr": "La qualit\u00e9 de l'air est bonne.",
+        "de": "Die Luftqualit\u00e4t ist gut."
       },
       "recommendation": {
         "en": "Enjoy your usual outdoor activities.",
-        "ro": "Continuați activitățile obișnuite în aer liber.",
-        "fr": "Profitez de vos activités habituelles en plein air.",
-        "de": "Genießen Sie Ihre gewohnten Aktivitäten im Freien."
+        "ro": "Continua\u021bi activit\u0103\u021bile obi\u0219nuite \u00een aer liber.",
+        "fr": "Profitez de vos activit\u00e9s habituelles en plein air.",
+        "de": "Genie\u00dfen Sie Ihre gewohnten Aktivit\u00e4ten im Freien."
       }
     },
     {
@@ -61,21 +61,21 @@
       "cvd_color": "#F0E442",
       "name": {
         "en": "Fair",
-        "ro": "Acceptabilă",
+        "ro": "Acceptabil\u0103",
         "fr": "Moyenne",
         "de": "Ausreichend"
       },
       "description": {
         "en": "The air quality is fair.",
-        "ro": "Calitatea aerului este acceptabilă.",
-        "fr": "La qualité de l'air est moyenne.",
-        "de": "Die Luftqualität ist ausreichend."
+        "ro": "Calitatea aerului este acceptabil\u0103.",
+        "fr": "La qualit\u00e9 de l'air est moyenne.",
+        "de": "Die Luftqualit\u00e4t ist ausreichend."
       },
       "recommendation": {
         "en": "Enjoy your usual outdoor activities.",
-        "ro": "Continuați activitățile obișnuite în aer liber.",
-        "fr": "Profitez de vos activités habituelles en plein air.",
-        "de": "Genießen Sie Ihre gewohnten Aktivitäten im Freien."
+        "ro": "Continua\u021bi activit\u0103\u021bile obi\u0219nuite \u00een aer liber.",
+        "fr": "Profitez de vos activit\u00e9s habituelles en plein air.",
+        "de": "Genie\u00dfen Sie Ihre gewohnten Aktivit\u00e4ten im Freien."
       }
     },
     {
@@ -85,21 +85,21 @@
       "cvd_color": "#E69F00",
       "name": {
         "en": "Moderate",
-        "ro": "Moderată",
-        "fr": "Dégradée",
-        "de": "Mäßig"
+        "ro": "Moderat\u0103",
+        "fr": "D\u00e9grad\u00e9e",
+        "de": "M\u00e4\u00dfig"
       },
       "description": {
         "en": "The air quality is moderate.",
-        "ro": "Calitatea aerului este moderată.",
-        "fr": "La qualité de l'air est dégradée.",
-        "de": "Die Luftqualität ist mäßig."
+        "ro": "Calitatea aerului este moderat\u0103.",
+        "fr": "La qualit\u00e9 de l'air est d\u00e9grad\u00e9e.",
+        "de": "Die Luftqualit\u00e4t ist m\u00e4\u00dfig."
       },
       "recommendation": {
         "en": "Enjoy your usual outdoor activities; sensitive people should consider reducing intense outdoor activities if they experience symptoms.",
-        "ro": "Continuați activitățile obișnuite; persoanele sensibile ar trebui să reducă activitățile intense în aer liber dacă au simptome.",
-        "fr": "Profitez de vos activités habituelles ; les personnes sensibles devraient envisager de réduire les activités intenses en plein air si elles ont des symptômes.",
-        "de": "Gewohnte Aktivitäten sind möglich; empfindliche Personen sollten bei Beschwerden intensive Aktivitäten im Freien reduzieren."
+        "ro": "Continua\u021bi activit\u0103\u021bile obi\u0219nuite; persoanele sensibile ar trebui s\u0103 reduc\u0103 activit\u0103\u021bile intense \u00een aer liber dac\u0103 au simptome.",
+        "fr": "Profitez de vos activit\u00e9s habituelles ; les personnes sensibles devraient envisager de r\u00e9duire les activit\u00e9s intenses en plein air si elles ont des sympt\u00f4mes.",
+        "de": "Gewohnte Aktivit\u00e4ten sind m\u00f6glich; empfindliche Personen sollten bei Beschwerden intensive Aktivit\u00e4ten im Freien reduzieren."
       }
     },
     {
@@ -109,21 +109,21 @@
       "cvd_color": "#D55E00",
       "name": {
         "en": "Poor",
-        "ro": "Slabă",
+        "ro": "Slab\u0103",
         "fr": "Mauvaise",
         "de": "Schlecht"
       },
       "description": {
         "en": "The air quality is poor.",
-        "ro": "Calitatea aerului este slabă.",
-        "fr": "La qualité de l'air est mauvaise.",
-        "de": "Die Luftqualität ist schlecht."
+        "ro": "Calitatea aerului este slab\u0103.",
+        "fr": "La qualit\u00e9 de l'air est mauvaise.",
+        "de": "Die Luftqualit\u00e4t ist schlecht."
       },
       "recommendation": {
         "en": "Consider reducing intense outdoor activities if you have symptoms such as sore eyes, a cough or sore throat; sensitive people should reduce physical activities, particularly outdoors.",
-        "ro": "Reduceți activitățile intense în aer liber dacă aveți simptome precum iritații ale ochilor, tuse sau dureri în gât; persoanele sensibile ar trebui să reducă activitatea fizică, mai ales în aer liber.",
-        "fr": "Envisagez de réduire les activités intenses en plein air en cas de symptômes (yeux irrités, toux, maux de gorge) ; les personnes sensibles devraient réduire l'activité physique, surtout à l'extérieur.",
-        "de": "Bei Beschwerden wie gereizten Augen, Husten oder Halsschmerzen intensive Aktivitäten im Freien reduzieren; empfindliche Personen sollten körperliche Aktivität, besonders im Freien, verringern."
+        "ro": "Reduce\u021bi activit\u0103\u021bile intense \u00een aer liber dac\u0103 ave\u021bi simptome precum irita\u021bii ale ochilor, tuse sau dureri \u00een g\u00e2t; persoanele sensibile ar trebui s\u0103 reduc\u0103 activitatea fizic\u0103, mai ales \u00een aer liber.",
+        "fr": "Envisagez de r\u00e9duire les activit\u00e9s intenses en plein air en cas de sympt\u00f4mes (yeux irrit\u00e9s, toux, maux de gorge) ; les personnes sensibles devraient r\u00e9duire l'activit\u00e9 physique, surtout \u00e0 l'ext\u00e9rieur.",
+        "de": "Bei Beschwerden wie gereizten Augen, Husten oder Halsschmerzen intensive Aktivit\u00e4ten im Freien reduzieren; empfindliche Personen sollten k\u00f6rperliche Aktivit\u00e4t, besonders im Freien, verringern."
       }
     },
     {
@@ -133,21 +133,21 @@
       "cvd_color": "#CC79A7",
       "name": {
         "en": "Very poor",
-        "ro": "Foarte slabă",
-        "fr": "Très mauvaise",
+        "ro": "Foarte slab\u0103",
+        "fr": "Tr\u00e8s mauvaise",
         "de": "Sehr schlecht"
       },
       "description": {
         "en": "The air quality is very poor.",
-        "ro": "Calitatea aerului este foarte slabă.",
-        "fr": "La qualité de l'air est très mauvaise.",
-        "de": "Die Luftqualität ist sehr schlecht."
+        "ro": "Calitatea aerului este foarte slab\u0103.",
+        "fr": "La qualit\u00e9 de l'air est tr\u00e8s mauvaise.",
+        "de": "Die Luftqualit\u00e4t ist sehr schlecht."
       },
       "recommendation": {
         "en": "Consider reducing physical activities, particularly outdoors, especially if you have symptoms; sensitive people should reduce them.",
-        "ro": "Reduceți activitatea fizică, mai ales în aer liber și în special dacă aveți simptome; persoanele sensibile ar trebui să o reducă.",
-        "fr": "Envisagez de réduire l'activité physique, surtout à l'extérieur et en cas de symptômes ; les personnes sensibles devraient la réduire.",
-        "de": "Körperliche Aktivität besonders im Freien und bei Beschwerden reduzieren; empfindliche Personen sollten sie verringern."
+        "ro": "Reduce\u021bi activitatea fizic\u0103, mai ales \u00een aer liber \u0219i \u00een special dac\u0103 ave\u021bi simptome; persoanele sensibile ar trebui s\u0103 o reduc\u0103.",
+        "fr": "Envisagez de r\u00e9duire l'activit\u00e9 physique, surtout \u00e0 l'ext\u00e9rieur et en cas de sympt\u00f4mes ; les personnes sensibles devraient la r\u00e9duire.",
+        "de": "K\u00f6rperliche Aktivit\u00e4t besonders im Freien und bei Beschwerden reduzieren; empfindliche Personen sollten sie verringern."
       }
     },
     {
@@ -157,21 +157,21 @@
       "cvd_color": "#882255",
       "name": {
         "en": "Extremely poor",
-        "ro": "Extrem de slabă",
-        "fr": "Extrêmement mauvaise",
+        "ro": "Extrem de slab\u0103",
+        "fr": "Extr\u00eamement mauvaise",
         "de": "Extrem schlecht"
       },
       "description": {
         "en": "The air quality is extremely poor.",
-        "ro": "Calitatea aerului este extrem de slabă.",
-        "fr": "La qualité de l'air est extrêmement mauvaise.",
-        "de": "Die Luftqualität ist extrem schlecht."
+        "ro": "Calitatea aerului este extrem de slab\u0103.",
+        "fr": "La qualit\u00e9 de l'air est extr\u00eamement mauvaise.",
+        "de": "Die Luftqualit\u00e4t ist extrem schlecht."
       },
       "recommendation": {
         "en": "Reduce physical activities outdoors; sensitive people should avoid them.",
-        "ro": "Reduceți activitatea fizică în aer liber; persoanele sensibile ar trebui să o evite.",
-        "fr": "Réduisez l'activité physique à l'extérieur ; les personnes sensibles devraient l'éviter.",
-        "de": "Körperliche Aktivität im Freien reduzieren; empfindliche Personen sollten sie meiden."
+        "ro": "Reduce\u021bi activitatea fizic\u0103 \u00een aer liber; persoanele sensibile ar trebui s\u0103 o evite.",
+        "fr": "R\u00e9duisez l'activit\u00e9 physique \u00e0 l'ext\u00e9rieur ; les personnes sensibles devraient l'\u00e9viter.",
+        "de": "K\u00f6rperliche Aktivit\u00e4t im Freien reduzieren; empfindliche Personen sollten sie meiden."
       }
     }
   ],
@@ -180,7 +180,7 @@
       {
         "averaging": {
           "type": "mean",
-          "hours": 24
+          "hours": 1
         },
         "unit": "ug/m3",
         "decimals": 0,
@@ -198,7 +198,7 @@
       {
         "averaging": {
           "type": "mean",
-          "hours": 24
+          "hours": 1
         },
         "unit": "ug/m3",
         "decimals": 0,
@@ -245,6 +245,24 @@
           120,
           160,
           180
+        ]
+      }
+    ],
+    "so2": [
+      {
+        "averaging": {
+          "type": "mean",
+          "hours": 1
+        },
+        "unit": "ug/m3",
+        "decimals": 0,
+        "rounding": "round",
+        "thresholds": [
+          20,
+          40,
+          125,
+          190,
+          275
         ]
       }
     ]

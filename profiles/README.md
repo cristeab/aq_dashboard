@@ -9,26 +9,24 @@ EN 16798-1, WHO indoor noise, Thom discomfort index – Kyle (1994)).
 | Profile | File | Kind | Summary |
 |---|---|---|---|
 | US EPA AQI | `aqi/us_epa.json` | index | 0–500, 2024 PM2.5 breakpoints, NowCast (12 h) for particles, 8 h O₃/CO, 1 h NO₂ |
-| US EPA – fast | `aqi/us_epa_fast.json` | index | EPA breakpoints applied to 10-minute means (indicative, like the former "10-min. AQI") |
-| EEA European AQI | `aqi/eea_eaqi.json` | banded | 6 levels (good … extremely poor), 2024 thresholds, 24 h PM, 1 h NO₂/O₃, µg/m³ at 20 °C |
-| European CAQI | `aqi/eu_caqi.json` | index | CiteAir hourly grid, 0–100 (> 100 = "very high"), µg/m³ at 20 °C (older European index) |
-| UK DAQI | `aqi/uk_daqi.json` | banded | 10 levels in 4 bands (COMEAP), 24 h PM, 8 h O₃, 1 h NO₂ |
-| China AQI | `aqi/china_mee.json` | index | HJ 633-2012 real-time report, 24 h PM, 1 h NO₂/CO, 1 h and 8 h O₃, sub-indices rounded up |
-| India NAQI | `aqi/india_naqi.json` | index | CPCB 0–500, 24 h PM/NO₂, 8 h O₃/CO, needs 3 pollutants incl. PM; "severe" upper limits extrapolated |
-| Korea CAI | `aqi/korea_cai.json` | index | AirKorea 0–500, 24 h PM, 1 h gases in ppm, +50/+75 when 2/3+ pollutants are "unhealthy" |
+| EEA European AQI | `aqi/eea_eaqi.json` | banded | 5 levels, hourly pollutant means and current EEA thresholds; PM values are hourly, not daily |
+| UK DAQI | `aqi/uk_daqi.json` | banded | 10 levels in 4 bands (COMEAP), pollutant-specific rolling periods including 24 h PM, 8 h O₃, 1 h NO₂ and 15 min SO₂ |
+| China AQI | `aqi/china_mee.json` | index | MEE HJ 633-2026, effective 1 March 2026; hourly means and updated PM thresholds, sub-indices rounded up |
+| India NAQI | `aqi/india_naqi.json` | index | CPCB 0–500, 24 h PM/NO₂/SO₂/NH₃/Pb and 8 h O₃/CO; requires 3 pollutants including PM |
+| Korea CAI | `aqi/korea_cai.json` | index | AirKorea 0–500, official 24 h estimated PM (C24E) and 1 h gas means, with the official multi-pollutant bonus |
 | Canada AQHI | `aqi/canada_aqhi.json` | additive_risk | 1–10+, sum of the risks of NO₂, O₃ and PM2.5 (3 h means) |
-| Raw concentration | `aqi/raw_who.json` | concentration | 10-minute mean of a selectable pollutant compared with the WHO 2021 guideline levels |
+| WHO 2021 guideline | `aqi/raw_who.json` | concentration | Pollutant-specific WHO 2021 averaging periods; a concentration comparison, not an AQI |
 | CO₂ – EN 16798-1 | `co2/co2_en16798.json` | concentration | indoor ventilation categories I–IV, CO₂ above a selectable outdoor level (left column) |
 | CO₂ – UBA | `co2/co2_uba.json` | concentration | German Environment Agency: < 1000 / 1000–2000 / > 2000 ppm (left column) |
 | Noise – WHO indoor | `noise/who_1999_indoor.json` | noise | LAeq 1 h vs the WHO 1999 indoor guidelines of the room (bedroom: 35 dB(A) day, 30 dB(A) night) |
 | Noise – EU occupational | `noise/eu_2003_10_occupational.json` | noise | LAeq 8 h vs the action values 80 / 85 / 87 dB(A) of Directive 2003/10/EC |
 | Noise – NIOSH | `noise/niosh_rel.json` | noise | LAeq 8 h vs the NIOSH REL 85 dB(A) (action level 82 dB(A), 3 dB exchange rate) |
-| Thom DI – Giles | `comfort/thom_giles.json` | | Thom discomfort index (°C), classes of Giles et al. (1990) |
 | Thom DI – Kyle | `comfort/thom_kyle.json` | | Thom discomfort index (°C), 10 bioclimatic classes of Kyle (1994), incl. cold |
-| Thom THI (1959) | `comfort/thom_thi_1959.json` | | Thom's original temperature-humidity index in °F (70 / 75 / 79) |
-| Humidex | `comfort/humidex.json` | | Environment Canada humidex |
-| NWS heat index | `comfort/nws_heat_index.json` | | US NWS heat index in °C, categories of the current NWS chart |
-| PMV/PPD | `comfort/iso7730_pmv.json` | | ISO 7730 office comfort, categories A/B/C, options: clothing, activity, air speed |
+| Humidex | `comfort/humidex.json` | | Environment and Climate Change Canada humidex bands: 20–29, 30–39, 40–45 and 46+ |
+| NWS heat index | `comfort/nws_heat_index.json` | | US NWS heat index in °C, categories from the NWS chart |
+| PMV/PPD | `comfort/iso7730_pmv.json` | | ISO 7730:2025 PMV/PPD estimate, options: clothing, activity, air speed |
+
+Optional pollutant tables that have no matching sensor input are ignored by the engine. This lets profiles retain official pollutant coverage without inventing measurements. The EEA AQI remains a public-health index for ambient air; the installed sensors and room placement do not make it a regulatory outdoor station. The Korea profile implements the published C24E particle estimate. The Canada AQHI profile implements the standard three-pollutant calculation; it does not implement the separate smoke-event PM₂.₅ method.
 
 The PM2.5 concentrations can be corrected for humidity before any averaging (settings, dust sensors section):
 Barkjohn et al. (2021), its extension for smoke (US EPA 2022) or none (see `pm_correction.py`).
@@ -57,13 +55,13 @@ Profiles are validated when the web server starts: an invalid file is skipped an
 | `dominant_pollutant_min_index` | the main pollutant is only reported above this index (China: 50) |
 | `scale` | `{min, max}` of the gauge; the last category must end at `max` |
 | `above_scale_display` | text shown when a concentration is above the highest breakpoint, e.g. `500+`, `>100` |
-| `pollutants` | `{pm25, pm10, o3, no2, co}` → list of breakpoint tables; the sub-index of a pollutant is the highest of its tables, the index is the highest sub-index |
+| `pollutants` | `{pm25, pm10, o3, no2, co, so2, nh3, pb}` → list of breakpoint tables; the sub-index of a pollutant is the highest applicable table, the index is the highest sub-index |
 
 Breakpoint table:
 
 | Field | Description |
 |---|---|
-| `averaging` | `{"type": "mean", "hours": 1..24}`, `{"type": "mean", "minutes": 1..60}` or `{"type": "nowcast", "hours": 3..24, "min_weight": 0.5}` |
+| `averaging` | `{"type": "mean", "hours": 1..24}`, `{"type": "mean", "minutes": 1..60}`, `{"type": "nowcast", "hours": 3..24, "min_weight": 0.5}` or Korea `{"type": "korea_pm24", "hours": 16, "min_concentration": ...}` |
 | `unit` | `ug/m3`, `mg/m3`, `ppb` or `ppm` (particles: `ug/m3` only) |
 | `decimals`, `rounding` | the average is rounded (`round`) or truncated (`truncate`, US EPA) before the lookup |
 | `breakpoints` | `[[C_low, C_high, I_low, I_high], ...]`; gaps between segments (e.g. 9.0 / 9.1) are allowed |
@@ -115,7 +113,7 @@ do not replace the air quality index.
 
 | Field | Description |
 |---|---|
-| `formula` | `thom_di` (°C), `thom_thi_f` (°F), `humidex`, `heat_index_c` or `pmv_iso7730` (needs the options `clo`, `met`, `air_speed`), computed from the temperature and relative humidity of the BME688 |
+| `formula` | `thom_di` (°C), `humidex`, `heat_index_c` or `pmv_iso7730` (needs the options `clo`, `met`, `air_speed`), computed from the temperature and relative humidity of the BME688 |
 | `unit`, `decimals`, `signed` | display unit and rounding (with `signed`, positive values get a `+`); the category is determined from the rounded value |
 | `scale` | `{min, max}` of the gauge (values outside are shown at the end of the gauge) |
 | `categories` | the last category has no `to` (open ended) |

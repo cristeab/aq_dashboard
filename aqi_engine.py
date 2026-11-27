@@ -132,6 +132,8 @@ class AqiEngine:
 
     def _averaged(self, profile: Dict, pollutant: str, spec: Dict):
         """(average in the unit and rounding of the spec, Average) or None."""
+        if pollutant not in POLLUTANT_SOURCES:
+            return None
         correction = self._correction if pollutant == "pm25" else None
         average = compute_average(self.history, pollutant, spec["averaging"], correction)
         if average is None:

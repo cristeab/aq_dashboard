@@ -19,14 +19,14 @@
     "fr": "Humidex canadien H = T + 0,5555 · (e − 10), où e est la pression de vapeur d'eau en hPa calculée à partir de la température et de l'humidité relative ; il décrit la chaleur et l'humidité ressenties par une personne moyenne. Sans dimension, comparable aux °C.",
     "de": "Kanadischer Humidex H = T + 0,5555 · (e − 10), wobei e der aus Temperatur und relativer Feuchte berechnete Wasserdampfdruck in hPa ist; beschreibt, wie warm und schwül es sich für eine durchschnittliche Person anfühlt. Dimensionslos, vergleichbar mit °C."
   },
-  "reference": "J. M. Masterton, F. A. Richardson, Humidex, a method of quantifying human discomfort due to excessive heat and humidity, Environment Canada CLI 1-79 (1979)",
+  "reference": "Environment and Climate Change Canada, Humidex and heat, https://www.canada.ca/en/services/environment/weather/severeweather/humidex.html",
   "formula": "humidex",
   "unit": "",
   "decimals": 0,
   "upper_bound": "exclusive",
   "scale": {
     "min": 15,
-    "max": 60
+    "max": 54
   },
   "neutral_category": "no_discomfort",
   "categories": [
@@ -90,7 +90,7 @@
         "de": "Großes Unbehagen"
       },
       "description": {
-        "en": "Great discomfort; avoid exertion.",
+        "en": "Great discomfort (40–45).",
         "ro": "Disconfort mare; evitați efortul.",
         "fr": "Grand inconfort ; évitez les efforts.",
         "de": "Großes Unbehagen; Anstrengung vermeiden."
@@ -104,7 +104,6 @@
     },
     {
       "id": "dangerous",
-      "to": 54,
       "color": "#E8513B",
       "cvd_color": "#D55E00",
       "name": {
@@ -114,39 +113,16 @@
         "de": "Gefährlich"
       },
       "description": {
-        "en": "Dangerous; heat stroke possible.",
+        "en": "46 and above: dangerous; heat stroke is possible.",
         "ro": "Periculos; șoc termic posibil.",
         "fr": "Dangereux ; coup de chaleur possible.",
         "de": "Gefährlich; Hitzschlag möglich."
       },
       "recommendation": {
-        "en": "Stop physical activity, move to a cool place and drink water.",
+        "en": "Avoid exertion, seek a cool place and stay hydrated.",
         "ro": "Opriți activitatea fizică, mutați-vă într-un loc răcoros și beți apă.",
         "fr": "Cessez toute activité physique, allez dans un endroit frais et buvez de l'eau.",
         "de": "Körperliche Aktivität einstellen, an einen kühlen Ort gehen und Wasser trinken."
-      }
-    },
-    {
-      "id": "heat_stroke",
-      "color": "#9E1F3D",
-      "cvd_color": "#CC79A7",
-      "name": {
-        "en": "Heat stroke imminent",
-        "ro": "Șoc termic iminent",
-        "fr": "Coup de chaleur imminent",
-        "de": "Hitzschlag droht"
-      },
-      "description": {
-        "en": "Heat stroke imminent.",
-        "ro": "Șoc termic iminent.",
-        "fr": "Coup de chaleur imminent.",
-        "de": "Hitzschlag steht unmittelbar bevor."
-      },
-      "recommendation": {
-        "en": "Move to a cooler place immediately and seek medical help if feeling unwell.",
-        "ro": "Mutați-vă imediat într-un loc mai răcoros și cereți ajutor medical dacă nu vă simțiți bine.",
-        "fr": "Rendez-vous immédiatement dans un endroit plus frais et consultez un médecin en cas de malaise.",
-        "de": "Sofort an einen kühleren Ort gehen und bei Unwohlsein ärztliche Hilfe suchen."
       }
     }
   ]

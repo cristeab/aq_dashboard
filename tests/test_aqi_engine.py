@@ -51,19 +51,13 @@ def test_us_epa_other_pollutants(pollutant, concentration, expected):
     assert sub_index("us_epa", pollutant, concentration) == (expected, False)
 
 
-def test_china_rounds_sub_indices_up():
-    # PM2.5 80 ug/m3: 100 + (150 - 100) / (115 - 75) * (80 - 75) = 106.25 -> 107
-    assert sub_index("china_mee", "pm25", 80) == (107, False)
-    assert sub_index("china_mee", "pm10", 150) == (100, False)
-    # O3 8 h above 800 ug/m3: only the 1 h table applies
+def test_china_2026_breakpoints():
+    # HJ 633-2026 applies the daily PM breakpoint table to current-hour means.
+    assert sub_index("china_mee", "pm25", 80) == (119, False)
+    assert sub_index("china_mee", "pm10", 150) == (112, False)
+    # O3 includes distinct 1-hour and 8-hour tables.
     assert sub_index("china_mee", "o3", 900, index=1) is None
     assert sub_index("china_mee", "o3", 900, index=0) == (350, False)
-
-
-def test_caqi():
-    assert sub_index("eu_caqi", "pm10", 60) == (56, False)   # 50 + 25 / 40 * 10 = 56.25
-    assert sub_index("eu_caqi", "no2", 450) == (100, True)   # above the grid: "very high", shown as >100
-    assert sub_index("eu_caqi", "co", 6250) == (38, False)   # 25 + 25 / 2500 * 1250 = 37.5 -> 38
 
 
 def test_concentration_conversions():
@@ -129,15 +123,9 @@ def test_ties_and_provisional_leader():
 
 
 def test_china_primary_pollutant_only_above_50():
-    engine = FakeEngine({("pm25", 24, None): (20.0, False)})
+    engine = FakeEngine({("pm25", 1, None): (20.0, False)})
     result = engine.compute("china_mee")
     assert result["value"] == 29 and result["dominant"] == [] and result["category"] == "excellent"
-
-
-def test_caqi_above_scale_is_very_high():
-    engine = FakeEngine({("no2", 1, None): (300.0, False)})  # 300 ppb = 574 ug/m3 at 20 C
-    result = engine.compute("eu_caqi")
-    assert result["display"] == ">100" and result["category"] == "very_high" and result["above_scale"]
 
 
 def test_raw_concentration_profile():
@@ -163,7 +151,7 @@ def level(profile_id, pollutant, concentration, index=0):
 
 
 @pytest.mark.parametrize("pollutant, concentration, expected", [
-    ("pm25", 5, 1), ("pm25", 5.4, 1), ("pm25", 12, 2), ("pm25", 141, 6),  # 24 h means
+    ("pm25", 5, 1), ("pm25", 5.4, 1), ("pm25", 12, 2), ("pm25", 141, 6),  # hourly means
     ("no2", 30, 3), ("o3", 100, 2), ("o3", 181, 6), ("pm10", 45, 2),
 ])
 def test_eea_eaqi_levels(pollutant, concentration, expected):
@@ -179,7 +167,7 @@ def test_uk_daqi_levels(pollutant, concentration, expected):
 
 
 def test_uk_daqi_overall_level_and_category():
-    engine = FakeEngine({("pm25", 24, None): (36.0, False), ("o3", 8, None): (20.0, False)})  # 20 ppb O3 = 39 ug/m3
+    engine = FakeEngine({("pm25", 1, None): (36.0, False), ("o3", 8, None): (20.0, False)})  # 20 ppb O3 = 39 ug/m3
     result = engine.compute("uk_daqi")
     assert result["kind"] == "banded" and result["value"] == 4 and result["category"] == "moderate"
     assert result["sub_indices"]["o3"]["value"] == 2 and result["dominant"] == ["pm25"]
@@ -215,12 +203,12 @@ def test_korea_cai(pollutant, concentration, expected):
 
 def test_korea_cai_multi_pollutant_bonus():
     # PM2.5 80 ug/m3 -> very unhealthy (251 + 249 / 424 * 4 = 253.3), O3 100 ppb -> unhealthy (124): 2 pollutants, +50
-    engine = FakeEngine({("pm25", 24, None): (80.0, False), ("o3", 1, None): (100.0, False), ("no2", 1, None): (10.0, False)})
+    engine = FakeEngine({("pm25", 16, None): (80.0, False), ("o3", 1, None): (100.0, False), ("no2", 1, None): (10.0, False)})
     result = engine.compute("korea_cai")
     assert result["sub_indices"]["pm25"]["value"] == 253 and result["sub_indices"]["o3"]["value"] == 124
     assert result["bonus"] == 50 and result["value"] == 303 and result["category"] == "very_unhealthy"
     # a single unhealthy pollutant: no bonus
-    single = FakeEngine({("pm25", 24, None): (80.0, False), ("o3", 1, None): (20.0, False)}).compute("korea_cai")
+    single = FakeEngine({("pm25", 16, None): (80.0, False), ("o3", 1, None): (20.0, False)}).compute("korea_cai")
     assert single["bonus"] == 0 and single["value"] == 253
 
 

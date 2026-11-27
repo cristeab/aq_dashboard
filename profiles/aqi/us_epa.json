@@ -15,10 +15,10 @@
     "de": "US-AQI"
   },
   "description": {
-    "en": "US Environmental Protection Agency index (0–500, 2024 PM2.5 breakpoints). Particles use the NowCast (12 h weighted average, as published by AirNow), ozone and CO 8-hour means, NO₂ 1-hour means. The highest pollutant sub-index gives the AQI.",
-    "ro": "Indicele Agenției pentru Protecția Mediului din SUA (0–500, praguri PM2.5 din 2024). Particulele folosesc NowCast (medie ponderată pe 12 h, ca AirNow), ozonul și CO medii pe 8 ore, NO₂ medii pe 1 oră. AQI este cel mai mare subindice al poluanților.",
-    "fr": "Indice de l'Agence américaine de protection de l'environnement (0–500, seuils PM2.5 de 2024). Les particules utilisent le NowCast (moyenne pondérée sur 12 h, comme AirNow), l'ozone et le CO des moyennes sur 8 heures, le NO₂ des moyennes horaires. L'AQI est le sous-indice le plus élevé.",
-    "de": "Index der US-Umweltschutzbehörde (0–500, PM2.5-Grenzen von 2024). Partikel verwenden den NowCast (gewichtetes 12-h-Mittel wie AirNow), Ozon und CO 8-Stunden-Mittel, NO₂ 1-Stunden-Mittel. Der höchste Teilindex ergibt den AQI."
+    "en": "US Environmental Protection Agency index (0–500, 2024 PM2.5 breakpoints). Particles use the NowCast (12 h weighted average, as published by AirNow), ozone and CO 8-hour means, NO₂ 1-hour means. The highest pollutant sub-index gives the AQI. SO₂ is included when supported data are available, using the EPA 1-hour and 24-hour tables.",
+    "ro": "Indicele Agenției pentru Protecția Mediului din SUA (0–500, praguri PM2.5 din 2024). Particulele folosesc NowCast (medie ponderată pe 12 h, ca AirNow), ozonul și CO medii pe 8 ore, NO₂ medii pe 1 oră. AQI este cel mai mare subindice al poluanților. SO₂ is included in the EPA 1-hour and 24-hour tables when supported data are available.",
+    "fr": "Indice de l'Agence américaine de protection de l'environnement (0–500, seuils PM2.5 de 2024). Les particules utilisent le NowCast (moyenne pondérée sur 12 h, comme AirNow), l'ozone et le CO des moyennes sur 8 heures, le NO₂ des moyennes horaires. L'AQI est le sous-indice le plus élevé. SO₂ is included in the EPA 1-hour and 24-hour tables when supported data are available.",
+    "de": "Index der US-Umweltschutzbehörde (0–500, PM2.5-Grenzen von 2024). Partikel verwenden den NowCast (gewichtetes 12-h-Mittel wie AirNow), Ozon und CO 8-Stunden-Mittel, NO₂ 1-Stunden-Mittel. Der höchste Teilindex ergibt den AQI. SO₂ is included in the EPA 1-hour and 24-hour tables when supported data are available."
   },
   "reference": "US EPA, Technical Assistance Document for the Reporting of Daily Air Quality – the Air Quality Index (AQI), EPA-454/B-24-002, May 2024",
   "index_rounding": "nearest",
@@ -470,6 +470,81 @@
           ]
         ],
         "above_range": "cap"
+      }
+    ],
+    "so2": [
+      {
+        "averaging": {
+          "type": "mean",
+          "hours": 1
+        },
+        "unit": "ppb",
+        "decimals": 0,
+        "rounding": "truncate",
+        "breakpoints": [
+          [
+            0,
+            35,
+            0,
+            50
+          ],
+          [
+            36,
+            75,
+            51,
+            100
+          ],
+          [
+            76,
+            185,
+            101,
+            150
+          ],
+          [
+            186,
+            304,
+            151,
+            200
+          ]
+        ],
+        "above_range": "cap",
+        "note": {
+          "en": "EPA 1-hour table applies below 305 ppb; the 1-hour AQI is capped at 200 above this range."
+        }
+      },
+      {
+        "averaging": {
+          "type": "mean",
+          "hours": 24
+        },
+        "unit": "ppb",
+        "decimals": 0,
+        "rounding": "truncate",
+        "breakpoints": [
+          [
+            305,
+            604,
+            201,
+            300
+          ],
+          [
+            605,
+            804,
+            301,
+            400
+          ],
+          [
+            805,
+            1004,
+            401,
+            500
+          ]
+        ],
+        "below_range": "not_applicable",
+        "above_range": "cap",
+        "note": {
+          "en": "EPA 24-hour table applies from 305 ppb."
+        }
       }
     ]
   }

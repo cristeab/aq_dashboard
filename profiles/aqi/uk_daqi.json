@@ -4,9 +4,9 @@
   "kind": "banded",
   "name": {
     "en": "UK Daily Air Quality Index (DAQI)",
-    "ro": "Indicele zilnic al calității aerului din Regatul Unit (DAQI)",
-    "fr": "Indice quotidien de la qualité de l'air du Royaume-Uni (DAQI)",
-    "de": "Britischer täglicher Luftqualitätsindex (DAQI)"
+    "ro": "Indicele zilnic al calit\u0103\u021bii aerului din Regatul Unit (DAQI)",
+    "fr": "Indice quotidien de la qualit\u00e9 de l'air du Royaume-Uni (DAQI)",
+    "de": "Britischer t\u00e4glicher Luftqualit\u00e4tsindex (DAQI)"
   },
   "short_name": {
     "en": "DAQI",
@@ -15,12 +15,12 @@
     "de": "DAQI"
   },
   "description": {
-    "en": "Index of the UK Department for Environment, Food & Rural Affairs from 1 (low) to 10 (very high), with the health advice of COMEAP: 24-hour means of PM2.5 and PM10, running 8-hour mean of O₃ and 1-hour mean of NO₂, in µg/m³ at 20 °C.",
-    "ro": "Indicele Departamentului pentru Mediu, Alimentație și Afaceri Rurale din Regatul Unit, de la 1 (scăzut) la 10 (foarte ridicat), cu recomandările de sănătate COMEAP: medii pe 24 de ore pentru PM2.5 și PM10, medie mobilă pe 8 ore pentru O₃ și medie pe 1 oră pentru NO₂, în µg/m³ la 20 °C.",
-    "fr": "Indice du ministère britannique de l'Environnement, de l'Alimentation et des Affaires rurales, de 1 (faible) à 10 (très élevé), avec les conseils sanitaires du COMEAP : moyennes sur 24 heures des PM2.5 et PM10, moyenne glissante sur 8 heures de l'O₃ et moyenne horaire du NO₂, en µg/m³ à 20 °C.",
-    "de": "Index des britischen Umweltministeriums (Defra) von 1 (niedrig) bis 10 (sehr hoch) mit den Gesundheitshinweisen des COMEAP: 24-Stunden-Mittel von PM2.5 und PM10, gleitendes 8-Stunden-Mittel von O₃ und 1-Stunden-Mittel von NO₂ in µg/m³ bei 20 °C."
+    "en": "Index of the UK Department for Environment, Food & Rural Affairs from 1 (low) to 10 (very high), with the health advice of COMEAP: 24-hour means of PM2.5 and PM10, running 8-hour mean of O\u2083 and 1-hour mean of NO\u2082, in \u00b5g/m\u00b3 at 20 \u00b0C. SO\u2082 uses a 15-minute mean; this dashboard has no SO\u2082 sensor, so it cannot contribute to the displayed level.",
+    "ro": "Indicele Departamentului pentru Mediu, Alimenta\u021bie \u0219i Afaceri Rurale din Regatul Unit, de la 1 (sc\u0103zut) la 10 (foarte ridicat), cu recomand\u0103rile de s\u0103n\u0103tate COMEAP: medii pe 24 de ore pentru PM2.5 \u0219i PM10, medie mobil\u0103 pe 8 ore pentru O\u2083 \u0219i medie pe 1 or\u0103 pentru NO\u2082, \u00een \u00b5g/m\u00b3 la 20 \u00b0C. SO\u2082 folose\u0219te o medie pe 15 minute; tabloul de bord nu are senzor SO\u2082.",
+    "fr": "Indice du minist\u00e8re britannique de l'Environnement, de l'Alimentation et des Affaires rurales, de 1 (faible) \u00e0 10 (tr\u00e8s \u00e9lev\u00e9), avec les conseils sanitaires du COMEAP : moyennes sur 24 heures des PM2.5 et PM10, moyenne glissante sur 8 heures de l'O\u2083 et moyenne horaire du NO\u2082, en \u00b5g/m\u00b3 \u00e0 20 \u00b0C. Le SO\u2082 utilise une moyenne sur 15 minutes ; ce tableau de bord ne mesure pas le SO\u2082.",
+    "de": "Index des britischen Umweltministeriums (Defra) von 1 (niedrig) bis 10 (sehr hoch) mit den Gesundheitshinweisen des COMEAP: 24-Stunden-Mittel von PM2.5 und PM10, gleitendes 8-Stunden-Mittel von O\u2083 und 1-Stunden-Mittel von NO\u2082 in \u00b5g/m\u00b3 bei 20 \u00b0C. F\u00fcr SO\u2082 gilt ein 15-Minuten-Mittel; dieses Dashboard misst kein SO\u2082."
   },
-  "reference": "Defra, Daily Air Quality Index (COMEAP review of the UK air quality index, 2011), uk-air.defra.gov.uk",
+  "reference": "UK Department for Environment, Food & Rural Affairs, Daily Air Quality Index pollutant concentration tables (updated 2026-04-13)",
   "gas_reference_temperature_c": 20,
   "dominant_pollutant_min_index": 0,
   "upper_bound": "inclusive",
@@ -49,21 +49,21 @@
       "cvd_color": "#009E73",
       "name": {
         "en": "Low",
-        "ro": "Scăzut",
+        "ro": "Sc\u0103zut",
         "fr": "Faible",
         "de": "Niedrig"
       },
       "description": {
         "en": "Low air pollution.",
-        "ro": "Poluare scăzută a aerului.",
+        "ro": "Poluare sc\u0103zut\u0103 a aerului.",
         "fr": "Pollution de l'air faible.",
         "de": "Niedrige Luftverschmutzung."
       },
       "recommendation": {
         "en": "Enjoy your usual outdoor activities.",
-        "ro": "Continuați activitățile obișnuite în aer liber.",
-        "fr": "Profitez de vos activités habituelles en plein air.",
-        "de": "Genießen Sie Ihre gewohnten Aktivitäten im Freien."
+        "ro": "Continua\u021bi activit\u0103\u021bile obi\u0219nuite \u00een aer liber.",
+        "fr": "Profitez de vos activit\u00e9s habituelles en plein air.",
+        "de": "Genie\u00dfen Sie Ihre gewohnten Aktivit\u00e4ten im Freien."
       }
     },
     {
@@ -74,20 +74,20 @@
       "name": {
         "en": "Moderate",
         "ro": "Moderat",
-        "fr": "Modéré",
-        "de": "Mäßig"
+        "fr": "Mod\u00e9r\u00e9",
+        "de": "M\u00e4\u00dfig"
       },
       "description": {
         "en": "Moderate air pollution.",
-        "ro": "Poluare moderată a aerului.",
-        "fr": "Pollution de l'air modérée.",
-        "de": "Mäßige Luftverschmutzung."
+        "ro": "Poluare moderat\u0103 a aerului.",
+        "fr": "Pollution de l'air mod\u00e9r\u00e9e.",
+        "de": "M\u00e4\u00dfige Luftverschmutzung."
       },
       "recommendation": {
         "en": "Adults and children with lung problems, and adults with heart problems, who have symptoms should consider reducing strenuous physical activity, particularly outdoors.",
-        "ro": "Adulții și copiii cu probleme pulmonare și adulții cu probleme cardiace care au simptome ar trebui să reducă efortul fizic intens, mai ales în aer liber.",
-        "fr": "Les adultes et enfants ayant des problèmes pulmonaires et les adultes ayant des problèmes cardiaques qui ont des symptômes devraient envisager de réduire les efforts intenses, surtout à l'extérieur.",
-        "de": "Erwachsene und Kinder mit Lungenproblemen sowie Erwachsene mit Herzproblemen sollten bei Beschwerden anstrengende körperliche Aktivität, besonders im Freien, reduzieren."
+        "ro": "Adul\u021bii \u0219i copiii cu probleme pulmonare \u0219i adul\u021bii cu probleme cardiace care au simptome ar trebui s\u0103 reduc\u0103 efortul fizic intens, mai ales \u00een aer liber.",
+        "fr": "Les adultes et enfants ayant des probl\u00e8mes pulmonaires et les adultes ayant des probl\u00e8mes cardiaques qui ont des sympt\u00f4mes devraient envisager de r\u00e9duire les efforts intenses, surtout \u00e0 l'ext\u00e9rieur.",
+        "de": "Erwachsene und Kinder mit Lungenproblemen sowie Erwachsene mit Herzproblemen sollten bei Beschwerden anstrengende k\u00f6rperliche Aktivit\u00e4t, besonders im Freien, reduzieren."
       }
     },
     {
@@ -98,20 +98,20 @@
       "name": {
         "en": "High",
         "ro": "Ridicat",
-        "fr": "Élevé",
+        "fr": "\u00c9lev\u00e9",
         "de": "Hoch"
       },
       "description": {
         "en": "High air pollution.",
-        "ro": "Poluare ridicată a aerului.",
-        "fr": "Pollution de l'air élevée.",
+        "ro": "Poluare ridicat\u0103 a aerului.",
+        "fr": "Pollution de l'air \u00e9lev\u00e9e.",
         "de": "Hohe Luftverschmutzung."
       },
       "recommendation": {
         "en": "People with lung or heart problems and older people should reduce strenuous physical exertion, particularly outdoors; anyone with sore eyes, a cough or sore throat should consider reducing activity.",
-        "ro": "Persoanele cu probleme pulmonare sau cardiace și vârstnicii ar trebui să reducă efortul fizic intens, mai ales în aer liber; cei cu iritații ale ochilor, tuse sau dureri în gât ar trebui să reducă activitatea.",
-        "fr": "Les personnes ayant des problèmes pulmonaires ou cardiaques et les personnes âgées devraient réduire les efforts intenses, surtout à l'extérieur ; toute personne ayant les yeux irrités, une toux ou mal à la gorge devrait envisager de réduire son activité.",
-        "de": "Menschen mit Lungen- oder Herzproblemen und ältere Menschen sollten anstrengende Tätigkeiten besonders im Freien reduzieren; wer gereizte Augen, Husten oder Halsschmerzen hat, sollte die Aktivität verringern."
+        "ro": "Persoanele cu probleme pulmonare sau cardiace \u0219i v\u00e2rstnicii ar trebui s\u0103 reduc\u0103 efortul fizic intens, mai ales \u00een aer liber; cei cu irita\u021bii ale ochilor, tuse sau dureri \u00een g\u00e2t ar trebui s\u0103 reduc\u0103 activitatea.",
+        "fr": "Les personnes ayant des probl\u00e8mes pulmonaires ou cardiaques et les personnes \u00e2g\u00e9es devraient r\u00e9duire les efforts intenses, surtout \u00e0 l'ext\u00e9rieur ; toute personne ayant les yeux irrit\u00e9s, une toux ou mal \u00e0 la gorge devrait envisager de r\u00e9duire son activit\u00e9.",
+        "de": "Menschen mit Lungen- oder Herzproblemen und \u00e4ltere Menschen sollten anstrengende T\u00e4tigkeiten besonders im Freien reduzieren; wer gereizte Augen, Husten oder Halsschmerzen hat, sollte die Aktivit\u00e4t verringern."
       }
     },
     {
@@ -122,20 +122,20 @@
       "name": {
         "en": "Very high",
         "ro": "Foarte ridicat",
-        "fr": "Très élevé",
+        "fr": "Tr\u00e8s \u00e9lev\u00e9",
         "de": "Sehr hoch"
       },
       "description": {
         "en": "Very high air pollution.",
-        "ro": "Poluare foarte ridicată a aerului.",
-        "fr": "Pollution de l'air très élevée.",
+        "ro": "Poluare foarte ridicat\u0103 a aerului.",
+        "fr": "Pollution de l'air tr\u00e8s \u00e9lev\u00e9e.",
         "de": "Sehr hohe Luftverschmutzung."
       },
       "recommendation": {
         "en": "People with lung or heart problems and older people should avoid strenuous physical activity; everyone should reduce physical exertion, particularly outdoors.",
-        "ro": "Persoanele cu probleme pulmonare sau cardiace și vârstnicii ar trebui să evite efortul fizic intens; toată lumea ar trebui să reducă efortul, mai ales în aer liber.",
-        "fr": "Les personnes ayant des problèmes pulmonaires ou cardiaques et les personnes âgées devraient éviter les efforts intenses ; tout le monde devrait réduire l'effort physique, surtout à l'extérieur.",
-        "de": "Menschen mit Lungen- oder Herzproblemen und ältere Menschen sollten anstrengende Aktivität meiden; alle sollten körperliche Anstrengung besonders im Freien reduzieren."
+        "ro": "Persoanele cu probleme pulmonare sau cardiace \u0219i v\u00e2rstnicii ar trebui s\u0103 evite efortul fizic intens; toat\u0103 lumea ar trebui s\u0103 reduc\u0103 efortul, mai ales \u00een aer liber.",
+        "fr": "Les personnes ayant des probl\u00e8mes pulmonaires ou cardiaques et les personnes \u00e2g\u00e9es devraient \u00e9viter les efforts intenses ; tout le monde devrait r\u00e9duire l'effort physique, surtout \u00e0 l'ext\u00e9rieur.",
+        "de": "Menschen mit Lungen- oder Herzproblemen und \u00e4ltere Menschen sollten anstrengende Aktivit\u00e4t meiden; alle sollten k\u00f6rperliche Anstrengung besonders im Freien reduzieren."
       }
     }
   ],
@@ -225,6 +225,28 @@
           83,
           91,
           100
+        ]
+      }
+    ],
+    "so2": [
+      {
+        "averaging": {
+          "type": "mean",
+          "minutes": 15
+        },
+        "unit": "ug/m3",
+        "decimals": 0,
+        "rounding": "round",
+        "thresholds": [
+          88,
+          177,
+          266,
+          354,
+          443,
+          532,
+          710,
+          887,
+          1064
         ]
       }
     ]

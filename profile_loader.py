@@ -19,16 +19,22 @@ from typing import Dict, List
 
 PROFILES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "profiles")
 
-# Pollutants measured by the sensors and the units their concentrations may be expressed in
+# Pollutants available in profiles. SO2, NH3 and Pb are supported for complete
+# official breakpoint tables but are not measured by the current hardware.
 POLLUTANT_UNITS = {
     "pm25": {"ug/m3"},
     "pm10": {"ug/m3"},
     "o3": {"ug/m3", "mg/m3", "ppb", "ppm"},
     "no2": {"ug/m3", "mg/m3", "ppb", "ppm"},
     "co": {"ug/m3", "mg/m3", "ppb", "ppm"},
+    # SO₂ is defined for complete official profile tables but this dashboard
+    # has no SO₂ sensor, so its sub-index is unavailable at runtime.
+    "so2": {"ug/m3", "mg/m3", "ppb", "ppm"},
+    "nh3": {"ug/m3", "mg/m3", "ppb", "ppm"},
+    "pb": {"ug/m3"},
     "co2": {"ppm"},
 }
-COMFORT_FORMULAS = {"thom_di", "thom_thi_f", "humidex", "heat_index_c", "pmv_iso7730"}
+COMFORT_FORMULAS = {"thom_di", "humidex", "heat_index_c", "pmv_iso7730"}
 # options that a comfort formula needs (numeric values)
 FORMULA_OPTIONS = {"pmv_iso7730": {"clo", "met", "air_speed"}}
 # Averaging periods cannot exceed the history kept by PollutantHistory
@@ -134,8 +140,12 @@ class _Validator:
     def averaging(self, spec, where: str):
         if not isinstance(spec, dict):
             self.fail(f"'averaging' in {where} must be an object")
-        kind = self.one_of(spec, "type", {"mean", "nowcast"}, f"{where}.averaging")
-        if kind == "mean":
+        kind = self.one_of(spec, "type", {"mean", "nowcast", "korea_pm24"}, f"{where}.averaging")
+        if kind == "korea_pm24":
+            if spec.get("hours") != 16:
+                self.fail(f"{where}.averaging: korea_pm24 requires 16 hourly values")
+            self.number(spec, "min_concentration", f"{where}.averaging")
+        elif kind == "mean":
             if ("hours" in spec) == ("minutes" in spec):
                 self.fail(f"{where}.averaging: a mean needs either 'hours' or 'minutes'")
             if "hours" in spec:

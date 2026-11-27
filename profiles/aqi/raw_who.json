@@ -4,7 +4,7 @@
   "kind": "concentration",
   "name": {
     "en": "Raw concentration (WHO 2021 guideline levels)",
-    "ro": "Concentrație brută (niveluri ghid OMS 2021)",
+    "ro": "Concentra\u021bie brut\u0103 (niveluri ghid OMS 2021)",
     "fr": "Concentration brute (niveaux guides OMS 2021)",
     "de": "Rohkonzentration (WHO-Leitwerte 2021)"
   },
@@ -15,10 +15,10 @@
     "de": "10-Min.-Mittel"
   },
   "description": {
-    "en": "Shows the 10-minute mean concentration of the selected pollutant instead of an index, compared with the WHO 2021 air quality guideline level and interim targets. WHO levels refer to 24-hour means (8-hour for O₃), so the comparison of short means is indicative.",
-    "ro": "Afișează concentrația medie pe 10 minute a poluantului selectat în locul unui indice, comparată cu nivelul ghid OMS 2021 și țintele intermediare. Nivelurile OMS se referă la medii pe 24 de ore (8 ore pentru O₃), deci comparația mediilor scurte este orientativă.",
-    "fr": "Affiche la concentration moyenne sur 10 minutes du polluant choisi au lieu d'un indice, comparée au niveau guide OMS 2021 et aux cibles intermédiaires. Les niveaux OMS portent sur des moyennes sur 24 heures (8 heures pour O₃) : la comparaison de moyennes courtes est indicative.",
-    "de": "Zeigt statt eines Index die 10-Minuten-Mittelkonzentration des gewählten Schadstoffs im Vergleich zum WHO-Leitwert 2021 und den Zwischenzielen. Die WHO-Werte beziehen sich auf 24-Stunden-Mittel (8 Stunden für O₃), daher ist der Vergleich kurzer Mittel nur orientierend."
+    "en": "Displays the selected pollutant against the WHO 2021 guideline and interim targets using the guideline averaging period: 24-hour means for PM2.5, PM10, NO\u2082 and CO, and the daily maximum 8-hour mean for O\u2083. This is a guideline comparison, not a regulatory AQI.",
+    "ro": "Afi\u0219eaz\u0103 poluantul selectat comparativ cu ghidul OMS 2021 \u0219i \u021bintele intermediare, folosind perioada de mediere a ghidului: 24 de ore pentru PM2.5, PM10, NO\u2082 \u0219i CO \u0219i media maxim\u0103 zilnic\u0103 pe 8 ore pentru O\u2083. Este o compara\u021bie cu ghidul, nu un AQI de reglementare.",
+    "fr": "Compare le polluant s\u00e9lectionn\u00e9 aux lignes directrices OMS 2021 et \u00e0 leurs objectifs interm\u00e9diaires avec la p\u00e9riode de calcul correspondante : moyenne sur 24 heures pour PM2.5, PM10, NO\u2082 et CO, et maximum journalier sur 8 heures pour O\u2083. Il s\u2019agit d\u2019une comparaison aux recommandations, pas d\u2019un indice r\u00e9glementaire.",
+    "de": "Zeigt den gew\u00e4hlten Schadstoff im Vergleich zu den WHO-Leitlinien 2021 und Zwischenzielen mit den jeweiligen Mittelungszeiten: 24 Stunden f\u00fcr PM2.5, PM10, NO\u2082 und CO sowie das t\u00e4gliche Maximum des 8-Stunden-Mittels f\u00fcr O\u2083. Dies ist ein Leitlinienvergleich, kein beh\u00f6rdlicher AQI."
   },
   "reference": "WHO global air quality guidelines: particulate matter (PM2.5 and PM10), ozone, nitrogen dioxide, sulfur dioxide and carbon monoxide, 2021 (short-term levels)",
   "gas_reference_temperature_c": 25,
@@ -36,8 +36,8 @@
       "default": "pm25",
       "label": {
         "en": "Displayed pollutant",
-        "ro": "Poluant afișat",
-        "fr": "Polluant affiché",
+        "ro": "Poluant afi\u0219at",
+        "fr": "Polluant affich\u00e9",
         "de": "Angezeigter Schadstoff"
       }
     }
@@ -49,7 +49,7 @@
       "cvd_color": "#009E73",
       "name": {
         "en": "Within WHO guideline",
-        "ro": "În limita ghidului OMS",
+        "ro": "\u00cen limita ghidului OMS",
         "fr": "Conforme au guide OMS",
         "de": "Innerhalb des WHO-Leitwerts"
       },
@@ -57,13 +57,13 @@
         "en": "At or below the WHO 2021 air quality guideline level.",
         "ro": "La sau sub nivelul ghid OMS 2021 pentru calitatea aerului.",
         "fr": "Au niveau ou en dessous du niveau guide OMS 2021.",
-        "de": "Auf oder unter dem WHO-Luftqualitätsleitwert 2021."
+        "de": "Auf oder unter dem WHO-Luftqualit\u00e4tsleitwert 2021."
       },
       "recommendation": {
         "en": "No action needed.",
-        "ro": "Nu este necesară nicio acțiune.",
-        "fr": "Aucune action nécessaire.",
-        "de": "Keine Maßnahme erforderlich."
+        "ro": "Nu este necesar\u0103 nicio ac\u021biune.",
+        "fr": "Aucune action n\u00e9cessaire.",
+        "de": "Keine Ma\u00dfnahme erforderlich."
       }
     },
     {
@@ -72,21 +72,21 @@
       "cvd_color": "#F0E442",
       "name": {
         "en": "Interim target 4",
-        "ro": "Țintă intermediară 4",
-        "fr": "Cible intermédiaire 4",
+        "ro": "\u021aint\u0103 intermediar\u0103 4",
+        "fr": "Cible interm\u00e9diaire 4",
         "de": "Zwischenziel 4"
       },
       "description": {
         "en": "Above the guideline level, within WHO interim target 4.",
-        "ro": "Peste nivelul ghid, în limita țintei intermediare OMS 4.",
-        "fr": "Au-dessus du niveau guide, dans la cible intermédiaire OMS 4.",
-        "de": "Über dem Leitwert, innerhalb des WHO-Zwischenziels 4."
+        "ro": "Peste nivelul ghid, \u00een limita \u021bintei intermediare OMS 4.",
+        "fr": "Au-dessus du niveau guide, dans la cible interm\u00e9diaire OMS 4.",
+        "de": "\u00dcber dem Leitwert, innerhalb des WHO-Zwischenziels 4."
       },
       "recommendation": {
         "en": "Ventilate or use an air purifier to bring the level down.",
-        "ro": "Aerisiți sau folosiți un purificator de aer pentru a reduce nivelul.",
-        "fr": "Aérez ou utilisez un purificateur d'air pour faire baisser le niveau.",
-        "de": "Lüften oder einen Luftreiniger verwenden, um den Wert zu senken."
+        "ro": "Aerisi\u021bi sau folosi\u021bi un purificator de aer pentru a reduce nivelul.",
+        "fr": "A\u00e9rez ou utilisez un purificateur d'air pour faire baisser le niveau.",
+        "de": "L\u00fcften oder einen Luftreiniger verwenden, um den Wert zu senken."
       }
     },
     {
@@ -95,21 +95,21 @@
       "cvd_color": "#E69F00",
       "name": {
         "en": "Interim target 3",
-        "ro": "Țintă intermediară 3",
-        "fr": "Cible intermédiaire 3",
+        "ro": "\u021aint\u0103 intermediar\u0103 3",
+        "fr": "Cible interm\u00e9diaire 3",
         "de": "Zwischenziel 3"
       },
       "description": {
         "en": "Above interim target 4, within WHO interim target 3.",
-        "ro": "Peste ținta intermediară 4, în limita țintei intermediare OMS 3.",
-        "fr": "Au-dessus de la cible intermédiaire 4, dans la cible intermédiaire OMS 3.",
-        "de": "Über Zwischenziel 4, innerhalb des WHO-Zwischenziels 3."
+        "ro": "Peste \u021binta intermediar\u0103 4, \u00een limita \u021bintei intermediare OMS 3.",
+        "fr": "Au-dessus de la cible interm\u00e9diaire 4, dans la cible interm\u00e9diaire OMS 3.",
+        "de": "\u00dcber Zwischenziel 4, innerhalb des WHO-Zwischenziels 3."
       },
       "recommendation": {
         "en": "Find the source and reduce exposure; sensitive people should limit intense activity.",
-        "ro": "Identificați sursa și reduceți expunerea; persoanele sensibile ar trebui să limiteze activitatea intensă.",
-        "fr": "Identifiez la source et réduisez l'exposition ; les personnes sensibles devraient limiter les activités intenses.",
-        "de": "Quelle finden und Belastung verringern; empfindliche Personen sollten intensive Aktivität begrenzen."
+        "ro": "Identifica\u021bi sursa \u0219i reduce\u021bi expunerea; persoanele sensibile ar trebui s\u0103 limiteze activitatea intens\u0103.",
+        "fr": "Identifiez la source et r\u00e9duisez l'exposition ; les personnes sensibles devraient limiter les activit\u00e9s intenses.",
+        "de": "Quelle finden und Belastung verringern; empfindliche Personen sollten intensive Aktivit\u00e4t begrenzen."
       }
     },
     {
@@ -118,21 +118,21 @@
       "cvd_color": "#D55E00",
       "name": {
         "en": "Interim target 2",
-        "ro": "Țintă intermediară 2",
-        "fr": "Cible intermédiaire 2",
+        "ro": "\u021aint\u0103 intermediar\u0103 2",
+        "fr": "Cible interm\u00e9diaire 2",
         "de": "Zwischenziel 2"
       },
       "description": {
         "en": "Above interim target 3, within WHO interim target 2.",
-        "ro": "Peste ținta intermediară 3, în limita țintei intermediare OMS 2.",
-        "fr": "Au-dessus de la cible intermédiaire 3, dans la cible intermédiaire OMS 2.",
-        "de": "Über Zwischenziel 3, innerhalb des WHO-Zwischenziels 2."
+        "ro": "Peste \u021binta intermediar\u0103 3, \u00een limita \u021bintei intermediare OMS 2.",
+        "fr": "Au-dessus de la cible interm\u00e9diaire 3, dans la cible interm\u00e9diaire OMS 2.",
+        "de": "\u00dcber Zwischenziel 3, innerhalb des WHO-Zwischenziels 2."
       },
       "recommendation": {
         "en": "Reduce exposure: remove the source, use an air purifier; sensitive people should avoid intense activity.",
-        "ro": "Reduceți expunerea: eliminați sursa, folosiți un purificator; persoanele sensibile ar trebui să evite activitatea intensă.",
-        "fr": "Réduisez l'exposition : supprimez la source, utilisez un purificateur ; les personnes sensibles devraient éviter les activités intenses.",
-        "de": "Belastung verringern: Quelle beseitigen, Luftreiniger nutzen; empfindliche Personen sollten intensive Aktivität meiden."
+        "ro": "Reduce\u021bi expunerea: elimina\u021bi sursa, folosi\u021bi un purificator; persoanele sensibile ar trebui s\u0103 evite activitatea intens\u0103.",
+        "fr": "R\u00e9duisez l'exposition : supprimez la source, utilisez un purificateur ; les personnes sensibles devraient \u00e9viter les activit\u00e9s intenses.",
+        "de": "Belastung verringern: Quelle beseitigen, Luftreiniger nutzen; empfindliche Personen sollten intensive Aktivit\u00e4t meiden."
       }
     },
     {
@@ -141,21 +141,21 @@
       "cvd_color": "#CC79A7",
       "name": {
         "en": "Interim target 1",
-        "ro": "Țintă intermediară 1",
-        "fr": "Cible intermédiaire 1",
+        "ro": "\u021aint\u0103 intermediar\u0103 1",
+        "fr": "Cible interm\u00e9diaire 1",
         "de": "Zwischenziel 1"
       },
       "description": {
         "en": "Above interim target 2, within WHO interim target 1.",
-        "ro": "Peste ținta intermediară 2, în limita țintei intermediare OMS 1.",
-        "fr": "Au-dessus de la cible intermédiaire 2, dans la cible intermédiaire OMS 1.",
-        "de": "Über Zwischenziel 2, innerhalb des WHO-Zwischenziels 1."
+        "ro": "Peste \u021binta intermediar\u0103 2, \u00een limita \u021bintei intermediare OMS 1.",
+        "fr": "Au-dessus de la cible interm\u00e9diaire 2, dans la cible interm\u00e9diaire OMS 1.",
+        "de": "\u00dcber Zwischenziel 2, innerhalb des WHO-Zwischenziels 1."
       },
       "recommendation": {
         "en": "Act now: remove the source and clean the air; everyone should avoid intense activity.",
-        "ro": "Acționați acum: eliminați sursa și purificați aerul; toată lumea ar trebui să evite activitatea intensă.",
-        "fr": "Agissez maintenant : supprimez la source et purifiez l'air ; tout le monde devrait éviter les activités intenses.",
-        "de": "Jetzt handeln: Quelle beseitigen und Luft reinigen; alle sollten intensive Aktivität meiden."
+        "ro": "Ac\u021biona\u021bi acum: elimina\u021bi sursa \u0219i purifica\u021bi aerul; toat\u0103 lumea ar trebui s\u0103 evite activitatea intens\u0103.",
+        "fr": "Agissez maintenant : supprimez la source et purifiez l'air ; tout le monde devrait \u00e9viter les activit\u00e9s intenses.",
+        "de": "Jetzt handeln: Quelle beseitigen und Luft reinigen; alle sollten intensive Aktivit\u00e4t meiden."
       }
     },
     {
@@ -164,21 +164,21 @@
       "cvd_color": "#882255",
       "name": {
         "en": "Above all interim targets",
-        "ro": "Peste toate țintele intermediare",
-        "fr": "Au-delà de toutes les cibles",
-        "de": "Über allen Zwischenzielen"
+        "ro": "Peste toate \u021bintele intermediare",
+        "fr": "Au-del\u00e0 de toutes les cibles",
+        "de": "\u00dcber allen Zwischenzielen"
       },
       "description": {
         "en": "Above WHO interim target 1, the least strict level.",
-        "ro": "Peste ținta intermediară OMS 1, cel mai puțin strict nivel.",
-        "fr": "Au-dessus de la cible intermédiaire OMS 1, le niveau le moins strict.",
-        "de": "Über dem WHO-Zwischenziel 1, dem am wenigsten strengen Wert."
+        "ro": "Peste \u021binta intermediar\u0103 OMS 1, cel mai pu\u021bin strict nivel.",
+        "fr": "Au-dessus de la cible interm\u00e9diaire OMS 1, le niveau le moins strict.",
+        "de": "\u00dcber dem WHO-Zwischenziel 1, dem am wenigsten strengen Wert."
       },
       "recommendation": {
         "en": "Avoid exposure: leave the room if possible, remove the source and clean the air.",
-        "ro": "Evitați expunerea: părăsiți camera dacă este posibil, eliminați sursa și purificați aerul.",
-        "fr": "Évitez l'exposition : quittez la pièce si possible, supprimez la source et purifiez l'air.",
-        "de": "Belastung vermeiden: Raum möglichst verlassen, Quelle beseitigen und Luft reinigen."
+        "ro": "Evita\u021bi expunerea: p\u0103r\u0103si\u021bi camera dac\u0103 este posibil, elimina\u021bi sursa \u0219i purifica\u021bi aerul.",
+        "fr": "\u00c9vitez l'exposition : quittez la pi\u00e8ce si possible, supprimez la source et purifiez l'air.",
+        "de": "Belastung vermeiden: Raum m\u00f6glichst verlassen, Quelle beseitigen und Luft reinigen."
       }
     }
   ],
@@ -186,7 +186,7 @@
     "pm25": {
       "averaging": {
         "type": "mean",
-        "minutes": 10
+        "hours": 24
       },
       "unit": "ug/m3",
       "decimals": 1,
@@ -225,7 +225,7 @@
     "pm10": {
       "averaging": {
         "type": "mean",
-        "minutes": 10
+        "hours": 24
       },
       "unit": "ug/m3",
       "decimals": 0,
@@ -264,7 +264,7 @@
     "no2": {
       "averaging": {
         "type": "mean",
-        "minutes": 10
+        "hours": 24
       },
       "unit": "ug/m3",
       "decimals": 0,
@@ -295,7 +295,7 @@
     "o3": {
       "averaging": {
         "type": "mean",
-        "minutes": 10
+        "hours": 8
       },
       "unit": "ug/m3",
       "decimals": 0,
@@ -326,7 +326,7 @@
     "co": {
       "averaging": {
         "type": "mean",
-        "minutes": 10
+        "hours": 24
       },
       "unit": "mg/m3",
       "decimals": 1,

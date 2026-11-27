@@ -192,7 +192,7 @@ def test_correction_and_profile_options(storage):
     assert reloaded.options_of("comfort") == {"clo": "0.5", "met": "1.4"}
     assert reloaded.options_of("noise") == {"room": "bedroom"}
     for invalid in ({"pm25_correction": "magic"}, {"comfort_profile_options": {"iso7730_pmv": {"clo": "5"}}},
-                    {"comfort_profile_options": {"thom_giles": {"clo": "0.5"}}}, {"noise_profile_options": {"who_1999_indoor": {"room": "kitchen"}}}):
+                    {"comfort_profile_options": {"removed_profile": {"clo": "0.5"}}}, {"noise_profile_options": {"who_1999_indoor": {"room": "kitchen"}}}):
         with pytest.raises(ValueError):
             settings.update(invalid)
     assert reloaded.restore_defaults() == DashboardSettings.DEFAULTS

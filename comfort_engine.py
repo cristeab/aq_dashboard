@@ -20,13 +20,6 @@ def thom_di(temperature_c: float, relative_humidity: float) -> float:
     return temperature_c - 0.55 * (1.0 - 0.01 * relative_humidity) * (temperature_c - 14.5)
 
 
-def thom_thi_f(temperature_c: float, relative_humidity: float) -> float:
-    """Thom's temperature-humidity index on the Fahrenheit scale:
-    THI = T - (0.55 - 0.0055 RH) (T - 58), T in °F."""
-    t = temperature_c * 9.0 / 5.0 + 32.0
-    return t - (0.55 - 0.0055 * relative_humidity) * (t - 58.0)
-
-
 def dew_point_c(temperature_c: float, relative_humidity: float) -> float:
     """Magnus formula (WMO coefficients), RH clamped to [1, 100] %."""
     b, c = 17.62, 243.12
@@ -131,7 +124,7 @@ def pmv_iso7730(temperature_c: float, relative_humidity: float, options: Dict) -
 
 # formulas (temperature °C, relative humidity %) -> value; the ones with options
 # return a dict with "value" and optionally "secondary" and "valid"
-FORMULAS = {"thom_di": thom_di, "thom_thi_f": thom_thi_f, "humidex": humidex, "heat_index_c": heat_index_c}
+FORMULAS = {"thom_di": thom_di, "humidex": humidex, "heat_index_c": heat_index_c}
 OPTION_FORMULAS = {"pmv_iso7730": pmv_iso7730}
 
 

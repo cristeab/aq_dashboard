@@ -4,9 +4,9 @@
   "kind": "index",
   "name": {
     "en": "Korea Comprehensive Air-quality Index (CAI)",
-    "ro": "Indicele integrat al calității aerului din Coreea (CAI)",
-    "fr": "Indice global de la qualité de l'air de la Corée (CAI)",
-    "de": "Koreanischer umfassender Luftqualitätsindex (CAI)"
+    "ro": "Indicele integrat al calit\u0103\u021bii aerului din Coreea (CAI)",
+    "fr": "Indice global de la qualit\u00e9 de l'air de la Cor\u00e9e (CAI)",
+    "de": "Koreanischer umfassender Luftqualit\u00e4tsindex (CAI)"
   },
   "short_name": {
     "en": "CAI",
@@ -15,12 +15,12 @@
     "de": "CAI"
   },
   "description": {
-    "en": "Index of the Korean Ministry of Environment (AirKorea, 0–500) with four levels: 24-hour means of PM2.5 and PM10 and 1-hour means of O₃, NO₂ and CO in ppm. When two pollutants are 'unhealthy' or worse, 50 is added to the highest sub-index (75 for three or more).",
-    "ro": "Indicele Ministerului Mediului din Coreea (AirKorea, 0–500) cu patru niveluri: medii pe 24 de ore pentru PM2.5 și PM10 și medii pe 1 oră pentru O₃, NO₂ și CO în ppm. Când doi poluanți sunt „nesănătoși” sau mai rău, se adaugă 50 la cel mai mare subindice (75 pentru trei sau mai mulți).",
-    "fr": "Indice du ministère coréen de l'Environnement (AirKorea, 0–500) à quatre niveaux : moyennes sur 24 heures des PM2.5 et PM10 et moyennes horaires de l'O₃, du NO₂ et du CO en ppm. Lorsque deux polluants sont « mauvais » ou pire, 50 est ajouté au sous-indice le plus élevé (75 pour trois ou plus).",
-    "de": "Index des koreanischen Umweltministeriums (AirKorea, 0–500) mit vier Stufen: 24-Stunden-Mittel von PM2.5 und PM10 sowie 1-Stunden-Mittel von O₃, NO₂ und CO in ppm. Sind zwei Schadstoffe „ungesund“ oder schlechter, werden 50 zum höchsten Teilindex addiert (75 bei drei oder mehr)."
+    "en": "Index of the Korean Ministry of Environment (AirKorea, 0\u2013500) with four levels: 24-hour means of PM2.5 and PM10 and 1-hour means of O\u2083, NO\u2082 and CO in ppm. When two pollutants are 'unhealthy' or worse, 50 is added to the highest sub-index (75 for three or more). PM uses AirKorea C24E; SO\u2082 is defined but unavailable because this dashboard has no SO\u2082 sensor.",
+    "ro": "Indicele Ministerului Mediului din Coreea (AirKorea, 0\u2013500) cu patru niveluri: medii pe 24 de ore pentru PM2.5 \u0219i PM10 \u0219i medii pe 1 or\u0103 pentru O\u2083, NO\u2082 \u0219i CO \u00een ppm. C\u00e2nd doi poluan\u021bi sunt \u201enes\u0103n\u0103to\u0219i\u201d sau mai r\u0103u, se adaug\u0103 50 la cel mai mare subindice (75 pentru trei sau mai mul\u021bi). PM folose\u0219te estimatorul AirKorea C24E; SO\u2082 nu poate contribui deoarece tabloul de bord nu are senzor SO\u2082.",
+    "fr": "Indice du minist\u00e8re cor\u00e9en de l'Environnement (AirKorea, 0\u2013500) \u00e0 quatre niveaux : moyennes sur 24 heures des PM2.5 et PM10 et moyennes horaires de l'O\u2083, du NO\u2082 et du CO en ppm. Lorsque deux polluants sont \u00ab mauvais \u00bb ou pire, 50 est ajout\u00e9 au sous-indice le plus \u00e9lev\u00e9 (75 pour trois ou plus). Les PM utilisent l\u2019estimateur AirKorea C24E ; le SO\u2082 ne peut contribuer car ce tableau de bord ne le mesure pas.",
+    "de": "Index des koreanischen Umweltministeriums (AirKorea, 0\u2013500) mit vier Stufen: 24-Stunden-Mittel von PM2.5 und PM10 sowie 1-Stunden-Mittel von O\u2083, NO\u2082 und CO in ppm. Sind zwei Schadstoffe \u201eungesund\u201c oder schlechter, werden 50 zum h\u00f6chsten Teilindex addiert (75 bei drei oder mehr). PM verwendet den AirKorea-C24E-Sch\u00e4tzer; SO\u2082 kann mangels Sensor nicht einflie\u00dfen."
   },
-  "reference": "Ministry of Environment of Korea / Korea Environment Corporation, AirKorea Comprehensive Air-quality Index (CAI), PM2.5 breakpoints of 2018",
+  "reference": "Korea Environment Corporation, AirKorea Comprehensive Air-quality Index (CAI), current calculation method",
   "index_rounding": "nearest",
   "gas_reference_temperature_c": 25,
   "dominant_pollutant_min_index": 0,
@@ -51,21 +51,21 @@
       "cvd_color": "#009E73",
       "name": {
         "en": "Good",
-        "ro": "Bună",
+        "ro": "Bun\u0103",
         "fr": "Bon",
         "de": "Gut"
       },
       "description": {
         "en": "Level at which patients with diseases related to air pollution are not affected.",
-        "ro": "Nivel la care pacienții cu boli legate de poluarea aerului nu sunt afectați.",
-        "fr": "Niveau auquel les patients atteints de maladies liées à la pollution ne sont pas affectés.",
-        "de": "Stufe, bei der Patienten mit luftverschmutzungsbedingten Erkrankungen nicht beeinträchtigt werden."
+        "ro": "Nivel la care pacien\u021bii cu boli legate de poluarea aerului nu sunt afecta\u021bi.",
+        "fr": "Niveau auquel les patients atteints de maladies li\u00e9es \u00e0 la pollution ne sont pas affect\u00e9s.",
+        "de": "Stufe, bei der Patienten mit luftverschmutzungsbedingten Erkrankungen nicht beeintr\u00e4chtigt werden."
       },
       "recommendation": {
         "en": "Enjoy your usual activities.",
-        "ro": "Continuați activitățile obișnuite.",
-        "fr": "Profitez de vos activités habituelles.",
-        "de": "Genießen Sie Ihre gewohnten Aktivitäten."
+        "ro": "Continua\u021bi activit\u0103\u021bile obi\u0219nuite.",
+        "fr": "Profitez de vos activit\u00e9s habituelles.",
+        "de": "Genie\u00dfen Sie Ihre gewohnten Aktivit\u00e4ten."
       }
     },
     {
@@ -75,21 +75,21 @@
       "cvd_color": "#F0E442",
       "name": {
         "en": "Moderate",
-        "ro": "Moderată",
+        "ro": "Moderat\u0103",
         "fr": "Moyen",
-        "de": "Mäßig"
+        "de": "M\u00e4\u00dfig"
       },
       "description": {
         "en": "Level that may have a slight effect on patients in case of chronic exposure.",
-        "ro": "Nivel care poate avea un efect ușor asupra pacienților în caz de expunere cronică.",
-        "fr": "Niveau pouvant avoir un léger effet sur les patients en cas d'exposition chronique.",
+        "ro": "Nivel care poate avea un efect u\u0219or asupra pacien\u021bilor \u00een caz de expunere cronic\u0103.",
+        "fr": "Niveau pouvant avoir un l\u00e9ger effet sur les patients en cas d'exposition chronique.",
         "de": "Stufe, die bei chronischer Exposition leichte Auswirkungen auf Patienten haben kann."
       },
       "recommendation": {
         "en": "Sensitive people should limit prolonged exposure.",
-        "ro": "Persoanele sensibile ar trebui să limiteze expunerea prelungită.",
-        "fr": "Les personnes sensibles devraient limiter les expositions prolongées.",
-        "de": "Empfindliche Personen sollten längere Exposition begrenzen."
+        "ro": "Persoanele sensibile ar trebui s\u0103 limiteze expunerea prelungit\u0103.",
+        "fr": "Les personnes sensibles devraient limiter les expositions prolong\u00e9es.",
+        "de": "Empfindliche Personen sollten l\u00e4ngere Exposition begrenzen."
       }
     },
     {
@@ -99,21 +99,21 @@
       "cvd_color": "#E69F00",
       "name": {
         "en": "Unhealthy",
-        "ro": "Nesănătoasă",
+        "ro": "Nes\u0103n\u0103toas\u0103",
         "fr": "Mauvais",
         "de": "Ungesund"
       },
       "description": {
         "en": "Level that may harm patients and sensitive groups (children, older people) and cause discomfort to the general public.",
-        "ro": "Nivel care poate dăuna pacienților și grupurilor sensibile (copii, vârstnici) și poate provoca disconfort populației generale.",
-        "fr": "Niveau pouvant nuire aux patients et aux groupes sensibles (enfants, personnes âgées) et incommoder le grand public.",
-        "de": "Stufe, die Patienten und empfindlichen Gruppen (Kinder, ältere Menschen) schaden und der Allgemeinheit Unbehagen bereiten kann."
+        "ro": "Nivel care poate d\u0103una pacien\u021bilor \u0219i grupurilor sensibile (copii, v\u00e2rstnici) \u0219i poate provoca disconfort popula\u021biei generale.",
+        "fr": "Niveau pouvant nuire aux patients et aux groupes sensibles (enfants, personnes \u00e2g\u00e9es) et incommoder le grand public.",
+        "de": "Stufe, die Patienten und empfindlichen Gruppen (Kinder, \u00e4ltere Menschen) schaden und der Allgemeinheit Unbehagen bereiten kann."
       },
       "recommendation": {
         "en": "Sensitive groups should avoid prolonged exertion; everyone should reduce strenuous activity.",
-        "ro": "Grupurile sensibile ar trebui să evite efortul prelungit; toată lumea ar trebui să reducă activitatea intensă.",
-        "fr": "Les groupes sensibles devraient éviter les efforts prolongés ; tout le monde devrait réduire les activités intenses.",
-        "de": "Empfindliche Gruppen sollten längere Anstrengungen meiden; alle sollten anstrengende Aktivitäten reduzieren."
+        "ro": "Grupurile sensibile ar trebui s\u0103 evite efortul prelungit; toat\u0103 lumea ar trebui s\u0103 reduc\u0103 activitatea intens\u0103.",
+        "fr": "Les groupes sensibles devraient \u00e9viter les efforts prolong\u00e9s ; tout le monde devrait r\u00e9duire les activit\u00e9s intenses.",
+        "de": "Empfindliche Gruppen sollten l\u00e4ngere Anstrengungen meiden; alle sollten anstrengende Aktivit\u00e4ten reduzieren."
       }
     },
     {
@@ -123,21 +123,21 @@
       "cvd_color": "#D55E00",
       "name": {
         "en": "Very unhealthy",
-        "ro": "Foarte nesănătoasă",
-        "fr": "Très mauvais",
+        "ro": "Foarte nes\u0103n\u0103toas\u0103",
+        "fr": "Tr\u00e8s mauvais",
         "de": "Sehr ungesund"
       },
       "description": {
         "en": "Level that may seriously affect patients and sensitive groups in case of acute exposure and harm the general public.",
-        "ro": "Nivel care poate afecta grav pacienții și grupurile sensibile la expunere acută și poate dăuna populației generale.",
-        "fr": "Niveau pouvant affecter gravement les patients et les groupes sensibles en cas d'exposition aiguë et nuire au grand public.",
-        "de": "Stufe, die Patienten und empfindliche Gruppen bei akuter Exposition schwer beeinträchtigen und der Allgemeinheit schaden kann."
+        "ro": "Nivel care poate afecta grav pacien\u021bii \u0219i grupurile sensibile la expunere acut\u0103 \u0219i poate d\u0103una popula\u021biei generale.",
+        "fr": "Niveau pouvant affecter gravement les patients et les groupes sensibles en cas d'exposition aigu\u00eb et nuire au grand public.",
+        "de": "Stufe, die Patienten und empfindliche Gruppen bei akuter Exposition schwer beeintr\u00e4chtigen und der Allgemeinheit schaden kann."
       },
       "recommendation": {
         "en": "Everyone should avoid strenuous activity; sensitive groups should avoid physical activity.",
-        "ro": "Toată lumea ar trebui să evite activitatea intensă; grupurile sensibile ar trebui să evite activitatea fizică.",
-        "fr": "Tout le monde devrait éviter les activités intenses ; les groupes sensibles devraient éviter l'activité physique.",
-        "de": "Alle sollten anstrengende Aktivitäten meiden; empfindliche Gruppen sollten körperliche Aktivität meiden."
+        "ro": "Toat\u0103 lumea ar trebui s\u0103 evite activitatea intens\u0103; grupurile sensibile ar trebui s\u0103 evite activitatea fizic\u0103.",
+        "fr": "Tout le monde devrait \u00e9viter les activit\u00e9s intenses ; les groupes sensibles devraient \u00e9viter l'activit\u00e9 physique.",
+        "de": "Alle sollten anstrengende Aktivit\u00e4ten meiden; empfindliche Gruppen sollten k\u00f6rperliche Aktivit\u00e4t meiden."
       }
     }
   ],
@@ -145,8 +145,9 @@
     "pm25": [
       {
         "averaging": {
-          "type": "mean",
-          "hours": 24
+          "type": "korea_pm24",
+          "hours": 16,
+          "min_concentration": 30
         },
         "unit": "ug/m3",
         "decimals": 0,
@@ -183,8 +184,9 @@
     "pm10": [
       {
         "averaging": {
-          "type": "mean",
-          "hours": 24
+          "type": "korea_pm24",
+          "hours": 16,
+          "min_concentration": 70
         },
         "unit": "ug/m3",
         "decimals": 0,
@@ -325,6 +327,44 @@
           [
             15.01,
             50.0,
+            251,
+            500
+          ]
+        ],
+        "above_range": "cap"
+      }
+    ],
+    "so2": [
+      {
+        "averaging": {
+          "type": "mean",
+          "hours": 1
+        },
+        "unit": "ppm",
+        "decimals": 3,
+        "rounding": "truncate",
+        "breakpoints": [
+          [
+            0,
+            0.02,
+            0,
+            50
+          ],
+          [
+            0.021,
+            0.05,
+            51,
+            100
+          ],
+          [
+            0.051,
+            0.15,
+            101,
+            250
+          ],
+          [
+            0.151,
+            1.0,
             251,
             500
           ]

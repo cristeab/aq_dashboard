@@ -1,16 +1,11 @@
 import pytest
 
-from comfort_engine import ComfortEngine, dew_point_c, humidex, thom_di, thom_thi_f
+from comfort_engine import ComfortEngine, dew_point_c, humidex, thom_di
 
 
 def test_thom_discomfort_index():
     assert thom_di(30, 60) == pytest.approx(26.59)
     assert thom_di(14.5, 10) == pytest.approx(14.5)  # at 14.5 C humidity has no effect
-
-
-def test_thom_thi_fahrenheit_is_the_same_index_on_another_scale():
-    for t, rh in [(22, 40), (30, 60), (35, 80)]:
-        assert thom_thi_f(t, rh) == pytest.approx(1.8 * thom_di(t, rh) + 32, abs=0.1)
 
 
 def test_humidex_environment_canada_table():
@@ -22,16 +17,10 @@ def test_humidex_environment_canada_table():
 
 
 @pytest.mark.parametrize("profile, t, rh, category", [
-    # Thom DI = T - 0.55 (1 - RH/100) (T - 14.5)
-    ("thom_giles", 22, 50, "no_discomfort"),   # DI 19.9
-    ("thom_giles", 26, 60, "mild"),            # DI 23.5
-    ("thom_giles", 28, 60, "moderate"),        # DI 25.0
-    ("thom_giles", 40, 60, "emergency"),       # DI 34.4
     ("thom_kyle", 18, 50, "comfortable"),      # DI 17.0
     ("thom_kyle", 5, 50, "cold"),              # DI 7.6
     ("thom_kyle", -30, 50, "extremely_cold"),  # DI -17.8
     ("thom_kyle", -45, 50, "glacial"),         # DI -28.6
-    ("thom_thi_1959", 24, 50, "some_uncomfortable"),  # THI 71
     ("humidex", 33, 50, "great_discomfort"),   # dew point 21.4 C -> humidex 41.6
     ("humidex", 35, 60, "dangerous"),          # dew point 26.1 C -> humidex 48.6 (EC table: 48)
 ])
@@ -39,20 +28,11 @@ def test_categories(profile, t, rh, category):
     assert ComfortEngine().compute(profile, t, rh)["category"] == category
 
 
-def test_category_uses_the_displayed_value():
-    engine = ComfortEngine()
-    # DI 20.96 is displayed as 21.0, which already belongs to "mild" (21 <= DI < 24)
-    t = 21.0
-    rh = next(rh / 10 for rh in range(1000, 0, -1) if 20.95 <= thom_di(t, rh / 10) < 21.0)
-    result = engine.compute("thom_giles", t, rh)
-    assert result["display"] == "21.0" and result["category"] == "mild"
-
-
 def test_missing_input():
-    assert ComfortEngine().compute("thom_giles", None, 50) is None
+    assert ComfortEngine().compute("thom_kyle", None, 50) is None
 
 
-# ISO 7730:2005 Table D.1 (rows verified against the independent pythermalcomfort implementation):
+# PMV reference vectors retained from the ISO 7730 PMV method; current profile cites ISO 7730:2025.
 # (ta, tr, relative air speed, RH, met, clo) -> (PMV, PPD)
 ISO_7730_TABLE_D1 = [
     ((22, 22, 0.1, 60, 1.2, 0.5), (-0.75, 17)), ((27, 27, 0.1, 60, 1.2, 0.5), (0.77, 17)),

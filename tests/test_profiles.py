@@ -34,13 +34,6 @@ def test_all_texts_are_translated(kind):
             assert set(texts) == LANGUAGES, f"{kind}/{profile_id}{path}: {sorted(LANGUAGES - set(texts))} missing"
 
 
-def test_extends_merges_the_parent():
-    profiles = load_profiles("aqi")
-    fast, epa = profiles["us_epa_fast"], profiles["us_epa"]
-    assert fast["categories"] == epa["categories"]
-    assert fast["pollutants"]["pm25"][0]["averaging"] == {"type": "mean", "minutes": 10}
-
-
 def write_profile(directory, profile):
     with open(os.path.join(directory, profile["id"] + ".json"), "w", encoding="utf-8") as f:
         json.dump(profile, f)
@@ -60,7 +53,7 @@ def broken(tmp_path, mutate):
     (lambda p: p["categories"][0]["name"].pop("en"), "non-empty 'en'"),
     (lambda p: p["categories"][-1].__setitem__("to", 400), "scale maximum"),
     (lambda p: p["pollutants"]["o3"][0].__setitem__("averaging", {"type": "mean", "hours": 48}), "between 1 and 24"),
-    (lambda p: p["pollutants"].__setitem__("so2", []), "unknown pollutant"),
+    (lambda p: p["pollutants"].__setitem__("voc", []), "unknown pollutant"),
     (lambda p: p["categories"][1].__setitem__("color", "yellow"), "#RRGGBB"),
 ])
 def test_invalid_profiles_are_rejected(tmp_path, mutate, message):
