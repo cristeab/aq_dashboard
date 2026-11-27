@@ -71,6 +71,9 @@ When running under systemd, dashboard and sensor worker logs are available in th
 
 <p align="center">
   <img src="screenshots/aq_dashboard.png" alt="Air Quality Dashboard" width="45%">
+</p>
+<p align="center">
+  <img src="screenshots/aq_dashboard_settings.png" alt="Air Quality Dashboard Settings" width="50%">
   <img src="screenshots/aq_dashboard_notifications.png" alt="Air Quality Dashboard with Notifications" width="45%">
 </p>
 
@@ -96,13 +99,13 @@ Center Display:
 
 - The 10-minute Air Quality Index (AQI) - derived from dust particle measurements using a pair of PMSA007 sensors
 
+- Thom discomfort index
+
 Right Column Values (Environment Parameters):
 
--	Current room temperature in Celsius degrees
+-	Current room temperature
 
 -	Relative humidity (amount of moisture in the air) - the normal value is around 40%
-
-- Thom discomfort index in Celsius degrees (below 21 means no discomfort)
 
 -	Atmospheric pressure expressed in hectoPascals
 
@@ -134,9 +137,9 @@ Particle Count Measurements (from PMSA007 sensors):
 
 -	PM10+(0.1L) Number of particles larger than 10 microns per 0.1 liter of air
 
-The notification list shown in the right image is sorted by timestamp in descending order and can be accessed by clicking the bell icon.
+The settings page lets users configure monitoring profiles, sensor health tracking, language, theme, temperature units, color scheme, and dust-sensor visibility.
 
-The UI theme can be toggled between dark and light using the button on the left of the notifications button. 
+The notification list shown in the right image is sorted by timestamp in descending order and can be accessed by clicking the bell icon.
 
 ## Reference
 
