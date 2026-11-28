@@ -589,8 +589,25 @@ function initSettingsTabs() {
     });
 }
 
+function alignDashboardPanels() {
+    const contentRect = document.getElementById('comfort-display').getBoundingClientRect();
+    const footerRect = document.querySelector('.footer').getBoundingClientRect();
+    const notificationsButton = document.getElementById('notifications-btn');
+    const notificationTop = notificationsButton.getBoundingClientRect().bottom;
+    const footerBottom = footerRect.bottom + 6;
+    const panelBottom = notificationTop + (footerBottom - notificationTop);
+    const root = document.documentElement;
+    root.style.setProperty('--dashboard-panel-top', `${Math.ceil(notificationTop)}px`);
+    root.style.setProperty('--dashboard-panel-left', `${Math.ceil(contentRect.left)}px`);
+    root.style.setProperty('--dashboard-panel-right', `${Math.ceil(window.innerWidth - contentRect.right)}px`);
+    root.style.setProperty('--dashboard-panel-bottom', `${Math.ceil(window.innerHeight - panelBottom)}px`);
+}
+
+window.alignDashboardPanels = alignDashboardPanels;
+
 async function openSettings() {
     const dialog = document.getElementById('settings-dialog');
+    alignDashboardPanels();
     showSettingsError('');
     try {
         deviceSettings = await fetchJson('api/settings');

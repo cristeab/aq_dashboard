@@ -805,6 +805,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     notificationsBtn.addEventListener('click', event => {
+        window.alignDashboardPanels?.();
         setNotificationsOpen(notificationsList.classList.contains('hidden'));
         languageMenu.close();
         currentNotifications.forEach(n => seenNotifications.add(notificationKey(n)));
