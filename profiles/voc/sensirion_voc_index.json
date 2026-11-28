@@ -1,0 +1,68 @@
+{
+  "kind": "classification",
+  "upper_bound": "inclusive",
+  "decimals": 0,
+  "id": "sensirion_voc_index",
+  "order": 10,
+  "name": {
+    "en": "Sensirion VOC Index"
+  },
+  "short_name": {
+    "en": "VOC Index"
+  },
+  "description": {
+    "en": "Relative VOC event index from the Sensirion SGP41 algorithm (1–500). 100 represents the average indoor gas composition over the preceding 24 hours; lower values indicate improvement and higher values indicate deterioration. It is not a TVOC concentration or a direct health-risk scale."
+  },
+  "reference": "Sensirion SGP41 Datasheet, VOC Index scale (1–500; 100 = 24-hour average indoor gas composition)",
+  "unit": "",
+  "scale": {
+    "min": 1,
+    "max": 500
+  },
+  "categories": [
+    {
+      "id": "below_baseline",
+      "to": 99,
+      "color": "#3BB273",
+      "cvd_color": "#009E73",
+      "name": {
+        "en": "Below baseline"
+      },
+      "description": {
+        "en": "VOC signal is below the rolling 24-hour average."
+      },
+      "recommendation": {
+        "en": "No action based on this relative index alone."
+      }
+    },
+    {
+      "id": "baseline",
+      "to": 100,
+      "color": "#F7D038",
+      "cvd_color": "#F0E442",
+      "name": {
+        "en": "Baseline"
+      },
+      "description": {
+        "en": "VOC signal is at the rolling 24-hour average."
+      },
+      "recommendation": {
+        "en": "Use as the sensor's recent typical indoor reference."
+      }
+    },
+    {
+      "id": "above_baseline",
+      "color": "#E8513B",
+      "cvd_color": "#D55E00",
+      "name": {
+        "en": "Above baseline"
+      },
+      "description": {
+        "en": "VOC signal is above the rolling 24-hour average."
+      },
+      "recommendation": {
+        "en": "Consider ventilation and look for a recent VOC source."
+      }
+    }
+  ]
+}

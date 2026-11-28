@@ -6,7 +6,7 @@ let currentNotifications = [];
 const seenNotifications = new Set();
 
 // Profiles (from api/profiles), by kind ("aqi", "co2", "noise", "comfort") and id
-let profiles = { aqi: {}, co2: {}, noise: {}, comfort: {} };
+let profiles = { aqi: {}, co2: {}, noise: {}, comfort: {}, uv: {}, voc: {} };
 
 // ---------------------------------------------------------------- translations
 
@@ -428,6 +428,22 @@ function updateClassifiedReading(kind, result, valueId, badgeId, fallbackValue, 
     setBadge(badge, category, severityIcon(categories, result.category), label);
 }
 
+function updateSensorIndex(kind, result, valueId, badgeId, fallbackValue) {
+    const valueEl = document.getElementById(valueId);
+    const badge = document.getElementById(badgeId);
+    const profile = result ? profiles[kind][result.profile] : undefined;
+    if (!profile) {
+        setBadge(badge);
+        updateReading(valueId, fallbackValue, '', kind === 'uv' ? 2 : 0);
+        return;
+    }
+    const category = findCategory(profile.categories, result.category);
+    updateReading(valueId, result.value, result.unit, profile.decimals);
+    const label = `${tl(profile.short_name)}: ${valueEl.textContent} · ${category ? tl(category.name) : ''}`;
+    valueEl.title = label;
+    setBadge(badge, category, severityIcon(profile.categories, result.category), label);
+}
+
 // ---------------------------------------------------------------- readings
 
 function updateReading(elementId, value, unit = '', decimals = 1) {
@@ -489,11 +505,11 @@ function updateDashboard(data) {
     updateReading('pressure-value', data.pressure, 'hPa');
     updateClassifiedReading('noise', data.noise_index, 'noise-value', 'dot-noise', data.noise, 'dB');
     updateReading('visible-light-lux-value', data.visible_light_lux, 'lux');
-    updateReading('uv-index-value', data.uv_index, '', 2);
+    updateSensorIndex('uv', data.uv_index_classification, 'uv-index-value', 'dot-uv', data.uv_index);
     updateReading('no2-value', data.no2, 'ppb');
     updateReading('o3-value', data.o3, 'ppb');
     updateReading('co-value', data.co, 'ppm');
-    updateReading('voc-value', data.voc, '', 0);
+    updateSensorIndex('voc', data.voc_index_classification, 'voc-value', 'dot-voc', data.voc);
     updateReading('nox-value', data.nox, '', 0);
     updateClassifiedReading('co2', data.co2_index, 'co2-value', 'dot-co2', data.co2, 'ppm');
     updateReading('radon-value', data.radon_week_avg, 'Bq/m³', 0);
@@ -583,7 +599,7 @@ function localizedParams(params) {
     return result;
 }
 
-const NOTIFICATION_PROFILE_KINDS = { aqi: 'aqi', comfort_index: 'comfort', co2: 'co2', noise: 'noise' };
+const NOTIFICATION_PROFILE_KINDS = { aqi: 'aqi', comfort_index: 'comfort', co2: 'co2', noise: 'noise', uv_index: 'uv', voc_index: 'voc' };
 
 function notificationTexts(n) {
     let param = t(`param_${n.parameter}`);

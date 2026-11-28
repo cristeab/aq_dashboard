@@ -34,6 +34,7 @@ from dust_sensor_monitor import DustSensorMonitor, alarm_message
 from env_alert_notifier import EnvAlertNotifier
 from logger_configurator import LoggerConfigurator
 from noise_engine import NoiseEngine
+from sensor_index_engine import SensorIndexEngine
 from persistent_storage import PersistentStorage
 from sensor_validation import SensorValidator, issue_message
 
@@ -53,10 +54,14 @@ aqi_engine = AqiEngine(storage, logger=logger)
 co2_engine = AqiEngine(storage, logger=logger, kind="co2", history=aqi_engine.history)
 noise_engine = NoiseEngine(aqi_engine.history, logger=logger)
 comfort_engine = ComfortEngine(logger=logger)
-if not all((aqi_engine.profiles, co2_engine.profiles, noise_engine.profiles, comfort_engine.profiles)):
-    raise SystemExit("No valid air quality, CO2, noise or thermal comfort profile found in the profiles directory")
+uv_engine = SensorIndexEngine("uv", logger=logger)
+voc_engine = SensorIndexEngine("voc", logger=logger)
+if not all((aqi_engine.profiles, co2_engine.profiles, noise_engine.profiles, comfort_engine.profiles,
+            uv_engine.profiles, voc_engine.profiles)):
+    raise SystemExit("No valid profile found in one of the profiles directories")
 settings = DashboardSettings(web_storage, aqi_engine.profiles, comfort_engine.profiles, logger,
-                             co2_profiles=co2_engine.profiles, noise_profiles=noise_engine.profiles)
+                             co2_profiles=co2_engine.profiles, noise_profiles=noise_engine.profiles,
+                             uv_profiles=uv_engine.profiles, voc_profiles=voc_engine.profiles)
 # Health of the two dust sensors (drift, disagreement...), uses the history of the AQI engine
 dust_monitor = DustSensorMonitor(storage, aqi_engine.history, logger)
 # Validation of all the sensors with their historical data
@@ -199,6 +204,13 @@ def _read_sensors(payload: Dict, current_settings: Dict):
                 "uv_index": light_data["uv_index"],
             })
             notifier.check_thresholds_and_alert("visible_light", light_data["visible_light_lux"], ts, light_data["time"])
+            uv_profile = uv_engine.profiles[current_settings["uv_profile"]]
+            uv_index = uv_engine.compute(uv_profile["id"], light_data["uv_index"])
+            if uv_index is not None:
+                payload["uv_index_classification"] = uv_index
+                notifier.check_category_and_alert("uv_index", uv_index["value"], uv_index["display"], uv_index["unit"],
+                                                  uv_profile["id"], _category(uv_profile, uv_index["category"]),
+                                                  ts, light_data["time"])
             is_data_missing = False
         except Exception as e:
             logger.error(f"Error processing light data: {e}")
@@ -231,7 +243,13 @@ def _read_sensors(payload: Dict, current_settings: Dict):
         try:
             ts = format_local_timestamp(sgp41_data["time"])
             payload.update({"voc": sgp41_data["voc_index"], "nox": sgp41_data["nox_index"]})
-            notifier.check_thresholds_and_alert("voc_index", sgp41_data["voc_index"], ts, sgp41_data["time"])
+            voc_profile = voc_engine.profiles[current_settings["voc_profile"]]
+            voc_index = voc_engine.compute(voc_profile["id"], sgp41_data["voc_index"])
+            if voc_index is not None:
+                payload["voc_index_classification"] = voc_index
+                notifier.check_category_and_alert("voc_index", voc_index["value"], voc_index["display"], voc_index["unit"],
+                                                  voc_profile["id"], _category(voc_profile, voc_index["category"]),
+                                                  ts, sgp41_data["time"])
             notifier.check_thresholds_and_alert("nox_index", sgp41_data["nox_index"], ts, sgp41_data["time"])
             is_data_missing = False
         except Exception as e:
@@ -533,7 +551,8 @@ api = APIRouter(prefix="/api", dependencies=[Depends(current_user)])
 # (encoding the large nested structure took 0.1-0.2 s of the event loop on each page load)
 _PROFILES_JSON = json.dumps(
     {"aqi": list(aqi_engine.profiles.values()), "co2": list(co2_engine.profiles.values()),
-     "noise": list(noise_engine.profiles.values()), "comfort": list(comfort_engine.profiles.values())},
+     "noise": list(noise_engine.profiles.values()), "comfort": list(comfort_engine.profiles.values()),
+     "uv": list(uv_engine.profiles.values()), "voc": list(voc_engine.profiles.values())},
     ensure_ascii=False, separators=(",", ":")).encode()
 
 
@@ -553,6 +572,10 @@ class SettingsUpdate(BaseModel):
     noise_profile_options: Optional[Dict[str, Dict[str, str]]] = None
     comfort_profile: Optional[str] = None
     comfort_profile_options: Optional[Dict[str, Dict[str, str]]] = None
+    uv_profile: Optional[str] = None
+    uv_profile_options: Optional[Dict[str, Dict[str, str]]] = None
+    voc_profile: Optional[str] = None
+    voc_profile_options: Optional[Dict[str, Dict[str, str]]] = None
     pm25_correction: Optional[str] = None
 
 

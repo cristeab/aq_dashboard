@@ -331,5 +331,9 @@
   "change_heading": "Change your password",
   "change_hint": "You logged in with a default or temporary password. Choose your own password to continue.",
   "password_changed_login": "Your password has been changed. Log in with the new password.",
-  "password_change_logout_note": "After the change, you are logged out on all devices: log in again with the new password."
+  "password_change_logout_note": "After the change, you are logged out on all devices: log in again with the new password.",
+  "settings_uv_section": "UV Index",
+  "settings_voc_section": "Sensirion VOC Index",
+  "tab_uv": "UV",
+  "tab_voc": "VOC"
 }

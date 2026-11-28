@@ -515,7 +515,9 @@ class EnvAlertNotifier:
         elif "co2" == key:
             return "CO2"
         elif "voc_index" == key:
-            return "TVOC Index"
+            return "Sensirion VOC Index"
+        elif "uv_index" == key:
+            return "UV Index"
         elif "nox_index" == key:
             return "NOx Index"
         elif "radon_1day_avg" == key:

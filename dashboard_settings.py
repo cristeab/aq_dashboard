@@ -32,18 +32,26 @@ class DashboardSettings:
         "noise_profile_options": {},
         "comfort_profile": "thom_kyle",
         "comfort_profile_options": {},
+        "uv_profile": "who_global_uvi",
+        "uv_profile_options": {},
+        "voc_profile": "sensirion_voc_index",
+        "voc_profile_options": {},
         # humidity correction of the PM2.5 readings of the Plantower sensors
         "pm25_correction": DEFAULT_PM25_CORRECTION,
     }
-    PROFILE_SETTINGS = {"aqi_profile": "aqi", "co2_profile": "co2", "noise_profile": "noise", "comfort_profile": "comfort"}
+    PROFILE_SETTINGS = {"aqi_profile": "aqi", "co2_profile": "co2", "noise_profile": "noise", "comfort_profile": "comfort",
+                       "uv_profile": "uv", "voc_profile": "voc"}
     OPTION_SETTINGS = {"aqi_profile_options": "aqi", "co2_profile_options": "co2",
-                       "noise_profile_options": "noise", "comfort_profile_options": "comfort"}
+                       "noise_profile_options": "noise", "comfort_profile_options": "comfort",
+                       "uv_profile_options": "uv", "voc_profile_options": "voc"}
 
     def __init__(self, storage, aqi_profiles: Dict, comfort_profiles: Dict, logger,
-                 co2_profiles: Dict = None, noise_profiles: Dict = None):
+                 co2_profiles: Dict = None, noise_profiles: Dict = None,
+                 uv_profiles: Dict = None, voc_profiles: Dict = None):
         self._storage = storage
         self._profiles = {"aqi": aqi_profiles, "comfort": comfort_profiles,
-                          "co2": co2_profiles or {}, "noise": noise_profiles or {}}
+                          "co2": co2_profiles or {}, "noise": noise_profiles or {},
+                          "uv": uv_profiles or {}, "voc": voc_profiles or {}}
         self._aqi_profiles = aqi_profiles
         self._comfort_profiles = comfort_profiles
         self._logger = logger

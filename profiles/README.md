@@ -4,7 +4,7 @@ The air quality index (`aqi/`), the indoor CO₂ classification (`co2/`), the no
 index (`comfort/`) are computed by configurable engines (`aqi_engine.py`, `noise_engine.py`, `comfort_engine.py`) from the
 profiles of this directory. The profiles used by all screens and by the notifications are selected in the web interface
 (settings button) and stored in the database; "Restore the defaults" selects the recommended ones (US EPA AQI,
-EN 16798-1, WHO indoor noise, Thom discomfort index – Kyle (1994)).
+EN 16798-1, WHO indoor noise, Thom discomfort index – Kyle (1994), WHO UV Index and Sensirion VOC Index).
 
 | Profile | File | Kind | Summary |
 |---|---|---|---|
@@ -25,6 +25,8 @@ EN 16798-1, WHO indoor noise, Thom discomfort index – Kyle (1994)).
 | Humidex | `comfort/humidex.json` | | Environment and Climate Change Canada humidex bands: 20–29, 30–39, 40–45 and 46+ |
 | NWS heat index | `comfort/nws_heat_index.json` | | US NWS heat index in °C, categories from the NWS chart |
 | PMV/PPD | `comfort/iso7730_pmv.json` | | ISO 7730:2025 PMV/PPD estimate, options: clothing, activity, air speed |
+| WHO Global Solar UV Index | `uv/who_global_uvi.json` | classification | WHO exposure categories, from low (0–2) to extreme (11+) |
+| Sensirion VOC Index | `voc/sensirion_voc_index.json` | classification | SGP41 relative index (1–500), where 100 is the rolling 24-hour average; not a TVOC concentration or health-risk scale |
 
 Optional pollutant tables that have no matching sensor input are ignored by the engine. This lets profiles retain official pollutant coverage without inventing measurements. The EEA AQI remains a public-health index for ambient air; the installed sensors and room placement do not make it a regulatory outdoor station. The Korea profile implements the published C24E particle estimate. The Canada AQHI profile implements the standard three-pollutant calculation; it does not implement the separate smoke-event PM₂.₅ method.
 
@@ -120,3 +122,9 @@ do not replace the air quality index.
 | `neutral_category` | id of the category of thermal neutrality: the categories before it are on the cold side (snowflake icon) |
 
 New formulas are added to `FORMULAS` in `comfort_engine.py` and to `COMFORT_FORMULAS` in `profile_loader.py`.
+
+## Sensor Index Profiles (`uv/`, `voc/`)
+
+Direct sensor index readings are classified using `kind: "classification"`, `unit`, `decimals`, `scale`, `upper_bound`
+and ordered `categories`. The last category is open-ended. The VOC Index is relative to the SGP41 algorithm's rolling
+baseline and must not be interpreted as a measured TVOC concentration or direct health-risk estimate.

@@ -76,8 +76,9 @@
                         <span class="sensor-flag" data-flag="ze07co" role="img" hidden><svg class="icon" aria-hidden="true"><use href="#i-flag"></use></svg></span>
                     </div>
                     <div class="temp-humidity reading" data-sensor="sgp41">
-                        <span class="reading-label label-voc">TVOC</span>
+                        <span class="reading-label label-voc">VOC Index</span>
                         <span class="reading-value" id="voc-value"></span>
+                        <span class="cat-badge" id="dot-voc" role="img" hidden></span>
                         <span class="sensor-flag" data-flag="sgp41" role="img" hidden><svg class="icon" aria-hidden="true"><use href="#i-flag"></use></svg></span>
                     </div>
                     <div class="temp-humidity reading" data-sensor="sgp41">
@@ -141,6 +142,7 @@
                     <div class="temp-humidity reading" data-sensor="ltr390">
                         <span class="reading-label label-uv"><span class="uv-label">UV</span></span>
                         <span class="reading-value" id="uv-index-value"></span>
+                        <span class="cat-badge" id="dot-uv" role="img" hidden></span>
                         <span class="sensor-flag" data-flag="ltr390" role="img" hidden><svg class="icon" aria-hidden="true"><use href="#i-flag"></use></svg></span>
                     </div>
                 </div>
@@ -227,6 +229,8 @@
                 <button type="button" role="tab" id="tab-co2" aria-controls="panel-co2" aria-selected="false" tabindex="-1">CO₂</button>
                 <button type="button" role="tab" id="tab-noise" aria-controls="panel-noise" aria-selected="false" tabindex="-1" data-i18n="tab_noise">Noise</button>
                 <button type="button" role="tab" id="tab-comfort" aria-controls="panel-comfort" aria-selected="false" tabindex="-1" data-i18n="tab_comfort">Comfort</button>
+                <button type="button" role="tab" id="tab-uv" aria-controls="panel-uv" aria-selected="false" tabindex="-1" data-i18n="tab_uv">UV</button>
+                <button type="button" role="tab" id="tab-voc" aria-controls="panel-voc" aria-selected="false" tabindex="-1" data-i18n="tab_voc">VOC</button>
                 <button type="button" role="tab" id="tab-sensors" aria-controls="panel-sensors" aria-selected="false" tabindex="-1"><span data-i18n="tab_sensors">Sensors</span><span class="sensor-flag tab-flag" id="tab-sensors-flag" role="img" hidden><svg class="icon" aria-hidden="true"><use href="#i-flag"></use></svg></span></button>
                 <button type="button" role="tab" id="tab-display" aria-controls="panel-display" aria-selected="false" tabindex="-1" data-i18n="tab_display">Display</button>
                 <button type="button" role="tab" id="tab-account" aria-controls="panel-account" aria-selected="false" tabindex="-1" data-i18n="tab_account">Account</button>
@@ -243,6 +247,12 @@
                 </div>
                 <div class="settings-panel" role="tabpanel" id="panel-comfort" aria-labelledby="tab-comfort" tabindex="0" hidden>
                     <section class="settings-section" id="settings-comfort"></section>
+                </div>
+                <div class="settings-panel" role="tabpanel" id="panel-uv" aria-labelledby="tab-uv" tabindex="0" hidden>
+                    <section class="settings-section" id="settings-uv"></section>
+                </div>
+                <div class="settings-panel" role="tabpanel" id="panel-voc" aria-labelledby="tab-voc" tabindex="0" hidden>
+                    <section class="settings-section" id="settings-voc"></section>
                 </div>
                 <div class="settings-panel" role="tabpanel" id="panel-sensors" aria-labelledby="tab-sensors" tabindex="0" hidden>
                     <section class="settings-section" id="settings-health"></section>

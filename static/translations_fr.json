@@ -331,5 +331,9 @@
   "change_heading": "Changez votre mot de passe",
   "change_hint": "Vous vous êtes connecté avec un mot de passe par défaut ou temporaire. Choisissez votre propre mot de passe pour continuer.",
   "password_changed_login": "Votre mot de passe a été changé. Connectez-vous avec le nouveau mot de passe.",
-  "password_change_logout_note": "Après le changement, vous êtes déconnecté sur tous les appareils : reconnectez-vous avec le nouveau mot de passe."
+  "password_change_logout_note": "Après le changement, vous êtes déconnecté sur tous les appareils : reconnectez-vous avec le nouveau mot de passe.",
+  "settings_uv_section": "Indice UV",
+  "settings_voc_section": "Indice VOC Sensirion",
+  "tab_uv": "UV",
+  "tab_voc": "VOC"
 }

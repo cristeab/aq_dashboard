@@ -7,6 +7,8 @@ const PROFILE_SECTIONS = [
     { kind: 'co2', container: 'settings-co2', title: 'settings_co2_section' },
     { kind: 'noise', container: 'settings-noise', title: 'settings_noise_section' },
     { kind: 'comfort', container: 'settings-comfort', title: 'settings_comfort_section' },
+    { kind: 'uv', container: 'settings-uv', title: 'settings_uv_section' },
+    { kind: 'voc', container: 'settings-voc', title: 'settings_voc_section' },
 ];
 
 /** Number in the format of the page language; without decimals: as many as the value has (e.g. a
@@ -213,6 +215,23 @@ function optionField(kind, profile, option) {
 
 /** Categories and their value ranges for the legend of a profile. */
 function legendContent(kind, profile) {
+    if (profile.kind === 'classification') {
+        let previous = null;
+        const ranges = profile.categories.map((category, i) => {
+            let range;
+            if (i === 0) {
+                range = profile.upper_bound === 'inclusive' ? `≤ ${formatNumber(category.to, profile.decimals)}`
+                    : `< ${formatNumber(category.to, profile.decimals)}`;
+            } else if (category.to === undefined) {
+                range = `${profile.upper_bound === 'inclusive' ? '>' : '≥'} ${formatNumber(previous, profile.decimals)}`;
+            } else {
+                range = `${profile.upper_bound === 'inclusive' ? '>' : '≥'} ${formatNumber(previous, profile.decimals)} – ${profile.upper_bound === 'inclusive' ? '≤' : '<'} ${formatNumber(category.to, profile.decimals)}`;
+            }
+            previous = category.to ?? previous;
+            return profile.unit ? `${range}\u00a0${unitLabel(profile.unit)}` : range;
+        });
+        return { categories: profile.categories, ranges };
+    }
     if (kind === 'comfort') {
         const convert = v => convertTemperature(v, profile.unit).value;
         const unit = convertTemperature(0, profile.unit).unit;
@@ -526,7 +545,7 @@ function selectedSettingsTab() {
     return sessionStorage.getItem('settingsTab') || 'air';
 }
 
-/** Shows the panel of a tab ("air", "co2", "noise", "comfort", "sensors", "display", "account"). */
+/** Shows the panel of a tab ("air", "co2", "noise", "comfort", "uv", "voc", "sensors", "display", "account"). */
 function selectSettingsTab(name, focus = false) {
     let tab = document.getElementById(`tab-${name}`);
     if (!tab || tab.hidden) {

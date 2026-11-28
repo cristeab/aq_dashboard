@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Loads and validates the index profiles (JSON files) used by the AQI engine
-(profiles/aqi) and by the thermal comfort engine (profiles/comfort).
+Loads and validates the index profiles (JSON files) used by the dashboard's
+AQI, CO2, noise, thermal comfort, UV and VOC classification engines.
 
 A profile may extend another one with "extends": "<profile id>": the keys of
 the child replace the keys of the parent (shallow merge), so that e.g. a
@@ -398,6 +398,20 @@ class _Validator:
         if not required <= set(options):
             self.fail(f"formula {p['formula']} needs the options {sorted(required)}")
 
+    def classification_profile(self):
+        """Directly classify a sensor's current index value using ordered bands."""
+        p = self.p
+        categories = self.common()
+        if p.get("kind") != "classification":
+            self.fail("a sensor profile must have kind 'classification'")
+        if not isinstance(self.require(p, "unit"), str):
+            self.fail("'unit' must be a string")
+        decimals = self.require(p, "decimals")
+        if not isinstance(decimals, int) or not 0 <= decimals <= 3:
+            self.fail("'decimals' must be an integer between 0 and 3")
+        self.scale(p, "profile")
+        self.ordered_bounds(categories, last_open=True)
+
 
 def _read_json(path: str) -> Dict:
     try:
@@ -424,11 +438,11 @@ def _resolve(profile_id: str, raw: Dict[str, Dict], paths: Dict[str, str], chain
     return merged
 
 
-PROFILE_KINDS = ("aqi", "co2", "noise", "comfort")
+PROFILE_KINDS = ("aqi", "co2", "noise", "comfort", "uv", "voc")
 
 
 def load_profiles(kind: str, directory: str = None, logger=None) -> Dict[str, Dict]:
-    """Loads all valid profiles of a kind ("aqi", "co2", "noise" or "comfort")
+    """Loads all valid profiles of a supported profile kind
     sorted by their "order" then id. Invalid profiles are skipped (and logged),
     so that a mistake in a user edited file does not stop the dashboard."""
     if kind not in PROFILE_KINDS:
@@ -453,7 +467,9 @@ def load_profiles(kind: str, directory: str = None, logger=None) -> Dict[str, Di
         try:
             profile = _resolve(profile_id, raw, paths)
             validator = _Validator(profile, paths[profile_id])
-            if kind == "comfort":
+            if kind in ("uv", "voc"):
+                validator.classification_profile()
+            elif kind == "comfort":
                 validator.comfort_profile()
             elif kind == "noise":
                 validator.noise_profile()

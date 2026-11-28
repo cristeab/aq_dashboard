@@ -1,0 +1,98 @@
+{
+  "kind": "classification",
+  "upper_bound": "exclusive",
+  "decimals": 1,
+  "id": "who_global_uvi",
+  "order": 10,
+  "name": {
+    "en": "WHO Global Solar UV Index"
+  },
+  "short_name": {
+    "en": "UV Index"
+  },
+  "description": {
+    "en": "WHO Global Solar UV Index exposure categories. Protection is recommended from UVI 3; this reading describes UV intensity at the sensor, not personal exposure."
+  },
+  "reference": "WHO, Global Solar UV Index: A Practical Guide (2002); WHO UV Index guidance",
+  "unit": "",
+  "scale": {
+    "min": 0,
+    "max": 12
+  },
+  "categories": [
+    {
+      "id": "low",
+      "to": 3,
+      "color": "#3BB273",
+      "cvd_color": "#009E73",
+      "name": {
+        "en": "Low"
+      },
+      "description": {
+        "en": "Low UV exposure."
+      },
+      "recommendation": {
+        "en": "No special protection is usually needed."
+      }
+    },
+    {
+      "id": "moderate",
+      "to": 6,
+      "color": "#F7D038",
+      "cvd_color": "#F0E442",
+      "name": {
+        "en": "Moderate"
+      },
+      "description": {
+        "en": "Moderate UV exposure."
+      },
+      "recommendation": {
+        "en": "Seek shade around midday and use sun protection."
+      }
+    },
+    {
+      "id": "high",
+      "to": 8,
+      "color": "#F5A623",
+      "cvd_color": "#E69F00",
+      "name": {
+        "en": "High"
+      },
+      "description": {
+        "en": "High UV exposure."
+      },
+      "recommendation": {
+        "en": "Reduce midday sun exposure and use sun protection."
+      }
+    },
+    {
+      "id": "very_high",
+      "to": 11,
+      "color": "#E8513B",
+      "cvd_color": "#D55E00",
+      "name": {
+        "en": "Very high"
+      },
+      "description": {
+        "en": "Very high UV exposure."
+      },
+      "recommendation": {
+        "en": "Avoid midday sun where possible and use full sun protection."
+      }
+    },
+    {
+      "id": "extreme",
+      "color": "#9E1F3D",
+      "cvd_color": "#CC79A7",
+      "name": {
+        "en": "Extreme"
+      },
+      "description": {
+        "en": "Extreme UV exposure."
+      },
+      "recommendation": {
+        "en": "Avoid midday sun and use full sun protection."
+      }
+    }
+  ]
+}

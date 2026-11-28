@@ -331,5 +331,9 @@
   "change_heading": "Schimbați parola",
   "change_hint": "V-ați autentificat cu o parolă implicită sau temporară. Alegeți propria parolă pentru a continua.",
   "password_changed_login": "Parola a fost schimbată. Autentificați-vă cu parola nouă.",
-  "password_change_logout_note": "După schimbare, sunteți deconectat de pe toate dispozitivele: autentificați-vă din nou cu parola nouă."
+  "password_change_logout_note": "După schimbare, sunteți deconectat de pe toate dispozitivele: autentificați-vă din nou cu parola nouă.",
+  "settings_uv_section": "Indice UV",
+  "settings_voc_section": "Indice VOC Sensirion",
+  "tab_uv": "UV",
+  "tab_voc": "VOC"
 }

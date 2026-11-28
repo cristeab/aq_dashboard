@@ -331,5 +331,9 @@
   "change_heading": "Ändern Sie Ihr Passwort",
   "change_hint": "Sie haben sich mit einem Standard- oder temporären Passwort angemeldet. Wählen Sie ein eigenes Passwort, um fortzufahren.",
   "password_changed_login": "Ihr Passwort wurde geändert. Melden Sie sich mit dem neuen Passwort an.",
-  "password_change_logout_note": "Nach der Änderung werden Sie auf allen Geräten abgemeldet: Melden Sie sich mit dem neuen Passwort wieder an."
+  "password_change_logout_note": "Nach der Änderung werden Sie auf allen Geräten abgemeldet: Melden Sie sich mit dem neuen Passwort wieder an.",
+  "settings_uv_section": "UV-Index",
+  "settings_voc_section": "Sensirion-VOC-Index",
+  "tab_uv": "UV",
+  "tab_voc": "VOC"
 }
