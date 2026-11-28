@@ -660,13 +660,14 @@ function updateNotifications(notifications) {
         return;
     }
     currentNotifications = notifications || [];
-    list.innerHTML = '';
+    const items = document.getElementById('notifications-items');
+    items.innerHTML = '';
     const dot = document.getElementById('notification-dot');
     if (currentNotifications.length === 0) {
         const empty = document.createElement('div');
         empty.className = 'notification-item';
         empty.textContent = t('no_notifications');
-        list.appendChild(empty);
+        items.appendChild(empty);
         dot.classList.add('hidden');
         return;
     }
@@ -681,7 +682,7 @@ function updateNotifications(notifications) {
             </div>
             <div class="notification-message">${escapeHtml(message)}</div>
             ${recommendation ? `<div class="notification-recommendation">${escapeHtml(recommendation)}</div>` : ''}`;
-        list.appendChild(item);
+        items.appendChild(item);
     });
     const unseen = currentNotifications.some(n => !seenNotifications.has(notificationKey(n)));
     dot.classList.toggle('hidden', !unseen);
@@ -796,6 +797,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     // Notifications dropdown
     const notificationsBtn = document.getElementById('notifications-btn');
     const notificationsList = document.getElementById('notifications-list');
+    const notificationsClose = document.getElementById('notifications-close');
 
     function setNotificationsOpen(open) {
         notificationsList.classList.toggle('hidden', !open);
@@ -809,6 +811,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         document.getElementById('notification-dot').classList.add('hidden');
         event.stopPropagation();
     });
+    notificationsClose.addEventListener('click', () => setNotificationsOpen(false));
     document.getElementById('language-btn').addEventListener('click', () => setNotificationsOpen(false));
     document.addEventListener('click', event => {
         if (!notificationsBtn.contains(event.target) && !notificationsList.contains(event.target)) {

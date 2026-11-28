@@ -44,6 +44,11 @@
                             <span id="notification-dot" class="notification-dot hidden"></span>
                         </button>
                         <div id="notifications-list" class="notifications-list hidden" tabindex="0" role="region" aria-live="polite" data-i18n-aria="notifications_title" aria-label="Notifications">
+                            <div class="notifications-header">
+                                <h2 data-i18n="notifications_title">Notifications</h2>
+                                <button type="button" class="notifications-close" id="notifications-close" title="Close" data-i18n-title="settings_close" data-i18n-aria="settings_close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            </div>
+                            <div class="notifications-items" id="notifications-items"></div>
                         </div>
                     </div>
                     <button id="settings-btn" class="settings-btn" title="Settings" data-i18n-title="settings_title" data-i18n-aria="settings_title" aria-label="Settings" aria-haspopup="dialog">
